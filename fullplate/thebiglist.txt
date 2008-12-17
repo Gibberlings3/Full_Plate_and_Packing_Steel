@@ -108,8 +108,47 @@ CHAN17       0 -1   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   
 PLAT06     -23 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // ankheg plate
 C2PLAT01   -18 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // ankheg plate
 PLAT13       0  0   0   0   0   0   0   0   0   6   0   0   0  0   0    0   0   0   0   0   0   // gorgon-quenched steel plate
+PLAT22     -10 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0   -5  -5   0   0   0   0   // shuruppak's plate
 R!KITPLT     0 -2   0   0   0   0   0   0   0   0   0   0   0  0   0   -5  -5   0   0   0   0   // well-made elven plate
 DWPLAT01    15  1  10   1   0   0   0   0   0  -2   0   0   0  0   0    0   0   0   0   0   0   // drow adamantine full plate
 CHAN20     -10 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0 -10 -10 -10   0   // white dragonscale splint mail
 PLAT18     -30 -2 -20  -1   0   0   0   0   0  -2   0  -4  -4  0   0  -35 -35 -35 -35 -35   0   // red dragonscale plate
 PLAT20     -40 -3 -20  -2   0   0   0   0   0   0   0   0   0  0   0  -35 -35 -35 -35 -35   0   // blue dragonscale plate
+DGFAITH      0  0   0   0   0   0   0   0   0  15  15  15  15  0   0    0   0   0   0   0   0   // armor of faith, innate version
+SPPR111      0  0   0   0   0   0   0   0   0   3   3   3   3  0   0    0   0   0   0   0   0   // armor of faith, priest, level 1
+SPPR111-5    0  0   0   0   0   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   // armor of faith, priest, level 5
+SPPR111-6    0  0   0   0   0   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   // armor of faith, priest, level 5
+SPPR111-7    0  0   0   0   0   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   // armor of faith, priest, level 5
+SPPR111-8    0  0   0   0   0   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   // armor of faith, priest, level 5
+SPPR111-9    0  0   0   0   0   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   // armor of faith, priest, level 5
+SPPR111-10   0  0   0   0   0   0   0   0   0   9   9   9   9  0   0    0   0   0   0   0   0   // armor of faith, priest, level 10
+SPPR111-11   0  0   0   0   0   0   0   0   0   9   9   9   9  0   0    0   0   0   0   0   0   // armor of faith, priest, level 10
+SPPR111-12   0  0   0   0   0   0   0   0   0   9   9   9   9  0   0    0   0   0   0   0   0   // armor of faith, priest, level 10
+SPPR111-13   0  0   0   0   0   0   0   0   0   9   9   9   9  0   0    0   0   0   0   0   0   // armor of faith, priest, level 10
+SPPR111-14   0  0   0   0   0   0   0   0   0   9   9   9   9  0   0    0   0   0   0   0   0   // armor of faith, priest, level 10
+SPPR111-15   0  0   0   0   0   0   0   0   0  12  12  12  12  0   0    0   0   0   0   0   0   // armor of faith, priest, level 15
+SPPR111-16   0  0   0   0   0   0   0   0   0  12  12  12  12  0   0    0   0   0   0   0   0   // armor of faith, priest, level 15
+SPPR111-17   0  0   0   0   0   0   0   0   0  12  12  12  12  0   0    0   0   0   0   0   0   // armor of faith, priest, level 15
+SPPR111-18   0  0   0   0   0   0   0   0   0  12  12  12  12  0   0    0   0   0   0   0   0   // armor of faith, priest, level 15
+SPPR111-19   0  0   0   0   0   0   0   0   0  12  12  12  12  0   0    0   0   0   0   0   0   // armor of faith, priest, level 15
+SPPR111-20   0  0   0   0   0   0   0   0   0  15  15  15  15  0   0    0   0   0   0   0   0   // armor of faith, priest, level 20
+SPPR202      0  0   0   0   0   0   0   0   0   0   5   0   0  0   0    0   0   0   0   0   0   // barkskin, priest, level 1 - scale +0 with +5% vs crushing
+SPPR202-4    0  0   0   0   0   0   0   0   0   2   7   2   2  0   0    0   0   0   0   0   0   // barkskin, priest, level 4 - scale +1 with +5% vs crushing
+SPPR202-5    0  0   0   0   0   0   0   0   0   2   7   2   2  0   0    0   0   0   0   0   0   // barkskin, priest, level 4 - scale +1 with +5% vs crushing
+SPPR202-6    0  0   0   0   0   0   0   0   0   2   7   2   2  0   0    0   0   0   0   0   0   // barkskin, priest, level 4 - scale +1 with +5% vs crushing
+SPPR202-7    0  0   0   0   0   0   0   0   0   2   7   2   2  0   0    0   0   0   0   0   0   // barkskin, priest, level 4 - scale +1 with +5% vs crushing
+SPPR202-8    0  0   0   0  -1   0   0   0   0   4   9   4   4  0   0    0   0   0   0   0   0   // barkskin, priest, level 8 - scale +2 with +5% vs crushing
+SPPR202-9    0  0   0   0  -1   0   0   0   0   4   9   4   4  0   0    0   0   0   0   0   0   // barkskin, priest, level 8 - scale +2 with +5% vs crushing
+SPPR202-10   0  0   0   0  -1   0   0   0   0   4   9   4   4  0   0    0   0   0   0   0   0   // barkskin, priest, level 8 - scale +2 with +5% vs crushing
+SPPR202-11   0  0   0   0  -1   0   0   0   0   4   9   4   4  0   0    0   0   0   0   0   0   // barkskin, priest, level 8 - scale +2 with +5% vs crushing
+SPPR202-12   0  0   0   0  -1   0   0   0   0   6  11   6   6  0   0    0   0   0   0   0   0   // barkskin, priest, level 12 - scale +3 with +5% vs crushing
+SPPR202-13   0  0   0   0  -1   0   0   0   0   6  11   6   6  0   0    0   0   0   0   0   0   // barkskin, priest, level 12 - scale +3 with +5% vs crushing
+SPPR202-14   0  0   0   0  -1   0   0   0   0   6  11   6   6  0   0    0   0   0   0   0   0   // barkskin, priest, level 12 - scale +3 with +5% vs crushing
+SPPR202-15   0  0   0   0  -1   0   0   0   0   6  11   6   6  0   0    0   0   0   0   0   0   // barkskin, priest, level 12 - scale +3 with +5% vs crushing
+SPPR202-16   0  0   0   0  -2   0   0   0   0   8  13   8   8  0   0    0   0   0   0   0   0   // barkskin, priest, level 16 - scale +4 with +5% vs crushing
+SPPR202-17   0  0   0   0  -2   0   0   0   0   8  13   8   8  0   0    0   0   0   0   0   0   // barkskin, priest, level 16 - scale +4 with +5% vs crushing
+SPPR202-18   0  0   0   0  -2   0   0   0   0   8  13   8   8  0   0    0   0   0   0   0   0   // barkskin, priest, level 16 - scale +4 with +5% vs crushing
+SPPR202-19   0  0   0   0  -2   0   0   0   0   8  13   8   8  0   0    0   0   0   0   0   0   // barkskin, priest, level 16 - scale +4 with +5% vs crushing
+SPPR202-20   0  0   0   0  -2   0   0   0   0  10  15  10  10  0   0    0   0   0   0   0   0   // barkskin, priest, level 20 - scale +5 with +5% vs crushing
+POTN18       0  0   0   0   0   0  10   0   0   0  40   0   0  0   0    0   0   0   0   0   0   // potion of absorption
+POTN24       0  0   0   0   0   5   5   5   5   0   0   0   0  0   0    0   0   0   0   0   0   // potion of defense

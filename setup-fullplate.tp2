@@ -1,10 +1,10 @@
 BACKUP ~fullplate/backup~
 AUTHOR ~erik, gibberlings3~
 MODDER
-VERSION ~alfa 9a~
+VERSION ~alfa 12~
 NO_IF_EVAL_BUG
 
-BEGIN ~Full Plate And Packing Steel: Clean, Shine and Oil all Armour (naming and enchantment level fixes, required for main component)~
+BEGIN ~Full Plate And Packing Steel: Clean, Shine and Oil your Armour, Soldier! (naming and enchantment level fixes, required for main component)~
  DESIGNATED 101
 COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   PATCH_IF (SOURCE_SIZE < 0x72) BEGIN
@@ -26,6 +26,18 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_LONG 0x34 7000 // same price as standard +2 banded, too cheap
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~BELT02.ITM~) BEGIN
+      WRITE_BYTE 0x60 1
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~BELT03.ITM~) BEGIN
+      WRITE_BYTE 0x60 1
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~BELT04.ITM~) BEGIN
+      WRITE_BYTE 0x60 1
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~BLEAT01.ITM~) BEGIN
       WRITE_BYTE 0x60 1
     END
@@ -41,6 +53,10 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~BRUENPLA.ITM~) BEGIN
       SAY NAME1 ~Field Plate Mail~
       WRITE_BYTE 0x18 ("%flags%" BOR 0b01000000)
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~C2BELT01.ITM~) BEGIN
+      WRITE_BYTE 0x60 1
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~C2CHAN01.ITM~) BEGIN
@@ -104,6 +120,10 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CHAN08.ITM~) BEGIN
       WRITE_BYTE 0x60 2
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CHAN12.ITM~) BEGIN
+      WRITE_BYTE 0x18 ("%flags%" BAND 0b10111111) // switch off magical flag
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CHAN20.ITM~) BEGIN
@@ -269,6 +289,18 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 2
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~POTN18.ITM~) BEGIN
+      WRITE_BYTE 0x60 1
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~POTN24.ITM~) BEGIN
+      WRITE_BYTE 0x60 1
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~POTN46.ITM~) BEGIN
+      WRITE_BYTE 0x60 1
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~R!KITPLT.ITM~) BEGIN
       SAY NAME1 ~Plate Mail~
       SAY NAME2 ~Bringer of Vengeance: Kitanya's Plate Mail +4~
@@ -363,6 +395,52 @@ WRITE_LONG      %fxoff% + 0x30 * %fxnum% + 0x24 0           // save type, n/a
 WRITE_LONG      %fxoff% + 0x30 * %fxnum% + 0x28 0           // save bonus, n/a
 WRITE_LONG      %fxoff% + 0x30 * %fxnum% + 0x2c 0           // unknown, n/a
 SET fxnum = %fxnum% + 1
+>>>>>>>>
+
+<<<<<<<< addsplfx.tpp
+INSERT_BYTES    %fx_start% + 0x30 * %index2%        0x30
+WRITE_SHORT     %fx_start% + 0x30 * %index2% + 0x00 %opcode%
+WRITE_BYTE      %fx_start% + 0x30 * %index2% + 0x02 2           // target pre-target
+WRITE_BYTE      %fx_start% + 0x30 * %index2% + 0x03 %power%     // power (spl level, mostly)
+WRITE_LONG      %fx_start% + 0x30 * %index2% + 0x04 %param1%
+WRITE_LONG      %fx_start% + 0x30 * %index2% + 0x08 %param2%
+WRITE_BYTE      %fx_start% + 0x30 * %index2% + 0x0c 0           // timing: duration
+WRITE_BYTE      %fx_start% + 0x30 * %index2% + 0x0d 3           // dispellable/bypass resistance
+WRITE_LONG      %fx_start% + 0x30 * %index2% + 0x0e %duration%  // duration
+WRITE_BYTE      %fx_start% + 0x30 * %index2% + 0x12 100         // probability upper
+WRITE_BYTE      %fx_start% + 0x30 * %index2% + 0x13 0           // probability lower ... so this is 0-100 of a 0-100 range.
+WRITE_LONG      %fx_start% + 0x30 * %index2% + 0x14 0           // resref dw 1, n/a
+WRITE_LONG      %fx_start% + 0x30 * %index2% + 0x18 0           // resref dw 2, n/a
+WRITE_LONG      %fx_start% + 0x30 * %index2% + 0x1c 0           // dice thrown, n/a
+WRITE_LONG      %fx_start% + 0x30 * %index2% + 0x20 0           // dice sides, n/a
+WRITE_LONG      %fx_start% + 0x30 * %index2% + 0x24 0           // save type, n/a
+WRITE_LONG      %fx_start% + 0x30 * %index2% + 0x28 0           // save bonus, n/a
+WRITE_LONG      %fx_start% + 0x30 * %index2% + 0x2c 0           // unknown, n/a
+SET fx_num = %fx_num% + 1
+SET accum_adj = %accum_adj% + 1
+>>>>>>>>
+
+<<<<<<<< addpotfx.tpp
+INSERT_BYTES    %fx_start% + 0x30 * %index2%        0x30
+WRITE_SHORT     %fx_start% + 0x30 * %index2% + 0x00 %opcode%
+WRITE_BYTE      %fx_start% + 0x30 * %index2% + 0x02 1           // target self
+WRITE_BYTE      %fx_start% + 0x30 * %index2% + 0x03 %power%     // power (various)
+WRITE_LONG      %fx_start% + 0x30 * %index2% + 0x04 %param1%
+WRITE_LONG      %fx_start% + 0x30 * %index2% + 0x08 %param2%
+WRITE_BYTE      %fx_start% + 0x30 * %index2% + 0x0c 0           // timing: duration
+WRITE_BYTE      %fx_start% + 0x30 * %index2% + 0x0d 3           // dispellable/bypass resistance
+WRITE_LONG      %fx_start% + 0x30 * %index2% + 0x0e %duration%  // duration
+WRITE_BYTE      %fx_start% + 0x30 * %index2% + 0x12 100         // probability upper
+WRITE_BYTE      %fx_start% + 0x30 * %index2% + 0x13 0           // probability lower ... so this is 0-100 of a 0-100 range.
+WRITE_LONG      %fx_start% + 0x30 * %index2% + 0x14 0           // resref dw 1, n/a
+WRITE_LONG      %fx_start% + 0x30 * %index2% + 0x18 0           // resref dw 2, n/a
+WRITE_LONG      %fx_start% + 0x30 * %index2% + 0x1c 0           // dice thrown, n/a
+WRITE_LONG      %fx_start% + 0x30 * %index2% + 0x20 0           // dice sides, n/a
+WRITE_LONG      %fx_start% + 0x30 * %index2% + 0x24 0           // save type, n/a
+WRITE_LONG      %fx_start% + 0x30 * %index2% + 0x28 0           // save bonus, n/a
+WRITE_LONG      %fx_start% + 0x30 * %index2% + 0x2c 0           // unknown, n/a
+SET fx_num = %fx_num% + 1
+SET accum_adj = %accum_adj% + 1
 >>>>>>>>
 
 // takes intopcode, intparam, returns returnval, clobbers fxnum fxoff opcode param1 param2 i.
@@ -569,429 +647,1194 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
         END
     END
 
-    PATCH_IF NOT ( ~%usename%~ STRING_EQUAL ~~ ) BEGIN
-        PATCH_IF ($weight(~%usename%~) > 0) BEGIN
-            WRITE_LONG 0x4c $weight(~%usename%~)
+    READ_SHORT 0x70 fxnum
+    PATCH_IF (fxnum > 0) BEGIN // has equipping effects, i.e. not a potion or similar
+
+    ///////////////////////////////
+    // armour updates start here //
+    ///////////////////////////////
+
+        PATCH_IF NOT ( ~%usename%~ STRING_EQUAL ~~ ) BEGIN
+            PATCH_IF ($weight(~%usename%~) > 0) BEGIN
+                WRITE_LONG 0x4c $weight(~%usename%~)
+            END
+        END
+
+        PATCH_IF NOT ( ~%usename%~ STRING_EQUAL ~~ ) BEGIN
+            /* We have something to do, yay */
+            READ_SHORT 0x70 fxnum
+            READ_LONG 0x6a fxoff
+
+            FOR (x=0; (x < %fxnum%); x+=1) BEGIN
+                READ_SHORT %fxoff% + 0x30 * %x% + 0     opcode
+                READ_LONG  %fxoff% + 0x30 * %x% + 0x04  param1
+                READ_LONG  %fxoff% + 0x30 * %x% + 0x08  param2
+
+                PATCH_IF (
+                    (%opcode% = 0) ||                                       // any AC effects
+                    (%opcode% = 145 && %param2% = 0) ||                     // wizard spell disable
+                    (%opcode% = 144 && (%param2% = 0 || %param2% = 1)) ||   // stealth/thieving disable
+                    (%opcode% = 59 && %param1% < 0) ||                      // move silently penalty (but keep bonuses)
+                    (%opcode% = 275 && %param1% < 0) ||                     // hide in shadows penalty
+                    (%opcode% = 90 && %param1% < 0) ||                      // open lock penalty
+                    (%opcode% = 91 && %param1% < 0) ||                      // find trap penalty
+                    (%opcode% = 92 && %param1% < 0) ||                      // pickpocket penalty
+                    (%opcode% = 126 && %param1% < 0 && %param2% = 0)        // movement slowdown
+                      ) BEGIN
+                    PATCH_INCLUDE ~delitmfx.tpp~                            // kill them. we'll add some back.
+                END
+            END
+
+            WRITE_SHORT 0x70 %fxnum%
+
+            PATCH_FOR_EACH param IN ~dexmod~ ~movemod~ ~wpnspeedmod~ ~baseac~ ~slashac~ ~crushac~ ~pierceac~ ~missileac~
+                                    ~slashres~ ~crushres~ ~pierceres~ ~missileres~ ~fireres~ ~coldres~
+                                    ~hidemod~ ~movesilmod~ ~openlockmod~ ~disarmtrapmod~ ~pickpocketmod~
+                                    ~spellfailmod~
+            BEGIN
+                SET x = EVALUATE_BUFFER ~%%param%_%usename%%~
+                PATCH_IF NOT (x = 0 || (x = 10 && ~%param%~ STRING_EQUAL ~baseac~)) BEGIN 
+                    PATCH_IF ~%param%~ STRING_EQUAL dexmod BEGIN
+                        SET opcode = 15
+                        SET param1 = 0 - x
+                        SET param2 = 0
+                        PATCH_INCLUDE ~additmfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL movemod BEGIN
+                        SET opcode = 176
+                        SET param1 = 0 - (x / 10)
+                        SET param2 = 0
+                        PATCH_INCLUDE ~additmfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL wpnspeedmod BEGIN
+                        SET opcode = 190
+                        SET param1 = 0 - x
+                        SET param2 = 0
+                        PATCH_INCLUDE ~additmfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL baseac BEGIN
+                        SET opcode = 0
+                        SET param1 = x
+                        SET param2 = 16
+                        PATCH_INCLUDE ~additmfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL slashac BEGIN
+                        SET opcode = 0
+                        SET param1 = x
+                        SET param2 = 8
+                        PATCH_INCLUDE ~additmfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL crushac BEGIN
+                        SET opcode = 0
+                        SET param1 = x
+                        SET param2 = 1
+                        PATCH_INCLUDE ~additmfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL pierceac BEGIN
+                        SET opcode = 0
+                        SET param1 = x
+                        SET param2 = 4
+                        PATCH_INCLUDE ~additmfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL missileac BEGIN
+                        SET opcode = 0
+                        SET param1 = x
+                        SET param2 = 2
+                        PATCH_INCLUDE ~additmfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL slashres BEGIN
+                        SET opcode = 86
+                        SET param1 = x
+                        SET param2 = 0
+                        PATCH_INCLUDE ~additmfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL crushres BEGIN
+                        SET opcode = 87
+                        SET param1 = x
+                        SET param2 = 0
+                        PATCH_INCLUDE ~additmfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL pierceres BEGIN
+                        SET opcode = 88
+                        SET param1 = x
+                        SET param2 = 0
+                        PATCH_INCLUDE ~additmfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL missileres BEGIN
+                        SET opcode = 89
+                        SET param1 = x
+                        SET param2 = 0
+                        PATCH_INCLUDE ~additmfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL fireres BEGIN
+                        SET opcode = 30
+                        SET param1 = x
+                        SET param2 = 0
+                        PATCH_INCLUDE ~additmfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL coldres BEGIN
+                        SET opcode = 28
+                        SET param1 = x
+                        SET param2 = 0
+                        PATCH_INCLUDE ~additmfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL hidemod BEGIN
+                        SET opcode = 275
+                        SET param1 = 0 - x
+                        SET param2 = 0
+                        PATCH_INCLUDE ~additmfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL movesilmod BEGIN
+                        SET opcode = 59
+                        SET param1 = 0 - x
+                        SET param2 = 0
+                        PATCH_INCLUDE ~additmfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL openlockmod BEGIN
+                        SET opcode = 90
+                        SET param1 = 0 - x
+                        SET param2 = 0
+                        PATCH_INCLUDE ~additmfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL disarmtrapmod BEGIN
+                        SET opcode = 91
+                        SET param1 = 0 - x
+                        SET param2 = 0
+                        PATCH_INCLUDE ~additmfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL pickpocketmod BEGIN
+                        SET opcode = 92
+                        SET param1 = 0 - x
+                        SET param2 = 0
+                        PATCH_INCLUDE ~additmfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL spellfailmod BEGIN
+                        SET opcode = 60
+                        SET param1 = x
+                        SET param2 = 0
+                        PATCH_INCLUDE ~additmfx.tpp~ END
+                END
+            END
+
+            WRITE_SHORT 0x70 %fxnum%
+
+        END
+        /* Description updates */
+        PATCH_IF NOT ( ~%usename%~ STRING_EQUAL ~~ ) BEGIN
+            READ_STRREF 0x50 uniddesc ELSE ~nope~
+            READ_STRREF 0x54 iddesc ELSE ~nope~
+
+            SET resistanceheaderprinted = 0
+            SET slowheaderprinted = 0
+
+            PATCH_FOR_EACH param IN ~weight~ ~dexmod~ ~movemod~ ~wpnspeedmod~ ~baseac~ ~slashac~ ~crushac~ ~pierceac~ ~missileac~
+                                    ~slashres~ ~crushres~ ~pierceres~ ~missileres~ ~fireres~ ~coldres~
+                                    ~spellfailmod~ ~pickpocketmod~ ~disarmtrapmod~ ~openlockmod~ ~movesilmod~ ~hidemod~ 
+            BEGIN
+
+                 SET x = EVALUATE_BUFFER ~%%param%_%usename%%~
+                 PATCH_IF NOT (x = 0 || (x = 10 && ~%param%~ STRING_EQUAL ~baseac~)) BEGIN 
+                     PATCH_IF ~%param%~ STRING_EQUAL weight BEGIN
+                         SPRINT searchstring   ~Weight:~
+                         SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
+                         SPRINT replacestring  ~Weight:[%tab% ]*[0-9]+[%tab% a-zA-Z.]*~
+                         SPRINT insertstring   ~Weight: %x%~
+                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+
+                     PATCH_IF ~%param%~ STRING_EQUAL baseac BEGIN // kill "AC:" lines
+                         SPRINT searchstring   ~AC:~
+                         SPRINT insertafter    ~\(STATISTICS\)~
+                         SPRINT replacestring  ~AC:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+~
+                         SPRINT insertstring   ~~
+                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+
+                     PATCH_IF ~%param%~ STRING_EQUAL baseac BEGIN
+                         SPRINT searchstring   ~Armor Class:~
+                         SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
+                         SPRINT replacestring  ~Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*~
+                         SPRINT insertstring   ~Armor Class: %x%~
+                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+
+                     PATCH_IF ((~%param%~ STRING_EQUAL slashres || ~%param%~ STRING_EQUAL crushres ||
+                                ~%param%~ STRING_EQUAL pierceres || ~%param%~ STRING_EQUAL missileres)
+                                && resistanceheaderprinted = 0) BEGIN
+                         SPRINT searchstring   ~THISWILLNEVERMATCH~
+                         SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
+                         SPRINT replacestring  ~~
+                         SPRINT insertstring   ~Protection:%wnl% vs. Slash/Crush/Pierce/Missile:%wnl%  0 / 0 / 0 / 0~
+                         SET resistanceheaderprinted = 1
+                         SET slashrestotal = 0
+                         SET crushrestotal = 0
+                         SET piercerestotal = 0
+                         SET missilerestotal = 0
+                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+
+                     PATCH_IF ~%param%~ STRING_EQUAL slashres BEGIN
+                         SET intopcode = 86
+                         SET intparam = 1
+                         PATCH_INCLUDE ~sumfx.tpp~
+                         SET slashrestotal = %returnval%
+                         END
+
+                     PATCH_IF ~%param%~ STRING_EQUAL crushres BEGIN
+                         SET intopcode = 87
+                         SET intparam = 1
+                         PATCH_INCLUDE ~sumfx.tpp~
+                         SET crushrestotal = %returnval%
+                         END
+
+                     PATCH_IF ~%param%~ STRING_EQUAL pierceres BEGIN
+                         SET intopcode = 88
+                         SET intparam = 1
+                         PATCH_INCLUDE ~sumfx.tpp~
+                         SET piercerestotal = %returnval%
+                         END
+
+                     PATCH_IF ~%param%~ STRING_EQUAL missileres BEGIN
+                         SET intopcode = 89
+                         SET intparam = 1
+                         PATCH_INCLUDE ~sumfx.tpp~
+                         SET missilerestotal = %returnval%
+                         END
+
+                     PATCH_IF ((~%param%~ STRING_EQUAL dexmod || ~%param%~ STRING_EQUAL movemod ||
+                                ~%param%~ STRING_EQUAL wpnspeedmod)
+                                && slowheaderprinted = 0) BEGIN
+                         SPRINT searchstring   ~THISWILLNEVERMATCH~
+                         SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
+                         SPRINT replacestring  ~~
+                         SPRINT insertstring   ~Slowdown:%wnl% Dex/Move Speed/Weapon Speed Factor:%wnl%  0 / 0 / 0 ~
+                         SET slowheaderprinted = 1
+                         SET dexmodtotal = 0
+                         SET movemodtotal = 0
+                         SET wpnspeedtotal = 0
+                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+
+                     PATCH_IF ~%param%~ STRING_EQUAL dexmod BEGIN // kill various DEX lines
+                         SPRINT searchstring   ~DEX bonus~
+                         SPRINT insertafter    ~\(STATISTICS\)~
+                         SPRINT replacestring  ~+[1-9] DEX bonus, ~
+                         SPRINT insertstring   ~~
+                         PATCH_INCLUDE ~descupd_magic.tpp~
+                         SPRINT searchstring   ~Bonus.*Dexterity~
+                         SPRINT insertafter    ~\(STATISTICS\)~
+                         SPRINT replacestring  ~Bonus.*Dexterity[%wnl%%lnl%%mnl%]~
+                         SPRINT insertstring   ~~
+                         PATCH_INCLUDE ~descupd_magic.tpp~
+                         SPRINT searchstring   ~.*Dexterity~
+                         SPRINT insertafter    ~\(STATISTICS\)~
+                         SPRINT replacestring  ~.*Dexterity[%wnl%%lnl%%mnl%]~
+                         SPRINT insertstring   ~~
+                         PATCH_INCLUDE ~descupd_magic.tpp~
+                         SET intopcode = 15
+                         SET intparam = 1
+                         PATCH_INCLUDE ~sumfx.tpp~
+                         SET dexmodtotal = %returnval%
+                         END
+
+                     PATCH_IF ~%param%~ STRING_EQUAL movemod BEGIN
+                         SET intopcode = 176
+                         SET intparam = 1
+                         PATCH_INCLUDE ~sumfx.tpp~
+                         SET movemodtotal = %returnval% * 10
+                         END
+
+                     PATCH_IF ~%param%~ STRING_EQUAL wpnspeedmod BEGIN
+                         SET intopcode = 190
+                         SET intparam = 1
+                         PATCH_INCLUDE ~sumfx.tpp~
+                         SET wpnspeedtotal = 0 - %returnval%
+                         PATCH_IF (wpnspeedtotal > 0) BEGIN
+                           SPRINT wpnspeedtotal ~+%wpnspeedtotal%~
+                         END
+                         END
+
+                     PATCH_IF ~%param%~ STRING_EQUAL hidemod BEGIN
+                         SET intopcode = 275
+                         SET intparam = 1
+                         PATCH_INCLUDE ~sumfx.tpp~
+                         SET x = %returnval%
+                         PATCH_IF (x > 0) BEGIN
+                           SPRINT x ~+%x%~
+                         END
+                         SPRINT searchstring   ~Hide.*Shadows~
+                         SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
+                         SPRINT replacestring  ~Hide.*Shadows:.*[1-9]*%perc%*~
+                         SPRINT insertstring   ~Hide in Shadows: %x%~
+                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+
+                     PATCH_IF (~%param%~ STRING_EQUAL movesilmod || ((~%SOURCE_RES%~ STRING_EQUAL ~c2leat01~ ||  // hack to force
+                                                                      ~%SOURCE_RES%~ STRING_EQUAL ~leat21~) &&   // description update
+                                                                      ~%param%~ STRING_EQUAL weight)) BEGIN      // of Human Flesh
+                         SET intopcode = 59
+                         SET intparam = 1
+                         PATCH_INCLUDE ~sumfx.tpp~
+                         SET x = %returnval%
+                         PATCH_IF (x > 0) BEGIN
+                           SPRINT x ~+%x%~
+                         END
+                         SPRINT searchstring   ~\(Stealth|Move Silently\)~
+                         SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
+                         SPRINT replacestring  ~\(Stealth|Move Silently\):.*[1-9]*%perc%*.*~
+                         SPRINT insertstring   ~Move Silently: %x%~
+                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+
+                     PATCH_IF ~%param%~ STRING_EQUAL openlockmod BEGIN
+                         SET intopcode = 90
+                         SET intparam = 1
+                         PATCH_INCLUDE ~sumfx.tpp~
+                         SET x = %returnval%
+                         PATCH_IF (x > 0) BEGIN
+                           SPRINT x ~+%x%~
+                         END
+                         SPRINT searchstring   ~Lock~
+                         SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
+                         SPRINT replacestring  ~\(Open.*ocks|Lock Picking\):.*[1-9]*%perc%*~
+                         SPRINT insertstring   ~Open Locks: %x%~
+                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+
+                     PATCH_IF ~%param%~ STRING_EQUAL disarmtrapmod BEGIN
+                         SET intopcode = 91
+                         SET intparam = 1
+                         PATCH_INCLUDE ~sumfx.tpp~
+                         SET x = %returnval%
+                         PATCH_IF (x > 0) BEGIN
+                           SPRINT x ~+%x%~
+                         END
+                         SPRINT searchstring   ~Find/Remove~
+                         SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
+                         SPRINT replacestring  ~Find/Remove.*raps:.*[1-9]*%perc%*~
+                         SPRINT insertstring   ~Find/Remove Traps: %x%~
+                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+
+                     PATCH_IF ~%param%~ STRING_EQUAL pickpocketmod BEGIN
+                         SET intopcode = 92
+                         SET intparam = 1
+                         PATCH_INCLUDE ~sumfx.tpp~
+                         SET x = %returnval%
+                         PATCH_IF (x > 0) BEGIN
+                           SPRINT x ~+%x%~
+                         END
+                         SPRINT searchstring   ~Pick Pockets~
+                         SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
+                         SPRINT replacestring  ~Pick Pockets:.*[1-9]*%perc%*~
+                         SPRINT insertstring   ~Pick Pockets: %x%~
+                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+
+                     PATCH_IF ~%param%~ STRING_EQUAL spellfailmod BEGIN
+                         SET intopcode = 60
+                         SET intparam = 1
+                         PATCH_INCLUDE ~sumfx.tpp~
+                         SET x = %returnval%
+                         PATCH_IF (x > 0) BEGIN
+                           SPRINT x ~+%x%~
+                         END
+                         SPRINT searchstring   ~Spell Failure~
+                         SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
+                         SPRINT replacestring  ~Spell Failure:.*[1-9]*%perc%*~
+                         SPRINT insertstring   ~Mage Spell Failure: %x%%perc%~
+                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+
+                END // if the param has changed
+            END // foreach
+
+            // batched updates ... where we have multiple values on one line.
+            // elaborate tricks with QUOTE, REPLACE_EVALUATE and EVALUATE_BUFFER failed.
+            PATCH_IF (resistanceheaderprinted = 1) BEGIN
+                SPRINT searchstring   ~ vs. Slash/Crush/Pierce/Missile:~
+                SPRINT insertafter    ~THISWILLNEVERMATCH~
+                SPRINT replacestring  ~Slash/Crush/Pierce/Missile:%wnl%  0 / 0 / 0 / 0~
+                SPRINT insertstring   ~Slash/Crush/Pierce/Missile:%wnl%  %slashrestotal%%perc% / %crushrestotal%%perc% / %piercerestotal%%perc% / %missilerestotal%%perc%~
+                PATCH_INCLUDE ~descupd_magic.tpp~
+            END
+            PATCH_IF (slowheaderprinted = 1) BEGIN
+                SPRINT searchstring   ~ Dex/Move Speed/Weapon Speed Factor:~
+                SPRINT insertafter    ~THISWILLNEVERMATCH~
+                SPRINT replacestring  ~ Dex/Move Speed/Weapon Speed Factor:%wnl%  0 / 0 / 0 ~
+                SPRINT insertstring   ~ Dex/Move Speed/Weapon Speed Factor:%wnl%  %dexmodtotal% / %movemodtotal%%perc% / %wpnspeedtotal% ~
+                PATCH_INCLUDE ~descupd_magic.tpp~
+            END
+
+            // some custom updates for less-than-accurate statements after mod install
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~c2keld01~) BEGIN
+                 SPRINT searchstring   ~Despite~
+                 SPRINT insertafter    ~THISWILLNEVERMATCH~
+                 SPRINT replacestring  ~ Despite being incredibly strong, the armor is almost weightless.~
+                 SPRINT insertstring   ~~
+                 PATCH_INCLUDE ~descupd_magic.tpp~
+            END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~leat16~) BEGIN // orc leather
+                 SPRINT searchstring   ~Bonuses:~
+                 SPRINT insertafter    ~THISWILLNEVERMATCH~
+                 SPRINT replacestring  ~Bonuses: .* resistance to missile attacks[%wnl%%lnl%%mnl%]+~
+                 SPRINT insertstring   ~~
+                 PATCH_INCLUDE ~descupd_magic.tpp~
+            END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~chan02~ || ~%SOURCE_RES%~ STRING_EQUAL ~chan05~ ||
+                      ~%SOURCE_RES%~ STRING_EQUAL ~j#spli06~) BEGIN // chain mail +1, splint mail +1, splint mail +2
+                 SPRINT searchstring   ~bonus.* to their armor class~
+                 SPRINT insertafter    ~THISWILLNEVERMATCH~
+                 SPRINT replacestring  ~This suit of armor is enchanted, granting the wearer a.* bonus.* to their armor class.~
+                 SPRINT insertstring   ~This suit of armor is enchanted, so it is lighter, easier to move in and more protective.~
+                 PATCH_INCLUDE ~descupd_magic.tpp~
+            END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~rr#abih~) BEGIN // abishai hide
+                 SPRINT searchstring   ~resistance~
+                 SPRINT insertafter    ~THISWILLNEVERMATCH~
+                 SPRINT replacestring  ~    .*resistance to slashing, piercing, crushing and missile damage[%wnl%%lnl%%mnl%]+~
+                 SPRINT insertstring   ~~
+                 PATCH_INCLUDE ~descupd_magic.tpp~
+            END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~c2chan01~) BEGIN // incarnadine elven chain - no thieving penalties
+                 SPRINT searchstring   ~Incarnadine~
+                 SPRINT insertafter    ~THISWILLNEVERMATCH~
+                 SPRINT replacestring  ~Stealth:.*[%wnl%%lnl%%mnl%]+~
+                 SPRINT insertstring   ~~
+                 PATCH_INCLUDE ~descupd_magic.tpp~
+                 SPRINT replacestring  ~Lockpicking:.*[%wnl%%lnl%%mnl%]+~
+                 PATCH_INCLUDE ~descupd_magic.tpp~
+                 SPRINT replacestring  ~Find/Remove.*[%wnl%%lnl%%mnl%]+~
+                 PATCH_INCLUDE ~descupd_magic.tpp~
+                 SPRINT replacestring  ~Pick.*[%wnl%%lnl%%mnl%]+~
+                 PATCH_INCLUDE ~descupd_magic.tpp~
+            END
+
+        END // if not empty usename
+    END // if fxnum > 0
+    ELSE BEGIN // do potions here
+
+    ///////////////////////////////
+    // potion updates start here //
+    ///////////////////////////////
+
+        PATCH_IF NOT ( ~%usename%~ STRING_EQUAL ~~ ) BEGIN
+            /* We have something to do, yay */
+            READ_LONG  0x64 "abil_off"
+            READ_SHORT 0x68 "abil_num"
+
+            READ_LONG  0x6a "fx_start"
+
+            SET accum_adj = 0
+            SET duration = 0
+
+            SET cumulative_or_set = 0
+
+            FOR (index = 0 ; index < abil_num ; index = index + 1) BEGIN
+              READ_SHORT ("%abil_off%" + 0x10 + ("%index%" * 56)) "level"
+              READ_SHORT ("%abil_off%" + 0x1e + ("%index%" * 56)) "fx_num"
+              READ_SHORT ("%abil_off%" + 0x20 + ("%index%" * 56)) "fx_off"
+
+              PATCH_IF (accum_adj != 0) BEGIN // if adjustments to previous level, fix us up
+                SET fx_off = fx_off + accum_adj
+                WRITE_SHORT ("%abil_off%" + 0x20 + ("%index%" * 56)) %fx_off%
+              END // if accum_adj
+
+              FOR (index2 = fx_off ; index2 < (fx_off + fx_num) ; index2 = index2 + 1) BEGIN
+                READ_SHORT %fx_start% + 0x30 * %index2% + 0     opcode
+                READ_BYTE  %fx_start% + 0x30 * %index2% + 0x03  power
+                READ_LONG  %fx_start% + 0x30 * %index2% + 0x04  param1
+                READ_LONG  %fx_start% + 0x30 * %index2% + 0x08  param2
+                READ_LONG  %fx_start% + 0x30 * %index2% + 0x0e  duration2
+
+                PATCH_IF (duration2 > duration) BEGIN // so we don't copy a visual effect duration, for example
+                    SET duration = duration2
+                END
+
+                PATCH_IF (
+                    (%opcode% = 0)  ||  // any AC effects
+                    (%opcode% = 15) ||  // dex modifiers
+                    (%opcode% = 86) ||  // slashres
+                    (%opcode% = 87) ||  // crushres
+                    (%opcode% = 88) ||  // pierceres
+                    (%opcode% = 89)     // missileres
+                      ) BEGIN
+                    DELETE_BYTES %fx_start% + 0x30 * %index2% + 0  0x30
+                    SET fx_num = %fx_num% - 1
+                    SET index2 = %index2% - 1
+                    SET accum_adj = %accum_adj% - 1
+                END
+              END // for fx_num
+
+            PATCH_FOR_EACH param IN ~dexmod~ ~movemod~ ~wpnspeedmod~ ~baseac~ ~slashac~ ~crushac~ ~pierceac~ ~missileac~
+                                    ~slashres~ ~crushres~ ~pierceres~ ~missileres~
+                                    ~spellfailmod~ ~pickpocketmod~ ~disarmtrapmod~ ~openlockmod~ ~movesilmod~ ~hidemod~ 
+            BEGIN
+                SET x = EVALUATE_BUFFER ~%%param%_%usename%%~
+                PATCH_IF NOT (x = 0 || (x = 10 && ~%param%~ STRING_EQUAL ~baseac~)) BEGIN 
+                    PATCH_IF ~%param%~ STRING_EQUAL dexmod BEGIN
+                        SET opcode = 15
+                        SET param1 = 0 - x
+                        SET param2 = 0
+                        PATCH_INCLUDE ~addpotfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL movemod BEGIN
+                        SET opcode = 176
+                        SET param1 = 0 - (x / 10)
+                        SET param2 = 0
+                        PATCH_INCLUDE ~addpotfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL wpnspeedmod BEGIN
+                        SET opcode = 190
+                        SET param1 = 0 - x
+                        SET param2 = 0
+                        PATCH_INCLUDE ~addpotfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL baseac BEGIN
+                        SET opcode = 0
+                        SET param1 = x
+                        SET param2 = 16
+                        PATCH_INCLUDE ~addpotfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL slashac BEGIN
+                        SET opcode = 0
+                        SET param1 = x
+                        SET param2 = 8
+                        PATCH_INCLUDE ~addpotfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL crushac BEGIN
+                        SET opcode = 0
+                        SET param1 = x
+                        SET param2 = 1
+                        PATCH_INCLUDE ~addpotfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL pierceac BEGIN
+                        SET opcode = 0
+                        SET param1 = x
+                        SET param2 = 4
+                        PATCH_INCLUDE ~addpotfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL missileac BEGIN
+                        SET opcode = 0
+                        SET param1 = x
+                        SET param2 = 2
+                        PATCH_INCLUDE ~addpotfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL slashres BEGIN
+                        SET opcode = 86
+                        SET param1 = x
+                        SET param2 = %cumulative_or_set%
+                        PATCH_INCLUDE ~addpotfx.tpp~ END
+                    PATCH_IF (~%param%~ STRING_EQUAL slashres) && cumulative_or_set == 1 BEGIN // immunity to further modification
+                        SET opcode = 101
+                        SET param1 = 0
+                        SET param2 = 86
+                        PATCH_INCLUDE ~addpotfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL crushres BEGIN
+                        SET opcode = 87
+                        SET param1 = x
+                        SET param2 = %cumulative_or_set%
+                        PATCH_INCLUDE ~addpotfx.tpp~ END
+                    PATCH_IF (~%param%~ STRING_EQUAL crushres) && cumulative_or_set == 1 BEGIN // immunity to further modification
+                        SET opcode = 101
+                        SET param1 = 0
+                        SET param2 = 87
+                        PATCH_INCLUDE ~addpotfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL pierceres BEGIN
+                        SET opcode = 88
+                        SET param1 = x
+                        SET param2 = %cumulative_or_set%
+                        PATCH_INCLUDE ~addpotfx.tpp~ END
+                    PATCH_IF (~%param%~ STRING_EQUAL pierceres) && cumulative_or_set == 1 BEGIN // immunity to further modification
+                        SET opcode = 101
+                        SET param1 = 0
+                        SET param2 = 88
+                        PATCH_INCLUDE ~addpotfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL missileres BEGIN
+                        SET opcode = 89
+                        SET param1 = x
+                        SET param2 = %cumulative_or_set%
+                        PATCH_INCLUDE ~addpotfx.tpp~ END
+                    PATCH_IF (~%param%~ STRING_EQUAL missileres) && cumulative_or_set == 1 BEGIN // immunity to further modification
+                        SET opcode = 101
+                        SET param1 = 0
+                        SET param2 = 89
+                        PATCH_INCLUDE ~addpotfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL hidemod BEGIN
+                        SET opcode = 275
+                        SET param1 = 0 - x
+                        SET param2 = 0
+                        PATCH_INCLUDE ~addpotfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL movesilmod BEGIN
+                        SET opcode = 59
+                        SET param1 = 0 - x
+                        SET param2 = 0
+                        PATCH_INCLUDE ~addpotfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL openlockmod BEGIN
+                        SET opcode = 90
+                        SET param1 = 0 - x
+                        SET param2 = 0
+                        PATCH_INCLUDE ~addpotfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL disarmtrapmod BEGIN
+                        SET opcode = 91
+                        SET param1 = 0 - x
+                        SET param2 = 0
+                        PATCH_INCLUDE ~addpotfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL pickpocketmod BEGIN
+                        SET opcode = 92
+                        SET param1 = 0 - x
+                        SET param2 = 0
+                        PATCH_INCLUDE ~addpotfx.tpp~ END
+                    PATCH_IF ~%param%~ STRING_EQUAL spellfailmod BEGIN
+                        SET opcode = 60
+                        SET param1 = x
+                        SET param2 = 0
+                        PATCH_INCLUDE ~addpotfx.tpp~ END
+
+                END // if valid param
+            END // for each param
+
+            WRITE_SHORT ("%abil_off%" + 0x1e + ("%index%" * 56)) %fx_num%
+
+            END // for abil_num
+
+            // description updates, for potions
+
+            READ_STRREF 0x50 uniddesc ELSE ~nope~
+            READ_STRREF 0x54 iddesc ELSE ~nope~
+
+            SET resistanceheaderprinted = 0
+            SET slowheaderprinted = 0
+
+            PATCH_FOR_EACH param IN ~dexmod~ ~movemod~ ~wpnspeedmod~ ~baseac~ ~slashac~ ~crushac~ ~pierceac~ ~missileac~
+                                    ~slashres~ ~crushres~ ~pierceres~ ~missileres~ ~fireres~ ~coldres~
+                                    ~spellfailmod~ ~pickpocketmod~ ~disarmtrapmod~ ~openlockmod~ ~movesilmod~ ~hidemod~ 
+            BEGIN
+
+                 SET x = EVALUATE_BUFFER ~%%param%_%usename%%~
+                 PATCH_IF NOT (x = 0 || (x = 10 && ~%param%~ STRING_EQUAL ~baseac~)) BEGIN 
+                     PATCH_IF ~%param%~ STRING_EQUAL baseac BEGIN
+                         SPRINT searchstring   ~Armor Class:~
+                         SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
+                         SPRINT replacestring  ~Armor Class:[%tab% ]*.*-*[0-9]+[%tab% a-zA-Z0-9+.()]*~
+                         SPRINT insertstring   ~Armor Class: %x%~
+                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+
+                     PATCH_IF ((~%param%~ STRING_EQUAL slashres || ~%param%~ STRING_EQUAL crushres ||
+                                ~%param%~ STRING_EQUAL pierceres || ~%param%~ STRING_EQUAL missileres)
+                                && resistanceheaderprinted = 0) BEGIN
+                         SPRINT searchstring   ~THISWILLNEVERMATCH~
+                         SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
+                         SPRINT replacestring  ~~
+                         SPRINT insertstring   ~Protection:%wnl% vs. Slash/Crush/Pierce/Missile:%wnl%  0 / 0 / 0 / 0~
+                         SET resistanceheaderprinted = 1
+                         SET slashrestotal = 0
+                         SET crushrestotal = 0
+                         SET piercerestotal = 0
+                         SET missilerestotal = 0
+                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+
+                     PATCH_IF ~%param%~ STRING_EQUAL slashres BEGIN
+                         SET slashrestotal = x
+                         PATCH_IF cumulative_or_set == 0 BEGIN
+                           SPRINT slashrestotal ~+%slashrestotal%~
+                           END
+                         END
+
+                     PATCH_IF ~%param%~ STRING_EQUAL crushres BEGIN
+                         SET crushrestotal = x
+                         PATCH_IF cumulative_or_set == 0 BEGIN
+                           SPRINT crushrestotal ~+%crushrestotal%~
+                           END
+                         END
+
+                     PATCH_IF ~%param%~ STRING_EQUAL pierceres BEGIN
+                         SET piercerestotal = x
+                         PATCH_IF cumulative_or_set == 0 BEGIN
+                           SPRINT piercerestotal ~+%piercerestotal%~
+                           END
+                         END
+
+                     PATCH_IF ~%param%~ STRING_EQUAL missileres BEGIN
+                         SET missilerestotal = x
+                         PATCH_IF cumulative_or_set == 0 BEGIN
+                           SPRINT missilerestotal ~+%missilerestotal%~
+                           END
+                         END
+
+                     PATCH_IF ((~%param%~ STRING_EQUAL dexmod || ~%param%~ STRING_EQUAL movemod ||
+                                ~%param%~ STRING_EQUAL wpnspeedmod)
+                                && slowheaderprinted = 0) BEGIN
+                         SPRINT searchstring   ~THISWILLNEVERMATCH~
+                         SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
+                         SPRINT replacestring  ~~
+                         SPRINT insertstring   ~Slowdown:%wnl% Dex/Move Speed/Weapon Speed Factor:%wnl%  0 / 0 / 0 ~
+                         SET slowheaderprinted = 1
+                         SET dexmodtotal = 0
+                         SET movemodtotal = 0
+                         SET wpnspeedtotal = 0
+                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+
+                     PATCH_IF ~%param%~ STRING_EQUAL dexmod BEGIN // kill various DEX lines
+                         SPRINT searchstring   ~Dexterity~
+                         SPRINT insertafter    ~\(STATISTICS\)~
+                         SPRINT replacestring  ~Dexterity:.*%wnl%~
+                         SPRINT insertstring   ~~
+                         PATCH_INCLUDE ~descupd_magic.tpp~
+                         SET dexmodtotal = 0 - x
+                         END
+
+                     PATCH_IF ~%param%~ STRING_EQUAL movemod BEGIN
+                         SET movemodtotal = (0 - x)
+                         END
+
+                     PATCH_IF ~%param%~ STRING_EQUAL wpnspeedmod BEGIN
+                         SET wpnspeedtotal = x
+                         PATCH_IF (wpnspeedtotal > 0) BEGIN
+                           SPRINT wpnspeedtotal ~+%wpnspeedtotal%~
+                         END
+                         END
+
+                     PATCH_IF ~%param%~ STRING_EQUAL hidemod BEGIN
+                         PATCH_IF (x > 0) BEGIN
+                           SPRINT x ~-%x%~
+                         END
+                         SPRINT searchstring   ~Hide.*Shadows~
+                         SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
+                         SPRINT replacestring  ~Hide.*Shadows:.*[1-9]*%perc%*~
+                         SPRINT insertstring   ~Hide in Shadows: %x%~
+                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+
+                     PATCH_IF (~%param%~ STRING_EQUAL movesilmod) BEGIN
+                         PATCH_IF (x > 0) BEGIN
+                           SPRINT x ~-%x%~
+                         END
+                         SPRINT searchstring   ~\(Stealth|Move Silently\)~
+                         SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
+                         SPRINT replacestring  ~\(Stealth|Move Silently\):.*[1-9]*%perc%*.*~
+                         SPRINT insertstring   ~Move Silently: %x%~
+                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+
+                     PATCH_IF ~%param%~ STRING_EQUAL openlockmod BEGIN
+                         PATCH_IF (x > 0) BEGIN
+                           SPRINT x ~-%x%~
+                         END
+                         SPRINT searchstring   ~Lock~
+                         SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
+                         SPRINT replacestring  ~\(Open.*ocks|Lock Picking\):.*[1-9]*%perc%*~
+                         SPRINT insertstring   ~Open Locks: %x%~
+                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+
+                     PATCH_IF ~%param%~ STRING_EQUAL disarmtrapmod BEGIN
+                         PATCH_IF (x > 0) BEGIN
+                           SPRINT x ~-%x%~
+                         END
+                         SPRINT searchstring   ~Find/Remove~
+                         SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
+                         SPRINT replacestring  ~Find/Remove.*raps:.*[1-9]*%perc%*~
+                         SPRINT insertstring   ~Find/Remove Traps: %x%~
+                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+
+                     PATCH_IF ~%param%~ STRING_EQUAL pickpocketmod BEGIN
+                         PATCH_IF (x > 0) BEGIN
+                           SPRINT x ~-%x%~
+                         END
+                         SPRINT searchstring   ~Pick Pockets~
+                         SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
+                         SPRINT replacestring  ~Pick Pockets:.*[1-9]*%perc%*~
+                         SPRINT insertstring   ~Pick Pockets: %x%~
+                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+
+                     PATCH_IF ~%param%~ STRING_EQUAL spellfailmod BEGIN
+                         PATCH_IF (x > 0) BEGIN
+                           SPRINT x ~+%x%~
+                         END
+                         SPRINT searchstring   ~Spell Failure~
+                         SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
+                         SPRINT replacestring  ~Spell Failure:.*[1-9]*%perc%*~
+                         SPRINT insertstring   ~Mage Spell Failure: %x%%perc%~
+                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+
+                END // if the param has changed
+            END // foreach
+
+            // batched updates ... where we have multiple values on one line.
+            // elaborate tricks with QUOTE, REPLACE_EVALUATE and EVALUATE_BUFFER failed.
+            PATCH_IF (resistanceheaderprinted = 1) BEGIN
+                SPRINT searchstring   ~ vs. Slash/Crush/Pierce/Missile:~
+                SPRINT insertafter    ~THISWILLNEVERMATCH~
+                SPRINT replacestring  ~Slash/Crush/Pierce/Missile:%wnl%  0 / 0 / 0 / 0~
+                SPRINT insertstring   ~Slash/Crush/Pierce/Missile:%wnl%  %slashrestotal%%perc% / %crushrestotal%%perc% / %piercerestotal%%perc% / %missilerestotal%%perc%~
+                PATCH_INCLUDE ~descupd_magic.tpp~
+            END
+            PATCH_IF (slowheaderprinted = 1) BEGIN
+                SPRINT searchstring   ~ Dex/Move Speed/Weapon Speed Factor:~
+                SPRINT insertafter    ~THISWILLNEVERMATCH~
+                SPRINT replacestring  ~ Dex/Move Speed/Weapon Speed Factor:%wnl%  0 / 0 / 0 ~
+                SPRINT insertstring   ~ Dex/Move Speed/Weapon Speed Factor:%wnl%  %dexmodtotal% / %movemodtotal%%perc% / %wpnspeedtotal% ~
+                PATCH_INCLUDE ~descupd_magic.tpp~
+            END
+            // some custom updates for less-than-accurate statements after mod install
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~potn24~) BEGIN // potion of defense
+                 SPRINT searchstring   ~Armor Class~
+                 SPRINT insertafter    ~THISWILLNEVERMATCH~
+                 SPRINT replacestring  ~Armor Class: set to 0~
+                 SPRINT insertstring   ~Armor Class: +%crushac_potn24% bonus vs. all~
+                 PATCH_INCLUDE ~descupd_magic.tpp~
+                 SPRINT searchstring   ~improves the armor class of the imbiber.~
+                 SPRINT insertafter    ~THISWILLNEVERMATCH~
+                 SPRINT replacestring  ~improves the armor class of the imbiber.~
+                 SPRINT insertstring   ~improves your understanding of combat and helps you dodge, weave and avoid attacks.~
+                 PATCH_INCLUDE ~descupd_magic.tpp~
+            END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~potn46~) BEGIN // potion of stone form
+                 SPRINT searchstring   ~THISWILLNEVERMATCH~
+                 SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
+                 SPRINT replacestring  ~~
+                 SPRINT insertstring   ~WARNING: dropping below 1 Dexterity will turn you to stone and kill you.%wnl%~
+                 PATCH_INCLUDE ~descupd_magic.tpp~
+            END
+
+        END // if usename
+    END // if fxnum == 0
+  END
+  BUT_ONLY_IF_IT_CHANGES
+
+PRINT ~Reworking spells and updating descriptions...~
+
+//////////////////////////////
+// spell updates start here //
+//////////////////////////////
+
+COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
+
+    SPRINT usename ~~
+    SET enchantment = 0
+    TO_LOWER SOURCE_RES
+    SET cumulative_or_set = 0
+    PATCH_IF ("%SOURCE_RES%" STRING_EQUAL ~spwi102~ ||
+              "%SOURCE_RES%" STRING_EQUAL ~spwi317~ ||
+              "%SOURCE_RES%" STRING_EQUAL ~spwi414~ ||
+              "%SOURCE_RES%" STRING_EQUAL ~sppr202~) BEGIN
+        SET cumulative_or_set = 1 // flat value set, not cumulative
+    END
+
+    // armor type defined for the spell in classifications.txt?
+    SPRINT classdefined $class(~%SOURCE_RES%~)
+    PATCH_IF NOT (~%classdefined%~ STRING_CONTAINS_REGEXP ~class~ == 0) BEGIN
+        SPRINT tempname ~%classdefined%%enchantment%~
+        
+        // stats listed in thebiglist.txt for the generic armor type?
+        SPRINT classenchant $weight(~%tempname%~)
+        PATCH_IF NOT (~%classenchant%~ STRING_CONTAINS_REGEXP ~weight~ == 0) BEGIN
+            SPRINT usename ~%tempname%~
         END
     END
+    
+    PATCH_IF NOT ( ~%usename%~ STRING_EQUAL ~~ ) BEGIN
+        // adjustments listed in thebiglist.txt for the specific spell?
+        SPRINT specialcase $baseac(~%SOURCE_RES%~)
+        PATCH_IF NOT (~%specialcase%~ STRING_CONTAINS_REGEXP ~baseac~ == 0) BEGIN
+            SET $baseac(~%SOURCE_RES%~)         = $baseac(~%SOURCE_RES%~) + $baseac(~%usename%~)
+            SET $slashac(~%SOURCE_RES%~)        = $slashac(~%SOURCE_RES%~) + $slashac(~%usename%~)
+            SET $crushac(~%SOURCE_RES%~)        = $crushac(~%SOURCE_RES%~) + $crushac(~%usename%~)
+            SET $pierceac(~%SOURCE_RES%~)       = $pierceac(~%SOURCE_RES%~) + $pierceac(~%usename%~)
+            SET $missileac(~%SOURCE_RES%~)      = $missileac(~%SOURCE_RES%~) + $missileac(~%usename%~)
+            SET $slashres(~%SOURCE_RES%~)       = $slashres(~%SOURCE_RES%~) + $slashres(~%usename%~)
+            SET $crushres(~%SOURCE_RES%~)       = $crushres(~%SOURCE_RES%~) + $crushres(~%usename%~)
+            SET $pierceres(~%SOURCE_RES%~)      = $pierceres(~%SOURCE_RES%~) + $pierceres(~%usename%~)
+            SET $missileres(~%SOURCE_RES%~)     = $missileres(~%SOURCE_RES%~) + $missileres(~%usename%~)
+
+            FOR (x=2; (x < 32); x+=1) BEGIN
+                SPRINT specialcase $baseac(~%SOURCE_RES%-%x%~)
+                PATCH_IF NOT (~%specialcase%~ STRING_CONTAINS_REGEXP ~baseac~ == 0) BEGIN
+                    SET $baseac(~%SOURCE_RES%-%x%~)         = $baseac(~%SOURCE_RES%-%x%~) + $baseac(~%usename%~)
+                    SET $slashac(~%SOURCE_RES%-%x%~)        = $slashac(~%SOURCE_RES%-%x%~) + $slashac(~%usename%~)
+                    SET $crushac(~%SOURCE_RES%-%x%~)        = $crushac(~%SOURCE_RES%-%x%~) + $crushac(~%usename%~)
+                    SET $pierceac(~%SOURCE_RES%-%x%~)       = $pierceac(~%SOURCE_RES%-%x%~) + $pierceac(~%usename%~)
+                    SET $missileac(~%SOURCE_RES%-%x%~)      = $missileac(~%SOURCE_RES%-%x%~) + $missileac(~%usename%~)
+                    SET $slashres(~%SOURCE_RES%-%x%~)       = $slashres(~%SOURCE_RES%-%x%~) + $slashres(~%usename%~)
+                    SET $crushres(~%SOURCE_RES%-%x%~)       = $crushres(~%SOURCE_RES%-%x%~) + $crushres(~%usename%~)
+                    SET $pierceres(~%SOURCE_RES%-%x%~)      = $pierceres(~%SOURCE_RES%-%x%~) + $pierceres(~%usename%~)
+                    SET $missileres(~%SOURCE_RES%-%x%~)     = $missileres(~%SOURCE_RES%-%x%~) + $missileres(~%usename%~)
+                END // if baseac
+            END // for
+
+            SPRINT usename ~%SOURCE_RES%~
+        END // if baseac
+    END // if usename
 
     PATCH_IF NOT ( ~%usename%~ STRING_EQUAL ~~ ) BEGIN
         /* We have something to do, yay */
-        READ_SHORT 0x70 fxnum
-        READ_LONG 0x6a fxoff
+        READ_LONG  0x64 "abil_off"
+        READ_SHORT 0x68 "abil_num"
+
+        READ_LONG  0x6a "fx_start"
         
-        FOR (x=0; (x < %fxnum%); x+=1) BEGIN
-            READ_SHORT %fxoff% + 0x30 * %x% + 0     opcode
-            READ_LONG  %fxoff% + 0x30 * %x% + 0x04  param1
-            READ_LONG  %fxoff% + 0x30 * %x% + 0x08  param2
+        SET accum_adj = 0
+        SET duration = 0
+
+        FOR (index = 0 ; index < abil_num ; index = index + 1) BEGIN
+          READ_SHORT ("%abil_off%" + 0x10 + ("%index%" * 40)) "level"
+          READ_SHORT ("%abil_off%" + 0x1e + ("%index%" * 40)) "fx_num"
+          READ_SHORT ("%abil_off%" + 0x20 + ("%index%" * 40)) "fx_off"
+          
+          PATCH_IF (accum_adj != 0) BEGIN // if adjustments to previous level, fix us up
+            SET fx_off = fx_off + accum_adj
+            WRITE_SHORT ("%abil_off%" + 0x20 + ("%index%" * 40)) %fx_off%
+          END // if accum_adj
+
+          FOR (index2 = fx_off ; index2 < (fx_off + fx_num) ; index2 = index2 + 1) BEGIN
+            READ_SHORT %fx_start% + 0x30 * %index2% + 0     opcode
+            READ_BYTE  %fx_start% + 0x30 * %index2% + 0x03  power
+            READ_LONG  %fx_start% + 0x30 * %index2% + 0x04  param1
+            READ_LONG  %fx_start% + 0x30 * %index2% + 0x08  param2
+            READ_LONG  %fx_start% + 0x30 * %index2% + 0x0e  duration2
+            
+            PATCH_IF (duration2 > duration) BEGIN // so we don't copy a visual effect duration, for example
+                SET duration = duration2
+            END
             
             PATCH_IF (
-                (%opcode% = 0) ||                                       // any AC effects
-                (%opcode% = 145 && %param2% = 0) ||                     // wizard spell disable
-                (%opcode% = 144 && (%param2% = 0 || %param2% = 1)) ||   // stealth/thieving disable
-                (%opcode% = 59 && %param1% < 0) ||                      // move silently penalty (but keep bonuses)
-                (%opcode% = 275 && %param1% < 0) ||                     // hide in shadows penalty
-                (%opcode% = 90 && %param1% < 0) ||                      // open lock penalty
-                (%opcode% = 91 && %param1% < 0) ||                      // find trap penalty
-                (%opcode% = 92 && %param1% < 0) ||                      // pickpocket penalty
-                (%opcode% = 126 && %param1% < 0 && %param2% = 0)        // movement slowdown
+                (%opcode% = 0)  ||  // any AC effects
+                (%opcode% = 86) ||  // slashres
+                (%opcode% = 87) ||  // crushres
+                (%opcode% = 88) ||  // pierceres
+                (%opcode% = 89)     // missileres
                   ) BEGIN
-                PATCH_INCLUDE ~delitmfx.tpp~                            // kill them. we'll add some back.
+                DELETE_BYTES %fx_start% + 0x30 * %index2% + 0  0x30
+                SET fx_num = %fx_num% - 1
+                SET index2 = %index2% - 1
+                SET accum_adj = %accum_adj% - 1
             END
-        END
-        
-        WRITE_SHORT 0x70 %fxnum%
-        
-        PATCH_FOR_EACH param IN ~dexmod~ ~movemod~ ~wpnspeedmod~ ~baseac~ ~slashac~ ~crushac~ ~pierceac~ ~missileac~
-                                ~slashres~ ~crushres~ ~pierceres~ ~missileres~ ~fireres~ ~coldres~
-                                ~hidemod~ ~movesilmod~ ~openlockmod~ ~disarmtrapmod~ ~pickpocketmod~
-                                ~spellfailmod~
+          END // for fx_num
+
+        PATCH_FOR_EACH param IN ~baseac~ ~slashac~ ~crushac~ ~pierceac~ ~missileac~
+                                ~slashres~ ~crushres~ ~pierceres~ ~missileres~
         BEGIN
             SET x = EVALUATE_BUFFER ~%%param%_%usename%%~
+            SPRINT y EVALUATE_BUFFER ~%%param%_%usename%-%level%%~
+            PATCH_IF NOT (~%y%~ STRING_CONTAINS_REGEXP ~%param%~ == 0) BEGIN // if y is valid, override x
+                SET x = %y%
+            END
             PATCH_IF NOT (x = 0 || (x = 10 && ~%param%~ STRING_EQUAL ~baseac~)) BEGIN 
-                PATCH_IF ~%param%~ STRING_EQUAL dexmod BEGIN
-                    SET opcode = 15
-                    SET param1 = 0 - x
-                    SET param2 = 0
-                    PATCH_INCLUDE ~additmfx.tpp~ END
-                PATCH_IF ~%param%~ STRING_EQUAL movemod BEGIN
-                    SET opcode = 176
-                    SET param1 = 0 - (x / 10)
-                    SET param2 = 0
-                    PATCH_INCLUDE ~additmfx.tpp~ END
-                PATCH_IF ~%param%~ STRING_EQUAL wpnspeedmod BEGIN
-                    SET opcode = 190
-                    SET param1 = 0 - x
-                    SET param2 = 0
-                    PATCH_INCLUDE ~additmfx.tpp~ END
                 PATCH_IF ~%param%~ STRING_EQUAL baseac BEGIN
                     SET opcode = 0
                     SET param1 = x
                     SET param2 = 16
-                    PATCH_INCLUDE ~additmfx.tpp~ END
+                    PATCH_INCLUDE ~addsplfx.tpp~ END
                 PATCH_IF ~%param%~ STRING_EQUAL slashac BEGIN
                     SET opcode = 0
                     SET param1 = x
                     SET param2 = 8
-                    PATCH_INCLUDE ~additmfx.tpp~ END
+                    PATCH_INCLUDE ~addsplfx.tpp~ END
                 PATCH_IF ~%param%~ STRING_EQUAL crushac BEGIN
                     SET opcode = 0
                     SET param1 = x
                     SET param2 = 1
-                    PATCH_INCLUDE ~additmfx.tpp~ END
+                    PATCH_INCLUDE ~addsplfx.tpp~ END
                 PATCH_IF ~%param%~ STRING_EQUAL pierceac BEGIN
                     SET opcode = 0
                     SET param1 = x
                     SET param2 = 4
-                    PATCH_INCLUDE ~additmfx.tpp~ END
+                    PATCH_INCLUDE ~addsplfx.tpp~ END
                 PATCH_IF ~%param%~ STRING_EQUAL missileac BEGIN
                     SET opcode = 0
                     SET param1 = x
                     SET param2 = 2
-                    PATCH_INCLUDE ~additmfx.tpp~ END
+                    PATCH_INCLUDE ~addsplfx.tpp~ END
+                PATCH_IF (~%param%~ STRING_EQUAL slashres) && cumulative_or_set == 1 BEGIN // immunity to further modification
+                    SET opcode = 101
+                    SET param1 = 0
+                    SET param2 = 86
+                    PATCH_INCLUDE ~addsplfx.tpp~ END
                 PATCH_IF ~%param%~ STRING_EQUAL slashres BEGIN
                     SET opcode = 86
                     SET param1 = x
-                    SET param2 = 0
-                    PATCH_INCLUDE ~additmfx.tpp~ END
+                    SET param2 = %cumulative_or_set%
+                    PATCH_INCLUDE ~addsplfx.tpp~ END
+                PATCH_IF (~%param%~ STRING_EQUAL crushres) && cumulative_or_set == 1 BEGIN // immunity to further modification
+                    SET opcode = 101
+                    SET param1 = 0
+                    SET param2 = 87
+                    PATCH_INCLUDE ~addsplfx.tpp~ END
                 PATCH_IF ~%param%~ STRING_EQUAL crushres BEGIN
                     SET opcode = 87
                     SET param1 = x
-                    SET param2 = 0
-                    PATCH_INCLUDE ~additmfx.tpp~ END
+                    SET param2 = %cumulative_or_set%
+                    PATCH_INCLUDE ~addsplfx.tpp~ END
+                PATCH_IF (~%param%~ STRING_EQUAL pierceres) && cumulative_or_set == 1 BEGIN // immunity to further modification
+                    SET opcode = 101
+                    SET param1 = 0
+                    SET param2 = 88
+                    PATCH_INCLUDE ~addsplfx.tpp~ END
                 PATCH_IF ~%param%~ STRING_EQUAL pierceres BEGIN
                     SET opcode = 88
                     SET param1 = x
-                    SET param2 = 0
-                    PATCH_INCLUDE ~additmfx.tpp~ END
+                    SET param2 = %cumulative_or_set%
+                    PATCH_INCLUDE ~addsplfx.tpp~ END
+                PATCH_IF (~%param%~ STRING_EQUAL missileres) && cumulative_or_set == 1 BEGIN // immunity to further modification
+                    SET opcode = 101
+                    SET param1 = 0
+                    SET param2 = 89
+                    PATCH_INCLUDE ~addsplfx.tpp~ END
                 PATCH_IF ~%param%~ STRING_EQUAL missileres BEGIN
                     SET opcode = 89
                     SET param1 = x
-                    SET param2 = 0
-                    PATCH_INCLUDE ~additmfx.tpp~ END
-                PATCH_IF ~%param%~ STRING_EQUAL fireres BEGIN
-                    SET opcode = 30
-                    SET param1 = x
-                    SET param2 = 0
-                    PATCH_INCLUDE ~additmfx.tpp~ END
-                PATCH_IF ~%param%~ STRING_EQUAL coldres BEGIN
-                    SET opcode = 28
-                    SET param1 = x
-                    SET param2 = 0
-                    PATCH_INCLUDE ~additmfx.tpp~ END
-                PATCH_IF ~%param%~ STRING_EQUAL hidemod BEGIN
-                    SET opcode = 275
-                    SET param1 = 0 - x
-                    SET param2 = 0
-                    PATCH_INCLUDE ~additmfx.tpp~ END
-                PATCH_IF ~%param%~ STRING_EQUAL movesilmod BEGIN
-                    SET opcode = 59
-                    SET param1 = 0 - x
-                    SET param2 = 0
-                    PATCH_INCLUDE ~additmfx.tpp~ END
-                PATCH_IF ~%param%~ STRING_EQUAL openlockmod BEGIN
-                    SET opcode = 90
-                    SET param1 = 0 - x
-                    SET param2 = 0
-                    PATCH_INCLUDE ~additmfx.tpp~ END
-                PATCH_IF ~%param%~ STRING_EQUAL disarmtrapmod BEGIN
-                    SET opcode = 91
-                    SET param1 = 0 - x
-                    SET param2 = 0
-                    PATCH_INCLUDE ~additmfx.tpp~ END
-                PATCH_IF ~%param%~ STRING_EQUAL pickpocketmod BEGIN
-                    SET opcode = 92
-                    SET param1 = 0 - x
-                    SET param2 = 0
-                    PATCH_INCLUDE ~additmfx.tpp~ END
-                PATCH_IF ~%param%~ STRING_EQUAL spellfailmod BEGIN
-                    SET opcode = 60
-                    SET param1 = x
-                    SET param2 = 0
-                    PATCH_INCLUDE ~additmfx.tpp~ END
-            END
-        END
+                    SET param2 = %cumulative_or_set%
+                    PATCH_INCLUDE ~addsplfx.tpp~ END
+                    
+            END // if valid param
+        END // for each param
 
-        WRITE_SHORT 0x70 %fxnum%
+        WRITE_SHORT ("%abil_off%" + 0x1e + ("%index%" * 40)) %fx_num%
 
-    END
-    /* Description updates */
-    PATCH_IF NOT ( ~%usename%~ STRING_EQUAL ~~ ) BEGIN
+        END // for abil_num
+
+        // description updates, mostly hand-coded for spells
         READ_STRREF 0x50 uniddesc ELSE ~nope~
         READ_STRREF 0x54 iddesc ELSE ~nope~
+
+        PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~spwi102~) BEGIN // Armor spell
+             SPRINT searchstring   ~scale mail armor (AC 6)~
+             SPRINT insertafter    ~THISWILLNEVERMATCH~
+             SPRINT replacestring  ~(AC 6)~
+             SPRINT insertstring   ~(AC %baseac_scale0%, Protection vs. S/C/P/M: %slashres_scale0%%perc% / %crushres_scale0%%perc% / %pierceres_scale0%%perc% / %missileres_scale0%%perc%)~
+             PATCH_INCLUDE ~descupd_magic.tpp~
+        END
+        PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~spwi317~) BEGIN // Ghost Armor spell
+             SPRINT searchstring   ~field plate armor (AC 2)~
+             SPRINT insertafter    ~THISWILLNEVERMATCH~
+             SPRINT replacestring  ~(AC 2)~
+             SPRINT insertstring   ~(AC %baseac_fieldp0%, Protection vs. S/C/P/M: %slashres_fieldp0%%perc% / %crushres_fieldp0%%perc% / %pierceres_fieldp0%%perc% / %missileres_fieldp0%%perc%)~
+             PATCH_INCLUDE ~descupd_magic.tpp~
+        END
+        PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~spwi414~) BEGIN // Spirit Armor spell
+             SPRINT searchstring   ~1, as if he was wearing full plate~
+             SPRINT insertafter    ~THISWILLNEVERMATCH~
+             SPRINT replacestring  ~While in effect the AC (armor class) of the recipient will be 1, as if he was wearing full plate.~
+             SPRINT insertstring   ~While in effect the recipient will be protected as if he was wearing full plate armor. (AC %baseac_fullp0%, Protection vs. S/C/P/M: %slashres_fullp0%%perc% / %crushres_fullp0%%perc% / %pierceres_fullp0%%perc% / %missileres_fullp0%%perc%)~
+             PATCH_INCLUDE ~descupd_magic.tpp~
+        END
+        PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~sppr111~ || ~%SOURCE_RES%~ STRING_EQUAL ~dgfaith~) BEGIN // Armor of Faith spell
+             SPRINT searchstring   ~At first level, the protection is 5~
+             SPRINT insertafter    ~THISWILLNEVERMATCH~
+             SPRINT replacestring  ~At first level, the protection is 5%perc%, and every five levels of the caster improves this by another 5%perc%.~
+             SPRINT insertstring   ~At first level, the protection is 5%perc% versus magic and %slashres_sppr111%%perc% versus physical attacks, and every five levels of the caster improves this by another 5%perc% and %slashres_sppr111%%perc%, respectively.~
+             PATCH_INCLUDE ~descupd_magic.tpp~
+             SPRINT searchstring   ~A 20th level priest would have~
+             SPRINT insertafter    ~THISWILLNEVERMATCH~
+             SPRINT replacestring  ~A 20th level priest would have 25%perc% of her damage 'absorbed'~
+             SPRINT insertstring   ~A 20th level priest would have 25%perc% / %slashres_sppr111-20%%perc% of her damage 'absorbed'~
+             PATCH_INCLUDE ~descupd_magic.tpp~
+        END
+        PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~sppr202~) BEGIN // Barkskin spell
+             SPRINT searchstring   ~increasing its base Armor Class to 6, plus 1 bonus point for every four levels of the priest (AC 5 at 4th level, AC 4 at 8th level, and so forth).~
+             SPRINT insertafter    ~THISWILLNEVERMATCH~
+             SPRINT replacestring  ~increasing its base Armor Class to 6, plus 1 bonus point for every four levels of the priest (AC 5 at 4th level, AC 4 at 8th level, and so forth).~
+             SPRINT insertstring   ~protecting it as a scale mail armor (AC %baseac_sppr202%, Protection vs. S/C/P/M: %slashres_sppr202%%perc% / %crushres_sppr202%%perc% / %pierceres_sppr202%%perc% / %missileres_sppr202%%perc%) of +1 enchantment for every four levels of the priest (+1 at 4th level, +2 at 8th level, and so forth).~
+             PATCH_INCLUDE ~descupd_magic.tpp~
+        END
         
-        SET resistanceheaderprinted = 0
-        SET slowheaderprinted = 0
-
-        PATCH_FOR_EACH param IN ~weight~ ~dexmod~ ~movemod~ ~wpnspeedmod~ ~baseac~ ~slashac~ ~crushac~ ~pierceac~ ~missileac~
-                                ~slashres~ ~crushres~ ~pierceres~ ~missileres~ ~fireres~ ~coldres~
-                                ~spellfailmod~ ~pickpocketmod~ ~disarmtrapmod~ ~openlockmod~ ~movesilmod~ ~hidemod~ 
-        BEGIN
-
-             SET x = EVALUATE_BUFFER ~%%param%_%usename%%~
-             PATCH_IF NOT (x = 0 || (x = 10 && ~%param%~ STRING_EQUAL ~baseac~)) BEGIN 
-                 PATCH_IF ~%param%~ STRING_EQUAL weight BEGIN
-                     SPRINT searchstring   ~Weight:~
-                     SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
-                     SPRINT replacestring  ~Weight:[%tab% ]*[0-9]+[%tab% a-zA-Z.]*~
-                     SPRINT insertstring   ~Weight: %x%~
-                     PATCH_INCLUDE ~descupd_magic.tpp~ END
-                
-                 PATCH_IF ~%param%~ STRING_EQUAL baseac BEGIN // kill "AC:" lines
-                     SPRINT searchstring   ~AC:~
-                     SPRINT insertafter    ~\(STATISTICS\)~
-                     SPRINT replacestring  ~AC:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+~
-                     SPRINT insertstring   ~~
-                     PATCH_INCLUDE ~descupd_magic.tpp~ END
-
-                 PATCH_IF ~%param%~ STRING_EQUAL baseac BEGIN
-                     SPRINT searchstring   ~Armor Class:~
-                     SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
-                     SPRINT replacestring  ~Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*~
-                     SPRINT insertstring   ~Armor Class: %x%~
-                     PATCH_INCLUDE ~descupd_magic.tpp~ END
-
-                 PATCH_IF ((~%param%~ STRING_EQUAL slashres || ~%param%~ STRING_EQUAL crushres ||
-                            ~%param%~ STRING_EQUAL pierceres || ~%param%~ STRING_EQUAL missileres)
-                            && resistanceheaderprinted = 0) BEGIN
-                     SPRINT searchstring   ~THISWILLNEVERMATCH~
-                     SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
-                     SPRINT replacestring  ~~
-                     SPRINT insertstring   ~Protection:%wnl% vs. Slash/Crush/Pierce/Missile:%wnl%  0 / 0 / 0 / 0~
-                     SET resistanceheaderprinted = 1
-                     SET slashrestotal = 0
-                     SET crushrestotal = 0
-                     SET piercerestotal = 0
-                     SET missilerestotal = 0
-                     PATCH_INCLUDE ~descupd_magic.tpp~ END
-
-                 PATCH_IF ~%param%~ STRING_EQUAL slashres BEGIN
-                     SET intopcode = 86
-                     SET intparam = 1
-                     PATCH_INCLUDE ~sumfx.tpp~
-                     SET slashrestotal = %returnval%
-                     END
-
-                 PATCH_IF ~%param%~ STRING_EQUAL crushres BEGIN
-                     SET intopcode = 87
-                     SET intparam = 1
-                     PATCH_INCLUDE ~sumfx.tpp~
-                     SET crushrestotal = %returnval%
-                     END
-
-                 PATCH_IF ~%param%~ STRING_EQUAL pierceres BEGIN
-                     SET intopcode = 88
-                     SET intparam = 1
-                     PATCH_INCLUDE ~sumfx.tpp~
-                     SET piercerestotal = %returnval%
-                     END
-
-                 PATCH_IF ~%param%~ STRING_EQUAL missileres BEGIN
-                     SET intopcode = 89
-                     SET intparam = 1
-                     PATCH_INCLUDE ~sumfx.tpp~
-                     SET missilerestotal = %returnval%
-                     END
-
-                 PATCH_IF ((~%param%~ STRING_EQUAL dexmod || ~%param%~ STRING_EQUAL movemod ||
-                            ~%param%~ STRING_EQUAL wpnspeedmod)
-                            && slowheaderprinted = 0) BEGIN
-                     SPRINT searchstring   ~THISWILLNEVERMATCH~
-                     SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
-                     SPRINT replacestring  ~~
-                     SPRINT insertstring   ~Slowdown:%wnl% Dex/Move Speed/Weapon Speed Factor:%wnl%  0 / 0 / 0 ~
-                     SET slowheaderprinted = 1
-                     SET dexmodtotal = 0
-                     SET movemodtotal = 0
-                     SET wpnspeedtotal = 0
-                     PATCH_INCLUDE ~descupd_magic.tpp~ END
-
-                 PATCH_IF ~%param%~ STRING_EQUAL dexmod BEGIN // kill various DEX lines
-                     SPRINT searchstring   ~DEX bonus~
-                     SPRINT insertafter    ~\(STATISTICS\)~
-                     SPRINT replacestring  ~+[1-9] DEX bonus, ~
-                     SPRINT insertstring   ~~
-                     PATCH_INCLUDE ~descupd_magic.tpp~
-                     SPRINT searchstring   ~Bonus.*Dexterity~
-                     SPRINT insertafter    ~\(STATISTICS\)~
-                     SPRINT replacestring  ~Bonus.*Dexterity[%wnl%%lnl%%mnl%]~
-                     SPRINT insertstring   ~~
-                     PATCH_INCLUDE ~descupd_magic.tpp~
-                     SPRINT searchstring   ~.*Dexterity~
-                     SPRINT insertafter    ~\(STATISTICS\)~
-                     SPRINT replacestring  ~.*Dexterity[%wnl%%lnl%%mnl%]~
-                     SPRINT insertstring   ~~
-                     PATCH_INCLUDE ~descupd_magic.tpp~
-                     SET intopcode = 15
-                     SET intparam = 1
-                     PATCH_INCLUDE ~sumfx.tpp~
-                     SET dexmodtotal = %returnval%
-                     END
-
-                 PATCH_IF ~%param%~ STRING_EQUAL movemod BEGIN
-                     SET intopcode = 176
-                     SET intparam = 1
-                     PATCH_INCLUDE ~sumfx.tpp~
-                     SET movemodtotal = %returnval% * 10
-                     END
-
-                 PATCH_IF ~%param%~ STRING_EQUAL wpnspeedmod BEGIN
-                     SET intopcode = 190
-                     SET intparam = 1
-                     PATCH_INCLUDE ~sumfx.tpp~
-                     SET wpnspeedtotal = 0 - %returnval%
-                     PATCH_IF (wpnspeedtotal > 0) BEGIN
-                       SPRINT wpnspeedtotal ~+%wpnspeedtotal%~
-                     END
-                     END
-
-                 PATCH_IF ~%param%~ STRING_EQUAL hidemod BEGIN
-                     SET intopcode = 275
-                     SET intparam = 1
-                     PATCH_INCLUDE ~sumfx.tpp~
-                     SET x = %returnval%
-                     PATCH_IF (x > 0) BEGIN
-                       SPRINT x ~+%x%~
-                     END
-                     SPRINT searchstring   ~Hide.*Shadows~
-                     SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
-                     SPRINT replacestring  ~Hide.*Shadows:.*[1-9]*%perc%*~
-                     SPRINT insertstring   ~Hide in Shadows: %x%~
-                     PATCH_INCLUDE ~descupd_magic.tpp~ END
-
-                 PATCH_IF (~%param%~ STRING_EQUAL movesilmod || ((~%SOURCE_RES%~ STRING_EQUAL ~c2leat01~ ||  // hack to force
-                                                                  ~%SOURCE_RES%~ STRING_EQUAL ~leat21~) &&   // description update
-                                                                  ~%param%~ STRING_EQUAL weight)) BEGIN      // of Human Flesh
-                     SET intopcode = 59
-                     SET intparam = 1
-                     PATCH_INCLUDE ~sumfx.tpp~
-                     SET x = %returnval%
-                     PATCH_IF (x > 0) BEGIN
-                       SPRINT x ~+%x%~
-                     END
-                     SPRINT searchstring   ~\(Stealth|Move Silently\)~
-                     SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
-                     SPRINT replacestring  ~\(Stealth|Move Silently\):.*[1-9]*%perc%*.*~
-                     SPRINT insertstring   ~Move Silently: %x%~
-                     PATCH_INCLUDE ~descupd_magic.tpp~ END
-
-                 PATCH_IF ~%param%~ STRING_EQUAL openlockmod BEGIN
-                     SET intopcode = 90
-                     SET intparam = 1
-                     PATCH_INCLUDE ~sumfx.tpp~
-                     SET x = %returnval%
-                     PATCH_IF (x > 0) BEGIN
-                       SPRINT x ~+%x%~
-                     END
-                     SPRINT searchstring   ~Lock~
-                     SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
-                     SPRINT replacestring  ~\(Open.*ocks|Lock Picking\):.*[1-9]*%perc%*~
-                     SPRINT insertstring   ~Open Locks: %x%~
-                     PATCH_INCLUDE ~descupd_magic.tpp~ END
-
-                 PATCH_IF ~%param%~ STRING_EQUAL disarmtrapmod BEGIN
-                     SET intopcode = 91
-                     SET intparam = 1
-                     PATCH_INCLUDE ~sumfx.tpp~
-                     SET x = %returnval%
-                     PATCH_IF (x > 0) BEGIN
-                       SPRINT x ~+%x%~
-                     END
-                     SPRINT searchstring   ~Find/Remove~
-                     SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
-                     SPRINT replacestring  ~Find/Remove.*raps:.*[1-9]*%perc%*~
-                     SPRINT insertstring   ~Find/Remove Traps: %x%~
-                     PATCH_INCLUDE ~descupd_magic.tpp~ END
-
-                 PATCH_IF ~%param%~ STRING_EQUAL pickpocketmod BEGIN
-                     SET intopcode = 92
-                     SET intparam = 1
-                     PATCH_INCLUDE ~sumfx.tpp~
-                     SET x = %returnval%
-                     PATCH_IF (x > 0) BEGIN
-                       SPRINT x ~+%x%~
-                     END
-                     SPRINT searchstring   ~Pick Pockets~
-                     SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
-                     SPRINT replacestring  ~Pick Pockets:.*[1-9]*%perc%*~
-                     SPRINT insertstring   ~Pick Pockets: %x%~
-                     PATCH_INCLUDE ~descupd_magic.tpp~ END
-
-                 PATCH_IF ~%param%~ STRING_EQUAL spellfailmod BEGIN
-                     SET intopcode = 60
-                     SET intparam = 1
-                     PATCH_INCLUDE ~sumfx.tpp~
-                     SET x = %returnval%
-                     PATCH_IF (x > 0) BEGIN
-                       SPRINT x ~+%x%~
-                     END
-                     SPRINT searchstring   ~Spell Failure~
-                     SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
-                     SPRINT replacestring  ~Spell Failure:.*[1-9]*%perc%*~
-                     SPRINT insertstring   ~Mage Spell Failure: %x%%perc%~
-                     PATCH_INCLUDE ~descupd_magic.tpp~ END
-
-            END // if the param has changed
-        END // foreach
-
-        // batched updates ... where we have multiple values on one line.
-        // elaborate tricks with QUOTE, REPLACE_EVALUATE and EVALUATE_BUFFER failed.
-        PATCH_IF (resistanceheaderprinted = 1) BEGIN
-            SPRINT searchstring   ~ vs. Slash/Crush/Pierce/Missile:~
-            SPRINT insertafter    ~THISWILLNEVERMATCH~
-            SPRINT replacestring  ~Slash/Crush/Pierce/Missile:%wnl%  0 / 0 / 0 / 0~
-            SPRINT insertstring   ~Slash/Crush/Pierce/Missile:%wnl%  %slashrestotal%%perc% / %crushrestotal%%perc% / %piercerestotal%%perc% / %missilerestotal%%perc%~
-            PATCH_INCLUDE ~descupd_magic.tpp~
-        END
-        PATCH_IF (slowheaderprinted = 1) BEGIN
-            SPRINT searchstring   ~ Dex/Move Speed/Weapon Speed Factor:~
-            SPRINT insertafter    ~THISWILLNEVERMATCH~
-            SPRINT replacestring  ~ Dex/Move Speed/Weapon Speed Factor:%wnl%  0 / 0 / 0 ~
-            SPRINT insertstring   ~ Dex/Move Speed/Weapon Speed Factor:%wnl%  %dexmodtotal% / %movemodtotal%%perc% / %wpnspeedtotal% ~
-            PATCH_INCLUDE ~descupd_magic.tpp~
-        END
-
-        // some custom updates for less-than-accurate statements after mod install
-        PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~c2keld01~) BEGIN
-             SPRINT searchstring   ~Despite~
-             SPRINT insertafter    ~THISWILLNEVERMATCH~
-             SPRINT replacestring  ~ Despite being incredibly strong, the armor is almost weightless.~
-             SPRINT insertstring   ~~
-             PATCH_INCLUDE ~descupd_magic.tpp~
-        END
-        PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~leat16~) BEGIN // orc leather
-             SPRINT searchstring   ~Bonuses:~
-             SPRINT insertafter    ~THISWILLNEVERMATCH~
-             SPRINT replacestring  ~Bonuses: .* resistance to missile attacks[%wnl%%lnl%%mnl%]+~
-             SPRINT insertstring   ~~
-             PATCH_INCLUDE ~descupd_magic.tpp~
-        END
-        PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~rr#abih~) BEGIN // abishai hide
-             SPRINT searchstring   ~resistance~
-             SPRINT insertafter    ~THISWILLNEVERMATCH~
-             SPRINT replacestring  ~    .*resistance to slashing, piercing, crushing and missile damage[%wnl%%lnl%%mnl%]+~
-             SPRINT insertstring   ~~
-             PATCH_INCLUDE ~descupd_magic.tpp~
-        END
-        PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~c2chan01~) BEGIN // incarnadine elven chain - no thieving penalties
-             SPRINT searchstring   ~Incarnadine~
-             SPRINT insertafter    ~THISWILLNEVERMATCH~
-             SPRINT replacestring  ~Stealth:.*[%wnl%%lnl%%mnl%]+~
-             SPRINT insertstring   ~~
-             PATCH_INCLUDE ~descupd_magic.tpp~
-             SPRINT replacestring  ~Lockpicking:.*[%wnl%%lnl%%mnl%]+~
-             PATCH_INCLUDE ~descupd_magic.tpp~
-             SPRINT replacestring  ~Find/Remove.*[%wnl%%lnl%%mnl%]+~
-             PATCH_INCLUDE ~descupd_magic.tpp~
-             SPRINT replacestring  ~Pick.*[%wnl%%lnl%%mnl%]+~
-             PATCH_INCLUDE ~descupd_magic.tpp~
-        END
-
-    END // if not empty usename
-
-  END
+    END // if usename
+            
   BUT_ONLY_IF_IT_CHANGES
 
+///////////////////////////////////////
+// update unid'ed armor descriptions //
+///////////////////////////////////////
+
+PRINT ~Fixing up unidentified armour descriptions...~
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+
+    READ_LONG 0x60 enchantment
+    READ_BYTE 0x1c itemtype
+
+    SPRINT usename ~~
+    TO_LOWER SOURCE_RES
+
+    PATCH_IF (itemtype == 0x02 && enchantment > 0) BEGIN
+      // armor type defined for the item in classifications.txt?
+      SPRINT classdefined $class(~%SOURCE_RES%~)
+      PATCH_IF NOT (~%classdefined%~ STRING_CONTAINS_REGEXP ~class~ == 0) BEGIN
+        PATCH_IF ~%classdefined%~ STRING_EQUAL ~leather~ BEGIN
+          INNER_ACTION BEGIN
+            COPY_EXISTING ~leat01.itm~ ~override~
+              READ_LONG 0x50 uniddescref
+            BUT_ONLY_IF_IT_CHANGES
+          END
+          WRITE_LONG 0x50 uniddescref
+        END
+        PATCH_IF ~%classdefined%~ STRING_EQUAL ~studded~ BEGIN
+          INNER_ACTION BEGIN
+            COPY_EXISTING ~leat04.itm~ ~override~
+              READ_LONG 0x50 uniddescref
+            BUT_ONLY_IF_IT_CHANGES
+          END
+          WRITE_LONG 0x50 uniddescref
+        END
+        PATCH_IF ~%classdefined%~ STRING_EQUAL ~hide~ BEGIN
+          INNER_ACTION BEGIN
+            COPY_EXISTING ~leat10.itm~ ~override~
+              READ_LONG 0x50 uniddescref
+            BUT_ONLY_IF_IT_CHANGES
+          END
+          WRITE_LONG 0x50 uniddescref
+        END
+        PATCH_IF ~%classdefined%~ STRING_EQUAL ~elvenc~ BEGIN
+          INNER_ACTION BEGIN
+            COPY_EXISTING ~chan12.itm~ ~override~
+              READ_LONG 0x50 uniddescref
+            BUT_ONLY_IF_IT_CHANGES
+          END
+          WRITE_LONG 0x50 uniddescref
+        END
+        PATCH_IF ~%classdefined%~ STRING_EQUAL ~scale~ && FILE_EXISTS_IN_GAME ~scal01.itm~ BEGIN
+          INNER_ACTION BEGIN
+            COPY_EXISTING ~scal01.itm~ ~override~
+              READ_LONG 0x50 uniddescref
+            BUT_ONLY_IF_IT_CHANGES
+          END
+          WRITE_LONG 0x50 uniddescref
+        END
+        PATCH_IF ~%classdefined%~ STRING_EQUAL ~chain~ BEGIN
+          INNER_ACTION BEGIN
+            COPY_EXISTING ~chan01.itm~ ~override~
+              READ_LONG 0x50 uniddescref
+            BUT_ONLY_IF_IT_CHANGES
+          END
+          WRITE_LONG 0x50 uniddescref
+        END
+        PATCH_IF ~%classdefined%~ STRING_EQUAL ~adamc~ BEGIN
+          INNER_ACTION BEGIN
+            COPY_EXISTING ~chan01.itm~ ~override~
+              READ_LONG 0x50 uniddescref
+            BUT_ONLY_IF_IT_CHANGES
+          END
+          WRITE_LONG 0x50 uniddescref
+        END
+        PATCH_IF ~%classdefined%~ STRING_EQUAL ~banded~ && FILE_EXISTS_IN_GAME ~band01.itm~ BEGIN
+          INNER_ACTION BEGIN
+            COPY_EXISTING ~band01.itm~ ~override~
+              READ_LONG 0x50 uniddescref
+            BUT_ONLY_IF_IT_CHANGES
+          END
+          WRITE_LONG 0x50 uniddescref
+        END
+        PATCH_IF ~%classdefined%~ STRING_EQUAL ~splint~ BEGIN
+          INNER_ACTION BEGIN
+            COPY_EXISTING ~chan04.itm~ ~override~
+              READ_LONG 0x50 uniddescref
+            BUT_ONLY_IF_IT_CHANGES
+          END
+          WRITE_LONG 0x50 uniddescref
+        END
+        PATCH_IF ~%classdefined%~ STRING_EQUAL ~plate~ BEGIN
+          INNER_ACTION BEGIN
+            COPY_EXISTING ~plat01.itm~ ~override~
+              READ_LONG 0x50 uniddescref
+            BUT_ONLY_IF_IT_CHANGES
+          END
+          WRITE_LONG 0x50 uniddescref
+        END
+        PATCH_IF ~%classdefined%~ STRING_EQUAL ~fieldp~ && FILE_EXISTS_IN_GAME ~flat01.itm~ BEGIN
+          INNER_ACTION BEGIN
+            COPY_EXISTING ~flat01.itm~ ~override~
+              READ_LONG 0x50 uniddescref
+            BUT_ONLY_IF_IT_CHANGES
+          END
+          WRITE_LONG 0x50 uniddescref
+        END
+        PATCH_IF ~%classdefined%~ STRING_EQUAL ~mfieldp~ && FILE_EXISTS_IN_GAME ~flat01.itm~ BEGIN
+          INNER_ACTION BEGIN
+            COPY_EXISTING ~flat01.itm~ ~override~
+              READ_LONG 0x50 uniddescref
+            BUT_ONLY_IF_IT_CHANGES
+          END
+          WRITE_LONG 0x50 uniddescref
+        END
+        PATCH_IF ~%classdefined%~ STRING_EQUAL ~mfieldp~ && NOT FILE_EXISTS_IN_GAME ~flat01.itm~ BEGIN
+          INNER_ACTION BEGIN
+            COPY_EXISTING ~plat04.itm~ ~override~
+              READ_LONG 0x50 uniddescref
+            BUT_ONLY_IF_IT_CHANGES
+          END
+          WRITE_LONG 0x50 uniddescref
+        END
+        PATCH_IF ~%classdefined%~ STRING_EQUAL ~fullp~ BEGIN
+          INNER_ACTION BEGIN
+            COPY_EXISTING ~plat04.itm~ ~override~
+              READ_LONG 0x50 uniddescref
+            BUT_ONLY_IF_IT_CHANGES
+          END
+          WRITE_LONG 0x50 uniddescref
+        END
+      END
+    END
+  BUT_ONLY_IF_IT_CHANGES
+    
 BEGIN ~Full Plate And Packing Steel: Field Improvisation (convenience tweak, remove restrictions on combining protective items)~
  DESIGNATED 102
 
