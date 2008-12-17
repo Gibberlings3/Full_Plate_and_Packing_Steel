@@ -56,6 +56,7 @@ CISPGRD     PLATE      ALL      //TOTLM
 CISPGRD3    PLATE      ALL      //TOTLM
 CLOLTH      ELVENC     ALL      //BG2:SOA
 D0T#LEAT    STUDDED    ALL      /* Ascension: Turnabout */
+DARCHAIN    PLATE      ALL      /* NeJ2 */
 DLEAT10     HIDE       ALL      //BG2:SOA
 DRAGARM     SCALE      ALL      //IWD
 DW#ABYDA    STUDDED    ALL      /* SCSII */
@@ -225,6 +226,7 @@ WA2PLAT     FULLP      ALL      //BG2:SOA
 XCHAN03     CHAIN      ALL      //TOTLM
 XLEAT03     LEATHER    ALL      //TOTLM
 ZILFGT      STUDDED    ALL      /* Ascension (Tougher Illasera) */
+ZOMBSKIN    LEATHER    ALL      /* NeJ2 */
 SPPR111     NOTARMOR   SOA      //BG2:SOA
 SPPR111     NOTARMOR   TOB      //BG2:SOA
 DGFAITH     NOTARMOR   ALL      //BG2:SOA

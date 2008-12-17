@@ -3,7 +3,6 @@ AUTHOR ~erik, gibberlings3~
 //MODDER setup_tra none
 VERSION ~beta 4~
 README ~fullplate/readme-fullplate.txt~
-NO_IF_EVAL_BUG
 
 ALLOW_MISSING ~baldur25.bcs~
 
@@ -36,8 +35,90 @@ ACTION_IF FILE_EXISTS ~override/tb#resisttweak.txt~ THEN BEGIN
     PRINT ~WARNING: tb#resisttweak.txt found in override. Not recommended, may cause stutter.~
 END
 
+PRINT ~Detecting game engine...~
+
+OUTER_SPRINT gameiam ~~
+OUTER_SPRINT modsiam ~~
+
+ACTION_IF ENGINE_IS ~soa~ BEGIN
+  OUTER_SPRINT gameiam ~soa~
+  PRINT ~ BG2: SOA...~
+END
+ACTION_IF ENGINE_IS ~tob~ BEGIN
+  OUTER_SPRINT gameiam ~tob~
+  PRINT ~ BG2: TOB...~
+END
+ACTION_IF MOD_IS_INSTALLED ~ITEM_REV/ITEM_REV.TP2~ 0 BEGIN
+  OUTER_SPRINT modsiam ~%modsiam% item_rev~
+  PRINT ~ + Item Revisions...~
+END
+ACTION_IF MOD_IS_INSTALLED ~SPELL_REV/SETUP-SPELL_REV.TP2~ 1 BEGIN
+  OUTER_SPRINT modsiam ~%modsiam% spell_rev_d~
+  PRINT ~ + Spell Revisions: Divine...~
+END
+ACTION_IF MOD_IS_INSTALLED ~SPELL_REV/SETUP-SPELL_REV.TP2~ 2 BEGIN
+  OUTER_SPRINT modsiam ~%modsiam% spell_rev_a~
+  PRINT ~ + Spell Revisions: Arcane...~
+END
+ACTION_IF MOD_IS_INSTALLED ~SETUP-SPELLPACKB5.TP2~ 32 BEGIN
+  OUTER_SPRINT modsiam ~%modsiam% gsp_ga~
+  PRINT ~ + Galactygon's Spell Pack beta 5: Ghost Armour...~
+END
+ACTION_IF MOD_IS_INSTALLED ~SETUP-NEJ2V694.TP2~ 0 BEGIN
+  OUTER_SPRINT modsiam ~%modsiam% nej2_694~
+  PRINT ~ + Never Ending Journey Second Edition v6.94 ...~
+END
+ACTION_IF ENGINE_IS ~iwd~ BEGIN
+  OUTER_SPRINT gameiam ~iwd~
+  PRINT ~ IWD...~
+END
+ACTION_IF ENGINE_IS ~how~ BEGIN
+  OUTER_SPRINT gameiam ~how~
+  PRINT ~ IWD: HoW...~
+END
+// needs weidu > 208 release
+ACTION_IF ENGINE_IS ~totlm~ BEGIN
+  OUTER_SPRINT gameiam ~totlm~
+  PRINT ~ IWD: ToTLM...~
+END
+ACTION_IF ENGINE_IS ~iwd2~ BEGIN
+  OUTER_SPRINT gameiam ~iwd2~
+  PRINT ~ IWD2...~
+  PRINT ~Warning: Icewind Dale II untested and probably not working.~
+END
+// needs weidu 208.34 or later ... or iwd/how/totlm is detected as pst as well
+ACTION_IF ENGINE_IS ~pst~ BEGIN
+  OUTER_SPRINT gameiam ~pst~
+  PRINT ~ PST...~
+  PRINT ~Warning: Planescape: Torment untested and probably not working.~
+END
+ACTION_IF ENGINE_IS ~bg1~ BEGIN
+  OUTER_SPRINT gameiam ~bg1~
+  PRINT ~ BG...~
+  PRINT ~Warning: original Baldur's Gate untested and probably not working.~
+END
+ACTION_IF ENGINE_IS ~totsc~ BEGIN
+  OUTER_SPRINT gameiam ~totsc~
+  PRINT ~ BG: TotSC...~
+  PRINT ~Warning: Baldur's Gate + Tales of the Sword Coast untested and probably not working.~
+END
+ACTION_IF GAME_IS ~tutu~ BEGIN
+  PRINT ~Warning: BG1Tutu untested...~
+END
+ACTION_IF GAME_IS ~bgt~ BEGIN
+  PRINT ~Warning: BGT untested...~
+END
+
 PRINT ~Cleaning, shining, oiling:~
 PRINT ~Naming and enchantment level fixes...~
+
+COPY_EXISTING ~chan01.itm~ ~override~
+  READ_LONG NAME1 "chainmail_name"
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~plat01.itm~ ~override~
+  READ_LONG NAME1 "platemail_name"
+  BUT_ONLY_IF_IT_CHANGES
 
 COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   PATCH_IF (SOURCE_SIZE < 0x72) BEGIN
@@ -322,23 +403,23 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~FWCHAN01.ITM~) BEGIN
-      SAY NAME1 ~Chain Mail Armor~
+      WRITE_LONG NAME1 chainmail_name
       SAY NAME2 ~Jester's Chain +4~
       WRITE_BYTE 0x60 4
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~FWCHAN02.ITM~) BEGIN
-      SAY NAME1 ~Chain Mail Armor~
+      WRITE_LONG NAME1 chainmail_name
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~FWCHAN03.ITM~) BEGIN
-      SAY NAME1 ~Chain Mail Armor~
+      WRITE_LONG NAME1 chainmail_name
       SAY NAME2 ~Suldanessellar Chain +2~
       WRITE_BYTE 0x60 2
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~FWCHAN04.ITM~) BEGIN
-      SAY NAME1 ~Chain Mail Armor~
+      WRITE_LONG NAME1 chainmail_name
       WRITE_BYTE 0x60 6
     END
 
@@ -389,7 +470,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~FWPLAT03.ITM~) BEGIN
-      SAY NAME1 ~Plate Mail Armor~
+      WRITE_LONG NAME1 platemail_name
       SAY NAME2 ~Tyr's Guard +3~
       WRITE_BYTE 0x60 3
     END
@@ -605,6 +686,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLAT09.ITM~) BEGIN
       SAY NAME1 ~Field Plate Mail~
       PATCH_IF (enchantment = 0) BEGIN // unless item rev. has given it a makeover
+        SAY NAME2 ~Mithril Field Plate Mail +2~
         WRITE_BYTE 0x60 2
         READ_LONG 0x50 temp
         WRITE_LONG 0x54 %temp% // missing identified desc
@@ -646,6 +728,16 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       PATCH_IF (enchantment = 3) BEGIN // if unmodified
         SAY NAME2 ~Shuruppak's Plate +3~
       END
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLAT98.ITM~) BEGIN
+      WRITE_BYTE 0x18 ("%flags%" BAND 0b10111111) // switch off magical flag
+      WRITE_LONG 0x54 0xffffffff // non-magical, doesn't need identified_desc
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLATBLK.ITM~ ) && (~%modsiam%~ STRING_CONTAINS_REGEXP ~nej2_694~ == 0) BEGIN  // NeJ2 version
+      SAY NAME2 ~Kresselack's Plate Mail +4~
+      WRITE_BYTE 0x60 4
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLATCM01.ITM~) BEGIN
@@ -784,7 +876,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~U#CHAN07.ITM~) BEGIN
-      SAY NAME1 ~Chain Mail~
+      WRITE_LONG NAME1 chainmail_name
       SAY NAME2 ~Elven Chain of the Hand +3~
       WRITE_BYTE 0x60 3
     END
@@ -865,6 +957,14 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~XLEAT03.ITM~) BEGIN
       WRITE_BYTE 0x60 2
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~ZOMBSKIN.ITM~) BEGIN
+      WRITE_BYTE 0x60 2
+      SAY NAME1 ~Skin of the Zombie +2~
+      SAY NAME2 ~Skin of the Zombie +2~
+      READ_LONG  0x50  uniddescref   // fix missing identified_desc
+      WRITE_LONG 0x54  %uniddescref%
     END
 
     READ_BYTE  0x18 "flags"
@@ -981,66 +1081,6 @@ PATCH_IF ( %returnval% > 100 ) BEGIN
     SET returnval = 100
 END
 >>>>>>>>
-
-PRINT ~Detecting game engine...~
-
-OUTER_SPRINT gameiam ~~
-OUTER_SPRINT modsiam ~~
-
-ACTION_IF ENGINE_IS ~soa~ BEGIN
-  OUTER_SPRINT gameiam ~soa~
-  PRINT ~ BG2: SOA...~
-END
-ACTION_IF ENGINE_IS ~tob~ BEGIN
-  OUTER_SPRINT gameiam ~tob~
-  PRINT ~ BG2: TOB...~
-END
-ACTION_IF MOD_IS_INSTALLED ~ITEM_REV/ITEM_REV.TP2~ 0 BEGIN
-  OUTER_SPRINT modsiam ~%modsiam% item_rev~
-  PRINT ~ + Item Revisions...~
-END
-ACTION_IF MOD_IS_INSTALLED ~SPELL_REV/SETUP-SPELL_REV.TP2~ 1 BEGIN
-  OUTER_SPRINT modsiam ~%modsiam% spell_rev_d~
-  PRINT ~ + Spell Revisions: Divine...~
-END
-ACTION_IF MOD_IS_INSTALLED ~SPELL_REV/SETUP-SPELL_REV.TP2~ 2 BEGIN
-  OUTER_SPRINT modsiam ~%modsiam% spell_rev_a~
-  PRINT ~ + Spell Revisions: Arcane...~
-END
-ACTION_IF MOD_IS_INSTALLED ~SETUP-SPELLPACKB5.TP2~ 32 BEGIN
-  OUTER_SPRINT modsiam ~%modsiam% gsp_ga~
-  PRINT ~ + Galactygon's Spell Pack beta 5: Ghost Armour...~
-END
-ACTION_IF ENGINE_IS ~iwd~ BEGIN
-  OUTER_SPRINT gameiam ~iwd~
-  PRINT ~ IWD...~
-END
-ACTION_IF ENGINE_IS ~how~ BEGIN
-  OUTER_SPRINT gameiam ~how~
-  PRINT ~ IWD: HoW...~
-END
-// needs weidu > 208 release
-ACTION_IF ENGINE_IS ~totlm~ BEGIN
-  OUTER_SPRINT gameiam ~totlm~
-  PRINT ~ IWD: ToTLM...~
-END
-ACTION_IF ENGINE_IS ~iwd2~ BEGIN
-  OUTER_SPRINT gameiam ~iwd2~
-  PRINT ~ IWD2...~
-END
-// needs weidu 208.34 or later ... or iwd/how/totlm is detected as pst as well
-ACTION_IF ENGINE_IS ~pst~ BEGIN
-  OUTER_SPRINT gameiam ~pst~
-  PRINT ~ PST...~
-END
-ACTION_IF ENGINE_IS ~bg1~ BEGIN
-  OUTER_SPRINT gameiam ~bg1~
-  PRINT ~ BG...~
-END
-ACTION_IF ENGINE_IS ~totsc~ BEGIN
-  OUTER_SPRINT gameiam ~totsc~
-  PRINT ~ BG: TotSC...~
-END
 
 PRINT ~Reading datafiles...~
 
@@ -1664,9 +1704,9 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                          PATCH_IF (x > 0) BEGIN
                            SPRINT x ~+%x%~
                          END
-                         SPRINT searchstring   ~Lock~
+                         SPRINT searchstring   ~\(Open.*ocks\|Lock Picking\):.*[0-9]*%perc%~
                          SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
-                         SPRINT replacestring  ~\(Open.*ocks|Lock Picking\):.*[1-9]*%perc%*~
+                         SPRINT replacestring  ~\(Open.*ocks\|Lock Picking\):.*[0-9]*%perc%*~
                          SPRINT insertstring   ~Open Locks: %x%~
                          PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
 
@@ -1776,6 +1816,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
             SPRINT insertstring   ~%wnl%Penalties~
             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            SPRINT searchstring   ~%wnl%[%wnl%%lnl%%mnl%].*20.*Fire Resistance~ // bd-weidu shuruppak fix
+            SPRINT insertafter    ~gnurf~
+            SPRINT replacestring  ~%wnl%[%wnl%%lnl%%mnl%].*20.*Fire Resistance~
+            SPRINT insertstring   ~%wnl%+20%perc% Fire Resistance~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
 
             // batched updates ... where we have multiple values on one line.
             // elaborate tricks with QUOTE, REPLACE_EVALUATE and EVALUATE_BUFFER failed.
@@ -1860,7 +1905,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                  SPRINT insertstring   ~This suit of armor is enchanted, so it is lighter, easier to move in and more protective.~
                  PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
-            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~s!leat03~) BEGIN // corthala family armor +6
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~npchan~ || ~%SOURCE_RES%~ STRING_EQUAL ~s!leat03~) BEGIN // corthala family armor variants
                  SPRINT searchstring   ~so that it grants a.* bonus to Valygar's armor class~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
                  SPRINT replacestring  ~so that it grants a.* bonus to Valygar's armor class~
@@ -2569,6 +2614,10 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
              SPRINT replacestring  ~A 20th level priest would have 25%perc% of her damage 'absorbed'~
              SPRINT insertstring   ~A 20th level priest would have 25%perc% / %slashres_sppr111-20%%perc% of her damage 'absorbed'~
              PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+             SPRINT searchstring   ~At first level, the armor absorbs 5~ // g3 bg2 fixpack revised description
+             SPRINT insertafter    ~THISWILLNEVERMATCH~
+             SPRINT replacestring  ~At first level, the armor absorbs 5%perc% of all damage, with an additional 5%perc% absorbed for.*every five levels of the caster, to a maximum of 25%perc% for a 20th level priest.~
+             SPRINT insertstring   ~At first level, the armor absorbs 5%perc% of magic damage and %slashres_sppr111%%perc% of physical damage, with an additional 5%perc%/%slashres_sppr111%%perc% absorbed for every five levels of the caster, to a maximum of 25%perc% and %slashres_sppr111-20%%perc% for a 20th level priest.~
         END
         PATCH_IF ( (~%SOURCE_RES%~ STRING_EQUAL ~sppr111~ || ~%SOURCE_RES%~ STRING_EQUAL ~dgfaith~)
                    && (~%modsiam%~ STRING_CONTAINS_REGEXP ~spell_rev_d~ == 0) ) BEGIN // spell rev. Armor of Faith spell

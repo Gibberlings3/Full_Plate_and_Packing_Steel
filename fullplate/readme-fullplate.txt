@@ -111,7 +111,7 @@ Design notes
 
 Changes
 
-beta 4
+beta 4 (closed beta, november 2008)
  * bugfix: armor no longer overrides natural resistances
  * install-time analysis of resistances added by items and effects, creatures
    adjusted to avoid resistant-to-everything enemies
