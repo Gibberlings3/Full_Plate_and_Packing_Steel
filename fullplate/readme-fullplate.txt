@@ -29,8 +29,8 @@ Do read the updated descriptions. They are informative.
 
 Little He Knows Where a Foe May Lurk:
 
-Everyone can backstab at x2, thieves/assassins do better. Only
-weapons a single-class thief can use are eligible for backstab,
+Everyone can backstab at x2, thieves/assassins/stalkers do better.
+Only weapons a single-class thief can use are eligible for backstab,
 as usual.
 
 
@@ -45,6 +45,8 @@ Incompatible with:
  Refinements' Revised Armors & Shields
  BG2 Tweaks' Allow Thieving and Stealth in Heavy Armor
  BG2 Tweaks' Allow Arcane Spellcasting in Heavy Armor
+ IWD Tweaks' Allow Thieving and Stealth in Heavy Armor
+ IWD Tweaks' Allow Arcane Spellcasting in Heavy Armor
 
 Install order:
  As close to last as you can manage. After anything adding
@@ -99,8 +101,8 @@ Design notes
 Changes
 
 beta 3
- * engine-specific tweaks (same filename, different spell)
- * IWD compatibility (experimental, no resistance limiter yet)
+ * game-specific tweaks (same filename, different spell)
+ * Icewind Dale compatibility (experimental, no resistance limiter yet)
  * improved SoA compatibility
  * added backstabbing-for-everyone component
 

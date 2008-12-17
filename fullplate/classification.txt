@@ -1,46 +1,50 @@
-ADLEATH     STUDDED    ALL
-ADRED       BANDED     ALL
-BAND01      BANDED     ALL
-BAND02      BANDED     ALL
-BAND03      BANDED     ALL
-BAND04      BANDED     ALL
-BELT02      NOTARMOR   ALL
-BELT03      NOTARMOR   ALL
-BELT04      NOTARMOR   ALL
+ADLEATH     STUDDED    ALL      /* Angelo NPC */
+ADRED       BANDED     ALL      /* Angelo NPC */
+ARMPEN      STUDDED    ALL      /* IWD, unused, restored in IWD UB */
+BAND01      BANDED     ALL      /* Ashes of Embers */
+BAND02      BANDED     ALL      /* Ashes of Embers */
+BAND03      BANDED     ALL      /* Ashes of Embers */
+BAND04      BANDED     ALL      /* Ashes of Embers */
+BELT02      NOTARMOR   ALL      //BG1
+BELT03      NOTARMOR   ALL      //BG1
+BELT04      NOTARMOR   ALL      //BG1
+BLCKPLA     PLATE      ALL      //IWD
 BLEAT01     HIDE       ALL
 BLEAT02     HIDE       ALL
 BLEAT03     HIDE       ALL
-BRUENPLA    MFIELDP    ALL
-C2BELT01    NOTARMOR   ALL
-C2CHAN01    ELVENC     ALL
-C2HIDE01    HIDE       ALL
-C2KELD01    FULLP      ALL
-C2LEAT01    LEATHER    ALL
-C2PLAT01    PLATE      ALL
-C2VALY01    CHAIN      ALL
+BLOOD       PLATE      ALL      //IWD
+BRUENPLA    MFIELDP    ALL      //BG2:SOA
+C2BELT01    NOTARMOR   ALL      /* Item Upgrade */
+C2CHAN01    ELVENC     ALL      /* Item Upgrade */
+C2HIDE01    HIDE       ALL      /* Item Upgrade */
+C2KELD01    FULLP      ALL      /* Item Upgrade */
+C2LEAT01    LEATHER    ALL      /* Item Upgrade */
+C2PLAT01    PLATE      ALL      /* Item Upgrade */
+C2VALY01    CHAIN      ALL      /* Item Upgrade */
+CHAINBM     CHAIN      ALL      //IWD
 CHALARM     FULLP      ALL
-CHAN01      CHAIN      ALL
-CHAN02      CHAIN      ALL
-CHAN03      CHAIN      ALL
-CHAN04      SPLINT     ALL
-CHAN05      SPLINT     ALL
-CHAN06      CHAIN      ALL
-CHAN07      CHAIN      ALL
-CHAN08      CHAIN      ALL
-CHAN09      CHAIN      ALL
-CHAN10      CHAIN      ALL
-CHAN11      CHAIN      ALL
-CHAN12      ELVENC     ALL
-CHAN13      ELVENC     ALL
-CHAN14      ELVENC     ALL
-CHAN15      ELVENC     ALL
-CHAN16      ELVENC     ALL
-CHAN17      SPLINT     ALL
-CHAN18      SPLINT     ALL
-CHAN19      ELVENC     ALL
-CHAN20      SPLINT     ALL
-CHAN21      CHAIN      ALL
-CLOLTH      ELVENC     ALL
+CHAN01      CHAIN      ALL      //BG1
+CHAN02      CHAIN      ALL      //BG1
+CHAN03      CHAIN      ALL      //BG1
+CHAN04      SPLINT     ALL      //BG1
+CHAN05      SPLINT     ALL      //BG1
+CHAN06      CHAIN      ALL      //BG1
+CHAN07      CHAIN      ALL      //BG2:SOA
+CHAN08      CHAIN      ALL      //BG2:SOA
+CHAN09      CHAIN      ALL      //BG2:SOA
+CHAN10      CHAIN      ALL      //BG2:SOA
+CHAN11      CHAIN      ALL      //BG2:SOA
+CHAN12      ELVENC     ALL      //BG2:SOA
+CHAN13      ELVENC     ALL      //BG2:SOA
+CHAN14      ELVENC     ALL      //BG2:SOA
+CHAN15      ELVENC     ALL      //BG2:SOA
+CHAN16      ELVENC     ALL      //BG2:SOA
+CHAN17      SPLINT     ALL      //BG2:SOA
+CHAN18      SPLINT     ALL      //BG2:SOA
+CHAN19      ELVENC     ALL      //BG2:TOB
+CHAN20      SPLINT     ALL      //BG2:TOB
+CHAN21      CHAIN      ALL      //BG2:TOB
+CLOLTH      ELVENC     ALL      //BG2:SOA
 CYLEAT      STUDDED    ALL
 D0T#LEAT    STUDDED    ALL
 DEITM053    CHAIN      ALL
@@ -49,113 +53,129 @@ DEITM087    CHAIN      ALL
 DEITM088    PLATE      ALL
 DEITM090    FULLP      ALL
 DEITM096    FULLP      ALL
-DLEAT10     HIDE       ALL
-DW#ABYDA    STUDDED    ALL
-DW#GPLAT    PLATE      ALL
-DW#LIZPL    FULLP      ALL
-DWCHAN01    ADAMC      ALL
-DWCHAN02    ADAMC      ALL
-DWPLAT01    FULLP      ALL
-FLAT01      FIELDP     ALL
-FLAT02      FIELDP     ALL
-FLAT03      FIELDP     ALL
-FLAT04      FIELDP     ALL
+DLEAT10     HIDE       ALL      //BG2:SOA
+DRAGARM     SCALE      ALL      //IWD
+DW#ABYDA    STUDDED    ALL      /* SCSII */
+DW#GPLAT    PLATE      ALL      /* SCSII */
+DW#LIZPL    FULLP      ALL      /* SCSII */
+DWCHAN01    ADAMC      ALL      //BG2:SOA
+DWCHAN02    ADAMC      ALL      //BG2:SOA
+DWPLAT01    FULLP      ALL      //BG2:SOA
+ELFCHAN     ELVENC     ALL      //IWD
+FLAT01      FIELDP     ALL      /* Ashes of Embers */
+FLAT02      FIELDP     ALL      /* Ashes of Embers */
+FLAT03      FIELDP     ALL      /* Ashes of Embers */
+FLAT04      FIELDP     ALL      /* Ashes of Embers */
 FWCHAN01    CHAIN      ALL
 FWLEAT03    HIDE       ALL
-ICHAN01     CHAIN      ALL
-ICHAN04     SPLINT     ALL
+GLORY       PLATE      ALL      /* IWD, unused, restored in IWD UB */
+ICHAN01     CHAIN      ALL      //BG1
+ICHAN04     SPLINT     ALL      //BG1
 ICEPLAT     PLATE      ALL
-ILEAT04     STUDDED    ALL
+ILEAT04     STUDDED    ALL      //BG1
 ILLAS04     ELVENC     ALL
-IPLAT01     PLATE      ALL
+IPLAT01     PLATE      ALL      //BG1
+IPLAT05     FULLP      ALL      //IWD
 J#SPLI06    SPLINT     ALL
+KAYCHAI     ELVENC     ALL      //IWD
 KINPLAT     FULLP      ALL
-LEAT01      LEATHER    ALL
-LEAT02      LEATHER    ALL
-LEAT03      LEATHER    ALL
-LEAT04      STUDDED    ALL
-LEAT05      STUDDED    ALL
-LEAT06      STUDDED    ALL
-LEAT07      STUDDED    ALL
-LEAT08      STUDDED    ALL
-LEAT09      LEATHER    ALL
-LEAT10      HIDE       ALL
-LEAT11      LEATHER    ALL
-LEAT12      LEATHER    ALL
-LEAT13      LEATHER    ALL
-LEAT14      LEATHER    ALL
-LEAT15      STUDDED    ALL
-LEAT16      STUDDED    ALL
-LEAT17      STUDDED    ALL
-LEAT18      STUDDED    ALL
-LEAT19      STUDDED    ALL
-LEAT20      HIDE       ALL
-LEAT21      LEATHER    ALL
-LEAT22      LEATHER    ALL
-LEAT23      STUDDED    ALL
-LEAT24      STUDDED    ALL
-M#ASLEAT    STUDDED    ALL
-MGILEAT1    LEATHER    ALL
-MGIPLAT1    FULLP      ALL
-MWARARM     HIDE       ALL
-NPCHAN      CHAIN      ALL
-NPPLAT      FULLP      ALL
+LEAT01      LEATHER    ALL      //BG1
+LEAT02      LEATHER    ALL      //BG1
+LEAT03      LEATHER    ALL      //BG1
+LEAT04      STUDDED    ALL      //BG1
+LEAT05      STUDDED    ALL      //BG1
+LEAT06      STUDDED    ALL      //BG1
+LEAT07      STUDDED    ALL      //BG1
+LEAT08      STUDDED    ALL      //BG1(?)
+LEAT09      LEATHER    ALL      //BG2:SOA
+LEAT10      HIDE       ALL      //BG2:SOA
+LEAT11      LEATHER    ALL      //BG2:SOA
+LEAT12      LEATHER    ALL      //BG2:SOA
+LEAT13      LEATHER    ALL      //BG2:SOA
+LEAT14      LEATHER    ALL      //BG2:SOA
+LEAT15      STUDDED    ALL      //BG2:SOA
+LEAT16      STUDDED    ALL      //BG2:SOA
+LEAT17      STUDDED    ALL      //BG2:SOA
+LEAT18      STUDDED    ALL      //BG2:SOA
+LEAT19      STUDDED    ALL      //BG2:SOA
+LEAT20      HIDE       ALL      //BG2:SOA
+LEAT21      LEATHER    ALL      //BG2:SOA
+LEAT22      LEATHER    ALL      //BG2:SOA
+LEAT23      STUDDED    ALL      //BG2:TOB
+LEAT24      STUDDED    ALL      //BG2:TOB
+MAILLIF     CHAIN      ALL      //IWD
+M#ASLEAT    STUDDED    ALL      /* Amber NPC */
+MGILEAT1    LEATHER    ALL      /* Selune's Armoury */
+MGIPLAT1    FULLP      ALL      /* Selune's Armoury */
+MWARARM     HIDE       ALL      /* Ariena NPC */
+NPCHAN      CHAIN      ALL      //BG2:SOA
+NPPLAT      FULLP      ALL      //BG2:SOA
 PALPLAT     FULLP      ALL
-PLAT01      PLATE      ALL
-PLAT02      PLATE      ALL
-PLAT04      FULLP      ALL
-PLAT05      FULLP      ALL
-PLAT06      PLATE      ALL
-PLAT07      PLATE      ALL
-PLAT08      PLATE      ALL
-PLAT09      MFIELDP    ALL
-PLAT10      PLATE      ALL
-PLAT11      PLATE      ALL
-PLAT12      PLATE      ALL
-PLAT13      PLATE      ALL
-PLAT14      FULLP      ALL
-PLAT15      FULLP      ALL
-PLAT16      FULLP      ALL
-PLAT17      PLATE      ALL
-PLAT18      FULLP      ALL
-PLAT19      FULLP      ALL
-PLAT20      FULLP      ALL
-PLAT21      FULLP      ALL
-PLAT22      FULLP      ALL
-PLAT23      FULLP      ALL
-PLAT98      PLATE      ALL
-PLAT99      PLATE      ALL
+PLAT01      PLATE      ALL      //BG1
+PLAT02      PLATE      ALL      //BG1
+PLAT04      FULLP      ALL      //BG1
+PLAT05      FULLP      ALL      //BG1
+PLAT06      PLATE      ALL      //BG1
+PLAT07      PLATE      ALL      //BG1
+PLAT08      PLATE      ALL      //BG2:SOA
+PLAT09      MFIELDP    ALL      //BG2:SOA
+PLAT10      PLATE      ALL      //BG2:SOA
+PLAT11      PLATE      ALL      //BG2:SOA
+PLAT12      PLATE      ALL      //BG2:SOA
+PLAT13      PLATE      ALL      //BG2:SOA
+PLAT14      FULLP      ALL      //BG2:SOA
+PLAT15      FULLP      ALL      //BG2:SOA
+PLAT16      FULLP      ALL      //BG2:SOA
+PLAT17      PLATE      ALL      //BG2:SOA
+PLAT18      FULLP      ALL      //BG2:SOA
+PLAT19      FULLP      ALL      //BG2:SOA
+PLAT20      FULLP      ALL      //BG2:TOB
+PLAT21      FULLP      ALL      //BG2:TOB
+PLAT22      FULLP      ALL      //BG2:TOB
+PLAT23      FULLP      ALL      //BG2:TOB
+PLAT98      PLATE      ALL      //BG2:SOA
+PLAT99      PLATE      ALL      //BG2:SOA
+PLATBLK     PLATE      ALL      //IWD
+PLATRED     PLATE      ALL      //IWD
 POTN18      NOTARMOR   ALL
 POTN24      NOTARMOR   ALL
 POTN46      FULLP      ALL
-R!KITPLT    PLATE      ALL
-RR#ABIH     STUDDED    ALL
-RR#CHN01    ELVENC     ALL
-S!CHAN01    CHAIN      ALL
-S!CHAN02    ELVENC     ALL
-S!LEAT01    LEATHER    ALL
-S!LEAT02    STUDDED    ALL
-S!LEAT03    CHAIN      ALL
-S!LEAT04    STUDDED    ALL
-S!LEAT05    STUDDED    ALL
-S!PLAT01    FULLP      ALL
-S!PLAT02    FULLP      ALL
-S!PLAT03    PLATE      ALL
-S!PLAT04    FULLP      ALL
-S!PLAT05    FULLP      ALL
-S!PLAT06    FULLP      ALL
-SCAL01      SCALE      ALL
-SCAL02      SCALE      ALL
-SCAL03      SCALE      ALL
-SCAL04      SCALE      ALL
+R!KITPLT    PLATE      ALL      /* Kitanya NPC */
+RR#ABIH     STUDDED    ALL      /* Rogue Rebalancing */
+RR#CHN01    ELVENC     ALL      /* Rogue Rebalancing */
+S!CHAN01    CHAIN      ALL      /* Improved Anvil */
+S!CHAN02    ELVENC     ALL      /* Improved Anvil */
+S!LEAT01    LEATHER    ALL      /* Improved Anvil */
+S!LEAT02    STUDDED    ALL      /* Improved Anvil */
+S!LEAT03    CHAIN      ALL      /* Improved Anvil */
+S!LEAT04    STUDDED    ALL      /* Improved Anvil */
+S!LEAT05    STUDDED    ALL      /* Improved Anvil */
+S!PLAT01    FULLP      ALL      /* Improved Anvil */
+S!PLAT02    FULLP      ALL      /* Improved Anvil */
+S!PLAT03    PLATE      ALL      /* Improved Anvil */
+S!PLAT04    FULLP      ALL      /* Improved Anvil */
+S!PLAT05    FULLP      ALL      /* Improved Anvil */
+S!PLAT06    FULLP      ALL      /* Improved Anvil */
+SCAL01      SCALE      ALL      /* Ashes of Embers */
+SCAL02      SCALE      ALL      /* Ashes of Embers */
+SCAL03      SCALE      ALL      /* Ashes of Embers */
+SCAL04      SCALE      ALL      /* Ashes of Embers */
 SHARARM     CHAIN      ALL
+SHPLATE     PLATE      ALL      //IWD
+SWANARM     PLATE      ALL      //IWD
 TAMCHAIN    CHAIN      ALL
 TG#BSP2     STUDDED    ALL
 TG#SPI2     CHAIN      ALL
-TTLEAT      LEATHER    ALL
-U#CHAN07    ELVENC     ALL
-U#HFHEAH    HIDE       ALL
-WA2PLAT     FULLP      ALL
+TTLEAT      LEATHER    ALL      //BG2:SOA
+U#CHAN07    ELVENC     ALL      /* Underrepresented Items */
+U#HFHEAH    HIDE       ALL      /* Underrepresented Items */
+UMHULK      PLATE      ALL      //IWD
+USLTR01     STUDDED    ALL      //IWD
+USLTR2A     STUDDED    ALL      //IWD
+USLTR3A     STUDDED    ALL      //IWD
+USLTR4A     STUDDED    ALL      //IWD
+USLTR5A     STUDDED    ALL      //IWD
+WA2PLAT     FULLP      ALL      //BG2:SOA
 ZILFGT      STUDDED    ALL
 SPPR111     NOTARMOR   SOA
 SPPR111     NOTARMOR   TOB

@@ -106,9 +106,14 @@ BELT04       0  0   0   0   0   0   0   2   2   0   0  10  10  0   0    0   0   
 C2BELT01     0  0   0   0   0   2   2   2   2  10  10  10  10  0   0    0   0   0   0   0   0   //  combo girdle (IU)
 LEAT08       0  0   0   0   0   0   0   0   0   0   0   0   0  0   0   -5  -5   0   0  -5   0   // shadow armor
 M#ASLEAT     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0  -15 -15  -5  -5 -25   0   // apprentice shadow armor
+USLTR01      0  0   0   0   0   0   0   0   0   0   0   0   0  0   0  -15 -15  -5  -5 -25   0   // studded leather +1: shadowed
+USLTR3A      0  0   0   0   0   0   0   0   0   0   0   0   0  0   0  -10 -10   0   0 -20   0   // studded leather +2: shadowed
+USLTR5A      0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0 -10   0   // studded leather +4: shadowed
 S!LEAT01     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0 -20   0   0   0   0   // improved human flesh - restore lost move silently bonus
 ADLEATH     -5 -1 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0 -13   // angelo's (studded) leathers
+ARMPEN      23  1  10   0   0   0   0   0   0   0   0   0   0  0   0   25  25  25  25  20   0   // studded leather armor of repentance +5
 FWLEAT03    38  2  20   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // desert troll hide
+DRAGARM    -20 -1 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // black dragon scale +2
 SCAL04     -20 -1 -10   0   0   0   0   0   0   0   0   0   0  0   0  -50 -50 -20 -20 -50 -23   // sea-elven scale
 CHAN06     -15 -1 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // mithril chain
 CHAN07     -15 -1 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // mithril chain
@@ -120,6 +125,10 @@ S!PLAT03   -13 -1   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   
 ADRED      -23 -1 -10  -1   0   0   0   0   0   6  -3   0   0  0   0  -15 -15  -5  -5 -15   0   // lacquer-plate armour
 PLAT13       0  0   0   0   0   0   0   0   0   6   0   0   0  0   0    0   0   0   0   0   0   // gorgon-quenched steel plate
 PLAT22     -10 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0   -5  -5   0   0   0   0   // shuruppak's plate
+GLORY       45  4  30   4   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // the glory of suffering
+SHPLATE      0  0   0   0   0   0   0   0   3   0   0   0   6  0   0    0   0   0   0   0   0   // shadowed plate +3
+SWANARM    -15 -2 -10  -1   0   0   0   0   0   0   0   0   0  0   0  -20 -20 -10 -10 -20   0   // black swan armor +2
+UMHULK       0  0   0   0   0   1   0   0   0   2   0   0   0  0   0    0   0   0   0   0   0   // umber hulk plate +1
 R!KITPLT     0 -2   0   0   0   0   0   0   0   0   0   0   0  0   0   -5  -5   0   0   0   0   // well-made elven plate
 DWPLAT01    15  1  10   1   0   0   0   0   0  -2   0   0   0  0   0    0   0   0   0   0   0   // drow adamantine full plate
 S!PLAT02    35  2  20   2   0   0   0   0   6   0   0   0   0  0   0    0   0   0   0   0   0   // huskar lord's armor

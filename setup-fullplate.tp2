@@ -39,6 +39,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 2
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~ARMPEN.ITM~) BEGIN
+      SAY NAME2 ~Studded Leather Armor of Penance +5~
+      WRITE_BYTE 0x60 5
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~BAND01.ITM~) BEGIN
       WRITE_LONG 0x54 0xffffffff // non-magical, doesn't need identified_desc
     END
@@ -75,6 +80,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~BLEAT03.ITM~) BEGIN
       WRITE_BYTE 0x18 ("%flags%" BAND 0b10111111)
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~BLOOD.ITM~) BEGIN
+      SAY NAME2 ~Bathed-In-Blood +4~
+      WRITE_BYTE 0x60 4
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~BRUENPLA.ITM~) BEGIN
@@ -124,6 +134,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~C2VALY01.ITM~) BEGIN
       SAY NAME1 ~Corthala Family Armor~
       SAY NAME2 ~Corthala Family Armor +5~
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CHAINBM.ITM~) BEGIN
+      SAY NAME2 ~Baleful Mail +2~
+      WRITE_BYTE 0x60 2
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CHAN02.ITM~) BEGIN
@@ -187,6 +202,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 2
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~DRAGARM.ITM~) BEGIN
+      SAY NAME2 ~Black Dragon Scale +2~
+      WRITE_BYTE 0x60 2
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~DW#ABYDA.ITM~) BEGIN
       SAY NAME2 ~Yellow Dragon Armor +8~ // looks to be based on shadow dragon scale, which is +6 studded
       WRITE_BYTE 0x60 8
@@ -203,6 +223,10 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~DWPLAT01.ITM~) BEGIN
       SAY NAME2 ~Drow Adamantine Full Plate +5~
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~ELFCHAN.ITM~) BEGIN
+      WRITE_BYTE 0x60 3
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~FINIROBE.ITM~) BEGIN
@@ -232,6 +256,15 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 9
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~GLORY.ITM~) BEGIN
+      SAY NAME2 ~The Glory of Suffering +6~
+      WRITE_BYTE 0x60 6
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~IPLAT05.ITM~) BEGIN
+      WRITE_BYTE 0x60 1
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~ICEPLAT.ITM~) BEGIN
       SAY NAME2 ~Ice Plate +3~
       WRITE_BYTE 0x60 3
@@ -239,6 +272,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~J#SPLI06.ITM~) BEGIN
       WRITE_BYTE 0x60 2
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~KAYCHAI.ITM~) BEGIN
+      SAY NAME2 ~Kaylessa's Elven Chain +3~
+      WRITE_BYTE 0x60 3
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~LEAT02.ITM~) BEGIN
@@ -262,6 +300,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~LEAT08.ITM~) BEGIN
+      SAY NAME2 ~Shadow Armor +3~
       WRITE_BYTE 0x60 3
     END
 
@@ -277,9 +316,18 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 2
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~LEAT19.ITM~) BEGIN
+      SAY NAME2 ~Shadow Dragon Scale +6~
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~M#ASLEAT.ITM~) BEGIN
       SAY NAME2 ~Apprentice Shadow Armor +1~
       WRITE_BYTE 0x60 1
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~MAILLIF.ITM~) BEGIN
+      SAY NAME2 ~Mail of Life +3~
+      WRITE_BYTE 0x60 3
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~MGILEAT1.ITM~) BEGIN
@@ -301,14 +349,20 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~NPCHAN.ITM~) BEGIN
       SAY NAME1 ~Corthala Family Armor~
+      SAY NAME2 ~Corthala Family Armor +3~
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~NPPLAT.ITM~) BEGIN
-      SAY NAME1 ~Firecam Full Plate Mail~
+      SAY NAME1 ~Firecam Full-Plate Mail~
+      SAY NAME2 ~Firecam Full-Plate Mail +1~
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLAT02.ITM~) BEGIN
       WRITE_BYTE 0x60 1
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLAT04.ITM~) BEGIN
+      SAY NAME2 ~Full Plate Mail~
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLAT05.ITM~) BEGIN
@@ -317,6 +371,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLAT06.ITM~) BEGIN
       SAY NAME1 ~Ankheg Plate Mail~
+      SAY NAME2 ~Ankheg Plate Mail +2~
       WRITE_BYTE 0x18 ("%flags%" BOR 0b01000000)
       WRITE_BYTE 0x60 2
     END
@@ -421,6 +476,16 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 9
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~SHPLATE.ITM~) BEGIN
+      SAY NAME2 ~Shadowed Plate +3~
+      WRITE_BYTE 0x60 3
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~SWANARM.ITM~) BEGIN
+      SAY NAME2 ~Black Swan Armor +2~
+      WRITE_BYTE 0x60 2
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~TAMCHAIN.ITM~) BEGIN
       WRITE_BYTE 0x60 5
     END
@@ -442,6 +507,34 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~U#HFHEAH.ITM~) BEGIN
       SAY NAME2 ~Cornugan Hide Armor +1~
       WRITE_BYTE 0x60 1
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~UMHULK.ITM~) BEGIN
+      SAY NAME2 ~Umber Hulk Plate +1~
+      WRITE_BYTE 0x18 ("%flags%" BOR 0b01000000)
+      WRITE_BYTE 0x60 1
+      READ_LONG  0x50  uniddescref
+      WRITE_LONG 0x54  %uniddescref%
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~USLTR01.ITM~) BEGIN
+      WRITE_BYTE 0x60 1
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~USLTR2A.ITM~) BEGIN
+      WRITE_BYTE 0x60 1
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~USLTR3A.ITM~) BEGIN
+      WRITE_BYTE 0x60 2
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~USLTR4A.ITM~) BEGIN
+      WRITE_BYTE 0x60 3
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~USLTR5A.ITM~) BEGIN
+      WRITE_BYTE 0x60 4
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~WA2ROBE.ITM~) BEGIN
@@ -626,11 +719,10 @@ ACTION_IF ENGINE_IS ~how~ BEGIN
   OUTER_SPRINT gameiam ~how~
   PRINT ~ IWD: HoW...~
 END
-// needs weidu>>20706 
-//ACTION_IF ENGINE_IS ~totlm~ BEGIN
-//  OUTER_SPRINT gameiam ~totlm~
-//  PRINT ~ IWD: ToTLM...~
-//END
+ACTION_IF ENGINE_IS ~totlm~ BEGIN
+  OUTER_SPRINT gameiam ~totlm~
+  PRINT ~ IWD: ToTLM...~
+END
 ACTION_IF ENGINE_IS ~iwd2~ BEGIN
   OUTER_SPRINT gameiam ~iwd2~
   PRINT ~ IWD2...~
@@ -1052,6 +1144,15 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
             SPRINT insertstring   ~STATISTICS:%wnl%%wnl%~
             PATCH_INCLUDE ~descupd_magic.tpp~
 
+            // custom fixup for missing STATISTICS line - IWD, Umber Hulk Plate
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~umhulk~) BEGIN
+              SPRINT searchstring   ~THISWILLNEVERMATCH~
+              SPRINT insertafter    ~\(umber hulk exoskeletons, cured and reinforced the armor.\)~
+              SPRINT replacestring  ~NOTHINGDAMNIT~
+              SPRINT insertstring   ~%wnl%%wnl%STATISTICS:%wnl%~
+              PATCH_INCLUDE ~descupd_magic.tpp~
+            END
+
             // kill whitespace at beginning of line, repeatedly
             SPRINT searchstring   ~^[ %tab%]+.*~
             SPRINT insertafter    ~gnurf~
@@ -1314,6 +1415,21 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                  SPRINT insertstring   ~~
                  PATCH_INCLUDE ~descupd_magic.tpp~
             END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~usltr2a~ ) BEGIN // IWD: reinforced leather
+                 SPRINT searchstring   ~Resistance Bonus:~
+                 SPRINT insertafter    ~THISWILLNEVERMATCH~
+                 SPRINT replacestring  ~Resistance Bonus: .*[%wnl%%lnl%%mnl%]+~
+                 SPRINT insertstring   ~~
+                 PATCH_INCLUDE ~descupd_magic.tpp~
+            END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~usltr3a~ || ~%SOURCE_RES%~ STRING_EQUAL ~usltr4a~ ||
+                      ~%SOURCE_RES%~ STRING_EQUAL ~usltr5a~ ) BEGIN // IWD: various studded leathers
+                 SPRINT searchstring   ~Resistance Bonus~
+                 SPRINT insertafter    ~THISWILLNEVERMATCH~
+                 SPRINT replacestring  ~Resistance Bonus.*[%wnl%%lnl%%mnl%]+.*Resistance[%wnl%%lnl%%mnl%]+.*Resistance[%wnl%%lnl%%mnl%]+~
+                 SPRINT insertstring   ~~
+                 PATCH_INCLUDE ~descupd_magic.tpp~
+            END
             PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~s!plat04~) BEGIN // improved firecam full plate
                  SPRINT searchstring   ~Missile Damage~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
@@ -1350,10 +1466,17 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                  SPRINT insertstring   ~~
                  PATCH_INCLUDE ~descupd_magic.tpp~
             END
-            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~mwararm~) BEGIN // ariena's armor
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~mwararm~ || ~%SOURCE_RES%~ STRING_EQUAL ~armpen~) BEGIN // kill unneeded Special: clauses
                  SPRINT searchstring   ~Special~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
-                 SPRINT replacestring  ~.*Special:.* piercing resistance.*[%wnl%%lnl%%mnl%]+~
+                 SPRINT replacestring  ~.*Special:.*[%wnl%%lnl%%mnl%]+~
+                 SPRINT insertstring   ~~
+                 PATCH_INCLUDE ~descupd_magic.tpp~
+            END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~armpen~) BEGIN // armor of penance
+                 SPRINT searchstring   ~Dexterity:~
+                 SPRINT insertafter    ~THISWILLNEVERMATCH~
+                 SPRINT replacestring  ~Dexterity.*[%wnl%%lnl%%mnl%]+~
                  SPRINT insertstring   ~~
                  PATCH_INCLUDE ~descupd_magic.tpp~
             END
@@ -1375,6 +1498,20 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                  SPRINT replacestring  ~Find/Remove.*[%wnl%%lnl%%mnl%]+~
                  PATCH_INCLUDE ~descupd_magic.tpp~
                  SPRINT replacestring  ~Pick.*[%wnl%%lnl%%mnl%]+~
+                 PATCH_INCLUDE ~descupd_magic.tpp~
+            END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~shplate~) BEGIN // IWD: fix shadowed plate typo if noone else has
+                 SPRINT searchstring   ~ corporeal ~
+                 SPRINT insertafter    ~THISWILLNEVERMATCH~
+                 SPRINT replacestring  ~ corporeal ~
+                 SPRINT insertstring   ~ incorporeal ~
+                 PATCH_INCLUDE ~descupd_magic.tpp~
+            END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~glory~) BEGIN // glory of suffering
+                 SPRINT searchstring   ~bonus to resist all Slashing, Piercing, Bludgeoning~
+                 SPRINT insertafter    ~THISWILLNEVERMATCH~
+                 SPRINT replacestring  ~  .*Missile attacks.~
+                 SPRINT insertstring   ~~
                  PATCH_INCLUDE ~descupd_magic.tpp~
             END
 
@@ -2042,9 +2179,15 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
         END
         PATCH_IF ~%classdefined%~ STRING_EQUAL ~elvenc~ BEGIN
           INNER_ACTION BEGIN
-            COPY_EXISTING ~chan12.itm~ ~override~
-              READ_LONG 0x50 uniddescref
-            BUT_ONLY_IF_IT_CHANGES
+            ACTION_IF FILE_EXISTS_IN_GAME ~chan12.itm~ BEGIN
+              COPY_EXISTING ~chan12.itm~ ~override~
+                READ_LONG 0x50 uniddescref
+              BUT_ONLY_IF_IT_CHANGES
+            END ELSE BEGIN
+              COPY_EXISTING ~chan01.itm~ ~override~ // IWD has elven chain, but uses normal chain for unid'ed descriptions
+                READ_LONG 0x50 uniddescref
+              BUT_ONLY_IF_IT_CHANGES
+            END
           END
           WRITE_LONG 0x50 uniddescref
         END
