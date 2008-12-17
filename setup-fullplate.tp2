@@ -1,7 +1,7 @@
 BACKUP ~fullplate/backup~
 AUTHOR ~erik, gibberlings3~
 MODDER
-VERSION ~alfa 5a~
+VERSION ~alfa 9a~
 NO_IF_EVAL_BUG
 
 BEGIN ~Full Plate And Packing Steel: Clean, Shine and Oil all Armour (naming and enchantment level fixes, required for main component)~
@@ -799,7 +799,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                      SPRINT searchstring   ~THISWILLNEVERMATCH~
                      SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
                      SPRINT replacestring  ~~
-                     SPRINT insertstring   ~Slowdown:%wnl% Dex/Move Speed/Weapon Speed:%wnl%  0 / 0 / 0 ~
+                     SPRINT insertstring   ~Slowdown:%wnl% Dex/Move Speed/Weapon Speed Factor:%wnl%  0 / 0 / 0 ~
                      SET slowheaderprinted = 1
                      SET dexmodtotal = 0
                      SET movemodtotal = 0
@@ -839,7 +839,10 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                      SET intopcode = 190
                      SET intparam = 1
                      PATCH_INCLUDE ~sumfx.tpp~
-                     SET wpnspeedtotal = %returnval%
+                     SET wpnspeedtotal = 0 - %returnval%
+                     PATCH_IF (wpnspeedtotal > 0) BEGIN
+                       SPRINT wpnspeedtotal ~+%wpnspeedtotal%~
+                     END
                      END
 
                  PATCH_IF ~%param%~ STRING_EQUAL hidemod BEGIN
@@ -941,10 +944,10 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
             PATCH_INCLUDE ~descupd_magic.tpp~
         END
         PATCH_IF (slowheaderprinted = 1) BEGIN
-            SPRINT searchstring   ~ Dex/Move Speed/Weapon Speed:~
+            SPRINT searchstring   ~ Dex/Move Speed/Weapon Speed Factor:~
             SPRINT insertafter    ~THISWILLNEVERMATCH~
-            SPRINT replacestring  ~ Dex/Move Speed/Weapon Speed:%wnl%  0 / 0 / 0 ~
-            SPRINT insertstring   ~ Dex/Move Speed/Weapon Speed:%wnl%  %dexmodtotal% / %movemodtotal%%perc% / %wpnspeedtotal% ~
+            SPRINT replacestring  ~ Dex/Move Speed/Weapon Speed Factor:%wnl%  0 / 0 / 0 ~
+            SPRINT insertstring   ~ Dex/Move Speed/Weapon Speed Factor:%wnl%  %dexmodtotal% / %movemodtotal%%perc% / %wpnspeedtotal% ~
             PATCH_INCLUDE ~descupd_magic.tpp~
         END
 
