@@ -105,13 +105,13 @@ NOTARMOR4    0  0   0   0  10   0   0   0   0   0   0   0   0  0   0    0   0   
 NOTARMOR5    0  0   0   0  10   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0
 PLAT17       0  1  10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // cursed plate
 LEAT06       0  0   0   0   0   0   0   0 -10   0   0   0 -35  0   0    0   0   0   0   0   0   // cursed studded, missile attractor
-BELT02       0  0   0   0   0   2   0   0   0  10   0   0   0  0   0    0   0   0   0   0   0   // golden girdle
-_BELT02      0  0   0   0   0   2   0   0   0  10   0   0   0  0   0    0   0   0   0   0   0   // golden girdle
-BELT03       0  0   0   0   0   0   3   0   0   0  15   0   0  0   0    0   0   0   0   0   0   // girdle of bluntness
-_BELT03      0  0   0   0   0   0   3   0   0   0  15   0   0  0   0    0   0   0   0   0   0   // girdle of bluntness
-BELT04       0  0   0   0   0   0   0   2   2   0   0  10  10  0   0    0   0   0   0   0   0   // girdle of piercing
-_BELT04      0  0   0   0   0   0   0   2   2   0   0  10  10  0   0    0   0   0   0   0   0   // girdle of piercing
-C2BELT01     0  0   0   0   0   2   2   2   2  10  10  10  10  0   0    0   0   0   0   0   0   //  combo girdle (IU)
+BELT02       0  0   0   0   0   3   0   0   0  10   0   0   0  0   0    0   0   0   0   0   0   // golden girdle
+_BELT02      0  0   0   0   0   3   0   0   0  10   0   0   0  0   0    0   0   0   0   0   0   // golden girdle
+BELT03       0  0   0   0   0   0   4   0   0   0  15   0   0  0   0    0   0   0   0   0   0   // girdle of bluntness
+_BELT03      0  0   0   0   0   0   4   0   0   0  15   0   0  0   0    0   0   0   0   0   0   // girdle of bluntness
+BELT04       0  0   0   0   0   0   0   3   3   0   0  10  10  0   0    0   0   0   0   0   0   // girdle of piercing
+_BELT04      0  0   0   0   0   0   0   3   3   0   0  10  10  0   0    0   0   0   0   0   0   // girdle of piercing
+C2BELT01     0  0   0   0   0   3   3   3   3  10  10  10  10  0   0    0   0   0   0   0   0   //  combo girdle (IU)
 LEATCM02     3  0   0   2   2   0   0   0   0   0  -2   0   0  0   0    5   5   5   5   5   1   // green peace resistance
 CMTULE01     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0 -10   0   // shadow armor +4
 LEAT08       0  0   0   0   0   0   0   0   0   0   0   0   0  0   0   -5  -5   0   0 -15   0   // shadow armor
