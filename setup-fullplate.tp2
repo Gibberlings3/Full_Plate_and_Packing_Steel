@@ -1,7 +1,7 @@
 BACKUP ~fullplate/backup~
 AUTHOR ~erik, gibberlings3~
 //MODDER setup_tra none
-VERSION ~beta 1~
+VERSION ~beta 1+~
 README ~fullplate/readme-fullplate.txt~
 NO_IF_EVAL_BUG
 
@@ -24,9 +24,13 @@ PRINT ~Naming and enchantment level fixes...~
 
 COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   PATCH_IF (SOURCE_SIZE < 0x72) BEGIN
-    PATCH_PRINT "%SOURCE_FILE%: Invalid, below minimum size"
+    // PATCH_PRINT "%SOURCE_FILE%: Invalid, below minimum size"
   END ELSE BEGIN
     READ_BYTE  0x18 "flags"
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~ADLEATH.ITM~) BEGIN
+      WRITE_BYTE 0x60 2
+    END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~BAND01.ITM~) BEGIN
       WRITE_LONG 0x54 0xffffffff // non-magical, doesn't need identified_desc
@@ -68,6 +72,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~BRUENPLA.ITM~) BEGIN
       SAY NAME1 ~Field Plate Mail~
+      SAY NAME2 ~Mithril Field Plate Mail +2~
       WRITE_BYTE 0x18 ("%flags%" BOR 0b01000000)
     END
 
@@ -343,6 +348,41 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 1
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~S!CHAN01.ITM~) BEGIN
+      WRITE_BYTE 0x60 6
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~S!LEAT01.ITM~) BEGIN
+      SAY NAME2 ~Human Flesh +6~
+      WRITE_BYTE 0x60 6
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~S!LEAT02.ITM~) BEGIN
+      SAY NAME2 ~Spirit of the Night +6~
+      WRITE_BYTE 0x60 6
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~S!LEAT03.ITM~) BEGIN
+      SAY NAME2 ~Corthala Family Armor +6~
+      WRITE_BYTE 0x60 6
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~S!PLAT01.ITM~) BEGIN
+      SAY NAME2 ~Pride of the Legion +4~
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~S!PLAT03.ITM~) BEGIN
+      SAY NAME1 ~Ankheg Plate Mail~
+      SAY NAME2 ~Ankheg Plate Mail +5~
+      WRITE_BYTE 0x18 ("%flags%" BOR 0b01000000)
+      WRITE_BYTE 0x60 5
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~S!PLAT04.ITM~) BEGIN
+      SAY NAME1 ~Firecam Full Plate Mail~
+      SAY NAME2 ~Firecam Full Plate Mail +3~
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~SCAL01.ITM~) BEGIN
       WRITE_LONG 0x54 0xffffffff // non-magical, doesn't need identified_desc
     END
@@ -483,8 +523,16 @@ FOR (i=0; (i < %fxnum%); i+=1) BEGIN
       END
     END
 END
+
+PATCH_IF ( %returnval% > 100 ) BEGIN
+    SET returnval = 100
+END
 >>>>>>>>
 
+// evil pseudomacro
+//  if searchstring exists in description, replace replacestring with insertstring
+//  else if insertafter exists in description, splice in insertstring after it
+//  else do nothing
 <<<<<<<< descupd_magic.tpp
 PATCH_IF (enchantment > 0) BEGIN
    PATCH_IF ( ~%iddesc%~ STRING_CONTAINS_REGEXP ~%searchstring%~ == 0) BEGIN
@@ -611,7 +659,7 @@ PRINT ~Reworking items and updating descriptions...~
 COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 
   PATCH_IF (SOURCE_SIZE < 0x72) BEGIN
-    PATCH_PRINT "%SOURCE_FILE%: Invalid, below minimum size"
+    // PATCH_PRINT "%SOURCE_FILE%: Invalid, below minimum size"
   END ELSE BEGIN
     // small workaround: remove DEX requirements, so npcs still can
     //  use their custom equipment with (very) heavy armour.
@@ -926,6 +974,23 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
             SET resistanceheaderprinted = 0
             SET slowheaderprinted = 0
 
+            // add empty line below the STATISTICS header, if there is none
+            SPRINT searchstring   ~STATISTICS.*%wnl%[ %tab%]*[a-zA-Z0-9+]~
+            SPRINT insertafter    ~gnurf~
+            SPRINT replacestring  ~STATISTICS.*%wnl%~
+            SPRINT insertstring   ~STATISTICS:%wnl%%wnl%~
+            PATCH_INCLUDE ~descupd_magic.tpp~
+
+            // kill whitespace at beginning of line, repeatedly
+            SPRINT searchstring   ~^[ %tab%]+.*~
+            SPRINT insertafter    ~gnurf~
+            SPRINT replacestring  ~^[ %tab%]+~
+            SPRINT insertstring   ~~
+            PATCH_INCLUDE ~descupd_magic.tpp~
+            PATCH_INCLUDE ~descupd_magic.tpp~
+            PATCH_INCLUDE ~descupd_magic.tpp~
+            PATCH_INCLUDE ~descupd_magic.tpp~
+
             PATCH_FOR_EACH param IN ~weight~ ~dexmod~ ~movemod~ ~wpnspeedmod~ ~baseac~ ~slashac~ ~crushac~ ~pierceac~ ~missileac~
                                     ~slashres~ ~crushres~ ~pierceres~ ~missileres~ ~fireres~ ~coldres~
                                     ~spellfailmod~ ~pickpocketmod~ ~disarmtrapmod~ ~openlockmod~ ~movesilmod~ ~hidemod~ 
@@ -941,9 +1006,9 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                          PATCH_INCLUDE ~descupd_magic.tpp~ END
 
                      PATCH_IF ~%param%~ STRING_EQUAL baseac BEGIN // kill "AC:" lines
-                         SPRINT searchstring   ~AC:~
+                         SPRINT searchstring   ~^AC~
                          SPRINT insertafter    ~\(STATISTICS\)~
-                         SPRINT replacestring  ~AC:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+~
+                         SPRINT replacestring  ~^AC[%tab% :]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+~
                          SPRINT insertstring   ~~
                          PATCH_INCLUDE ~descupd_magic.tpp~ END
 
@@ -1137,6 +1202,15 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                 END // if the param has changed
             END // foreach
 
+            // collapse empty lines in the middle of the statistics block - or at least imm. above Armor Class
+            // this one works, but by blind luck. It will fail at some point.
+            SPRINT searchstring   ~%wnl%%wnl%Armor Class~
+            SPRINT insertafter    ~gnurf~
+            SPRINT replacestring  ~%wnl%%wnl%Armor Class~
+            SPRINT insertstring   ~%wnl%Armor Class~
+            PATCH_INCLUDE ~descupd_magic.tpp~
+            PATCH_INCLUDE ~descupd_magic.tpp~
+
             // batched updates ... where we have multiple values on one line.
             // elaborate tricks with QUOTE, REPLACE_EVALUATE and EVALUATE_BUFFER failed.
             PATCH_IF (resistanceheaderprinted = 1) BEGIN
@@ -1155,7 +1229,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
             END
 
             // some custom updates for less-than-accurate statements after mod install
-            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~c2keld01~) BEGIN
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~c2keld01~) BEGIN // improved firecam full plate
                  SPRINT searchstring   ~Despite~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
                  SPRINT replacestring  ~ Despite being incredibly strong, the armor is almost weightless.~
@@ -1169,6 +1243,20 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                  SPRINT insertstring   ~~
                  PATCH_INCLUDE ~descupd_magic.tpp~
             END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~s!plat04~) BEGIN // improved firecam full plate
+                 SPRINT searchstring   ~Missile Damage~
+                 SPRINT insertafter    ~THISWILLNEVERMATCH~
+                 SPRINT replacestring  ~.*esistance to .*[mM]issile [dD]amage[%wnl%%lnl%%mnl%]+~
+                 SPRINT insertstring   ~~
+                 PATCH_INCLUDE ~descupd_magic.tpp~
+            END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~plat22~) BEGIN // shuruppak's plate
+                 SPRINT searchstring   ~[%wnl%%lnl%%mnl%][%wnl%%lnl%%mnl%]+.*fire resistance~
+                 SPRINT insertafter    ~THISWILLNEVERMATCH~
+                 SPRINT replacestring  ~[%wnl%%lnl%%mnl%][%wnl%%lnl%%mnl%]+.*fire resistance~
+                 SPRINT insertstring   ~%wnl%+20%perc% fire resistance~
+                 PATCH_INCLUDE ~descupd_magic.tpp~
+            END
             PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~chan02~ || ~%SOURCE_RES%~ STRING_EQUAL ~chan05~ ||
                       ~%SOURCE_RES%~ STRING_EQUAL ~j#spli06~) BEGIN // chain mail +1, splint mail +1, splint mail +2
                  SPRINT searchstring   ~bonus.* to their armor class~
@@ -1177,10 +1265,24 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                  SPRINT insertstring   ~This suit of armor is enchanted, so it is lighter, easier to move in and more protective.~
                  PATCH_INCLUDE ~descupd_magic.tpp~
             END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~s!leat03~) BEGIN // corthala family armor +6
+                 SPRINT searchstring   ~so that it grants a.* bonus to Valygar's armor class~
+                 SPRINT insertafter    ~THISWILLNEVERMATCH~
+                 SPRINT replacestring  ~so that it grants a.* bonus to Valygar's armor class~
+                 SPRINT insertstring   ~so that it is lighter, easier to move in and more protective than before~
+                 PATCH_INCLUDE ~descupd_magic.tpp~
+            END
             PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~rr#abih~) BEGIN // abishai hide
                  SPRINT searchstring   ~resistance~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
-                 SPRINT replacestring  ~    .*resistance to slashing, piercing, crushing and missile damage[%wnl%%lnl%%mnl%]+~
+                 SPRINT replacestring  ~.*resistance to slashing, piercing, crushing and missile damage[%wnl%%lnl%%mnl%]+~
+                 SPRINT insertstring   ~~
+                 PATCH_INCLUDE ~descupd_magic.tpp~
+            END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~s!leat04~ || ~%SOURCE_RES%~ STRING_EQUAL ~s!leat05~) BEGIN // green leaves/red coral armor
+                 SPRINT searchstring   ~resistance~
+                 SPRINT insertafter    ~THISWILLNEVERMATCH~
+                 SPRINT replacestring  ~.*resistance to physical damage.*[%wnl%%lnl%%mnl%]+~
                  SPRINT insertstring   ~~
                  PATCH_INCLUDE ~descupd_magic.tpp~
             END
@@ -1808,6 +1910,10 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
 PRINT ~Fixing up unidentified armour descriptions...~
 COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 
+  PATCH_IF (SOURCE_SIZE < 0x72) BEGIN
+    // PATCH_PRINT "%SOURCE_FILE%: Invalid, below minimum size"
+  END ELSE BEGIN
+
     READ_LONG 0x60 enchantment
     READ_BYTE 0x1c itemtype
 
@@ -1932,6 +2038,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
         END
       END
     END
+  END
   BUT_ONLY_IF_IT_CHANGES
     
 ///////////////////////////////////

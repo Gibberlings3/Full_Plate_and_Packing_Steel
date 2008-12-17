@@ -103,20 +103,27 @@ BELT04       0  0   0   0   0   0   0   2   2   0   0  10  10  0   0    0   0   
 C2BELT01     0  0   0   0   0   2   2   2   2  10  10  10  10  0   0    0   0   0   0   0   0   //  combo girdle (IU)
 LEAT08       0  0   0   0   0   0   0   0   0   0   0   0   0  0   0   -5  -5   0   0  -5   0   // shadow armor
 M#ASLEAT     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0  -15 -15  -5  -5 -25   0   // apprentice shadow armor
+S!LEAT01     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0 -20   0   0   0   0   // improved human flesh - restore lost move silently bonus
+ADLEATH     -5 -1 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0 -13   // angelo's (studded) leathers
 SCAL04     -20 -1 -10   0   0   0   0   0   0   0   0   0   0  0   0  -50 -50 -20 -20 -50 -23   // sea-elven scale
 CHAN06     -15 -1 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // mithril chain
 CHAN07     -15 -1 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // mithril chain
 CHAN17       0 -1   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // wyvernscale splint mail
-PLAT06     -23 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // ankheg plate
-C2PLAT01   -18 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // ankheg plate
+PLAT06     -23 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // ankheg plate +2
+C2PLAT01   -18 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // ankheg plate +4
+S!PLAT03   -13 -1   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // ankheg plate +5
+ADRED      -23 -1 -10  -1   0   0   0   0   0   6  -3   0   0  0   0  -15 -15  -5  -5 -15   0   // lacquer-plate armour
 PLAT13       0  0   0   0   0   0   0   0   0   6   0   0   0  0   0    0   0   0   0   0   0   // gorgon-quenched steel plate
 PLAT22     -10 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0   -5  -5   0   0   0   0   // shuruppak's plate
 R!KITPLT     0 -2   0   0   0   0   0   0   0   0   0   0   0  0   0   -5  -5   0   0   0   0   // well-made elven plate
 DWPLAT01    15  1  10   1   0   0   0   0   0  -2   0   0   0  0   0    0   0   0   0   0   0   // drow adamantine full plate
+S!PLAT02    35  2  20   2   0   0   0   0   6   0   0   0   0  0   0    0   0   0   0   0   0   // huskar lord's armor
 DW#ABYDA     2  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // yellow dragonscale armor
 CHAN20     -10 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0 -10 -10 -10   0   // white dragonscale splint mail
 PLAT18     -30 -2 -20  -1   0   0   0   0   0  -2   0  -4  -4  0   0  -35 -35 -35 -35 -35   0   // red dragonscale plate
 PLAT20     -40 -3 -20  -2   0   0   0   0   0   0   0   0   0  0   0  -35 -35 -35 -35 -35   0   // blue dragonscale plate
+S!PLAT05   -35 -2 -20  -2   0   0   0   0   0   0   0   0   4  0   0  -35 -35 -35 -35 -35   0   // green wyrmscale plate
+S!PLAT06   -30 -1 -10  -1   0   0   0   0   0   0   0   0   4  0   0  -35 -35 -35 -35 -35   0   // red wyrmscale plate
 DGFAITH      0  0   0   0   0   0   0   0   0  15  15  15  15  0   0    0   0   0   0   0   0   // armor of faith, innate version
 SPPR111      0  0   0   0   0   0   0   0   0   3   3   3   3  0   0    0   0   0   0   0   0   // armor of faith, priest, level 1
 SPPR111-5    0  0   0   0   0   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   // armor of faith, priest, level 5

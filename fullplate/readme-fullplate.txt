@@ -1,6 +1,6 @@
 Full Plate and Packing Steel
 
-Beta 1, May 2008
+Beta 2, June 2008
 
 Between You And Harm: Armour System Rework for BG2
 
@@ -72,7 +72,7 @@ Design notes
 - conflicts with "armor refinements" from Refinements, don't install.
 - movement penalty purely based on weight.
 - light armour:
-  * leather, studded, hide, elven chain, shadow dragonscale armours
+  * leather, studded, hide, elven chain, light dragonscale armours
   * enchantment improves ac quickly
   * enchantment removes weapon speed penalties quickly
   * enchantment lowers thieving penalties quickly
@@ -80,10 +80,20 @@ Design notes
   * enchantment lowers weight, move penalties and dex penalties (no sudden halving of weight for +1 armours)
   * enchantment improves spell failure slowly
 - heavy armour:
-  * scale, (adamantine/mithril) chain, splint, banded, plate, field plate, full plate, (non-shadow) dragonscale armours
+  * scale, (adamantine/mithril) chain, splint, banded, plate, field plate, full plate, heavy dragonscale armours
   * enchantment improves ac slowly
   * enchantment removes weapon speed penalties slowly
   * enchantment lowers thieving penalties slowly
   * enchantment improves damage resistance quickly
   * enchantment lowers weight, move penalties and dex penalties (no sudden halving of weight for +1 armours)
   * enchantment improves spell failure slowly
+
+
+Changes
+
+beta 2
+ * improved descriptionwhacking
+ * limit each item to max 100% resistance, not only the gametime total
+
+beta 1 (closed beta, late may 2008)
+ * quite a few!
