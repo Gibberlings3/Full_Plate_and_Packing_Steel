@@ -2341,7 +2341,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                  SPRINT replacestring  ~Pick.*[%wnl%%lnl%%mnl%]+~
                  PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
-            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~shplate~) BEGIN // IWD: fix shadowed plate typo if noone else has
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~shplate~ || ~%SOURCE_RES%~ STRING_EQUAL ~cispgrd3~) BEGIN // IWD: fix shadowed plate typo if noone else has
                  SPRINT searchstring   ~ corporeal ~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
                  SPRINT replacestring  ~ corporeal ~
