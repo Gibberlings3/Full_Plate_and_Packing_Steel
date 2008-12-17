@@ -4,7 +4,7 @@ MODDER
 VERSION ~beta 1~
 NO_IF_EVAL_BUG
 
-BEGIN ~Full Plate And Packing Steel: Clean, Shine and Oil all Armour (naming and enchantment level fixes, required for next component)~
+BEGIN ~Full Plate And Packing Steel: Clean, Shine and Oil all Armour (naming and enchantment level fixes, required for main component)~
  DESIGNATED 101
 COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   PATCH_IF (SOURCE_SIZE < 0x72) BEGIN
@@ -368,8 +368,8 @@ SET returnval = 0
 
 FOR (i=0; (i < %fxnum%); i+=1) BEGIN
     READ_SHORT %fxoff% + 0x30 * %i% + 0     opcode
-    READ_LONG  %fxoff% + 0x30 * %i% + 0x04  param1
-    READ_LONG  %fxoff% + 0x30 * %i% + 0x08  param2
+    READ_SLONG  %fxoff% + 0x30 * %i% + 0x04  param1
+    READ_SLONG  %fxoff% + 0x30 * %i% + 0x08  param2
 
     PATCH_IF ( %opcode% = %intopcode% ) BEGIN
       PATCH_IF ( %intparam% = 1 ) BEGIN
@@ -503,9 +503,10 @@ INCLUDE ~fullplate/extra_regexp_vars.tph~
 //////////////////////////////////////
 // profit! and take over the world! //
 //////////////////////////////////////
+PRINT ~Reworking items and updating descriptions...~
 
 COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
-//COPY_EXISTING_REGEXP GLOB ~r!kitplt.itm~ ~override~
+
   PATCH_IF (SOURCE_SIZE < 0x72) BEGIN
     PATCH_PRINT "%SOURCE_FILE%: Invalid, below minimum size"
   END ELSE BEGIN
@@ -715,11 +716,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
         READ_STRREF 0x54 iddesc ELSE ~nope~
         
         SET resistanceheaderprinted = 0
+        SET slowheaderprinted = 0
 
         PATCH_FOR_EACH param IN ~weight~ ~dexmod~ ~movemod~ ~wpnspeedmod~ ~baseac~ ~slashac~ ~crushac~ ~pierceac~ ~missileac~
                                 ~slashres~ ~crushres~ ~pierceres~ ~missileres~ ~fireres~ ~coldres~
-                                ~hidemod~ ~movesilmod~ ~openlockmod~ ~disarmtrapmod~ ~pickpocketmod~
-                                ~spellfailmod~
+                                ~spellfailmod~ ~pickpocketmod~ ~disarmtrapmod~ ~openlockmod~ ~movesilmod~ ~hidemod~ 
         BEGIN
 
              SET x = EVALUATE_BUFFER ~%%param%_%usename%%~
@@ -787,6 +788,141 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                      SET missilerestotal = %returnval%
                      END
 
+                 PATCH_IF ((~%param%~ STRING_EQUAL dexmod || ~%param%~ STRING_EQUAL movemod ||
+                            ~%param%~ STRING_EQUAL wpnspeedmod)
+                            && slowheaderprinted = 0) BEGIN
+                     SPRINT searchstring   ~THISWILLNEVERMATCH~
+                     SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
+                     SPRINT replacestring  ~~
+                     SPRINT insertstring   ~Slowdown:%wnl% Dex/Move Speed/Weapon Speed: 0 / 0 / 0 ~
+                     SET slowheaderprinted = 1
+                     SET dexmodtotal = 0
+                     SET movemodtotal = 0
+                     SET wpnspeedtotal = 0
+                     PATCH_INCLUDE ~descupd_magic.tpp~ END
+
+                 PATCH_IF ~%param%~ STRING_EQUAL dexmod BEGIN // kill various DEX lines
+                     SPRINT searchstring   ~DEX bonus~
+                     SPRINT insertafter    ~\(STATISTICS\)~
+                     SPRINT replacestring  ~+[1-9] DEX bonus, ~
+                     SPRINT insertstring   ~~
+                     PATCH_INCLUDE ~descupd_magic.tpp~
+                     SPRINT searchstring   ~Bonus.*Dexterity~
+                     SPRINT insertafter    ~\(STATISTICS\)~
+                     SPRINT replacestring  ~Bonus.*Dexterity[%wnl%%lnl%%mnl%]~
+                     SPRINT insertstring   ~~
+                     PATCH_INCLUDE ~descupd_magic.tpp~
+                     SPRINT searchstring   ~.*Dexterity~
+                     SPRINT insertafter    ~\(STATISTICS\)~
+                     SPRINT replacestring  ~.*Dexterity[%wnl%%lnl%%mnl%]~
+                     SPRINT insertstring   ~~
+                     PATCH_INCLUDE ~descupd_magic.tpp~
+                     SET intopcode = 15
+                     SET intparam = 1
+                     PATCH_INCLUDE ~sumfx.tpp~
+                     SET dexmodtotal = %returnval%
+                     END
+
+                 PATCH_IF ~%param%~ STRING_EQUAL movemod BEGIN
+                     SET intopcode = 176
+                     SET intparam = 1
+                     PATCH_INCLUDE ~sumfx.tpp~
+                     SET movemodtotal = %returnval% * 10
+                     END
+
+                 PATCH_IF ~%param%~ STRING_EQUAL wpnspeedmod BEGIN
+                     SET intopcode = 190
+                     SET intparam = 1
+                     PATCH_INCLUDE ~sumfx.tpp~
+                     SET wpnspeedtotal = %returnval%
+                     END
+
+                 PATCH_IF ~%param%~ STRING_EQUAL hidemod BEGIN
+                     SET intopcode = 275
+                     SET intparam = 1
+                     PATCH_INCLUDE ~sumfx.tpp~
+                     SET x = %returnval%
+                     PATCH_IF (x > 0) BEGIN
+                       SPRINT x ~+%x%~
+                     END
+                     SPRINT searchstring   ~Hide.*Shadows~
+                     SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
+                     SPRINT replacestring  ~Hide.*Shadows:.*[1-9]*%perc%*~
+                     SPRINT insertstring   ~Hide in Shadows: %x%~
+                     PATCH_INCLUDE ~descupd_magic.tpp~ END
+
+                 PATCH_IF (~%param%~ STRING_EQUAL movesilmod || ((~%SOURCE_RES%~ STRING_EQUAL ~c2leat01~ ||  // hack to force
+                                                                  ~%SOURCE_RES%~ STRING_EQUAL ~leat21~) &&   // description update
+                                                                  ~%param%~ STRING_EQUAL weight)) BEGIN      // of Human Flesh
+                     SET intopcode = 59
+                     SET intparam = 1
+                     PATCH_INCLUDE ~sumfx.tpp~
+                     SET x = %returnval%
+                     PATCH_IF (x > 0) BEGIN
+                       SPRINT x ~+%x%~
+                     END
+                     SPRINT searchstring   ~\(Stealth|Move Silently\)~
+                     SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
+                     SPRINT replacestring  ~\(Stealth|Move Silently\):.*[1-9]*%perc%*.*~
+                     SPRINT insertstring   ~Move Silently: %x%~
+                     PATCH_INCLUDE ~descupd_magic.tpp~ END
+
+                 PATCH_IF ~%param%~ STRING_EQUAL openlockmod BEGIN
+                     SET intopcode = 90
+                     SET intparam = 1
+                     PATCH_INCLUDE ~sumfx.tpp~
+                     SET x = %returnval%
+                     PATCH_IF (x > 0) BEGIN
+                       SPRINT x ~+%x%~
+                     END
+                     SPRINT searchstring   ~Lock~
+                     SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
+                     SPRINT replacestring  ~\(Open.*ocks|Lock Picking\):.*[1-9]*%perc%*~
+                     SPRINT insertstring   ~Open Locks: %x%~
+                     PATCH_INCLUDE ~descupd_magic.tpp~ END
+
+                 PATCH_IF ~%param%~ STRING_EQUAL disarmtrapmod BEGIN
+                     SET intopcode = 91
+                     SET intparam = 1
+                     PATCH_INCLUDE ~sumfx.tpp~
+                     SET x = %returnval%
+                     PATCH_IF (x > 0) BEGIN
+                       SPRINT x ~+%x%~
+                     END
+                     SPRINT searchstring   ~Find/Remove~
+                     SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
+                     SPRINT replacestring  ~Find/Remove.*raps:.*[1-9]*%perc%*~
+                     SPRINT insertstring   ~Find/Remove Traps: %x%~
+                     PATCH_INCLUDE ~descupd_magic.tpp~ END
+
+                 PATCH_IF ~%param%~ STRING_EQUAL pickpocketmod BEGIN
+                     SET intopcode = 92
+                     SET intparam = 1
+                     PATCH_INCLUDE ~sumfx.tpp~
+                     SET x = %returnval%
+                     PATCH_IF (x > 0) BEGIN
+                       SPRINT x ~+%x%~
+                     END
+                     SPRINT searchstring   ~Pick Pockets~
+                     SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
+                     SPRINT replacestring  ~Pick Pockets:.*[1-9]*%perc%*~
+                     SPRINT insertstring   ~Pick Pockets: %x%~
+                     PATCH_INCLUDE ~descupd_magic.tpp~ END
+
+                 PATCH_IF ~%param%~ STRING_EQUAL spellfailmod BEGIN
+                     SET intopcode = 60
+                     SET intparam = 1
+                     PATCH_INCLUDE ~sumfx.tpp~
+                     SET x = %returnval%
+                     PATCH_IF (x > 0) BEGIN
+                       SPRINT x ~+%x%~
+                     END
+                     SPRINT searchstring   ~Spell Failure~
+                     SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
+                     SPRINT replacestring  ~Spell Failure:.*[1-9]*%perc%*~
+                     SPRINT insertstring   ~Mage Spell Failure: %x%%perc%~
+                     PATCH_INCLUDE ~descupd_magic.tpp~ END
+
             END // if the param has changed
         END // foreach
 
@@ -799,8 +935,56 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
             SPRINT insertstring   ~Slash/Crush/Pierce/Missile: %slashrestotal%%perc% / %crushrestotal%%perc% / %piercerestotal%%perc% / %missilerestotal%%perc%~
             PATCH_INCLUDE ~descupd_magic.tpp~
         END
+        PATCH_IF (slowheaderprinted = 1) BEGIN
+            SPRINT searchstring   ~ Dex/Move Speed/Weapon Speed:~
+            SPRINT insertafter    ~THISWILLNEVERMATCH~
+            SPRINT replacestring  ~ Dex/Move Speed/Weapon Speed: 0 / 0 / 0 ~
+            SPRINT insertstring   ~ Dex/Move Speed/Weapon Speed: %dexmodtotal% / %movemodtotal%%perc% / %wpnspeedtotal% ~
+            PATCH_INCLUDE ~descupd_magic.tpp~
+        END
+
+        // some custom updates for less-than-accurate statements after mod install
+        PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~c2keld01~) BEGIN
+             SPRINT searchstring   ~Despite~
+             SPRINT insertafter    ~THISWILLNEVERMATCH~
+             SPRINT replacestring  ~ Despite being incredibly strong, the armor is almost weightless.~
+             SPRINT insertstring   ~~
+             PATCH_INCLUDE ~descupd_magic.tpp~
+        END
+        PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~leat16~) BEGIN // orc leather
+             SPRINT searchstring   ~Bonuses:~
+             SPRINT insertafter    ~THISWILLNEVERMATCH~
+             SPRINT replacestring  ~Bonuses: .* resistance to missile attacks[%wnl%%lnl%%mnl%]+~
+             SPRINT insertstring   ~~
+             PATCH_INCLUDE ~descupd_magic.tpp~
+        END
+        PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~rr#abih~) BEGIN // abishai hide
+             SPRINT searchstring   ~resistance~
+             SPRINT insertafter    ~THISWILLNEVERMATCH~
+             SPRINT replacestring  ~    .*resistance to slashing, piercing, crushing and missile damage[%wnl%%lnl%%mnl%]+~
+             SPRINT insertstring   ~~
+             PATCH_INCLUDE ~descupd_magic.tpp~
+        END
+        PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~c2chan01~) BEGIN // incarnadine elven chain - no thieving penalties
+             SPRINT searchstring   ~Incarnadine~
+             SPRINT insertafter    ~THISWILLNEVERMATCH~
+             SPRINT replacestring  ~Stealth:.*[%wnl%%lnl%%mnl%]+~
+             SPRINT insertstring   ~~
+             PATCH_INCLUDE ~descupd_magic.tpp~
+             SPRINT replacestring  ~Lockpicking:.*[%wnl%%lnl%%mnl%]+~
+             PATCH_INCLUDE ~descupd_magic.tpp~
+             SPRINT replacestring  ~Find/Remove.*[%wnl%%lnl%%mnl%]+~
+             PATCH_INCLUDE ~descupd_magic.tpp~
+             SPRINT replacestring  ~Pick.*[%wnl%%lnl%%mnl%]+~
+             PATCH_INCLUDE ~descupd_magic.tpp~
+        END
 
     END // if not empty usename
 
   END
   BUT_ONLY_IF_IT_CHANGES
+
+BEGIN ~Full Plate And Packing Steel: Field Improvisation (convenience tweak, remove restrictions on combining protective items)~
+ DESIGNATED 102
+
+COPY ~fullplate/itemexcl.2da~ ~override~
