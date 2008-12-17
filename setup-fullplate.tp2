@@ -1,7 +1,7 @@
 BACKUP ~fullplate/backup~
 AUTHOR ~erik, gibberlings3~
 MODDER
-VERSION ~beta 1~
+VERSION ~alfa 5a~
 NO_IF_EVAL_BUG
 
 BEGIN ~Full Plate And Packing Steel: Clean, Shine and Oil all Armour (naming and enchantment level fixes, required for main component)~
@@ -752,7 +752,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                      SPRINT searchstring   ~THISWILLNEVERMATCH~
                      SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
                      SPRINT replacestring  ~~
-                     SPRINT insertstring   ~Protection:%wnl% vs. Slash/Crush/Pierce/Missile: 0 / 0 / 0 / 0~
+                     SPRINT insertstring   ~Protection:%wnl% vs. Slash/Crush/Pierce/Missile:%wnl%  0 / 0 / 0 / 0~
                      SET resistanceheaderprinted = 1
                      SET slashrestotal = 0
                      SET crushrestotal = 0
@@ -794,7 +794,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                      SPRINT searchstring   ~THISWILLNEVERMATCH~
                      SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
                      SPRINT replacestring  ~~
-                     SPRINT insertstring   ~Slowdown:%wnl% Dex/Move Speed/Weapon Speed: 0 / 0 / 0 ~
+                     SPRINT insertstring   ~Slowdown:%wnl% Dex/Move Speed/Weapon Speed:%wnl%  0 / 0 / 0 ~
                      SET slowheaderprinted = 1
                      SET dexmodtotal = 0
                      SET movemodtotal = 0
@@ -931,15 +931,15 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
         PATCH_IF (resistanceheaderprinted = 1) BEGIN
             SPRINT searchstring   ~ vs. Slash/Crush/Pierce/Missile:~
             SPRINT insertafter    ~THISWILLNEVERMATCH~
-            SPRINT replacestring  ~Slash/Crush/Pierce/Missile: 0 / 0 / 0 / 0~
-            SPRINT insertstring   ~Slash/Crush/Pierce/Missile: %slashrestotal%%perc% / %crushrestotal%%perc% / %piercerestotal%%perc% / %missilerestotal%%perc%~
+            SPRINT replacestring  ~Slash/Crush/Pierce/Missile:%wnl%  0 / 0 / 0 / 0~
+            SPRINT insertstring   ~Slash/Crush/Pierce/Missile:%wnl%  %slashrestotal%%perc% / %crushrestotal%%perc% / %piercerestotal%%perc% / %missilerestotal%%perc%~
             PATCH_INCLUDE ~descupd_magic.tpp~
         END
         PATCH_IF (slowheaderprinted = 1) BEGIN
             SPRINT searchstring   ~ Dex/Move Speed/Weapon Speed:~
             SPRINT insertafter    ~THISWILLNEVERMATCH~
-            SPRINT replacestring  ~ Dex/Move Speed/Weapon Speed: 0 / 0 / 0 ~
-            SPRINT insertstring   ~ Dex/Move Speed/Weapon Speed: %dexmodtotal% / %movemodtotal%%perc% / %wpnspeedtotal% ~
+            SPRINT replacestring  ~ Dex/Move Speed/Weapon Speed:%wnl%  0 / 0 / 0 ~
+            SPRINT insertstring   ~ Dex/Move Speed/Weapon Speed:%wnl%  %dexmodtotal% / %movemodtotal%%perc% / %wpnspeedtotal% ~
             PATCH_INCLUDE ~descupd_magic.tpp~
         END
 
