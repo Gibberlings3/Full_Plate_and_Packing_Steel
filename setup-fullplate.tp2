@@ -1,7 +1,7 @@
 BACKUP ~fullplate/backup~
 AUTHOR ~erik, gibberlings3~
 //MODDER setup_tra none
-VERSION ~beta 1+~
+VERSION ~beta 2~
 README ~fullplate/readme-fullplate.txt~
 NO_IF_EVAL_BUG
 
@@ -29,6 +29,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     READ_BYTE  0x18 "flags"
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~ADLEATH.ITM~) BEGIN
+      SAY NAME2 ~Angelo's Leathers +2~
       WRITE_BYTE 0x60 2
     END
 
@@ -215,6 +216,21 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 1
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~FWCHAN01.ITM~) BEGIN
+      SAY NAME2 ~Jester's Chain +4 (improved)~
+      WRITE_BYTE 0x60 4
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~FWLEAT03.ITM~) BEGIN
+      SAY NAME2 ~Desert Troll Hide +9~
+      WRITE_BYTE 0x60 9
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~ICEPLAT.ITM~) BEGIN
+      SAY NAME2 ~Ice Plate +3~
+      WRITE_BYTE 0x60 3
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~J#SPLI06.ITM~) BEGIN
       WRITE_BYTE 0x60 2
     END
@@ -267,6 +283,10 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~MGIPLAT1.ITM~) BEGIN
       SAY NAME1 ~Full Plate Mail~
       WRITE_BYTE 0x60 1
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~MWARARM.ITM~) BEGIN
+      SAY NAME2 ~Ariena's Armor: Hide +3~
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~NPARM.ITM~) BEGIN
@@ -1279,6 +1299,13 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                  SPRINT insertstring   ~~
                  PATCH_INCLUDE ~descupd_magic.tpp~
             END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~mwararm~) BEGIN // ariena's armor
+                 SPRINT searchstring   ~Special~
+                 SPRINT insertafter    ~THISWILLNEVERMATCH~
+                 SPRINT replacestring  ~.*Special:.* piercing resistance.*[%wnl%%lnl%%mnl%]+~
+                 SPRINT insertstring   ~~
+                 PATCH_INCLUDE ~descupd_magic.tpp~
+            END
             PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~s!leat04~ || ~%SOURCE_RES%~ STRING_EQUAL ~s!leat05~) BEGIN // green leaves/red coral armor
                  SPRINT searchstring   ~resistance~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
@@ -2041,6 +2068,52 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   END
   BUT_ONLY_IF_IT_CHANGES
     
+//////////////////////
+// do shield things //
+//////////////////////
+
+PRINT ~Removing spellcasting/thieving restrictions from shields~
+
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+
+  PATCH_IF (SOURCE_SIZE < 0x72) BEGIN
+    // PATCH_PRINT "%SOURCE_FILE%: Invalid, below minimum size"
+  END ELSE BEGIN
+
+    READ_ASCII 0x22 anim (2)
+
+    PATCH_IF (("%anim%" STRING_EQUAL ~D1~) ||
+              ("%anim%" STRING_EQUAL ~D2~) ||
+              ("%anim%" STRING_EQUAL ~D3~) ||
+              ("%anim%" STRING_EQUAL ~D4~)) BEGIN
+
+      READ_SHORT 0x70 fxnum
+      READ_LONG 0x6a fxoff
+
+      FOR (x=0; (x < %fxnum%); x+=1) BEGIN
+          READ_SHORT %fxoff% + 0x30 * %x% + 0     opcode
+          READ_LONG  %fxoff% + 0x30 * %x% + 0x04  param1
+          READ_LONG  %fxoff% + 0x30 * %x% + 0x08  param2
+
+          PATCH_IF (
+              (%opcode% = 145 && %param2% = 0) ||                     // wizard spell disable
+              (%opcode% = 144 && (%param2% = 0 || %param2% = 1)) ||   // stealth/thieving disable
+              (%opcode% = 59 && %param1% < 0) ||                      // move silently penalty (but keep bonuses)
+              (%opcode% = 275 && %param1% < 0) ||                     // hide in shadows penalty
+              (%opcode% = 90 && %param1% < 0) ||                      // open lock penalty
+              (%opcode% = 91 && %param1% < 0) ||                      // find trap penalty
+              (%opcode% = 92 && %param1% < 0) ||                      // pickpocket penalty
+              (%opcode% = 126 && %param1% < 0 && %param2% = 0)        // movement slowdown
+                ) BEGIN
+              PATCH_INCLUDE ~delitmfx.tpp~                            // kill them.
+          END
+      END
+
+      WRITE_SHORT 0x70 %fxnum%
+    END
+  END
+  BUT_ONLY_IF_IT_CHANGES
+
 ///////////////////////////////////
 // add resistance limiter cutspy //
 // whee, it works, perfectly!    //
@@ -2595,3 +2668,5 @@ BEGIN ~Full Plate And Packing Steel: Field Improvisation (convenience tweak, rem
  DESIGNATED 102
 
 COPY ~fullplate/itemexcl.2da~ ~override~
+
+

@@ -1,6 +1,6 @@
 Full Plate and Packing Steel
 
-Beta 2, June 2008
+Beta 2, July 2008
 
 Between You And Harm: Armour System Rework for BG2
 
@@ -91,7 +91,9 @@ Design notes
 
 Changes
 
-beta 2
+beta 2 (closed beta, july 2008)
+ * more mod items taken care of
+ * shields not disabling spells/thieving anymore
  * improved descriptionwhacking
  * limit each item to max 100% resistance, not only the gametime total
 
