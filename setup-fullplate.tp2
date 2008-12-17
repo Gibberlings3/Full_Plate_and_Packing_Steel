@@ -3201,15 +3201,24 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
           END
           WRITE_LONG 0x50 uniddescref
         END
-        PATCH_IF ~%classdefined%~ STRING_EQUAL ~mfieldp~ && NOT FILE_EXISTS_IN_GAME ~flat01.itm~ BEGIN // fallback to full plate desc.
+        PATCH_IF ~%classdefined%~ STRING_EQUAL ~mfieldp~ && NOT FILE_EXISTS_IN_GAME ~flat01.itm~ BEGIN // fallback to plate mail desc.
           INNER_ACTION BEGIN
-            COPY_EXISTING ~plat04.itm~ ~override~
+            COPY_EXISTING ~plat01.itm~ ~override~
               READ_LONG 0x50 uniddescref
             BUT_ONLY_IF_IT_CHANGES
           END
           WRITE_LONG 0x50 uniddescref
         END
-        PATCH_IF ~%classdefined%~ STRING_EQUAL ~fullp~ BEGIN
+        PATCH_IF ~%classdefined%~ STRING_EQUAL ~fullp~ && ( ~%gameiam%~ STRING_EQUAL ~iwd~ || ~%gameiam%~ STRING_EQUAL ~how~ || ~%gameiam%~ STRING_EQUAL ~totlm~ ) BEGIN
+          // fallback to plate mail desc - no nonmagical full plate in iwd
+          INNER_ACTION BEGIN
+            COPY_EXISTING ~plat01.itm~ ~override~
+              READ_LONG 0x50 uniddescref
+            BUT_ONLY_IF_IT_CHANGES
+          END
+          WRITE_LONG 0x50 uniddescref
+        END
+        PATCH_IF ~%classdefined%~ STRING_EQUAL ~fullp~ && ( ~%gameiam%~ STRING_EQUAL ~soa~ || ~%gameiam%~ STRING_EQUAL ~tob~ ) BEGIN
           INNER_ACTION BEGIN
             COPY_EXISTING ~plat04.itm~ ~override~
               READ_LONG 0x50 uniddescref
