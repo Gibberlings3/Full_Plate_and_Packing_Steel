@@ -2285,7 +2285,9 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                  SPRINT insertstring   ~This suit of armor is enchanted, so it is lighter, easier to move in and more protective.~
                  PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
-            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~npchan~ || ~%SOURCE_RES%~ STRING_EQUAL ~s!leat03~) BEGIN // corthala family armor variants
+            PATCH_IF (   ~%SOURCE_RES%~ STRING_EQUAL ~npchan~ || ~%SOURCE_RES%~ STRING_EQUAL ~s!leat03~
+                      || ~%SOURCE_RES%~ STRING_EQUAL ~c2valy01~) BEGIN
+                 // corthala family armor variants
                  SPRINT searchstring   ~so that it grants a.* bonus to Valygar's armor class~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
                  SPRINT replacestring  ~so that it grants a.* bonus to Valygar's armor class~
