@@ -2292,6 +2292,13 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                  SPRINT insertstring   ~so that it is lighter, easier to move in and more protective than before~
                  PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~npplat~) BEGIN // firecam full plate +1
+                 SPRINT searchstring   ~an additional .* bonus to the wearer's armor class~
+                 SPRINT insertafter    ~THISWILLNEVERMATCH~
+                 SPRINT replacestring  ~This particular suit of armor provides an additional .* bonus to the wearer's armor class, a .* bonus to all saving throws, ~
+                 SPRINT insertstring   ~This particular suit of armor provides a +1 bonus to all saving throws ~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            END
             PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~rr#abih~) BEGIN // abishai hide
                  SPRINT searchstring   ~resistance~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
