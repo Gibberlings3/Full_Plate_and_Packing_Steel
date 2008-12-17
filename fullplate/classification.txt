@@ -179,7 +179,7 @@ LEATGR05    STUDDED    ALL      /* Auril's Bane */
 LEATRAT     LEATHER    ALL      /* The Darkest Day */
 MAILLIF     CHAIN      ALL      //IWD OR NeJ2 OR Tortured Souls
 M#ASLEAT    STUDDED    ALL      /* Amber NPC */
-MGILEAT1    LEATHER    ALL      /* Selune's Armoury */
+MGILEAT1    STUDDED    ALL      /* Selune's Armoury */
 MGIPLAT1    FULLP      ALL      /* Selune's Armoury */
 MOURNER     LEATHER    ALL      //HOW OR Tortured Souls
 MWARARM     HIDE       ALL      /* Ariena NPC */
