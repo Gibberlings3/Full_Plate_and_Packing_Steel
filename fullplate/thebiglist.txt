@@ -55,7 +55,7 @@ ELVENC6      8  0   0   0  -5   2   0   1   1  39  14  17  17  0   0    0   0   
 ADAMC0      40  3  20   4   7   2   0   1   1  37  12  17  17  0   0   25  35  15  15  35   0
 ADAMC1      35  3  10   3   7   2   0   1   1  39  14  19  19  0   0   25  30  15  15  35   0
 ADAMC2      35  2  10   2   6   2   0   1   1  41  16  21  21  0   0   25  30  15  15  30   0
-ADAMC3      30  2  10   1   6   2   0   1   1  43  28  23  23  0   0   25  25  15  15  30   0
+ADAMC3      30  2  10   1   6   2   0   1   1  43  18  23  23  0   0   25  25  15  15  30   0
 ADAMC4      30  1  10   0   5   2   0   1   1  45  20  25  25  0   0   25  25  15  15  25   0
 ADAMC5      25  1  10   0   5   2   0   1   1  47  22  27  27  0   0   20  25  15  15  25   0
 BANDED0     35  3  10   6   7   3   0   1   0  40  15  20  20  0   0   40  60  20  20  50  35
@@ -108,7 +108,7 @@ BELT03       0  0   0   0   0   0   3   0   0   0  15   0   0  0   0    0   0   
 BELT04       0  0   0   0   0   0   0   2   2   0   0  10  10  0   0    0   0   0   0   0   0   // girdle of piercing
 C2BELT01     0  0   0   0   0   2   2   2   2  10  10  10  10  0   0    0   0   0   0   0   0   //  combo girdle (IU)
 LEATCM02     3  0   0   2   2   0   0   0   0   0  -2   0   0  0   0    5   5   5   5   5   1   // green peace resistance
-LEAT08       0  0   0   0   0   0   0   0   0   0   0   0   0  0   0   -5  -5   0   0  -5   0   // shadow armor
+LEAT08       0  0   0   0   0   0   0   0   0   0   0   0   0  0   0   -5  -5   0   0 -15   0   // shadow armor
 M#ASLEAT     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0  -15 -15  -5  -5 -25   0   // apprentice shadow armor
 USLTR01      0  0   0   0   0   0   0   0   0   0   0   0   0  0   0  -15 -15  -5  -5 -25   0   // studded leather +1: shadowed
 USLTR3A      0  0   0   0   0   0   0   0   0   0   0   0   0  0   0  -10 -10   0   0 -20   0   // studded leather +2: shadowed
@@ -117,7 +117,10 @@ S!LEAT01     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0 -20   
 MOURNER     14  1  10   0   0   0   0   0   0   0   0   0   0  0   0   25  25  25  25  25   0   // mourner's armour +4
 ADLEATH     -5 -1 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0 -13   // angelo's (studded) leathers
 ARMPEN      23  1  10   0   0   0   0   0   0   0   0   0   0  0   0   25  25  25  25  20   0   // studded leather armor of repentance +5
+FWLEAT02     0  0   0   0   0   0   0   0   0   2   2   2   2  0   0    0   0   0   0   0   0   // beastmen's leather +5
 FWLEAT03    38  2  20   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // desert troll hide
+FWLEAT05     0  0   0   0   0   0   0  -2  -2   0   0  -4  -4  0   0    0   0   0   0   0   0   // deathbane
+FWLEAT06     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0 -14   // caster's leather
 DRAGARM    -20 -1 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // black dragon scale +2
 SCAL04     -20 -1 -10   0   0   0   0   0   0   0   0   0   0  0   0  -50 -50 -20 -20 -50 -23   // sea-elven scale
 CHAN06     -15 -1 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // mithril chain
@@ -126,6 +129,8 @@ CHANGR03   -15 -1 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   
 CHAN17       0 -1   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // wyvernscale splint mail
 SHARK3      -5  0 -10   0   0   0   0   0   0   2   2   2   2  0   0    0   0   0   0   0   0   // coral plate - sahuagin splint mail
 FWCHAN01     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0 -26   // improved jester's chain
+FWCHAN03     0  0   0   0   0  10   0  10   0  99   0  99   0  0   0    0   0   0   0   0   0   // suldanessellar chain
+FWCHAN04     0  0   0   0  -3   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // sunus graywar's chainmail +6
 CISPGRD    -25 -2 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // winter king's plate
 KING       -25 -2 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // winter king's plate
 PLATGR01   -20 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // chitinous plate +1
@@ -141,13 +146,15 @@ SWANARM    -15 -2 -10  -1   0   0   0   0   0   0   0   0   0  0   0  -20 -20 -1
 ISWARM     -15 -2 -10  -1   0   0   0   0   0   0   0   0   0  0   0  -20 -20 -10 -10 -20   0   // black swan armor +2
 UMHULK       0  0   0   0   0   1   0   0   0   2   0   0   0  0   0    0   0   0   0   0   0   // umber hulk plate +1
 R!KITPLT     0 -2   0   0   0   0   0   0   0   0   0   0   0  0   0   -5  -5   0   0   0   0   // well-made elven plate
+FWPLAT02     5  0   0   1   0   0   0   0   0  -2  -2  -2  -2  0   0    0   5   0   0   0   1   // full plate of blades
+FWPLAT04   -35 -3 -10  -4   0   0   0   0   0   4   0   4   4  0   0  -80 -80 -75 -75 -75   0   // death knight's armor
 DWPLAT01    15  1  10   1   0   0   0   0   0  -2   0   0   0  0   0    0   0   0   0   0   0   // drow adamantine full plate
 S!PLAT02    35  2  20   2   0   0   0   0   6   0   0   0   0  0   0    0   0   0   0   0   0   // huskar lord's armor
 DW#ABYDA     2  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // yellow dragonscale armor
 CHAN20     -10 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0 -10 -10 -10   0   // white dragonscale splint mail
 CHANGR02   -10 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0 -10 -10 -10   0   // zeddek's skin dragonscale splint mail
-PLAT18     -30 -2 -20  -1   0   0   0   0   0  -2   0  -4  -4  0   0  -35 -35 -35 -35 -35   0   // red dragonscale plate
-PLAT20     -40 -3 -20  -2   0   0   0   0   0   0   0   0   0  0   0  -35 -35 -35 -35 -35   0   // blue dragonscale plate
+PLAT18      -5  0 -10  -1   0   0   0   0   0   0   0   0   0  0   0  -20 -20 -10 -10 -20   0   // red dragonscale plate
+PLAT20     -30 -2 -10  -2   0   0   0   0   0   0   0   0   0  0   0  -35 -35 -35 -35 -35   0   // blue dragonscale plate
 S!PLAT05   -35 -2 -20  -2   0   0   0   0   0   0   0   0   4  0   0  -35 -35 -35 -35 -35   0   // green wyrmscale plate
 S!PLAT06   -30 -1 -10  -1   0   0   0   0   0   0   0   0   4  0   0  -35 -35 -35 -35 -35   0   // red wyrmscale plate
 DGFAITH      0  0   0   0   0   0   0   0   0  15  15  15  15  0   0    0   0   0   0   0   0   // armor of faith, innate version
@@ -186,5 +193,22 @@ SPPR202-17   0  0   0   0  -2   0   0   0   0   8  13   8   8  0   0    0   0   
 SPPR202-18   0  0   0   0  -2   0   0   0   0   8  13   8   8  0   0    0   0   0   0   0   0   // barkskin, priest, level 16 - scale +4 with +5% vs crushing
 SPPR202-19   0  0   0   0  -2   0   0   0   0   8  13   8   8  0   0    0   0   0   0   0   0   // barkskin, priest, level 16 - scale +4 with +5% vs crushing
 SPPR202-20   0  0   0   0  -2   0   0   0   0  10  15  10  10  0   0    0   0   0   0   0   0   // barkskin, priest, level 20 - scale +5 with +5% vs crushing
+SPWI102-4    0  0   0   0   0   0   0   0   0   2   2   2   2  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 4 - scale +1
+SPWI102-5    0  0   0   0   0   0   0   0   0   2   2   2   2  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 5 - scale +1
+SPWI102-6    0  0   0   0   0   0   0   0   0   2   2   2   2  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 6 - scale +1
+SPWI102-7    0  0   0   0   0   0   0   0   0   2   2   2   2  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 7 - scale +1
+SPWI102-8    0  0   0   0  -1   0   0   0   0   4   4   4   4  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 8 - scale +2
+SPWI102-9    0  0   0   0  -1   0   0   0   0   4   4   4   4  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 9 - scale +2
+SPWI102-10   0  0   0   0  -1   0   0   0   0   4   4   4   4  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 10 - scale +2
+SPWI102-11   0  0   0   0  -1   0   0   0   0   4   4   4   4  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 11 - scale +2
+SPWI102-12   0  0   0   0  -1   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 12 - scale +3
+SPWI102-13   0  0   0   0  -1   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 13 - scale +3
+SPWI102-14   0  0   0   0  -1   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 14 - scale +3
+SPWI102-15   0  0   0   0  -1   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 15 - scale +3
+SPWI102-16   0  0   0   0  -2   0   0   0   0   8   8   8   8  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 16 - scale +4
+SPWI102-17   0  0   0   0  -2   0   0   0   0   8   8   8   8  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 17 - scale +4
+SPWI102-18   0  0   0   0  -2   0   0   0   0   8   8   8   8  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 18 - scale +4
+SPWI102-19   0  0   0   0  -2   0   0   0   0   8   8   8   8  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 19 - scale +4
+SPWI102-20   0  0   0   0  -2   0   0   0   0  10  10  10  10  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 20 - scale +5
 POTN18       0  0   0   0   0   0  10   0   0   0  40   0   0  0   0    0   0   0   0   0   0   // potion of absorption
 POTN24       0  0   0   0   0   5   5   5   5   0   0   0   0  0   0    0   0   0   0   0   0   // potion of defense

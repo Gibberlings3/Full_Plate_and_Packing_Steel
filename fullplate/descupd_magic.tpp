@@ -1,5 +1,5 @@
 // evil pseudomacro
-//  if searchstring exists in description, replace replacestring with insertstring
+//  if searchstring exists in description, replace replacestring with insertstring,
 //  else if insertafter exists in description, splice in insertstring after it
 //  else do nothing
 // <<<<<<<< descupd_magic.tpp

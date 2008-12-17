@@ -9,13 +9,28 @@ ALLOW_MISSING ~baldur25.bcs~
 
 BEGIN ~Full Plate And Packing Steel: Between You And Harm (alternate armour system)~
  DESIGNATED 1
- FORBID_COMPONENT ~SETUP-REFINEMENTS.TP2~ ~5~ ~Incompatible with Refinements' Revised Armors & Shields~
- FORBID_COMPONENT ~BG2_TWEAKS/SETUP-BG2_TWEAKS.TP2~ ~2100~ ~Incompatible with BG2 Tweaks' Allow Thieving and Stealth in Heavy Armor~
- FORBID_COMPONENT ~BG2_TWEAKS/SETUP-BG2_TWEAKS.TP2~ ~2110~ ~Incompatible with BG2 Tweaks' Allow Thieving and Stealth in Heavy Armor~
- FORBID_COMPONENT ~BG2_TWEAKS/SETUP-BG2_TWEAKS.TP2~ ~2120~ ~Incompatible with BG2 Tweaks' Allow Arcane Spellcasting in Heavy Armor~
- FORBID_COMPONENT ~BG2_TWEAKS/SETUP-BG2_TWEAKS.TP2~ ~2130~ ~Incompatible with BG2 Tweaks' Allow Arcane Spellcasting in Heavy Armor~
- FORBID_COMPONENT ~G3DALETWEAKS/SETUP-G3DALETWEAKS.TP2~ ~2040~ ~Incompatible with IWD Tweaks' Allow Thieving and Stealth in Heavy Armor~
- FORBID_COMPONENT ~G3DALETWEAKS/SETUP-G3DALETWEAKS.TP2~ ~2050~ ~Incompatible with IWD Tweaks' Allow Arcane Spellcasting in Heavy Armor~
+ FORBID_COMPONENT ~SETUP-REFINEMENTS.TP2~ 5 ~Incompatible with Refinements' Revised Armors & Shields~
+ FORBID_COMPONENT ~BG2_TWEAKS/SETUP-BG2_TWEAKS.TP2~ 2100 ~Incompatible with BG2 Tweaks' Allow Thieving and Stealth in Heavy Armor~
+ FORBID_COMPONENT ~BG2_TWEAKS/SETUP-BG2_TWEAKS.TP2~ 2110 ~Incompatible with BG2 Tweaks' Allow Thieving and Stealth in Heavy Armor~
+ FORBID_COMPONENT ~G3DALETWEAKS/SETUP-G3DALETWEAKS.TP2~ 2040 ~Incompatible with IWD Tweaks' Allow Thieving and Stealth in Heavy Armor~
+ FORBID_COMPONENT ~ITEM_REV/ITEM_REV.TP2~ 6 ~Incompatible with Item Revisions' Heavy Armor Encumbrance~
+ FORBID_COMPONENT ~ITEM_REV/ITEM_REV.TP2~ 7 ~Incompatible with Item Revisions' Heavy Armor Encumbrance~
+ FORBID_COMPONENT ~ITEM_REV/ITEM_REV.TP2~ 8 ~Incompatible with Item Revisions' Heavy Armor Encumbrance~
+ FORBID_COMPONENT ~ITEM_REV/ITEM_REV.TP2~ 9 ~Incompatible with Item Revisions' Allow Thieving Skills in Armor~
+
+OUTER_SET arcanewhacking = 1
+
+ACTION_IF ( (MOD_IS_INSTALLED ~ITEM_REV/ITEM_REV.TP2~ 2) ||
+            (MOD_IS_INSTALLED ~ITEM_REV/ITEM_REV.TP2~ 3) ||
+            (MOD_IS_INSTALLED ~ITEM_REV/ITEM_REV.TP2~ 4) ||
+            (MOD_IS_INSTALLED ~ITEM_REV/ITEM_REV.TP2~ 5) ||
+            (MOD_IS_INSTALLED ~BG2_TWEAKS/SETUP-BG2_TWEAKS.TP2~ 2120) ||
+            (MOD_IS_INSTALLED ~BG2_TWEAKS/SETUP-BG2_TWEAKS.TP2~ 2130) ||
+            (MOD_IS_INSTALLED ~G3DALETWEAKS/SETUP-G3DALETWEAKS.TP2~ 2050) ) BEGIN
+    PRINT ~WARNING: casting in heavy armor already modified by another mod.~
+    PRINT ~Will avoid modifying your previous choice.~
+    OUTER_SET arcanewhacking = 0
+END
 
 ACTION_IF FILE_EXISTS ~override/tb#resisttweak.txt~ THEN BEGIN
     PRINT ~WARNING: tb#resisttweak.txt found in override. Not recommended, may cause stutter.~
@@ -29,6 +44,9 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     // PATCH_PRINT "%SOURCE_FILE%: Invalid, below minimum size"
   END ELSE BEGIN
     READ_BYTE  0x18 "flags"
+    READ_BYTE  0x1c "itemtype"
+    READ_BYTE  0x60 "enchantment"
+    READ_STRREF 0x0c idname ELSE ~blarg~
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~ADLEATH.ITM~) BEGIN
       SAY NAME2 ~Angelo's Leathers +2~
@@ -176,9 +194,15 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_LONG NAME1 %temp%
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CHAN17.ITM~) BEGIN
+      WRITE_BYTE 0x60 2
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CHAN20.ITM~) BEGIN
-      SAY NAME2 ~White Dragon Scale +6~
-      WRITE_BYTE 0x60 6
+      PATCH_IF (enchantment != 5) BEGIN // use Item Revisions' stats if installed, else these stock stats
+        SAY NAME2 ~White Dragonscale Armor +6~
+        WRITE_BYTE 0x60 6
+      END
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CHAN21.ITM~) BEGIN
@@ -226,7 +250,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CLOLTH.ITM~) BEGIN
-      SAY NAME2 ~Dark Elven Chain +1~
+      PATCH_IF (~%idname%~ STRING_EQUAL ~Dark Elven Chain +3~) BEGIN // Item Rev. ver.
+        WRITE_BYTE 0x60 3
+      END ELSE BEGIN                                                 // Stock ver.
+        SAY NAME2 ~Dark Elven Chain +1~
+      END
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~D0T#GORI.ITM~) BEGIN
@@ -261,11 +289,15 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~DWCHAN01.ITM~) BEGIN
-      SAY NAME2 ~Drow Adamantine Chain +3~
+      PATCH_IF NOT (~%idname%~ STRING_EQUAL ~Drowcraft Elven Chain +1~) BEGIN // unless item rev. version
+        SAY NAME2 ~Drow Adamantine Chain +3~
+      END
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~DWPLAT01.ITM~) BEGIN
-      SAY NAME2 ~Drow Adamantine Full Plate +5~
+      PATCH_IF NOT (~%idname%~ STRING_EQUAL ~Drowcraft Adamantine Full Plate +3~) BEGIN // unless item rev. version
+        SAY NAME2 ~Drow Adamantine Full Plate +5~
+      END
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~ELFCHAN.ITM~) BEGIN
@@ -290,18 +322,91 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~FWCHAN01.ITM~) BEGIN
-      SAY NAME2 ~Jester's Chain +4 (improved)~
+      SAY NAME1 ~Chain Mail Armor~
+      SAY NAME2 ~Jester's Chain +4~
       WRITE_BYTE 0x60 4
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~FWCHAN02.ITM~) BEGIN
+      SAY NAME1 ~Chain Mail Armor~
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~FWCHAN03.ITM~) BEGIN
+      SAY NAME1 ~Chain Mail Armor~
+      SAY NAME2 ~Suldanessellar Chain +2~
+      WRITE_BYTE 0x60 2
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~FWCHAN04.ITM~) BEGIN
+      SAY NAME1 ~Chain Mail Armor~
+      WRITE_BYTE 0x60 6
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~FWLEAT01.ITM~) BEGIN
+      SAY NAME1 ~Leather Armor~
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~FWLEAT02.ITM~) BEGIN
+      SAY NAME1 ~Hide Armor~
+      SAY NAME2 ~Beastmen's Leather +5~
+      WRITE_BYTE 0x60 5
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~FWLEAT03.ITM~) BEGIN
+      SAY NAME1 ~Hide Armor~
       SAY NAME2 ~Desert Troll Hide +9~
       WRITE_BYTE 0x60 9
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~FWLEAT04.ITM~) BEGIN
+      SAY NAME1 ~Wooden Armor~
+      SAY NAME2 ~The Oaken Protector +5~
+      WRITE_BYTE 0x60 5
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~FWLEAT05.ITM~) BEGIN
+      SAY NAME1 ~Leather Armor~
+      SAY NAME2 ~Deathbane +5~
+      WRITE_BYTE 0x60 5
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~FWLEAT06.ITM~) BEGIN
+      SAY NAME1 ~Studded Leather Armor~
+      SAY NAME2 ~Caster's Leather +1~
+      WRITE_BYTE 0x60 1
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~FWPLAT01.ITM~) BEGIN
+      SAY NAME1 ~Full Plate Armor~
+      SAY NAME2 ~Ferra's Diamond +2~
+      WRITE_BYTE 0x60 2
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~FWPLAT02.ITM~) BEGIN
+      SAY NAME1 ~Full Plate Armor~
+      SAY NAME2 ~Full Plate of Blades~
+      WRITE_BYTE 0x60 1
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~FWPLAT03.ITM~) BEGIN
+      SAY NAME1 ~Plate Mail Armor~
+      SAY NAME2 ~Tyr's Guard +3~
+      WRITE_BYTE 0x60 3
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~FWPLAT04.ITM~) BEGIN
+      SAY NAME1 ~Field Plate Armor~
+      SAY NAME2 ~Death Knight's Armor +2~
+      WRITE_BYTE 0x60 2
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~GLORY.ITM~) BEGIN
       SAY NAME2 ~The Glory of Suffering +6~
       WRITE_BYTE 0x60 6
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~GMD02.ITM~) BEGIN
+      WRITE_BYTE 0x60 2
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~IPLAT05.ITM~) BEGIN
@@ -335,7 +440,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~LEAT06.ITM~) BEGIN
-      WRITE_BYTE 0x60 2
+      PATCH_IF (~%idname%~ STRING_EQUAL ~Armor of Missile Attraction +3~) BEGIN // if item rev. version
+        WRITE_BYTE 0x60 3
+      END ELSE BEGIN
+        WRITE_BYTE 0x60 2
+      END
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~LEAT07.ITM~) BEGIN
@@ -356,12 +465,20 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 2
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~LEAT14.ITM~) BEGIN
+      PATCH_IF (~%idname%~ STRING_EQUAL ~Mielikki's Gift +4~) BEGIN // if item rev. version
+        WRITE_BYTE 0x60 4
+      END
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~LEAT15.ITM~) BEGIN
       WRITE_BYTE 0x60 2
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~LEAT19.ITM~) BEGIN
-      SAY NAME2 ~Shadow Dragon Scale +6~
+      PATCH_IF NOT (~%idname%~ STRING_EQUAL ~Shadow Dragonhide Armor +5~) BEGIN // unless item rev. version
+        SAY NAME2 ~Shadow Dragon Scale +6~
+      END
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~LEATCM01.ITM~) BEGIN
@@ -446,8 +563,10 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~NPPLAT.ITM~) BEGIN
-      SAY NAME1 ~Firecam Full-Plate Mail~
-      SAY NAME2 ~Firecam Full-Plate Mail +1~
+      SAY NAME1 ~Full Plate Mail~
+      PATCH_IF (enchantment = 1) BEGIN // if unmodified
+        SAY NAME2 ~Firecam Full Plate Mail +1~
+      END
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~OGIEN.ITM~) BEGIN
@@ -475,17 +594,21 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLAT08.ITM~) BEGIN
-      SAY NAME2 ~Plate Mail +3~
-      WRITE_BYTE 0x60 3
-      READ_LONG 0x50 temp
-      WRITE_LONG 0x54 %temp% // missing identified desc
+      PATCH_IF (enchantment = 0) BEGIN  // unless item rev. gives it a proper makeover
+        SAY NAME2 ~Plate Mail +3~
+        WRITE_BYTE 0x60 3
+        READ_LONG 0x50 temp
+        WRITE_LONG 0x54 %temp% // missing identified desc
+      END
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLAT09.ITM~) BEGIN
       SAY NAME1 ~Field Plate Mail~
-      WRITE_BYTE 0x60 2
-      READ_LONG 0x50 temp
-      WRITE_LONG 0x54 %temp% // missing identified desc
+      PATCH_IF (enchantment = 0) BEGIN // unless item rev. has given it a makeover
+        WRITE_BYTE 0x60 2
+        READ_LONG 0x50 temp
+        WRITE_LONG 0x54 %temp% // missing identified desc
+      END
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLAT10.ITM~) BEGIN
@@ -493,7 +616,9 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLAT11.ITM~) BEGIN
-      WRITE_BYTE 0x60 2
+      PATCH_IF (enchantment = 1) BEGIN // unless item rev. has given it a makeover
+        WRITE_BYTE 0x60 2
+      END
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLAT14.ITM~) BEGIN
@@ -501,8 +626,10 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLAT18.ITM~) BEGIN
-      SAY NAME2 ~Red Dragon Scale +2~
-      WRITE_BYTE 0x60 2
+      PATCH_IF (enchantment != 5) BEGIN // unless item rev.
+        SAY NAME2 ~Red Dragon Scale +4~
+        WRITE_BYTE 0x60 4
+      END
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLAT19.ITM~) BEGIN
@@ -510,11 +637,15 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLAT20.ITM~) BEGIN
-      SAY NAME2 ~Blue Dragon Plate +2~
+      PATCH_IF (enchantment = 2) BEGIN // if unmodified
+        SAY NAME2 ~Blue Dragon Plate +2~
+      END
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLAT22.ITM~) BEGIN
-      SAY NAME2 ~Shuruppak's Plate +3~
+      PATCH_IF (enchantment = 3) BEGIN // if unmodified
+        SAY NAME2 ~Shuruppak's Plate +3~
+      END
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLATCM01.ITM~) BEGIN
@@ -695,21 +826,29 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       SAY NAME2 ~Vexed Armor +2~
       WRITE_BYTE 0x60 2
     END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~VEXDL.ITM~) BEGIN
       SAY NAME2 ~Vexed Armor +2~
       WRITE_BYTE 0x60 2
     END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~VEXED.ITM~) BEGIN
       SAY NAME2 ~Vexed Armor +2~
       WRITE_BYTE 0x60 2
     END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~VEXED2.ITM~) BEGIN
       SAY NAME2 ~Vexed Armor +2~
       WRITE_BYTE 0x60 2
     END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~VEXED3.ITM~) BEGIN
       SAY NAME2 ~Vexed Armor +2~
       WRITE_BYTE 0x60 2
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~VICARM.ITM~) BEGIN
+      SAY NAME2 ~Shar's Blessing +5~
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~WA2PLAT.ITM~) BEGIN
@@ -726,6 +865,13 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~XLEAT03.ITM~) BEGIN
       WRITE_BYTE 0x60 2
+    END
+
+    READ_BYTE  0x18 "flags"
+    PATCH_IF ( (NOT (("%flags%" BAND 0b01000000) == 0b01000000))
+                && (itemtype = 0x02))
+    BEGIN
+      WRITE_LONG 0x54 0xffffffff // non-magical armour, doesn't need identified_desc
     END
 
   END
@@ -837,6 +983,10 @@ END
 >>>>>>>>
 
 PRINT ~Detecting game engine...~
+
+OUTER_SPRINT gameiam ~~
+OUTER_SPRINT modsiam ~~
+
 ACTION_IF ENGINE_IS ~soa~ BEGIN
   OUTER_SPRINT gameiam ~soa~
   PRINT ~ BG2: SOA...~
@@ -844,6 +994,22 @@ END
 ACTION_IF ENGINE_IS ~tob~ BEGIN
   OUTER_SPRINT gameiam ~tob~
   PRINT ~ BG2: TOB...~
+END
+ACTION_IF MOD_IS_INSTALLED ~ITEM_REV/ITEM_REV.TP2~ 0 BEGIN
+  OUTER_SPRINT modsiam ~%modsiam% item_rev~
+  PRINT ~ + Item Revisions...~
+END
+ACTION_IF MOD_IS_INSTALLED ~SPELL_REV/SETUP-SPELL_REV.TP2~ 1 BEGIN
+  OUTER_SPRINT modsiam ~%modsiam% spell_rev_d~
+  PRINT ~ + Spell Revisions: Divine...~
+END
+ACTION_IF MOD_IS_INSTALLED ~SPELL_REV/SETUP-SPELL_REV.TP2~ 2 BEGIN
+  OUTER_SPRINT modsiam ~%modsiam% spell_rev_a~
+  PRINT ~ + Spell Revisions: Arcane...~
+END
+ACTION_IF MOD_IS_INSTALLED ~SETUP-SPELLPACKB5.TP2~ 32 BEGIN
+  OUTER_SPRINT modsiam ~%modsiam% gsp_ga~
+  PRINT ~ + Galactygon's Spell Pack beta 5: Ghost Armour...~
 END
 ACTION_IF ENGINE_IS ~iwd~ BEGIN
   OUTER_SPRINT gameiam ~iwd~
@@ -888,8 +1054,11 @@ COPY_EXISTING - ~fullplate/classification.txt~ ~fullplate~
         TO_LOWER name
         TO_LOWER class
         TO_LOWER game
-        PATCH_IF ( ~%game%~ STRING_EQUAL ~all~ || ~%game%~ STRING_EQUAL ~%gameiam%~ ) BEGIN
+        PATCH_IF ( ~%game%~ STRING_EQUAL ~all~ || ~%game%~ STRING_EQUAL ~%gameiam%~ || (~%modsiam%~ STRING_CONTAINS_REGEXP ~%game%~ == 0) ) BEGIN
           SPRINT $class(~%name%~) ~%class%~
+        END
+        PATCH_IF ( ~%class%~ STRING_EQUAL ~nonono~ && (~%modsiam%~ STRING_CONTAINS_REGEXP ~%game%~ == 0)) BEGIN
+          SPRINT $class(~%name%~) ~class~ /* negative match, ignore */
         END
     END
     BUT_ONLY_IF_IT_CHANGES
@@ -919,6 +1088,7 @@ COPY_EXISTING - ~fullplate/thebiglist.txt~ ~fullplate~
         READ_2DA_ENTRY ~%i%~ 19 0 ~_disarmtrapmod~
         READ_2DA_ENTRY ~%i%~ 20 0 ~_pickpocketmod~
         READ_2DA_ENTRY ~%i%~ 21 0 ~_spellfailmod~
+        PATCH_IF (arcanewhacking = 0) BEGIN SPRINT _spellfailmod ~0~ END
 
         TO_LOWER name
 
@@ -1035,15 +1205,16 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                 READ_LONG  %fxoff% + 0x30 * %x% + 0x08  param2
 
                 PATCH_IF (
-                    (%opcode% = 0) ||                                       // any AC effects
-                    (%opcode% = 145 && %param2% = 0) ||                     // wizard spell disable
-                    (%opcode% = 144 && (%param2% = 0 || %param2% = 1)) ||   // stealth/thieving disable
-                    (%opcode% = 59 && %param1% < 0) ||                      // move silently penalty (but keep bonuses)
-                    (%opcode% = 275 && %param1% < 0) ||                     // hide in shadows penalty
-                    (%opcode% = 90 && %param1% < 0) ||                      // open lock penalty
-                    (%opcode% = 91 && %param1% < 0) ||                      // find trap penalty
-                    (%opcode% = 92 && %param1% < 0) ||                      // pickpocket penalty
-                    (%opcode% = 126 && %param1% < 0 && %param2% = 0)        // movement slowdown
+                    (%opcode% = 0) ||                                               // any AC effects
+                    (%opcode% = 145 && %param2% = 0 && %arcanewhacking% = 1) ||     // wizard spell disable
+                    (%opcode% = 144 && (%param2% = 0 || %param2% = 1)) ||           // stealth/thieving disable
+                    (%opcode% = 60 && %param2% = 0 && %arcanewhacking% = 1) ||      // arcane spell failure
+                    (%opcode% = 59 && %param1% < 0) ||                              // move silently penalty (but keep bonuses)
+                    (%opcode% = 275 && %param1% < 0) ||                             // hide in shadows penalty
+                    (%opcode% = 90 && %param1% < 0) ||                              // open lock penalty
+                    (%opcode% = 91 && %param1% < 0) ||                              // find trap penalty
+                    (%opcode% = 92 && %param1% < 0) ||                              // pickpocket penalty
+                    (%opcode% = 126 && %param1% < 0 && %param2% = 0)                // movement slowdown
                       ) BEGIN
                     PATCH_INCLUDE ~delitmfx.tpp~                            // kill them. we'll add some back.
                 END
@@ -1309,6 +1480,20 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
               PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
 
+            // item rev compat.
+            SPRINT searchstring   ~%mnl%%wnl%Spellcasting Time~
+            SPRINT insertafter    ~gnurf~
+            SPRINT replacestring  ~%mnl%%wnl%Spellcasting Time~
+            SPRINT insertstring   ~%wnl%Spellcasting Time~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            SPRINT searchstring   ~%mnl%%wnl%Arcane Spell Failure~
+            SPRINT insertafter    ~gnurf~
+            SPRINT replacestring  ~%mnl%%wnl%Arcane Spell Failure~
+            SPRINT insertstring   ~%wnl%Arcane Spell Failure~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+
             // kill whitespace at beginning of line, repeatedly
             SPRINT searchstring   ~^[ %tab%]+.*~
             SPRINT insertafter    ~gnurf~
@@ -1456,7 +1641,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                          PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
 
                      PATCH_IF (~%param%~ STRING_EQUAL movesilmod || ((~%SOURCE_RES%~ STRING_EQUAL ~c2leat01~ ||  // hack to force
-                                                                      ~%SOURCE_RES%~ STRING_EQUAL ~leat21~) &&   // description update
+                                                                      (~%SOURCE_RES%~ STRING_EQUAL ~leat21~ && NOT ~%modiam%~ STRING_EQUAL ~item_rev~)) &&   // description update
                                                                       ~%param%~ STRING_EQUAL weight)) BEGIN      // of Human Flesh
                          SET intopcode = 59
                          SET intparam = 1
@@ -1521,9 +1706,9 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                          PATCH_IF (x > 0) BEGIN
                            SPRINT x ~+%x%~
                          END
-                         SPRINT searchstring   ~Spell Failure~
+                         SPRINT searchstring   ~\(Spell Failure\|Miscast Arcane Magic\)~
                          SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
-                         SPRINT replacestring  ~Spell Failure:.*[1-9]*%perc%*~
+                         SPRINT replacestring  ~Miscast Arcane Magic:.*[0-9]*%perc%~
                          SPRINT insertstring   ~Mage Spell Failure: %x%%perc%~
                          PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
 
@@ -1567,6 +1752,30 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
             SPRINT insertstring   ~%lnl%Weight~
             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            SPRINT searchstring   ~%wnl%%wnl%Equipped Abilities~
+            SPRINT insertafter    ~gnurf~
+            SPRINT replacestring  ~%wnl%%wnl%Equipped Abilities~
+            SPRINT insertstring   ~%wnl%Equipped Abilities~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            SPRINT searchstring   ~%mnl%%mnl%Equipped Abilities~
+            SPRINT insertafter    ~gnurf~
+            SPRINT replacestring  ~%mnl%%mnl%Equipped Abilities~
+            SPRINT insertstring   ~%mnl%Equipped Abilities~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            SPRINT searchstring   ~%lnl%%lnl%Equipped Abilities~
+            SPRINT insertafter    ~gnurf~
+            SPRINT replacestring  ~%lnl%%lnl%Equipped Abilities~
+            SPRINT insertstring   ~%lnl%Equipped Abilities~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            SPRINT searchstring   ~%wnl%%wnl%Penalties~
+            SPRINT insertafter    ~gnurf~
+            SPRINT replacestring  ~%wnl%%wnl%Penalties~
+            SPRINT insertstring   ~%wnl%Penalties~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
 
             // batched updates ... where we have multiple values on one line.
             // elaborate tricks with QUOTE, REPLACE_EVALUATE and EVALUATE_BUFFER failed.
@@ -1604,6 +1813,20 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                  SPRINT searchstring   ~Resistance Bonus:~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
                  SPRINT replacestring  ~Resistance Bonus: .*[%wnl%%lnl%%mnl%]+~
+                 SPRINT insertstring   ~~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~dwchan02~ || ~%SOURCE_RES%~ STRING_EQUAL ~dwplat01~ ) BEGIN // IR version of drow items
+                 SPRINT searchstring   ~Physical Resistance:~
+                 SPRINT insertafter    ~THISWILLNEVERMATCH~
+                 SPRINT replacestring  ~Physical Resistance: .*[%wnl%%lnl%%mnl%]+~
+                 SPRINT insertstring   ~~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~leat16~) BEGIN // IR version of orc leather
+                 SPRINT searchstring   ~Physical Damage Resistance:~
+                 SPRINT insertafter    ~THISWILLNEVERMATCH~
+                 SPRINT replacestring  ~Physical Damage Resistance: .*[%wnl%%lnl%%mnl%]+~
                  SPRINT insertstring   ~~
                  PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
@@ -2283,6 +2506,18 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
              SPRINT replacestring  ~(AC 6)~
              SPRINT insertstring   ~(AC %baseac_scale0%, Protection vs. S/C/P/M: %slashres_scale0%%perc% / %crushres_scale0%%perc% / %pierceres_scale0%%perc% / %missileres_scale0%%perc%)~
              PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+             SPRINT searchstring   ~ The spell has no effect on a person already armored or a creature with Armor Class 6 or better.  ~
+             SPRINT insertafter    ~THISWILLNEVERMATCH~
+             SPRINT replacestring  ~ The spell has no effect on a person already armored or a creature with Armor Class 6 or better.  ~
+             SPRINT insertstring   ~~
+             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+        END
+        PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~spwi102~) && (~%modsiam%~ STRING_CONTAINS_REGEXP ~spell_rev_a~ == 0) BEGIN // Armor spell
+             SPRINT searchstring   ~sets its base armor class to 6, the equivalent of scale mail armor. This improves by 1 AC for every four levels of the caster, up to a minimum base armor class of 1 at level 20. ~
+             SPRINT insertafter    ~THISWILLNEVERMATCH~
+             SPRINT replacestring   ~sets its base armor class to 6, the equivalent of scale mail armor. This improves by 1 AC for every four levels of the caster, up to a minimum base armor class of 1 at level 20. ~
+             SPRINT insertstring   ~protects the caster as a scale mail armor (AC %baseac_scale0%, Protection vs. S/C/P/M: %slashres_scale0%%perc% / %crushres_scale0%%perc% / %pierceres_scale0%%perc% / %missileres_scale0%%perc%), of +1 enchantment for every four levels of the caster (+1 at 4th level, +2 at 8th level, and so forth). ~
+             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
         END
         PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~spwi317~) BEGIN // Ghost Armor spell
              SPRINT searchstring   ~field plate armor (AC 2)~
@@ -2290,25 +2525,40 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
              SPRINT replacestring  ~(AC 2)~
              SPRINT insertstring   ~(AC %baseac_fieldp0%, Protection vs. S/C/P/M: %slashres_fieldp0%%perc% / %crushres_fieldp0%%perc% / %pierceres_fieldp0%%perc% / %missileres_fieldp0%%perc%)~
              PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+             // Spell Revisions variant
+             SPRINT searchstring   ~that sets its base armor class to 2.~
+             SPRINT insertafter    ~THISWILLNEVERMATCH~
+             SPRINT replacestring  ~that sets its base armor class to 2.~
+             SPRINT insertstring   ~that protects as a field plate armor (AC %baseac_fieldp0%, Protection vs. S/C/P/M: %slashres_fieldp0%%perc% / %crushres_fieldp0%%perc% / %pierceres_fieldp0%%perc% / %missileres_fieldp0%%perc%).~
+             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
              // IWD variant - touch range and a bit weaker, bg2 is caster-only
              SPRINT searchstring   ~plate armor (AC 3)~
              SPRINT insertafter    ~THISWILLNEVERMATCH~
              SPRINT replacestring  ~(AC 3)~
              SPRINT insertstring   ~(AC %baseac_plate0%, Protection vs. S/C/P/M: %slashres_plate0%%perc% / %crushres_plate0%%perc% / %pierceres_plate0%%perc% / %missileres_plate0%%perc%)~
              PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+             // Galactygon's Spell Pack variant - similar to IWD variant
+             SPRINT searchstring   ~The plate armor provides an AC of 3 to the user, which combines with Dexterity and magical bonuses. If the recipient is already AC 3 or better, the spell has no effect.~
+             SPRINT insertafter    ~THISWILLNEVERMATCH~
+             SPRINT replacestring  ~The plate armor provides an AC of 3 to the user, which combines with Dexterity and magical bonuses. If the recipient is already AC 3 or better, the spell has no effect.~
+             SPRINT insertstring   ~The plate armor protects as normal (AC %baseac_plate0%, Protection vs. S/C/P/M: %slashres_plate0%%perc% / %crushres_plate0%%perc% / %pierceres_plate0%%perc% / %missileres_plate0%%perc%), and combines with Dexterity and magical bonuses.~
+             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
         END
         PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~spwi414~) BEGIN // Spirit Armor spell
-             SPRINT searchstring   ~1, as if he was wearing full plate~
+             SPRINT searchstring   ~1, as if he .* wearing full plate~
              SPRINT insertafter    ~THISWILLNEVERMATCH~
              SPRINT replacestring  ~While in effect the AC (armor class) of the recipient will be 1, as if he was wearing full plate.~
              SPRINT insertstring   ~While in effect the recipient will be protected as if he was wearing full plate armor. (AC %baseac_fullp0%, Protection vs. S/C/P/M: %slashres_fullp0%%perc% / %crushres_fullp0%%perc% / %pierceres_fullp0%%perc% / %missileres_fullp0%%perc%)~
+             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+             SPRINT replacestring  ~While in effect, the armor class of the recipient will be set to 1, as if he were wearing full plate armor.~
              PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
              // IWD variant
              SPRINT searchstring   ~1, as if he was wearing plate mail~
              SPRINT replacestring  ~While in effect the AC (armor class) of the recipient will be 1, as if he was wearing plate mail.~
              PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
         END
-        PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~sppr111~ || ~%SOURCE_RES%~ STRING_EQUAL ~dgfaith~) BEGIN // Armor of Faith spell
+        PATCH_IF ( (~%SOURCE_RES%~ STRING_EQUAL ~sppr111~ || ~%SOURCE_RES%~ STRING_EQUAL ~dgfaith~)
+                   && (~%modsiam%~ STRING_CONTAINS_REGEXP ~spell_rev_d~ == 1) ) BEGIN // stock Armor of Faith spell
              SPRINT searchstring   ~At first level, the protection is 5~
              SPRINT insertafter    ~THISWILLNEVERMATCH~
              SPRINT replacestring  ~At first level, the protection is 5%perc%, and every five levels of the caster improves this by another 5%perc%.~
@@ -2318,6 +2568,19 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
              SPRINT insertafter    ~THISWILLNEVERMATCH~
              SPRINT replacestring  ~A 20th level priest would have 25%perc% of her damage 'absorbed'~
              SPRINT insertstring   ~A 20th level priest would have 25%perc% / %slashres_sppr111-20%%perc% of her damage 'absorbed'~
+             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+        END
+        PATCH_IF ( (~%SOURCE_RES%~ STRING_EQUAL ~sppr111~ || ~%SOURCE_RES%~ STRING_EQUAL ~dgfaith~)
+                   && (~%modsiam%~ STRING_CONTAINS_REGEXP ~spell_rev_d~ == 0) ) BEGIN // spell rev. Armor of Faith spell
+             SPRINT searchstring   ~At first level, the protection is \(set to \)?5~
+             SPRINT insertafter    ~THISWILLNEVERMATCH~
+             SPRINT replacestring  ~At first level, the protection is \(set to \)?5%perc%, and every five levels of the caster improves this by another 5%perc%.~
+             SPRINT insertstring   ~At first level, the protection is %slashres_sppr111%%perc%, and every five levels of the caster improves this by another %slashres_sppr111%%perc%.~
+             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+             SPRINT searchstring   ~A 20th level priest would have~
+             SPRINT insertafter    ~THISWILLNEVERMATCH~
+             SPRINT replacestring  ~A 20th level priest would have 25%perc% of her damage 'absorbed'~
+             SPRINT insertstring   ~A 20th level priest would have %slashres_sppr111-20%%perc% of her damage 'absorbed'~
              PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
         END
         PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~sppr202~) BEGIN // Barkskin spell
@@ -2506,7 +2769,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 // do shield things //
 //////////////////////
 
-PRINT ~Removing spellcasting/thieving restrictions from shields~
+ACTION_IF (arcanewhacking = 1) BEGIN
+  PRINT ~Removing spellcasting/thieving restrictions from shields...~
+END ELSE BEGIN
+  PRINT ~Removing thieving restrictions from shields...~
+END
 
 COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 
@@ -2530,14 +2797,15 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
           READ_LONG  %fxoff% + 0x30 * %x% + 0x08  param2
 
           PATCH_IF (
-              (%opcode% = 145 && %param2% = 0) ||                     // wizard spell disable
-              (%opcode% = 144 && (%param2% = 0 || %param2% = 1)) ||   // stealth/thieving disable
-              (%opcode% = 59 && %param1% < 0) ||                      // move silently penalty (but keep bonuses)
-              (%opcode% = 275 && %param1% < 0) ||                     // hide in shadows penalty
-              (%opcode% = 90 && %param1% < 0) ||                      // open lock penalty
-              (%opcode% = 91 && %param1% < 0) ||                      // find trap penalty
-              (%opcode% = 92 && %param1% < 0) ||                      // pickpocket penalty
-              (%opcode% = 126 && %param1% < 0 && %param2% = 0)        // movement slowdown
+              (%opcode% = 145 && %param2% = 0 && %arcanewhacking% = 1) ||                     // wizard spell disable
+              (%opcode% = 144 && (%param2% = 0 || %param2% = 1)) ||                           // stealth/thieving disable
+              (%opcode% = 60 && %param2% = 0 && %arcanewhacking% = 1) ||                      // arcane spell failure
+              (%opcode% = 59 && %param1% < 0) ||                                              // move silently penalty (but keep bonuses)
+              (%opcode% = 275 && %param1% < 0) ||                                             // hide in shadows penalty
+              (%opcode% = 90 && %param1% < 0) ||                                              // open lock penalty
+              (%opcode% = 91 && %param1% < 0) ||                                              // find trap penalty
+              (%opcode% = 92 && %param1% < 0) ||                                              // pickpocket penalty
+              (%opcode% = 126 && %param1% < 0 && %param2% = 0)                                // movement slowdown
                 ) BEGIN
               PATCH_INCLUDE ~delitmfx.tpp~                            // kill them.
           END

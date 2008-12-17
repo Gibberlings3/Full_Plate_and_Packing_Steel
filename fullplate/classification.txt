@@ -9,9 +9,9 @@ BELT02      NOTARMOR   ALL      //BG1
 BELT03      NOTARMOR   ALL      //BG1
 BELT04      NOTARMOR   ALL      //BG1
 BLCKPLA     PLATE      ALL      //IWD
-BLEAT01     HIDE       ALL      /* Improved Horns of Valhalla */
-BLEAT02     HIDE       ALL      /* Improved Horns of Valhalla */
-BLEAT03     HIDE       ALL      /* Improved Horns of Valhalla */
+BLEAT01     HIDE       ALL      /* Improved Horns of Valhalla OR Item Revisions */
+BLEAT02     HIDE       ALL      /* Improved Horns of Valhalla OR Item Revisions */
+BLEAT03     HIDE       ALL      /* Improved Horns of Valhalla OR Item Revisions */
 BLOOD       PLATE      ALL      //IWD
 BRUENPLA    MFIELDP    ALL      //BG2:SOA
 C2BELT01    NOTARMOR   ALL      /* Item Upgrade */
@@ -70,8 +70,20 @@ FLAT02      FIELDP     ALL      /* Ashes of Embers */
 FLAT03      FIELDP     ALL      /* Ashes of Embers */
 FLAT04      FIELDP     ALL      /* Ashes of Embers */
 FWCHAN01    CHAIN      ALL      /* Revised Forgotten Wars Item Pack - rfwip */
+FWCHAN02    ELVENC     ALL      /* Revised Forgotten Wars Item Pack - rfwip */
+FWCHAN03    ELVENC     ALL      /* Revised Forgotten Wars Item Pack - rfwip */
+FWCHAN04    CHAIN      ALL      /* Revised Forgotten Wars Item Pack - rfwip */
+FWLEAT02    HIDE       ALL      /* Revised Forgotten Wars Item Pack - rfwip */
 FWLEAT03    HIDE       ALL      /* Revised Forgotten Wars Item Pack - rfwip */
+FWLEAT04    LEATHER    ALL      /* Revised Forgotten Wars Item Pack - rfwip */
+FWLEAT05    LEATHER    ALL      /* Revised Forgotten Wars Item Pack - rfwip */
+FWLEAT06    STUDDED    ALL      /* Revised Forgotten Wars Item Pack - rfwip */
+FWPLAT01    FULLP      ALL      /* Revised Forgotten Wars Item Pack - rfwip */
+FWPLAT02    FULLP      ALL      /* Revised Forgotten Wars Item Pack - rfwip */
+FWPLAT03    PLATE      ALL      /* Revised Forgotten Wars Item Pack - rfwip */
+FWPLAT04    FIELDP     ALL      /* Revised Forgotten Wars Item Pack - rfwip */
 GLORY       PLATE      ALL      /* IWD, unused, restored in IWD UB */
+GMD02       CHAIN      ALL      /* Revised Forgotten Wars Item Pack - rfwip */
 ICHAN01     CHAIN      ALL      //BG1
 ICHAN04     SPLINT     ALL      //BG1
 ICEPLAT     PLATE      ALL      /* RPG Dungeon Kitpack - Ice Knight */
@@ -103,6 +115,7 @@ LEAT16      STUDDED    ALL      //BG2:SOA
 LEAT17      STUDDED    ALL      //BG2:SOA
 LEAT18      STUDDED    ALL      //BG2:SOA
 LEAT19      STUDDED    ALL      //BG2:SOA
+LEAT19      HIDE       item_rev /* Item Revisions */
 LEAT20      HIDE       ALL      //BG2:SOA
 LEAT21      LEATHER    ALL      //BG2:SOA
 LEAT22      LEATHER    ALL      //BG2:SOA
@@ -141,11 +154,13 @@ PLAT14      FULLP      ALL      //BG2:SOA
 PLAT15      FULLP      ALL      //BG2:SOA
 PLAT16      FULLP      ALL      //BG2:SOA
 PLAT17      PLATE      ALL      //BG2:SOA
-PLAT18      FULLP      ALL      //BG2:SOA
+PLAT17      FULLP      item_rev /* Item Revisions */
+PLAT18      PLATE      ALL      //BG2:SOA
 PLAT19      FULLP      ALL      //BG2:SOA
 PLAT20      FULLP      ALL      //BG2:TOB
 PLAT21      FULLP      ALL      //BG2:TOB
 PLAT22      FULLP      ALL      //BG2:TOB
+PLAT22      PLATE      item_rev /* Item Revisions */
 PLAT23      FULLP      ALL      //BG2:TOB
 PLAT98      PLATE      ALL      //BG2:SOA
 PLAT99      PLATE      ALL      //BG2:SOA
@@ -205,17 +220,20 @@ VEXDL       PLATE      ALL      //HOW
 VEXED       PLATE      ALL      //HOW
 VEXED2      PLATE      ALL      //HOW
 VEXED3      PLATE      ALL      //HOW
+VICARM      STUDDED    ALL      /* Item Revisions */
 WA2PLAT     FULLP      ALL      //BG2:SOA
 XCHAN03     CHAIN      ALL      //TOTLM
 XLEAT03     LEATHER    ALL      //TOTLM
 ZILFGT      STUDDED    ALL      /* Ascension (Tougher Illasera) */
-SPPR111     NOTARMOR   SOA
-SPPR111     NOTARMOR   TOB
-DGFAITH     NOTARMOR   ALL
-SPPR202     SCALE      ALL
-SPWI102     SCALE      ALL
+SPPR111     NOTARMOR   SOA      //BG2:SOA
+SPPR111     NOTARMOR   TOB      //BG2:SOA
+DGFAITH     NOTARMOR   ALL      //BG2:SOA
+SPPR202     SCALE      ALL      //BG1
+SPPR202     nonono     spell_rev_d  /* Spell Revisions */
+SPWI102     SCALE      ALL      //BG1
 SPWI317     FIELDP     SOA
 SPWI317     FIELDP     TOB
+SPWI317     PLATE      gsp_ga   /* Galactygon's Spell Pack beta 5 */
 SPWI317     PLATE      IWD
 SPWI317     PLATE      HOW
 SPWI317     PLATE      TOTLM

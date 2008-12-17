@@ -50,13 +50,14 @@ Thanks to:
 Incompatible with:
  Refinements' Revised Armors & Shields
  BG2 Tweaks' Allow Thieving and Stealth in Heavy Armor
- BG2 Tweaks' Allow Arcane Spellcasting in Heavy Armor
  IWD Tweaks' Allow Thieving and Stealth in Heavy Armor
- IWD Tweaks' Allow Arcane Spellcasting in Heavy Armor
+ Item Revisions' Heavy Armor Encumbrance
+ Item Revisions' Allow Thieving Skills in Armor
 
 Install order:
  As close to last as you can manage. After anything adding
- armours to the game.
+ armours to the game. Definitely after Spell Revisions,
+ Item Revisions, Galactygon's Spell Pack beta.
 
 License:
  Creative Commons Attribution 3.0 Unported (http://creativecommons.org/licenses/by/3.0/)
@@ -80,7 +81,7 @@ Untouched:
  potion of invuln.
  weapons with protective effects
  barbarian resistances
- hardiness hla (fine as it is)
+ hardiness hla
 
 Question marks, untouched at the moment:
  mage robes
@@ -119,6 +120,9 @@ beta 4
  * beefed up missile protection of heavy armours a bit
  * minor descriptionwhacking updates
  * tested with still more mods than before
+ ** avoids disturbing other "casting-in-armour" mods
+ ** compatibility added with Spell Revisions and Item Revisions mods
+ ** compatibility added with Galactygon's Spell Pack beta 5
 
 beta 3 (closed beta, november 2008)
  * caveat: WeiDU pre-209 beta, for proper game engine detection
