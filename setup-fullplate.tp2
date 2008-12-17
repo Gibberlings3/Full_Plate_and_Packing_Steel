@@ -1,7 +1,7 @@
 BACKUP ~fullplate/backup~
 AUTHOR ~erik, gibberlings3~
-MODDER
-VERSION ~alfa 12~
+MODDER setup_tra none
+VERSION ~alfa 13~
 NO_IF_EVAL_BUG
 
 BEGIN ~Full Plate And Packing Steel: Clean, Shine and Oil your Armour, Soldier! (naming and enchantment level fixes, required for main component)~
@@ -1579,6 +1579,14 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
             PATCH_IF NOT (~%y%~ STRING_CONTAINS_REGEXP ~%param%~ == 0) BEGIN // if y is valid, override x
                 SET x = %y%
             END
+
+            // TODO!
+            // static set resistance = doesn't work combined with cumulative stuff...
+            // alt. 1: add scripting state, modify up/down to match
+            // alt. 2: amalgamate together resistances of armour, set static there
+            //
+            // todo#2: finere justeringer, -10-til-det-er-lavt-nok er litt grovt
+
             PATCH_IF NOT (x = 0 || (x = 10 && ~%param%~ STRING_EQUAL ~baseac~)) BEGIN 
                 PATCH_IF ~%param%~ STRING_EQUAL baseac BEGIN
                     SET opcode = 0
@@ -1835,6 +1843,278 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     END
   BUT_ONLY_IF_IT_CHANGES
     
+///////////////////////////////////
+// add resistance limiter cutspy //
+// whee, it works, perfectly!    //
+///////////////////////////////////
+
+PRINT ~Adding damage resistance limiter...~
+
+<<<<<<<< baldur_res.baf
+IF
+    OR(24)
+        CheckStatGT(Player1,90,RESISTSLASHING)
+        CheckStatGT(Player2,90,RESISTSLASHING)
+        CheckStatGT(Player3,90,RESISTSLASHING)
+        CheckStatGT(Player4,90,RESISTSLASHING)
+        CheckStatGT(Player5,90,RESISTSLASHING)
+        CheckStatGT(Player6,90,RESISTSLASHING)
+        CheckStatGT(Player1,90,RESISTCRUSHING)
+        CheckStatGT(Player2,90,RESISTCRUSHING)
+        CheckStatGT(Player3,90,RESISTCRUSHING)
+        CheckStatGT(Player4,90,RESISTCRUSHING)
+        CheckStatGT(Player5,90,RESISTCRUSHING)
+        CheckStatGT(Player6,90,RESISTCRUSHING)
+        CheckStatGT(Player1,90,RESISTPIERCING)
+        CheckStatGT(Player2,90,RESISTPIERCING)
+        CheckStatGT(Player3,90,RESISTPIERCING)
+        CheckStatGT(Player4,90,RESISTPIERCING)
+        CheckStatGT(Player5,90,RESISTPIERCING)
+        CheckStatGT(Player6,90,RESISTPIERCING)
+        CheckStatGT(Player1,90,RESISTMISSILE)
+        CheckStatGT(Player2,90,RESISTMISSILE)
+        CheckStatGT(Player3,90,RESISTMISSILE)
+        CheckStatGT(Player4,90,RESISTMISSILE)
+        CheckStatGT(Player5,90,RESISTMISSILE)
+        CheckStatGT(Player6,90,RESISTMISSILE)
+    Global("ekresspybeenhere","GLOBAL",0)
+THEN
+    RESPONSE #100
+        CreateCreatureObject("ekresspy",Player1,1,0,0)
+        SetGlobal("ekresspybeenhere","GLOBAL",1)
+        Continue()
+END
+
+IF
+    GlobalGT("ekresspybeenhere","GLOBAL",0)
+    !InActiveArea("ekresspy")
+THEN
+    RESPONSE #100
+        MoveGlobalObjectOffscreen("ekresspy",Player1)
+END
+
+>>>>>>>>
+
+<<<<<<<< ekresres.baf
+IF
+    Global("ekresspybeenhere","GLOBAL",1)
+THEN
+    RESPONSE #100
+        MakeGlobal()
+        SetGlobal("ekresspybeenhere","GLOBAL",2)
+END
+
+IF
+    CheckStatGT(Player1,90,RESISTSLASHING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKSLASH", Player1)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player2,90,RESISTSLASHING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKSLASH", Player2)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player3,90,RESISTSLASHING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKSLASH", Player3)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player4,90,RESISTSLASHING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKSLASH", Player4)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player5,90,RESISTSLASHING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKSLASH", Player5)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player6,90,RESISTSLASHING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKSLASH", Player6)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player1,90,RESISTCRUSHING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKCRUSH", Player1)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player2,90,RESISTCRUSHING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKCRUSH", Player2)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player3,90,RESISTCRUSHING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKCRUSH", Player3)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player4,90,RESISTCRUSHING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKCRUSH", Player4)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player5,90,RESISTCRUSHING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKCRUSH", Player5)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player6,90,RESISTCRUSHING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKCRUSH", Player6)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player1,90,RESISTPIERCING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKPIERC", Player1)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player2,90,RESISTPIERCING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKPIERC", Player2)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player3,90,RESISTPIERCING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKPIERC", Player3)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player4,90,RESISTPIERCING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKPIERC", Player4)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player5,90,RESISTPIERCING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKPIERC", Player5)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player6,90,RESISTPIERCING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKPIERC", Player6)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player1,90,RESISTMISSILE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKMISS", Player1)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player2,90,RESISTMISSILE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKMISS", Player2)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player3,90,RESISTMISSILE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKMISS", Player3)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player4,90,RESISTMISSILE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKMISS", Player4)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player5,90,RESISTMISSILE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKMISS", Player5)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player6,90,RESISTMISSILE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKMISS", Player6)
+        Continue()
+END
+
+IF
+    True()
+THEN
+    RESPONSE #100
+        NoAction()
+END
+>>>>>>>>
+
+COPY ~fullplate/ekresspy.cre~ ~override~
+COPY ~fullplate/ekslash.spl~ ~override~
+COPY ~fullplate/ekcrush.spl~ ~override~
+COPY ~fullplate/ekpierc.spl~ ~override~
+COPY ~fullplate/ekmiss.spl~ ~override~
+
+COMPILE ~ekresres.baf~
+
+EXTEND_BOTTOM baldur.bcs baldur_res.baf
+
+
 BEGIN ~Full Plate And Packing Steel: Field Improvisation (convenience tweak, remove restrictions on combining protective items)~
  DESIGNATED 102
 

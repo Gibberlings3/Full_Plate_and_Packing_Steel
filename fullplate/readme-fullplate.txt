@@ -23,6 +23,10 @@ Question marks, untouched at the moment:
  mage robes
  Jansen adventurewear
 
+Todo before beta:
+- fix armour vs armour spell fuckup
+- check for 100%+ armoured creatures
+- finer adjustment ... say, 2, 3 or 5% at a time
 
 Design notes
 
