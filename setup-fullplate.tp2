@@ -204,6 +204,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 2
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~M#ASLEAT.ITM~) BEGIN
+      SAY NAME2 ~Apprentice Shadow Armor +1~
+      WRITE_BYTE 0x60 1
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~MGILEAT1.ITM~) BEGIN
       SAY NAME1 ~Leather Armor~
     END
