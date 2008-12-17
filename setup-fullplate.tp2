@@ -4,8 +4,7 @@ MODDER
 VERSION ~beta 1~
 NO_IF_EVAL_BUG
 
-BEGIN ~Full Plate And Packing Steel: Clean, Shine and Oil all Armour (naming and enchantment level fixes, required for
-next component)~
+BEGIN ~Full Plate And Packing Steel: Clean, Shine and Oil all Armour (naming and enchantment level fixes, required for next component)~
  DESIGNATED 101
 COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   PATCH_IF (SOURCE_SIZE < 0x72) BEGIN
@@ -13,8 +12,14 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   END ELSE BEGIN
     READ_BYTE  0x18 "flags"
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~BAND02.ITM~) BEGIN
+      WRITE_LONG 0x34 2400 // too cheap for +1
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~BAND04.ITM~) BEGIN
+      SAY NAME2 ~Eternal Age +2~
       WRITE_BYTE 0x60 2
+      WRITE_LONG 0x34 7000 // same price as standard +2 banded, too cheap
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~BLEAT01.ITM~) BEGIN
@@ -130,8 +135,20 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 2
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~DWCHAN01.ITM~) BEGIN
+      SAY NAME2 ~Drow Adamantine Chain +3~
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~DWPLAT01.ITM~) BEGIN
+      SAY NAME2 ~Drow Adamantine Full Plate +5~
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~FINIROBE.ITM~) BEGIN
       WRITE_BYTE 0x60 5
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~FLAT02.ITM~) BEGIN
+      WRITE_LONG 0x34 9000 // too cheap for +1
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~FLAT04.ITM~) BEGIN
@@ -239,7 +256,6 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 2
     END
 
-    /* Looks like a somewhat stripped down, less-protective, plate mail +4 */
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~R!KITPLT.ITM~) BEGIN
       SAY NAME1 ~Plate Mail~
       SAY NAME2 ~Bringer of Vengeance: Kitanya's Plate Mail +4~
@@ -254,6 +270,10 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~RR#CHN01.ITM~) BEGIN
       SAY NAME2 ~Drow Chain Mail +1~
       WRITE_BYTE 0x60 1
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~SCAL02.ITM~) BEGIN
+      WRITE_LONG 0x34 1600 // too cheap for +1
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~SHARARM.ITM~) BEGIN
@@ -419,24 +439,17 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     PATCH_IF NOT (~%classdefined%~ STRING_CONTAINS_REGEXP ~class~ == 0) BEGIN
         SPRINT tempname ~%classdefined%%enchantment%~
         
-        PATCH_PRINT ~A!~
-
         // stats listed in thebiglist.txt for the generic armor type?
         SPRINT classenchant $weight(~%tempname%~)
         PATCH_IF NOT (~%classenchant%~ STRING_CONTAINS_REGEXP ~weight~ == 0) BEGIN
-            PATCH_PRINT ~B!~
-
             SPRINT usename ~%tempname%~
         END
     END
     
     PATCH_IF NOT ( ~%usename%~ STRING_EQUAL ~~ ) BEGIN
         // adjustments listed in thebiglist.txt for the specific armor?
-        PATCH_PRINT ~C!~
-        PATCH_PRINT ~%usename%~
         SPRINT specialcase $weight(~%SOURCE_RES%~)
         PATCH_IF NOT (~%specialcase%~ STRING_CONTAINS_REGEXP ~weight~ == 0) BEGIN
-            PATCH_PRINT ~D!~
             SET $weight(~%SOURCE_RES%~)         = $weight(~%SOURCE_RES%~) + $weight(~%usename%~)
             SET $dexmod(~%SOURCE_RES%~)         = $dexmod(~%SOURCE_RES%~) + $dexmod(~%usename%~)
             SET $movemod(~%SOURCE_RES%~)        = $movemod(~%SOURCE_RES%~) + $movemod(~%usename%~)
@@ -463,7 +476,6 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     END
 
     PATCH_IF NOT ( ~%usename%~ STRING_EQUAL ~~ ) BEGIN
-        PATCH_PRINT ~blarg!~
         PATCH_IF ($weight(~%usename%~) > 0) BEGIN
             WRITE_LONG 0x4c $weight(~%usename%~)
         END
@@ -474,8 +486,6 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
         READ_SHORT 0x70 fxnum
         READ_LONG 0x6a fxoff
         
-        PATCH_PRINT ~fxnum predelete: %fxnum%~
-
         FOR (x=0; (x < %fxnum%); x+=1) BEGIN
             READ_SHORT %fxoff% + 0x30 * %x% + 0     opcode
             READ_LONG  %fxoff% + 0x30 * %x% + 0x04  param1
@@ -496,8 +506,6 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
             END
         END
         
-        PATCH_PRINT ~fxnum postdelete: %fxnum%~
-
         WRITE_SHORT 0x70 %fxnum%
         
         PATCH_FOR_EACH param IN ~dexmod~ ~movemod~ ~wpnspeedmod~ ~baseac~ ~slashac~ ~crushac~ ~pierceac~ ~missileac~
@@ -610,7 +618,6 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
             END
         END
 
-        PATCH_PRINT ~fxnum postadd: %fxnum%~
         WRITE_SHORT 0x70 %fxnum%
 
     END
