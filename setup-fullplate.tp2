@@ -659,7 +659,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 2
     END
 
-    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~LEAT19.ITM~) BEGIN
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~LEAT19.ITM~ || "%SOURCE_FILE%" STRING_EQUAL ~ZILFGT.ITM~) BEGIN
       PATCH_IF NOT (~%idname%~ STRING_EQUAL ~Shadow Dragonhide Armor +5~) BEGIN // unless item rev. version
         SAY NAME2 ~Shadow Dragon Scale +6~
       END
