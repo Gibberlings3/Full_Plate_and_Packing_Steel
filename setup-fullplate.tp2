@@ -326,8 +326,8 @@ BEGIN ~Full Plate And Packing Steel: Between You And Harm (alternate armour syst
  DESIGNATED 1
  REQUIRE_COMPONENT ~setup-fullplate.tp2~ ~101~ ~Oil the armour first, please.~
 
-ACTION_IF NOT FILE_EXISTS ~override/tb#resisttweak.txt~ THEN BEGIN
-    PRINT ~tb#resisttweak.txt not found in override. Refinements HLA component is recommended.~
+ACTION_IF FILE_EXISTS ~override/tb#resisttweak.txt~ THEN BEGIN
+    PRINT ~WARNING: tb#resisttweak.txt found in override. Not recommended, may cause stutter.~
 END
 
 // define local pseudomacros

@@ -94,6 +94,7 @@ BELT03       0  0   0   0   0   0   3   0   0   0  15   0   0  0   0    0   0   
 BELT04       0  0   0   0   0   0   0   2   2   0   0  10  10  0   0    0   0   0   0   0   0   // girdle of piercing
 C2BELT01     0  0   0   0   0   2   2   2   2  10  10  10  10  0   0    0   0   0   0   0   0   //  combo girdle (IU)
 LEAT08       0  0   0   0   0   0   0   0   0   0   0   0   0  0   0   -5  -5   0   0  -5   0   // shadow armor
+M#ASLEAT     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0  -15 -15  -5  -5 -25   0   // apprentice shadow armor
 SCAL04     -20 -1 -10   0   0   0   0   0   0   0   0   0   0  0   0  -50 -50 -20 -20 -50 -23   // sea-elven scale
 CHAN06     -15 -1 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // mithril chain
 CHAN07     -15 -1 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // mithril chain
