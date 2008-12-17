@@ -125,6 +125,7 @@ U#LEAT01     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   
 U#LEAT02     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0 -10   0   // hide of shades
 S!LEAT01     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0 -20   0   0   0   0   // improved human flesh - restore lost move silently bonus
 MOURNER     14  1  10   0   0   0   0   0   0   0   0   0   0  0   0   25  25  25  25  25   0   // mourner's armour +4
+LEATGR01     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0 -10   // bardic leather
 ADLEATH     -5 -1 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0 -13   // angelo's (studded) leathers
 ARMPEN      23  1  10   0   0   0   0   0   0   0   0   0   0  0   0   25  25  25  25  20   0   // studded leather armor of repentance +5
 FWLEAT02     0  0   0   0   0   0   0   0   0   2   2   2   2  0   0    0   0   0   0   0   0   // beastmen's leather +5
