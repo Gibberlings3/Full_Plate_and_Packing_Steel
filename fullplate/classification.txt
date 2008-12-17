@@ -301,8 +301,8 @@ TCPLAT01    PLATE      ALL      /* Classic Adventures */
 TCRIHARM    ELVENC     ALL      /* Classic Adventures */
 TCRIVARM    ELVENC     ALL      /* Classic Adventures */
 TCVILDPL    FIELDP     ALL      /* Classic Adventures */
-TG#BSP2     STUDDED    ALL      /* Refinements */
-TG#SPI2     CHAIN      ALL      /* Refinements */
+TG#BSP2     STUDDED    ALL      /* Refinements (revised HLAs) */
+TG#SPI2     CHAIN      ALL      /* Refinements (revised HLAs) */
 TROLLARM    FULLP      ALL      /* The Darkest Day */
 TTLEAT      LEATHER    ALL      //BG2:SOA
 U#CHAN01    ADAMC      ALL      /* Ruad OR Classic Adventures */
