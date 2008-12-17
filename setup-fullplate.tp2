@@ -1,7 +1,7 @@
 BACKUP ~fullplate/backup~
 AUTHOR ~erik, gibberlings3~
 //MODDER setup_tra none
-VERSION ~beta 5~
+VERSION ~beta 5+~
 README ~fullplate/readme-fullplate.html~
 
 ALLOW_MISSING ~baldur25.bcs~
@@ -109,9 +109,6 @@ ACTION_IF ENGINE_IS ~totsc~ BEGIN
   OUTER_SPRINT gameiam ~totsc~
   PRINT ~ BG: TotSC...~
   PRINT ~Warning: Baldur's Gate + Tales of the Sword Coast untested and probably not working.~
-END
-ACTION_IF GAME_IS ~bgt~ BEGIN
-  PRINT ~Warning: BGT untested...~
 END
 
 PRINT ~Cleaning, shining, oiling:~
@@ -963,15 +960,15 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 1
     END
 
-    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~POTN18.ITM~) BEGIN
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~POTN18.ITM~ || "%SOURCE_FILE%" STRING_EQUAL ~_POTN18.ITM~) BEGIN
       WRITE_BYTE 0x60 1
     END
 
-    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~POTN24.ITM~) BEGIN
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~POTN24.ITM~ || "%SOURCE_FILE%" STRING_EQUAL ~_POTN24.ITM~) BEGIN
       WRITE_BYTE 0x60 1
     END
 
-    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~POTN46.ITM~) BEGIN
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~POTN46.ITM~ || "%SOURCE_FILE%" STRING_EQUAL ~_POTN46.ITM~) BEGIN
       WRITE_BYTE 0x60 1
     END
 
