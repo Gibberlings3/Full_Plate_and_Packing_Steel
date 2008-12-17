@@ -346,3 +346,4 @@ SPWI317     PLATE      IWD
 SPWI317     PLATE      HOW
 SPWI317     PLATE      TOTLM
 SPWI414     FULLP      ALL
+DLWI414     FULLP      ALL      /* DLTC: Glory of Istar demo */

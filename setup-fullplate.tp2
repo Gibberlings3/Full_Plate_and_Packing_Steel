@@ -40,11 +40,11 @@ PRINT ~Detecting game engine...~
 OUTER_SPRINT gameiam ~~
 OUTER_SPRINT modsiam ~~
 
-ACTION_IF ENGINE_IS ~soa~ || ( FILE_EXISTS_IN_GAME ~xpbonus.2da~ && NOT (FILE_EXISTS_IN_GAME ~xnewarea.2da~ && FILE_EXISTS_IN_GAME ~areaflag.ids~)) BEGIN
+ACTION_IF ENGINE_IS ~soa~ BEGIN
   OUTER_SPRINT gameiam ~soa~
   PRINT ~ BG2: SOA...~
 END
-ACTION_IF ( NOT ~%gameiam%~ STRING_EQUAL ~soa~ ) && ( ENGINE_IS ~tob~ || ( FILE_EXISTS_IN_GAME ~xpbonus.2da~ && FILE_EXISTS_IN_GAME ~xnewarea.2da~ && FILE_EXISTS_IN_GAME ~areaflag.ids~ )) BEGIN
+ACTION_IF ENGINE_IS ~tob~ BEGIN
   OUTER_SPRINT gameiam ~tob~
   PRINT ~ BG2: TOB...~
 END
@@ -162,15 +162,15 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_LONG 0x34 7000 // same price as standard +2 banded, too cheap
     END
 
-    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~BELT02.ITM~) BEGIN
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~BELT02.ITM~ || "%SOURCE_FILE%" STRING_EQUAL ~_BELT02.ITM~ ) BEGIN
       WRITE_BYTE 0x60 1
     END
 
-    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~BELT03.ITM~) BEGIN
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~BELT03.ITM~ || "%SOURCE_FILE%" STRING_EQUAL ~_BELT03.ITM~ ) BEGIN
       WRITE_BYTE 0x60 1
     END
 
-    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~BELT04.ITM~) BEGIN
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~BELT04.ITM~ || "%SOURCE_FILE%" STRING_EQUAL ~_BELT04.ITM~ ) BEGIN
       WRITE_BYTE 0x60 1
     END
 
@@ -2295,8 +2295,10 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                  SPRINT insertstring   ~%wnl%+20%perc% fire resistance~
                  PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
-            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~chan02~ || ~%SOURCE_RES%~ STRING_EQUAL ~chan05~ || ~%SOURCE_RES%~ STRING_EQUAL ~tcarmor3~ ||
-                      ~%SOURCE_RES%~ STRING_EQUAL ~j#spli06~ || ~%SOURCE_RES%~ STRING_EQUAL ~chan22~ ) BEGIN // chain mail +1, splint mail +1 (x2), splint mail +2 (x2)
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~chan02~ || ~%SOURCE_RES%~ STRING_EQUAL ~_chan02~ ||
+                      ~%SOURCE_RES%~ STRING_EQUAL ~chan05~ || ~%SOURCE_RES%~ STRING_EQUAL ~_chan05~ ||
+                      ~%SOURCE_RES%~ STRING_EQUAL ~tcarmor3~ || ~%SOURCE_RES%~ STRING_EQUAL ~j#spli06~ ||
+                      ~%SOURCE_RES%~ STRING_EQUAL ~chan22~ ) BEGIN // chain mail +1 (x2), splint mail +1 (x3), splint mail +2 (x2)
                  SPRINT searchstring   ~bonus.* to their armor class~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
                  SPRINT replacestring  ~This suit of armor is enchanted, granting the wearer a.* bonus.* to their armor class.~
@@ -2742,7 +2744,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
             // some custom updates for less-than-accurate statements after mod install
-            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~potn24~) BEGIN // potion of defense
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~potn24~ || ~%SOURCE_RES%~ STRING_EQUAL ~_potn24~) BEGIN // potion of defense
                  SPRINT searchstring   ~Armor Class~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
                  SPRINT replacestring  ~Armor Class: set to 0~
@@ -2754,7 +2756,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                  SPRINT insertstring   ~improves your understanding of combat and helps you dodge, weave and avoid attacks.~
                  PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
-            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~potn46~) BEGIN // potion of stone form
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~potn46~ || ~%SOURCE_RES%~ STRING_EQUAL ~_potn46~) BEGIN // potion of stone form
                  SPRINT searchstring   ~THISWILLNEVERMATCH~
                  SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
                  SPRINT replacestring  ~~
@@ -2790,7 +2792,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
     PATCH_IF ("%SOURCE_RES%" STRING_EQUAL ~spwi102~ ||
               "%SOURCE_RES%" STRING_EQUAL ~spwi317~ ||
               "%SOURCE_RES%" STRING_EQUAL ~spwi414~ ||
-              "%SOURCE_RES%" STRING_EQUAL ~sppr202~) BEGIN
+              "%SOURCE_RES%" STRING_EQUAL ~sppr202~ ||
+              "%SOURCE_RES%" STRING_EQUAL ~dlwi102~ ||
+              "%SOURCE_RES%" STRING_EQUAL ~dlwi317~ ||
+              "%SOURCE_RES%" STRING_EQUAL ~dlwi414~ ||
+              "%SOURCE_RES%" STRING_EQUAL ~dlpr202~    ) BEGIN
         SET cumulative_or_set = 1 // flat value set, like normal armour
     END
 
@@ -2995,7 +3001,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
              SPRINT insertstring   ~The plate armor protects as normal (AC %baseac_plate0%, Protection vs. S/C/P/M: %slashres_plate0%%perc% / %crushres_plate0%%perc% / %pierceres_plate0%%perc% / %missileres_plate0%%perc%), and combines with Dexterity and magical bonuses.~
              PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
         END
-        PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~spwi414~) BEGIN // Spirit Armor spell
+        PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~spwi414~ || ~%SOURCE_RES%~ STRING_EQUAL ~dlwi414~) BEGIN // Spirit Armor spell
              SPRINT searchstring   ~1, as if he .* wearing full plate~
              SPRINT insertafter    ~THISWILLNEVERMATCH~
              SPRINT replacestring  ~While in effect the AC (armor class) of the recipient will be 1, as if he was wearing full plate.~
