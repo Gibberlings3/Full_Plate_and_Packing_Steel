@@ -489,7 +489,8 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                 (%opcode% = 275 && %param1% < 0) ||                     // hide in shadows penalty
                 (%opcode% = 90 && %param1% < 0) ||                      // open lock penalty
                 (%opcode% = 91 && %param1% < 0) ||                      // find trap penalty
-                (%opcode% = 92 && %param1% < 0)                         // pickpocket penalty
+                (%opcode% = 92 && %param1% < 0) ||                      // pickpocket penalty
+                (%opcode% = 126 && %param1% < 0 && %param2% = 0)        // movement slowdown
                   ) BEGIN
                 PATCH_INCLUDE ~delitmfx.tpp~                            // kill them. we'll add some back.
             END
