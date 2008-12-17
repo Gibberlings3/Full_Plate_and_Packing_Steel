@@ -201,7 +201,11 @@ PLAT01      PLATE      ALL      //BG1
 _PLAT01     PLATE      ALL      /* Tutu */
 PLAT02      PLATE      ALL      //BG1
 _PLAT02     PLATE      ALL      /* Tutu */
-PLAT04      FULLP      ALL      //BG1
+PLAT04      FULLP      SOA      //BG1
+PLAT04      FULLP      TOB      //BG1
+PLAT04      MFIELDP    IWD      //IWD
+PLAT04      MFIELDP    HOW      //IWD
+PLAT04      MFIELDP    TOTLM    //IWD
 _PLAT04     FULLP      ALL      /* Tutu */
 PLAT05      FULLP      ALL      //BG1
 _PLAT05     FULLP      ALL      /* Tutu */

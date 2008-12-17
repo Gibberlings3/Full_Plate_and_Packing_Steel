@@ -847,7 +847,10 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 3
     END
 
-    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLAT09.ITM~) BEGIN
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLAT09.ITM~) ||
+      ( ( ~%gameiam%~ STRING_EQUAL ~iwd~ || ~%gameiam%~ STRING_EQUAL ~how~ || ~%gameiam%~ STRING_EQUAL ~totlm~ ) &&
+        ("%SOURCE_FILE%" STRING_EQUAL ~PLAT04.ITM~) ) // iwd plat04 == bg2 plat09
+      BEGIN
       SAY NAME1 ~Field Plate Mail~
       PATCH_IF (enchantment = 0) BEGIN // unless item rev. has given it a makeover
         SAY NAME2 ~Mithril Field Plate Mail +2~
