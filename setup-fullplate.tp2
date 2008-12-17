@@ -12,6 +12,10 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   END ELSE BEGIN
     READ_BYTE  0x18 "flags"
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~BAND01.ITM~) BEGIN
+      WRITE_LONG 0x54 0xffffffff // non-magical, doesn't need identified_desc
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~BAND02.ITM~) BEGIN
       WRITE_LONG 0x34 2400 // too cheap for +1
     END
@@ -147,6 +151,10 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 5
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~FLAT01.ITM~) BEGIN
+      WRITE_LONG 0x54 0xffffffff // non-magical, doesn't need identified_desc
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~FLAT02.ITM~) BEGIN
       WRITE_LONG 0x34 9000 // too cheap for +1
     END
@@ -272,6 +280,10 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 1
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~SCAL01.ITM~) BEGIN
+      WRITE_LONG 0x54 0xffffffff // non-magical, doesn't need identified_desc
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~SCAL02.ITM~) BEGIN
       WRITE_LONG 0x34 1600 // too cheap for +1
     END
@@ -348,6 +360,78 @@ WRITE_LONG      %fxoff% + 0x30 * %fxnum% + 0x2c 0           // unknown, n/a
 SET fxnum = %fxnum% + 1
 >>>>>>>>
 
+// takes intopcode, intparam, returns returnval, clobbers fxnum fxoff opcode param1 param2 i.
+<<<<<<<< sumfx.tpp
+READ_SHORT 0x70 fxnum
+READ_LONG 0x6a fxoff
+SET returnval = 0
+
+FOR (i=0; (i < %fxnum%); i+=1) BEGIN
+    READ_SHORT %fxoff% + 0x30 * %i% + 0     opcode
+    READ_LONG  %fxoff% + 0x30 * %i% + 0x04  param1
+    READ_LONG  %fxoff% + 0x30 * %i% + 0x08  param2
+
+    PATCH_IF ( %opcode% = %intopcode% ) BEGIN
+      PATCH_IF ( %intparam% = 1 ) BEGIN
+        SET returnval = %returnval% + %param1%
+      END
+      PATCH_IF ( %intparam% = 2 ) BEGIN
+        SET returnval = %returnval% + %param2%
+      END
+    END
+END
+>>>>>>>>
+
+<<<<<<<< descupd_magic.tpp
+PATCH_IF (enchantment > 0) BEGIN
+   PATCH_IF ( ~%iddesc%~ STRING_CONTAINS_REGEXP ~%searchstring%~ == 0) BEGIN
+     INNER_PATCH_SAVE newdescstr "%iddesc%" BEGIN
+       REPLACE_EVALUATE ~%replacestring%~
+         BEGIN
+           SPRINT result ~%insertstring%~
+         END
+         ~%result%~
+     END
+   END ELSE BEGIN
+     INNER_PATCH_SAVE newdescstr "%iddesc%" BEGIN
+       REPLACE_EVALUATE ~%insertafter%~
+         BEGIN
+           SPRINT result  ~%MATCH1%%insertstring%~
+           PATCH_IF (~%insertstring%~ STRING_EQUAL ~~ == 0) BEGIN
+             SPRINT result  ~%result%%wnl%~
+           END
+         END
+         ~%result%~
+     END
+   END
+   SAY_EVALUATED IDENTIFIED_DESC ~%newdescstr%~
+   READ_STRREF 0x54 iddesc ELSE ~nope~
+END ELSE BEGIN // if enchanted
+   PATCH_IF ( ~%uniddesc%~ STRING_CONTAINS_REGEXP ~%searchstring%~ == 0) BEGIN
+     INNER_PATCH_SAVE newdescstr "%uniddesc%" BEGIN
+       REPLACE_EVALUATE ~%replacestring%~
+         BEGIN
+           SPRINT result ~%insertstring%~
+         END
+         ~%result%~
+     END
+   END ELSE BEGIN
+     INNER_PATCH_SAVE newdescstr "%uniddesc%" BEGIN
+       REPLACE_EVALUATE ~%insertafter%~
+         BEGIN
+           SPRINT result  ~%MATCH1%%insertstring%~
+           PATCH_IF (~%insertstring%~ STRING_EQUAL ~~ == 0) BEGIN
+             SPRINT result  ~%result%%wnl%~
+           END
+         END
+         ~%result%~
+     END
+   END
+   SAY_EVALUATED UNIDENTIFIED_DESC ~%newdescstr%~
+   READ_STRREF 0x50 uniddesc ELSE ~nope~
+END // if not enchanted
+>>>>>>>>
+
 // read data files
 
 COPY_EXISTING - ~fullplate/classification.txt~ ~fullplate~
@@ -413,11 +497,15 @@ COPY_EXISTING - ~fullplate/thebiglist.txt~ ~fullplate~
     END
     BUT_ONLY_IF_IT_CHANGES
 
+// allows us to regexp match tabs and newlines
+INCLUDE ~fullplate/extra_regexp_vars.tph~
+
 //////////////////////////////////////
 // profit! and take over the world! //
 //////////////////////////////////////
 
 COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+//COPY_EXISTING_REGEXP GLOB ~r!kitplt.itm~ ~override~
   PATCH_IF (SOURCE_SIZE < 0x72) BEGIN
     PATCH_PRINT "%SOURCE_FILE%: Invalid, below minimum size"
   END ELSE BEGIN
@@ -621,6 +709,98 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
         WRITE_SHORT 0x70 %fxnum%
 
     END
+    /* Description updates */
+    PATCH_IF NOT ( ~%usename%~ STRING_EQUAL ~~ ) BEGIN
+        READ_STRREF 0x50 uniddesc ELSE ~nope~
+        READ_STRREF 0x54 iddesc ELSE ~nope~
+        
+        SET resistanceheaderprinted = 0
+
+        PATCH_FOR_EACH param IN ~weight~ ~dexmod~ ~movemod~ ~wpnspeedmod~ ~baseac~ ~slashac~ ~crushac~ ~pierceac~ ~missileac~
+                                ~slashres~ ~crushres~ ~pierceres~ ~missileres~ ~fireres~ ~coldres~
+                                ~hidemod~ ~movesilmod~ ~openlockmod~ ~disarmtrapmod~ ~pickpocketmod~
+                                ~spellfailmod~
+        BEGIN
+
+             SET x = EVALUATE_BUFFER ~%%param%_%usename%%~
+             PATCH_IF NOT (x = 0 || (x = 10 && ~%param%~ STRING_EQUAL ~baseac~)) BEGIN 
+                 PATCH_IF ~%param%~ STRING_EQUAL weight BEGIN
+                     SPRINT searchstring   ~Weight:~
+                     SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
+                     SPRINT replacestring  ~Weight:[%tab% ]*[0-9]+[%tab% a-zA-Z.]*~
+                     SPRINT insertstring   ~Weight: %x%~
+                     PATCH_INCLUDE ~descupd_magic.tpp~ END
+                
+                 PATCH_IF ~%param%~ STRING_EQUAL baseac BEGIN // kill "AC:" lines
+                     SPRINT searchstring   ~AC:~
+                     SPRINT insertafter    ~\(STATISTICS\)~
+                     SPRINT replacestring  ~AC:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+~
+                     SPRINT insertstring   ~~
+                     PATCH_INCLUDE ~descupd_magic.tpp~ END
+
+                 PATCH_IF ~%param%~ STRING_EQUAL baseac BEGIN
+                     SPRINT searchstring   ~Armor Class:~
+                     SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
+                     SPRINT replacestring  ~Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*~
+                     SPRINT insertstring   ~Armor Class: %x%~
+                     PATCH_INCLUDE ~descupd_magic.tpp~ END
+
+                 PATCH_IF ((~%param%~ STRING_EQUAL slashres || ~%param%~ STRING_EQUAL crushres ||
+                            ~%param%~ STRING_EQUAL pierceres || ~%param%~ STRING_EQUAL missileres)
+                            && resistanceheaderprinted = 0) BEGIN
+                     SPRINT searchstring   ~THISWILLNEVERMATCH~
+                     SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
+                     SPRINT replacestring  ~~
+                     SPRINT insertstring   ~Protection:%wnl% vs. Slash/Crush/Pierce/Missile: 0 / 0 / 0 / 0~
+                     SET resistanceheaderprinted = 1
+                     SET slashrestotal = 0
+                     SET crushrestotal = 0
+                     SET piercerestotal = 0
+                     SET missilerestotal = 0
+                     PATCH_INCLUDE ~descupd_magic.tpp~ END
+
+                 PATCH_IF ~%param%~ STRING_EQUAL slashres BEGIN
+                     SET intopcode = 86
+                     SET intparam = 1
+                     PATCH_INCLUDE ~sumfx.tpp~
+                     SET slashrestotal = %returnval%
+                     END
+
+                 PATCH_IF ~%param%~ STRING_EQUAL crushres BEGIN
+                     SET intopcode = 87
+                     SET intparam = 1
+                     PATCH_INCLUDE ~sumfx.tpp~
+                     SET crushrestotal = %returnval%
+                     END
+
+                 PATCH_IF ~%param%~ STRING_EQUAL pierceres BEGIN
+                     SET intopcode = 88
+                     SET intparam = 1
+                     PATCH_INCLUDE ~sumfx.tpp~
+                     SET piercerestotal = %returnval%
+                     END
+
+                 PATCH_IF ~%param%~ STRING_EQUAL missileres BEGIN
+                     SET intopcode = 89
+                     SET intparam = 1
+                     PATCH_INCLUDE ~sumfx.tpp~
+                     SET missilerestotal = %returnval%
+                     END
+
+            END // if the param has changed
+        END // foreach
+
+        // batched updates ... where we have multiple values on one line.
+        // elaborate tricks with QUOTE, REPLACE_EVALUATE and EVALUATE_BUFFER failed.
+        PATCH_IF (resistanceheaderprinted = 1) BEGIN
+            SPRINT searchstring   ~ vs. Slash/Crush/Pierce/Missile:~
+            SPRINT insertafter    ~THISWILLNEVERMATCH~
+            SPRINT replacestring  ~Slash/Crush/Pierce/Missile: 0 / 0 / 0 / 0~
+            SPRINT insertstring   ~Slash/Crush/Pierce/Missile: %slashrestotal%%perc% / %crushrestotal%%perc% / %piercerestotal%%perc% / %missilerestotal%%perc%~
+            PATCH_INCLUDE ~descupd_magic.tpp~
+        END
+
+    END // if not empty usename
 
   END
   BUT_ONLY_IF_IT_CHANGES
