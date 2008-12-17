@@ -1,8 +1,8 @@
 Full Plate and Packing Steel
 
-Beta 2, July 2008
+Beta 3, Xxx 200X
 
-Between You And Harm: Armour System Rework for BG2
+Between You And Harm: Armour System Rework for BG2 and IWD
 
 AD&D's armour system never made sense to me. Characters as
 agile and sprightly in full plate as in light leather armour.
@@ -25,6 +25,13 @@ but difficult.
 Heavy armour has quite another feel now. Enjoy.
 
 Do read the updated descriptions. They are informative.
+
+
+Little He Knows Where a Foe May Lurk:
+
+Everyone can backstab at x2, thieves/assassins do better. Only
+weapons a single-class thief can use are eligible for backstab,
+as usual.
 
 
 Thanks to:
@@ -90,6 +97,12 @@ Design notes
 
 
 Changes
+
+beta 3
+ * engine-specific tweaks (same filename, different spell)
+ * IWD compatibility (experimental, no resistance limiter yet)
+ * improved SoA compatibility
+ * added backstabbing-for-everyone component
 
 beta 2 (closed beta, july 2008)
  * more mod items taken care of

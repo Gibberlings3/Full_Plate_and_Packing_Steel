@@ -1,19 +1,25 @@
 BACKUP ~fullplate/backup~
 AUTHOR ~erik, gibberlings3~
-//MODDER setup_tra none
-VERSION ~beta 2~
+MODDER setup_tra none
+VERSION ~beta ca 3~
 README ~fullplate/readme-fullplate.txt~
 NO_IF_EVAL_BUG
 
 ALLOW_MISSING ~baldur25.bcs~
 
+// IWD todo: check potions
+// IWD todo: add the game-specific armors
+// IWD long-term todo: add a resistance limiter creature
+
 BEGIN ~Full Plate And Packing Steel: Between You And Harm (alternate armour system)~
  DESIGNATED 1
-FORBID_COMPONENT ~SETUP-REFINEMENTS.TP2~ ~5~ ~Incompatible with Refinements' Revised Armors & Shields~
-FORBID_COMPONENT ~BG2_TWEAKS/SETUP-BG2_TWEAKS.TP2~ ~2100~ ~Incompatible with BG2 Tweaks' Allow Thieving and Stealth in Heavy Armor~
-FORBID_COMPONENT ~BG2_TWEAKS/SETUP-BG2_TWEAKS.TP2~ ~2110~ ~Incompatible with BG2 Tweaks' Allow Thieving and Stealth in Heavy Armor~
-FORBID_COMPONENT ~BG2_TWEAKS/SETUP-BG2_TWEAKS.TP2~ ~2120~ ~Incompatible with BG2 Tweaks' Allow Arcane Spellcasting in Heavy Armor~
-FORBID_COMPONENT ~BG2_TWEAKS/SETUP-BG2_TWEAKS.TP2~ ~2130~ ~Incompatible with BG2 Tweaks' Allow Arcane Spellcasting in Heavy Armor~
+ FORBID_COMPONENT ~SETUP-REFINEMENTS.TP2~ ~5~ ~Incompatible with Refinements' Revised Armors & Shields~
+ FORBID_COMPONENT ~BG2_TWEAKS/SETUP-BG2_TWEAKS.TP2~ ~2100~ ~Incompatible with BG2 Tweaks' Allow Thieving and Stealth in Heavy Armor~
+ FORBID_COMPONENT ~BG2_TWEAKS/SETUP-BG2_TWEAKS.TP2~ ~2110~ ~Incompatible with BG2 Tweaks' Allow Thieving and Stealth in Heavy Armor~
+ FORBID_COMPONENT ~BG2_TWEAKS/SETUP-BG2_TWEAKS.TP2~ ~2120~ ~Incompatible with BG2 Tweaks' Allow Arcane Spellcasting in Heavy Armor~
+ FORBID_COMPONENT ~BG2_TWEAKS/SETUP-BG2_TWEAKS.TP2~ ~2130~ ~Incompatible with BG2 Tweaks' Allow Arcane Spellcasting in Heavy Armor~
+ FORBID_COMPONENT ~G3DALETWEAKS/SETUP-G3DALETWEAKS.TP2~ ~2040~ ~Incompatible with IWD Tweaks' Allow Thieving and Stealth in Heavy Armor~
+ FORBID_COMPONENT ~G3DALETWEAKS/SETUP-G3DALETWEAKS.TP2~ ~2050~ ~Incompatible with IWD Tweaks' Allow Arcane Spellcasting in Heavy Armor~
 
 ACTION_IF FILE_EXISTS ~override/tb#resisttweak.txt~ THEN BEGIN
     PRINT ~WARNING: tb#resisttweak.txt found in override. Not recommended, may cause stutter.~
@@ -603,16 +609,61 @@ END ELSE BEGIN // if enchanted
 END // if not enchanted
 >>>>>>>>
 
+PRINT ~Detecting game engine...~
+ACTION_IF ENGINE_IS ~soa~ BEGIN
+  OUTER_SPRINT gameiam ~soa~
+  PRINT ~ BG2: SOA...~
+END
+ACTION_IF ENGINE_IS ~tob~ BEGIN
+  OUTER_SPRINT gameiam ~tob~
+  PRINT ~ BG2: TOB...~
+END
+ACTION_IF ENGINE_IS ~iwd~ BEGIN
+  OUTER_SPRINT gameiam ~iwd~
+  PRINT ~ IWD...~
+END
+ACTION_IF ENGINE_IS ~how~ BEGIN
+  OUTER_SPRINT gameiam ~how~
+  PRINT ~ IWD: HoW...~
+END
+// needs weidu>>20706 
+//ACTION_IF ENGINE_IS ~totlm~ BEGIN
+//  OUTER_SPRINT gameiam ~totlm~
+//  PRINT ~ IWD: ToTLM...~
+//END
+ACTION_IF ENGINE_IS ~iwd2~ BEGIN
+  OUTER_SPRINT gameiam ~iwd2~
+  PRINT ~ IWD2...~
+END
+// weidu < 209 bug ... iwd is detected as pst
+ACTION_IF ENGINE_IS ~pst~ AND NOT ENGINE_IS ~iwd~ BEGIN
+  OUTER_SPRINT gameiam ~pst~
+  PRINT ~ PST...~
+END
+ACTION_IF ENGINE_IS ~bg1~ BEGIN
+  OUTER_SPRINT gameiam ~bg1~
+  PRINT ~ BG...~
+END
+ACTION_IF ENGINE_IS ~totsc~ BEGIN
+  OUTER_SPRINT gameiam ~totsc~
+  PRINT ~ BG: TotSC...~
+END
+
 PRINT ~Reading datafiles...~
 
 COPY_EXISTING - ~fullplate/classification.txt~ ~fullplate~
     COUNT_2DA_ROWS 0 ~entrycount~
     FOR (i=0;i<~%entrycount%~;i=i+1) BEGIN
+        SPRINT game ~~
         READ_2DA_ENTRY ~%i%~ 0 0 ~name~
         READ_2DA_ENTRY ~%i%~ 1 0 ~class~
+        READ_2DA_ENTRY ~%i%~ 2 0 ~game~
         TO_LOWER name
         TO_LOWER class
-        SPRINT $class(~%name%~) ~%class%~
+        TO_LOWER game
+        PATCH_IF ( ~%game%~ STRING_EQUAL ~all~ || ~%game%~ STRING_EQUAL ~%gameiam%~ ) BEGIN
+          SPRINT $class(~%name%~) ~%class%~
+        END
     END
     BUT_ONLY_IF_IT_CHANGES
 
@@ -850,7 +901,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                         SET param1 = x
                         SET param2 = 0
                         PATCH_INCLUDE ~additmfx.tpp~ END
-                    PATCH_IF ~%param%~ STRING_EQUAL hidemod BEGIN
+                    PATCH_IF (~%param%~ STRING_EQUAL hidemod && (ENGINE_IS ~ToB~ || ENGINE_IS ~SoA~)) BEGIN
                         SET opcode = 275
                         SET param1 = 0 - x
                         SET param2 = 0
@@ -1133,7 +1184,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                          END
                          END
 
-                     PATCH_IF ~%param%~ STRING_EQUAL hidemod BEGIN
+                     PATCH_IF (~%param%~ STRING_EQUAL hidemod && (ENGINE_IS ~ToB~ || ENGINE_IS ~SoA~)) BEGIN
                          SET intopcode = 275
                          SET intparam = 1
                          PATCH_INCLUDE ~sumfx.tpp~
@@ -1739,7 +1790,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
             SPRINT usename ~%tempname%~
         END
     END
-    
+
     PATCH_IF NOT ( ~%usename%~ STRING_EQUAL ~~ ) BEGIN
         // adjustments listed in thebiglist.txt for the specific spell?
         SPRINT specialcase $baseac(~%SOURCE_RES%~)
@@ -1898,12 +1949,22 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
              SPRINT replacestring  ~(AC 2)~
              SPRINT insertstring   ~(AC %baseac_fieldp0%, Protection vs. S/C/P/M: %slashres_fieldp0%%perc% / %crushres_fieldp0%%perc% / %pierceres_fieldp0%%perc% / %missileres_fieldp0%%perc%)~
              PATCH_INCLUDE ~descupd_magic.tpp~
+             // IWD variant
+             SPRINT searchstring   ~plate armor (AC 3)~
+             SPRINT insertafter    ~THISWILLNEVERMATCH~
+             SPRINT replacestring  ~(AC 3)~
+             SPRINT insertstring   ~(AC %baseac_plate0%, Protection vs. S/C/P/M: %slashres_plate0%%perc% / %crushres_plate0%%perc% / %pierceres_plate0%%perc% / %missileres_plate0%%perc%)~
+             PATCH_INCLUDE ~descupd_magic.tpp~
         END
         PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~spwi414~) BEGIN // Spirit Armor spell
              SPRINT searchstring   ~1, as if he was wearing full plate~
              SPRINT insertafter    ~THISWILLNEVERMATCH~
              SPRINT replacestring  ~While in effect the AC (armor class) of the recipient will be 1, as if he was wearing full plate.~
              SPRINT insertstring   ~While in effect the recipient will be protected as if he was wearing full plate armor. (AC %baseac_fullp0%, Protection vs. S/C/P/M: %slashres_fullp0%%perc% / %crushres_fullp0%%perc% / %pierceres_fullp0%%perc% / %missileres_fullp0%%perc%)~
+             PATCH_INCLUDE ~descupd_magic.tpp~
+             // IWD variant
+             SPRINT searchstring   ~1, as if he was wearing plate mail~
+             SPRINT replacestring  ~While in effect the AC (armor class) of the recipient will be 1, as if he was wearing plate mail.~
              PATCH_INCLUDE ~descupd_magic.tpp~
         END
         PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~sppr111~ || ~%SOURCE_RES%~ STRING_EQUAL ~dgfaith~) BEGIN // Armor of Faith spell
@@ -1923,6 +1984,10 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
              SPRINT insertafter    ~THISWILLNEVERMATCH~
              SPRINT replacestring  ~increasing its base Armor Class to 6, plus 1 bonus point for every four levels of the priest (AC 5 at 4th level, AC 4 at 8th level, and so forth).~
              SPRINT insertstring   ~protecting it as a scale mail armor (AC %baseac_sppr202%, Protection vs. S/C/P/M: %slashres_sppr202%%perc% / %crushres_sppr202%%perc% / %pierceres_sppr202%%perc% / %missileres_sppr202%%perc%) of +1 enchantment for every four levels of the priest (+1 at 4th level, +2 at 8th level, and so forth).~
+             PATCH_INCLUDE ~descupd_magic.tpp~
+             // IWD variant
+             SPRINT searchstring   ~increasing its base Armor Class to AC 6, plus 1 AC for every four levels of the priest: Armor Class 5 at 4th level, Armor Class 4 at 8th, and so on.~
+             SPRINT replacestring  ~increasing its base Armor Class to AC 6, plus 1 AC for every four levels of the priest: Armor Class 5 at 4th level, Armor Class 4 at 8th, and so on.~
              PATCH_INCLUDE ~descupd_magic.tpp~
         END
         
@@ -2114,10 +2179,15 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   END
   BUT_ONLY_IF_IT_CHANGES
 
+
+
 ///////////////////////////////////
 // add resistance limiter cutspy //
 // whee, it works, perfectly!    //
 ///////////////////////////////////
+
+// Need variants for BG1/IWD/PST
+ACTION_IF ( ENGINE_IS ~ToB~ || ENGINE_IS ~SoA~ ) BEGIN
 
 PRINT ~Adding damage resistance limiter... (physical 90, magical 100)~
 
@@ -2656,6 +2726,13 @@ COPY ~fullplate/ekacid.spl~ ~override~
 COPY ~fullplate/ekelec.spl~ ~override~
 COPY ~fullplate/ekmdam.spl~ ~override~
 
+// ApplySpellRES() isn't defined in a stock SoA install
+APPEND ~action.ids~ ~160 ApplySpellRES(S:RES*,O:Target)~
+ UNLESS ~ApplySpellRES(S:RES*,O:Target)~
+// MakeGlobal() isn't defined in a stock SoA install
+APPEND ~action.ids~ ~336 MakeGlobal()~
+ UNLESS ~MakeGlobal()~
+
 COMPILE ~ekresres.baf~
 
 EXTEND_BOTTOM baldur.bcs baldur_res.baf
@@ -2664,9 +2741,37 @@ ACTION_IF FILE_EXISTS_IN_GAME ~baldur25.bcs~ BEGIN
   EXTEND_BOTTOM baldur25.bcs baldur_res.baf
 END
 
+END // ACTION_IF BG2 engine
+ELSE BEGIN
+  PRINT ~Non-BG2 engine detected, not adding damage resistance limiter...~
+END
+
+
+//////////////////////////
+// The minor components //
+//////////////////////////
+
 BEGIN ~Full Plate And Packing Steel: Field Improvisation (convenience tweak, remove restrictions on combining protective items)~
  DESIGNATED 102
 
 COPY ~fullplate/itemexcl.2da~ ~override~
 
+
+BEGIN ~Full Plate And Packing Steel: Little He Knows Where a Foe May Lurk (everyone can backstab at x2, thieves/assassins do better)~
+ DESIGNATED 204
+
+COPY_EXISTING ~backstab.2da~ ~override/backstab.2da~
+  COUNT_2DA_COLS cols
+  SET_2DA_ENTRY 1 1 10 ~2~
+  FOR (x=2; (x < %cols%); x+=1) BEGIN
+    READ_2DA_ENTRY 1 %x% 10 entry
+    SET entry = entry + 1
+    SET_2DA_ENTRY 1 %x% 10 ~%entry%~
+  END
+  BUT_ONLY_IF_IT_CHANGES
+
+// todo: add new description for assassins/stalkers/swashbucklers (x8/x6, x4, x2)
+ACTION_IF ( ENGINE_IS ~ToB~ || ENGINE_IS ~SoA~ ) BEGIN
+// READ_STRREF / SAY / SET_2DA_ENTRY ?
+END
 
