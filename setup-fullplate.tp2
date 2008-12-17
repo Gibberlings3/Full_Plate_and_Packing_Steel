@@ -617,6 +617,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 3
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~KKCHAIN.ITM~) BEGIN
+      WRITE_LONG NAME1 chainmail_name
+      WRITE_BYTE 0x60 3
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~LEAT02.ITM~ || "%SOURCE_FILE%" STRING_EQUAL ~_LEAT02.ITM~) BEGIN
       WRITE_BYTE 0x60 1
     END
@@ -1836,6 +1841,13 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
               SPRINT insertafter    ~NOTHINGDAMNIT~
               SPRINT replacestring  ~.*Statistics:.*~
               SPRINT insertstring   ~STATISTICS:%wnl%%wnl%~
+              PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~kinplat~) BEGIN // Kindrek's Full Plate
+              SPRINT searchstring   ~THISWILLNEVERMATCH~
+              SPRINT insertafter    ~\(This is Kindrek's beloved armor. He will wear no other.\)~
+              SPRINT replacestring  ~NOTHINGDAMNIT~
+              SPRINT insertstring   ~%wnl%%wnl%STATISTICS:%wnl%%wnl%~
               PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
 

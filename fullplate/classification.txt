@@ -135,6 +135,7 @@ J#SPLI06    SPLINT     ALL      /* Ashes of Embers */
 KAYCHAI     ELVENC     ALL      //IWD
 KING        PLATE      ALL      //HOW OR The Darkest Day
 KINPLAT     FULLP      ALL      /* Kindrek NPC */
+KKCHAIN     CHAIN      ALL      /* Kindrek NPC */
 LEAT01      LEATHER    ALL      //BG1
 _LEAT01     LEATHER    ALL      /* Tutu */
 LEAT02      LEATHER    ALL      //BG1
