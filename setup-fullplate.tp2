@@ -9,6 +9,12 @@ ALLOW_MISSING ~baldur25.bcs~
 BEGIN ~Full Plate And Packing Steel: Between You And Harm (alternate armour system)~
  DESIGNATED 1
  FORBID_COMPONENT ~SETUP-REFINEMENTS.TP2~ 5 ~Incompatible with Refinements' Revised Armors & Shields~
+ FORBID_COMPONENT ~SETUP-REFINEMENTS.TP2~ 70 ~Incompatible with Refinements' Revised Armors & Shields~
+ FORBID_COMPONENT ~SETUP-REFINEMENTS.TP2~ 71 ~Incompatible with Refinements' Revised Armors & Shields~
+ FORBID_COMPONENT ~SETUP-REFINEMENTS.TP2~ 72 ~Incompatible with Refinements' Revised Armors & Shields~
+ FORBID_COMPONENT ~SETUP-REFINEMENTS.TP2~ 73 ~Incompatible with Refinements' Revised Armors & Shields~
+ FORBID_COMPONENT ~SETUP-REFINEMENTS.TP2~ 74 ~Incompatible with Refinements' Revised Armors & Shields~
+ FORBID_COMPONENT ~SETUP-REFINEMENTS.TP2~ 75 ~Incompatible with Refinements' Revised Armors & Shields~
  FORBID_COMPONENT ~BG2_TWEAKS/SETUP-BG2_TWEAKS.TP2~ 2100 ~Incompatible with BG2 Tweaks' Allow Thieving and Stealth in Heavy Armor~
  FORBID_COMPONENT ~BG2_TWEAKS/SETUP-BG2_TWEAKS.TP2~ 2110 ~Incompatible with BG2 Tweaks' Allow Thieving and Stealth in Heavy Armor~
  FORBID_COMPONENT ~G3DALETWEAKS/SETUP-G3DALETWEAKS.TP2~ 2040 ~Incompatible with IWD Tweaks' Allow Thieving and Stealth in Heavy Armor~
