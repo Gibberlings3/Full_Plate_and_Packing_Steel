@@ -1,11 +1,27 @@
 BACKUP ~fullplate/backup~
 AUTHOR ~erik, gibberlings3~
-MODDER setup_tra none
-VERSION ~alfa 13~
+//MODDER setup_tra none
+VERSION ~beta 1~
+README ~fullplate/readme-fullplate.txt~
 NO_IF_EVAL_BUG
 
-BEGIN ~Full Plate And Packing Steel: Clean, Shine and Oil your Armour, Soldier! (naming and enchantment level fixes, required for main component)~
- DESIGNATED 101
+ALLOW_MISSING ~baldur25.bcs~
+
+BEGIN ~Full Plate And Packing Steel: Between You And Harm (alternate armour system)~
+ DESIGNATED 1
+FORBID_COMPONENT ~SETUP-REFINEMENTS.TP2~ ~5~ ~Incompatible with Refinements' Revised Armors & Shields~
+FORBID_COMPONENT ~BG2_TWEAKS/SETUP-BG2_TWEAKS.TP2~ ~2100~ ~Incompatible with BG2 Tweaks' Allow Thieving and Stealth in Heavy Armor~
+FORBID_COMPONENT ~BG2_TWEAKS/SETUP-BG2_TWEAKS.TP2~ ~2110~ ~Incompatible with BG2 Tweaks' Allow Thieving and Stealth in Heavy Armor~
+FORBID_COMPONENT ~BG2_TWEAKS/SETUP-BG2_TWEAKS.TP2~ ~2120~ ~Incompatible with BG2 Tweaks' Allow Arcane Spellcasting in Heavy Armor~
+FORBID_COMPONENT ~BG2_TWEAKS/SETUP-BG2_TWEAKS.TP2~ ~2130~ ~Incompatible with BG2 Tweaks' Allow Arcane Spellcasting in Heavy Armor~
+
+ACTION_IF FILE_EXISTS ~override/tb#resisttweak.txt~ THEN BEGIN
+    PRINT ~WARNING: tb#resisttweak.txt found in override. Not recommended, may cause stutter.~
+END
+
+PRINT ~Cleaning, shining, oiling:~
+PRINT ~Naming and enchantment level fixes...~
+
 COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   PATCH_IF (SOURCE_SIZE < 0x72) BEGIN
     PATCH_PRINT "%SOURCE_FILE%: Invalid, below minimum size"
@@ -155,8 +171,18 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~DLEAT10.ITM~) BEGIN
-      WRITE_BYTE 0x18 ("%flags%" BOR 0b01000000)
+      WRITE_BYTE 0x18 ("%flags%" BOR 0b01000000) // switch on magical flag
       WRITE_BYTE 0x60 2
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~DW#ABYDA.ITM~) BEGIN
+      SAY NAME2 ~Yellow Dragon Armor +8~ // looks to be based on shadow dragon scale, which is +6 studded
+      WRITE_BYTE 0x60 8
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~DW#LIZPL.ITM~) BEGIN
+      WRITE_BYTE 0x18 ("%flags%" BOR 0b01000000) // switch on magical flag
+      WRITE_BYTE 0x60 1
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~DWCHAN01.ITM~) BEGIN
@@ -359,13 +385,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   BUT_ONLY_IF_IT_CHANGES
 
 
-BEGIN ~Full Plate And Packing Steel: Between You And Harm (alternate armour system)~
- DESIGNATED 1
- REQUIRE_COMPONENT ~setup-fullplate.tp2~ ~101~ ~Oil the armour first, please.~
-
-ACTION_IF FILE_EXISTS ~override/tb#resisttweak.txt~ THEN BEGIN
-    PRINT ~WARNING: tb#resisttweak.txt found in override. Not recommended, may cause stutter.~
-END
+PRINT ~Defining local macros...~
 
 // define local pseudomacros
 
@@ -515,7 +535,7 @@ END ELSE BEGIN // if enchanted
 END // if not enchanted
 >>>>>>>>
 
-// read data files
+PRINT ~Reading datafiles...~
 
 COPY_EXISTING - ~fullplate/classification.txt~ ~fullplate~
     COUNT_2DA_ROWS 0 ~entrycount~
@@ -593,13 +613,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   PATCH_IF (SOURCE_SIZE < 0x72) BEGIN
     PATCH_PRINT "%SOURCE_FILE%: Invalid, below minimum size"
   END ELSE BEGIN
-    // small workaround: reduce DEX requirements, so npcs still can
+    // small workaround: remove DEX requirements, so npcs still can
     //  use their custom equipment with (very) heavy armour.
-    READ_BYTE  0x2c min_dex
-    SET min_dex = %min_dex% - 6
-    PATCH_IF min_dex < 0 BEGIN SET min_dex = 0 END
-	WRITE_BYTE 0x2c %min_dex%
+	WRITE_BYTE 0x2c 0
 
+    READ_BYTE 0x1c itemtype
     READ_LONG 0x60 enchantment
 
     SPRINT usename ~~
@@ -794,12 +812,112 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                         SET param1 = x
                         SET param2 = 0
                         PATCH_INCLUDE ~additmfx.tpp~ END
-                END
-            END
+                END // if param modified
+            END // for param
 
             WRITE_SHORT 0x70 %fxnum%
 
-        END
+        END // if usename
+
+        // Pass #2: sum, change to static and replace armour resistance effects
+        PATCH_IF (itemtype == 0x02) BEGIN
+            PATCH_IF NOT ( ~%usename%~ STRING_EQUAL ~~ ) BEGIN
+                PATCH_FOR_EACH param IN ~slashres~ ~crushres~ ~pierceres~ ~missileres~ BEGIN
+                     SET y = EVALUATE_BUFFER ~%%param%_%usename%%~
+                     PATCH_IF NOT (y == 0) BEGIN 
+                         PATCH_IF ~%param%~ STRING_EQUAL slashres BEGIN
+                             SET intopcode = 86
+                             SET intparam = 1
+                             PATCH_INCLUDE ~sumfx.tpp~
+                             READ_SHORT 0x70 fxnum
+                             READ_LONG 0x6a fxoff
+                             FOR (x=0; (x < %fxnum%); x+=1) BEGIN
+                                 READ_SHORT %fxoff% + 0x30 * %x% + 0     opcode
+                                 READ_LONG  %fxoff% + 0x30 * %x% + 0x04  param1
+                                 READ_LONG  %fxoff% + 0x30 * %x% + 0x08  param2
+                                 PATCH_IF
+                                     (%opcode% = 86) BEGIN
+                                     PATCH_INCLUDE ~delitmfx.tpp~
+                                 END
+                             END
+                             SET opcode = 86
+                             SET param1 = %returnval%
+                             SET param2 = 1
+                             PATCH_INCLUDE ~additmfx.tpp~
+                             WRITE_SHORT 0x70 %fxnum%
+                             END
+
+                         PATCH_IF ~%param%~ STRING_EQUAL crushres BEGIN
+                             SET intopcode = 87
+                             SET intparam = 1
+                             PATCH_INCLUDE ~sumfx.tpp~
+                             READ_SHORT 0x70 fxnum
+                             READ_LONG 0x6a fxoff
+                             FOR (x=0; (x < %fxnum%); x+=1) BEGIN
+                                 READ_SHORT %fxoff% + 0x30 * %x% + 0     opcode
+                                 READ_LONG  %fxoff% + 0x30 * %x% + 0x04  param1
+                                 READ_LONG  %fxoff% + 0x30 * %x% + 0x08  param2
+                                 PATCH_IF
+                                     (%opcode% = 87) BEGIN
+                                     PATCH_INCLUDE ~delitmfx.tpp~
+                                 END
+                             END
+                             SET opcode = 87
+                             SET param1 = %returnval%
+                             SET param2 = 1
+                             PATCH_INCLUDE ~additmfx.tpp~
+                             WRITE_SHORT 0x70 %fxnum%
+                             END
+
+                         PATCH_IF ~%param%~ STRING_EQUAL pierceres BEGIN
+                             SET intopcode = 88
+                             SET intparam = 1
+                             PATCH_INCLUDE ~sumfx.tpp~
+                             READ_SHORT 0x70 fxnum
+                             READ_LONG 0x6a fxoff
+                             FOR (x=0; (x < %fxnum%); x+=1) BEGIN
+                                 READ_SHORT %fxoff% + 0x30 * %x% + 0     opcode
+                                 READ_LONG  %fxoff% + 0x30 * %x% + 0x04  param1
+                                 READ_LONG  %fxoff% + 0x30 * %x% + 0x08  param2
+                                 PATCH_IF
+                                     (%opcode% = 88) BEGIN
+                                     PATCH_INCLUDE ~delitmfx.tpp~
+                                 END
+                             END
+                             SET opcode = 88
+                             SET param1 = %returnval%
+                             SET param2 = 1
+                             PATCH_INCLUDE ~additmfx.tpp~
+                             WRITE_SHORT 0x70 %fxnum%
+                             END
+
+                         PATCH_IF ~%param%~ STRING_EQUAL missileres BEGIN
+                             SET intopcode = 89
+                             SET intparam = 1
+                             PATCH_INCLUDE ~sumfx.tpp~
+                             READ_SHORT 0x70 fxnum
+                             READ_LONG 0x6a fxoff
+                             FOR (x=0; (x < %fxnum%); x+=1) BEGIN
+                                 READ_SHORT %fxoff% + 0x30 * %x% + 0     opcode
+                                 READ_LONG  %fxoff% + 0x30 * %x% + 0x04  param1
+                                 READ_LONG  %fxoff% + 0x30 * %x% + 0x08  param2
+                                 PATCH_IF
+                                     (%opcode% = 89) BEGIN
+                                     PATCH_INCLUDE ~delitmfx.tpp~
+                                 END
+                             END
+                             SET opcode = 89
+                             SET param1 = %returnval%
+                             SET param2 = 1
+                             PATCH_INCLUDE ~additmfx.tpp~
+                             WRITE_SHORT 0x70 %fxnum%
+                             END
+
+                     END // if param
+                END // for param
+            END // if usename
+        END // if type = armour
+
         /* Description updates */
         PATCH_IF NOT ( ~%usename%~ STRING_EQUAL ~~ ) BEGIN
             READ_STRREF 0x50 uniddesc ELSE ~nope~
@@ -1044,10 +1162,10 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                  SPRINT insertstring   ~~
                  PATCH_INCLUDE ~descupd_magic.tpp~
             END
-            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~leat16~) BEGIN // orc leather
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~leat16~ || ~%SOURCE_RES%~ STRING_EQUAL ~dw#abyda~) BEGIN // orc leather, yellow dragon armor
                  SPRINT searchstring   ~Bonuses:~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
-                 SPRINT replacestring  ~Bonuses: .* resistance to missile attacks[%wnl%%lnl%%mnl%]+~
+                 SPRINT replacestring  ~Bonuses: .*esistance to .*[mM]issile [aA]ttacks[%wnl%%lnl%%mnl%]+~
                  SPRINT insertstring   ~~
                  PATCH_INCLUDE ~descupd_magic.tpp~
             END
@@ -1478,7 +1596,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
               "%SOURCE_RES%" STRING_EQUAL ~spwi317~ ||
               "%SOURCE_RES%" STRING_EQUAL ~spwi414~ ||
               "%SOURCE_RES%" STRING_EQUAL ~sppr202~) BEGIN
-        SET cumulative_or_set = 1 // flat value set, not cumulative
+        SET cumulative_or_set = 1 // flat value set, like normal armour
     END
 
     // armor type defined for the spell in classifications.txt?
@@ -1580,13 +1698,6 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
                 SET x = %y%
             END
 
-            // TODO!
-            // static set resistance = doesn't work combined with cumulative stuff...
-            // alt. 1: add scripting state, modify up/down to match
-            // alt. 2: amalgamate together resistances of armour, set static there
-            //
-            // todo#2: finere justeringer, -10-til-det-er-lavt-nok er litt grovt
-
             PATCH_IF NOT (x = 0 || (x = 10 && ~%param%~ STRING_EQUAL ~baseac~)) BEGIN 
                 PATCH_IF ~%param%~ STRING_EQUAL baseac BEGIN
                     SET opcode = 0
@@ -1613,40 +1724,20 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
                     SET param1 = x
                     SET param2 = 2
                     PATCH_INCLUDE ~addsplfx.tpp~ END
-                PATCH_IF (~%param%~ STRING_EQUAL slashres) && cumulative_or_set == 1 BEGIN // immunity to further modification
-                    SET opcode = 101
-                    SET param1 = 0
-                    SET param2 = 86
-                    PATCH_INCLUDE ~addsplfx.tpp~ END
                 PATCH_IF ~%param%~ STRING_EQUAL slashres BEGIN
                     SET opcode = 86
                     SET param1 = x
                     SET param2 = %cumulative_or_set%
-                    PATCH_INCLUDE ~addsplfx.tpp~ END
-                PATCH_IF (~%param%~ STRING_EQUAL crushres) && cumulative_or_set == 1 BEGIN // immunity to further modification
-                    SET opcode = 101
-                    SET param1 = 0
-                    SET param2 = 87
                     PATCH_INCLUDE ~addsplfx.tpp~ END
                 PATCH_IF ~%param%~ STRING_EQUAL crushres BEGIN
                     SET opcode = 87
                     SET param1 = x
                     SET param2 = %cumulative_or_set%
                     PATCH_INCLUDE ~addsplfx.tpp~ END
-                PATCH_IF (~%param%~ STRING_EQUAL pierceres) && cumulative_or_set == 1 BEGIN // immunity to further modification
-                    SET opcode = 101
-                    SET param1 = 0
-                    SET param2 = 88
-                    PATCH_INCLUDE ~addsplfx.tpp~ END
                 PATCH_IF ~%param%~ STRING_EQUAL pierceres BEGIN
                     SET opcode = 88
                     SET param1 = x
                     SET param2 = %cumulative_or_set%
-                    PATCH_INCLUDE ~addsplfx.tpp~ END
-                PATCH_IF (~%param%~ STRING_EQUAL missileres) && cumulative_or_set == 1 BEGIN // immunity to further modification
-                    SET opcode = 101
-                    SET param1 = 0
-                    SET param2 = 89
                     PATCH_INCLUDE ~addsplfx.tpp~ END
                 PATCH_IF ~%param%~ STRING_EQUAL missileres BEGIN
                     SET opcode = 89
@@ -1848,11 +1939,12 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 // whee, it works, perfectly!    //
 ///////////////////////////////////
 
-PRINT ~Adding damage resistance limiter...~
+PRINT ~Adding damage resistance limiter... (physical 90, magical 100)~
 
 <<<<<<<< baldur_res.baf
 IF
-    OR(24)
+    Global("ekresspybeenhere","GLOBAL",0)
+    OR(54)
         CheckStatGT(Player1,90,RESISTSLASHING)
         CheckStatGT(Player2,90,RESISTSLASHING)
         CheckStatGT(Player3,90,RESISTSLASHING)
@@ -1877,7 +1969,36 @@ IF
         CheckStatGT(Player4,90,RESISTMISSILE)
         CheckStatGT(Player5,90,RESISTMISSILE)
         CheckStatGT(Player6,90,RESISTMISSILE)
-    Global("ekresspybeenhere","GLOBAL",0)
+        CheckStatGT(Player1,100,RESISTFIRE)
+        CheckStatGT(Player2,100,RESISTFIRE)
+        CheckStatGT(Player3,100,RESISTFIRE)
+        CheckStatGT(Player4,100,RESISTFIRE)
+        CheckStatGT(Player5,100,RESISTFIRE)
+        CheckStatGT(Player6,100,RESISTFIRE)
+        CheckStatGT(Player1,100,RESISTCOLD)
+        CheckStatGT(Player2,100,RESISTCOLD)
+        CheckStatGT(Player3,100,RESISTCOLD)
+        CheckStatGT(Player4,100,RESISTCOLD)
+        CheckStatGT(Player5,100,RESISTCOLD)
+        CheckStatGT(Player6,100,RESISTCOLD)
+        CheckStatGT(Player1,100,RESISTELECTRICITY)
+        CheckStatGT(Player2,100,RESISTELECTRICITY)
+        CheckStatGT(Player3,100,RESISTELECTRICITY)
+        CheckStatGT(Player4,100,RESISTELECTRICITY)
+        CheckStatGT(Player5,100,RESISTELECTRICITY)
+        CheckStatGT(Player6,100,RESISTELECTRICITY)
+        CheckStatGT(Player1,100,RESISTACID)
+        CheckStatGT(Player2,100,RESISTACID)
+        CheckStatGT(Player3,100,RESISTACID)
+        CheckStatGT(Player4,100,RESISTACID)
+        CheckStatGT(Player5,100,RESISTACID)
+        CheckStatGT(Player6,100,RESISTACID)
+        CheckStatGT(Player1,100,MAGICDAMAGERESISTANCE)
+        CheckStatGT(Player2,100,MAGICDAMAGERESISTANCE)
+        CheckStatGT(Player3,100,MAGICDAMAGERESISTANCE)
+        CheckStatGT(Player4,100,MAGICDAMAGERESISTANCE)
+        CheckStatGT(Player5,100,MAGICDAMAGERESISTANCE)
+        CheckStatGT(Player6,100,MAGICDAMAGERESISTANCE)
 THEN
     RESPONSE #100
         CreateCreatureObject("ekresspy",Player1,1,0,0)
@@ -2097,6 +2218,246 @@ THEN
 END
 
 IF
+    CheckStatGT(Player1,100,RESISTFIRE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKFIRE", Player1)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player2,100,RESISTFIRE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKFIRE", Player2)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player3,100,RESISTFIRE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKFIRE", Player3)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player4,100,RESISTFIRE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKFIRE", Player4)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player5,100,RESISTFIRE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKFIRE", Player5)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player6,100,RESISTFIRE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKFIRE", Player6)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player1,100,RESISTCOLD)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKCOLD", Player1)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player2,100,RESISTCOLD)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKCOLD", Player2)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player3,100,RESISTCOLD)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKCOLD", Player3)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player4,100,RESISTCOLD)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKCOLD", Player4)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player5,100,RESISTCOLD)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKCOLD", Player5)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player6,100,RESISTCOLD)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKCOLD", Player6)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player1,100,RESISTELECTRICITY)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKELEC", Player1)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player2,100,RESISTELECTRICITY)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKELEC", Player2)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player3,100,RESISTELECTRICITY)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKELEC", Player3)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player4,100,RESISTELECTRICITY)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKELEC", Player4)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player5,100,RESISTELECTRICITY)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKELEC", Player5)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player6,100,RESISTELECTRICITY)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKELEC", Player6)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player1,100,RESISTACID)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKACID", Player1)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player2,100,RESISTACID)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKACID", Player2)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player3,100,RESISTACID)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKACID", Player3)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player4,100,RESISTACID)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKACID", Player4)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player5,100,RESISTACID)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKACID", Player5)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player6,100,RESISTACID)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKACID", Player6)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player1,100,MAGICDAMAGERESISTANCE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKMDAM", Player1)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player2,100,MAGICDAMAGERESISTANCE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKMDAM", Player2)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player3,100,MAGICDAMAGERESISTANCE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKMDAM", Player3)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player4,100,MAGICDAMAGERESISTANCE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKMDAM", Player4)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player5,100,MAGICDAMAGERESISTANCE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKMDAM", Player5)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player6,100,MAGICDAMAGERESISTANCE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKMDAM", Player6)
+        Continue()
+END
+
+IF
     True()
 THEN
     RESPONSE #100
@@ -2109,11 +2470,19 @@ COPY ~fullplate/ekslash.spl~ ~override~
 COPY ~fullplate/ekcrush.spl~ ~override~
 COPY ~fullplate/ekpierc.spl~ ~override~
 COPY ~fullplate/ekmiss.spl~ ~override~
+COPY ~fullplate/ekfire.spl~ ~override~
+COPY ~fullplate/ekcold.spl~ ~override~
+COPY ~fullplate/ekacid.spl~ ~override~
+COPY ~fullplate/ekelec.spl~ ~override~
+COPY ~fullplate/ekmdam.spl~ ~override~
 
 COMPILE ~ekresres.baf~
 
 EXTEND_BOTTOM baldur.bcs baldur_res.baf
 
+ACTION_IF FILE_EXISTS_IN_GAME ~baldur25.bcs~ BEGIN
+  EXTEND_BOTTOM baldur25.bcs baldur_res.baf
+END
 
 BEGIN ~Full Plate And Packing Steel: Field Improvisation (convenience tweak, remove restrictions on combining protective items)~
  DESIGNATED 102

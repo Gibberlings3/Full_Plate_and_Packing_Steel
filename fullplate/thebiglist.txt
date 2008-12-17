@@ -14,6 +14,8 @@ STUDDED3    18  1   0   0   2   0   0   0   0  17   7  12  10  0   0    5   5   
 STUDDED4    15  0   0   0   0   0   0   0   0  17   7  12  12  0   0    0   0   0   0  10  11
 STUDDED5    12  0   0   0  -2   0   0   0   0  17   9  12  12  0   0    0   0   0   0   5  10
 STUDDED6    10  0   0   0  -4   0   0   0   0  19   9  12  12  0   0    0   0   0   0   0  10
+STUDDED7     9  0   0   0  -6   0   0   0   0  19   9  14  12  0   0    0   0   0   0   0  10
+STUDDED8     8  0   0   0  -8   0   0   0   0  19   9  14  14  0   0    0   0   0   0   0  10
 HIDE0       30  2  10   5   7   0   0   0   0  15  10  15  15  5   5   20  30  50  50  60  20
 HIDE1       28  2  10   3   5   0   0   0   0  15  12  15  15  5   5   15  25  45  45  55  19
 HIDE2       25  2  10   1   3   0   0   0   0  15  12  17  15  6   6   10  20  40  40  50  18
@@ -111,6 +113,7 @@ PLAT13       0  0   0   0   0   0   0   0   0   6   0   0   0  0   0    0   0   
 PLAT22     -10 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0   -5  -5   0   0   0   0   // shuruppak's plate
 R!KITPLT     0 -2   0   0   0   0   0   0   0   0   0   0   0  0   0   -5  -5   0   0   0   0   // well-made elven plate
 DWPLAT01    15  1  10   1   0   0   0   0   0  -2   0   0   0  0   0    0   0   0   0   0   0   // drow adamantine full plate
+DW#ABYDA     2  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // yellow dragonscale armor
 CHAN20     -10 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0 -10 -10 -10   0   // white dragonscale splint mail
 PLAT18     -30 -2 -20  -1   0   0   0   0   0  -2   0  -4  -4  0   0  -35 -35 -35 -35 -35   0   // red dragonscale plate
 PLAT20     -40 -3 -20  -2   0   0   0   0   0   0   0   0   0  0   0  -35 -35 -35 -35 -35   0   // blue dragonscale plate

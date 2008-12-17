@@ -1,6 +1,48 @@
 Full Plate and Packing Steel
 
-Armour System Rework for BG2
+Beta 1, May 2008
+
+Between You And Harm: Armour System Rework for BG2
+
+AD&D's armour system never made sense to me. Characters as
+agile and sprightly in full plate as in light leather armour.
+Heavy armour not helping one bit if a goblin happens to roll
+a 20 when hitting you in the chest with a butterknife. You
+get hurt just as bad as the random unarmoured commoner.
+
+And in BG2, AC simply isn't effective after a while. Opponents
+autohit you and you them, because of AC not keeping pace with
+THAC0 and pluses to hit and whatnot accumulating.
+
+Enter this rework. Light, enchanted armours actually help you
+dodge and take a bit of the sting out. Heavy, enchanted armours
+don't help dodging much. But they absorb perhaps half or more of
+the blow in exchange for slowing you down.
+
+Stealth, thieving and casting in heavy armour is possible,
+but difficult.
+
+Heavy armour has quite another feel now. Enjoy.
+
+Do read the updated descriptions. They are informative.
+
+
+Thanks to:
+ Westley Weimer and the Bigg, for WeiDU
+ Avenger, for DLTCEP
+ the Bigg and the Refinements team, for inspiration
+ Gibberlings3, for the friendly atmosphere
+ various Pen & Paper roleplaying games, for inspiration
+
+Incompatible with:
+ Refinements' Revised Armors & Shields
+ BG2 Tweaks' Allow Thieving and Stealth in Heavy Armor
+ BG2 Tweaks' Allow Arcane Spellcasting in Heavy Armor
+
+Install order:
+ As close to last as you can manage. After anything adding
+ armours to the game.
+
 
 Touched:
  all armours
@@ -22,11 +64,6 @@ Untouched:
 Question marks, untouched at the moment:
  mage robes
  Jansen adventurewear
-
-Todo before beta:
-- fix armour vs armour spell fuckup
-- check for 100%+ armoured creatures
-- finer adjustment ... say, 2, 3 or 5% at a time
 
 Design notes
 
