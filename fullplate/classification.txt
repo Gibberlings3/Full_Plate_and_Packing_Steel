@@ -1,19 +1,24 @@
 ADLEATH     STUDDED    ALL      /* Angelo NPC */
 ADRED       BANDED     ALL      /* Angelo NPC */
+ARDEADX     STUDDED    ALL      /* The Darkest Day */
 ARMPEN      STUDDED    ALL      /* IWD, unused, restored in IWD UB */
 BAND01      BANDED     ALL      /* Ashes of Embers */
 BAND02      BANDED     ALL      /* Ashes of Embers */
 BAND03      BANDED     ALL      /* Ashes of Embers */
 BAND04      BANDED     ALL      /* Ashes of Embers */
 BELT02      NOTARMOR   ALL      //BG1
+_BELT02     NOTARMOR   ALL      /* Tutu */
 BELT03      NOTARMOR   ALL      //BG1
+_BELT03     NOTARMOR   ALL      /* Tutu */
 BELT04      NOTARMOR   ALL      //BG1
+_BELT04     NOTARMOR   ALL      /* Tutu */
 BLCKPLA     PLATE      ALL      //IWD
 BLEAT01     HIDE       ALL      /* Improved Horns of Valhalla OR Item Revisions */
 BLEAT02     HIDE       ALL      /* Improved Horns of Valhalla OR Item Revisions */
 BLEAT03     HIDE       ALL      /* Improved Horns of Valhalla OR Item Revisions */
-BLOOD       PLATE      ALL      //IWD
+BLOOD       PLATE      ALL      //IWD OR NeJ2 OR The Darkest Day
 BRUENPLA    MFIELDP    ALL      //BG2:SOA
+BSINGCHN    ELVENC     ALL      /* The Darkest Day */
 C2BELT01    NOTARMOR   ALL      /* Item Upgrade */
 C2CHAN01    ELVENC     ALL      /* Item Upgrade */
 C2HIDE01    HIDE       ALL      /* Item Upgrade */
@@ -21,18 +26,27 @@ C2KELD01    FULLP      ALL      /* Item Upgrade */
 C2LEAT01    LEATHER    ALL      /* Item Upgrade */
 C2PLAT01    PLATE      ALL      /* Item Upgrade */
 C2VALY01    CHAIN      ALL      /* Item Upgrade */
+CALLAR      CHAIN      ALL      /* The Undying */
 CDECHAIN    ELVENC     ALL      /* Item Upgrade for IWD */
 CDHARMOR    HIDE       ALL      /* Item Upgrade for IWD */
 CDSCALE     SPLINT     ALL      /* Item Upgrade for IWD */
+CELEBROS    SPLINT     ALL      /* The Darkest Day */
 CHAINBM     CHAIN      ALL      //IWD
 CHALARM     FULLP      ALL      //BG2:TOB
 CHAN01      CHAIN      ALL      //BG1
+_CHAN01     CHAIN      ALL      /* Tutu */
 CHAN02      CHAIN      ALL      //BG1
+_CHAN02     CHAIN      ALL      /* Tutu */
 CHAN03      CHAIN      ALL      //BG1
+_CHAN03     CHAIN      ALL      /* Tutu */
 CHAN04      SPLINT     ALL      //BG1
+_CHAN04     SPLINT     ALL      /* Tutu */
 CHAN05      SPLINT     ALL      //BG1
+_CHAN05     SPLINT     ALL      /* Tutu */
 CHAN06      CHAIN      ALL      //BG1
+_CHAN06     CHAIN      ALL      /* Tutu */
 CHAN07      CHAIN      ALL      //BG2:SOA
+_CHAN07     CHAIN      ALL      /* Tutu */
 CHAN08      CHAIN      ALL      //BG2:SOA
 CHAN09      CHAIN      ALL      //BG2:SOA
 CHAN10      CHAIN      ALL      //BG2:SOA
@@ -47,6 +61,7 @@ CHAN18      SPLINT     ALL      //BG2:SOA
 CHAN19      ELVENC     ALL      //BG2:TOB
 CHAN20      SPLINT     ALL      //BG2:TOB
 CHAN21      CHAIN      ALL      //BG2:TOB
+CHAN22      SPLINT     ALL      /* Classic Adventures */
 CHANCM01    SPLINT     ALL      /* Auril's Bane */
 CHANCM02    ELVENC     ALL      /* Auril's Bane */
 CHANGR01    ELVENC     ALL      /* Auril's Bane */
@@ -55,9 +70,27 @@ CHANGR03    CHAIN      ALL      /* Auril's Bane */
 CISPGRD     PLATE      ALL      //TOTLM
 CISPGRD3    PLATE      ALL      //TOTLM
 CLOLTH      ELVENC     ALL      //BG2:SOA
+CMTUCH01    ELVENC     ALL      /* The Undying */
+CMTUCH02    SPLINT     ALL      /* The Undying */
+CMTULE01    STUDDED    ALL      /* The Undying */
+CMTULE02    STUDDED    ALL      /* The Undying */
+CMTULE03    STUDDED    ALL      /* The Undying */
+CMTUPL01    PLATE      ALL      /* The Undying */
+CMTUPL02    FULLP      ALL      /* The Undying */
+COMA11      PLATE      ALL      /* CoM Encounters OR The Undying */
 D0T#LEAT    STUDDED    ALL      /* Ascension: Turnabout */
 DARCHAIN    PLATE      ALL      /* NeJ2 */
+DEITM053    CHAIN      ALL      /* Freedom's Reign / Reign of Virtue */
+DEITM086    FULLP      ALL      /* Freedom's Reign / Reign of Virtue */
+DEITM087    CHAIN      ALL      /* Freedom's Reign / Reign of Virtue */
+DEITM088    FIELDP     ALL      /* Freedom's Reign / Reign of Virtue */
+DEITM090    FULLP      ALL      /* Freedom's Reign / Reign of Virtue */
+DEITM096    FULLP      ALL      /* Freedom's Reign / Reign of Virtue */
+DLARMOR1    CHAIN      ALL      /* DLTC: Glory of Istar demo */
+DLCHAN01    CHAIN      ALL      /* DLTC: Glory of Istar demo */
+DLPLAT01    FULLP      ALL      /* DLTC: Glory of Istar demo */
 DLEAT10     HIDE       ALL      //BG2:SOA
+DPLATE      FULLP      ALL      /* Tortured Souls */
 DRAGARM     SCALE      ALL      //IWD
 DW#ABYDA    STUDDED    ALL      /* SCSII */
 DW#GPLAT    PLATE      ALL      /* SCSII */
@@ -66,6 +99,7 @@ DWCHAN01    ADAMC      ALL      //BG2:SOA
 DWCHAN02    ADAMC      ALL      //BG2:SOA
 DWPLAT01    FULLP      ALL      //BG2:SOA
 ELFCHAN     ELVENC     ALL      //IWD
+FLAMPLAT    PLATE      ALL      /* The Darkest Day */
 FLAT01      FIELDP     ALL      /* Ashes of Embers */
 FLAT02      FIELDP     ALL      /* Ashes of Embers */
 FLAT03      FIELDP     ALL      /* Ashes of Embers */
@@ -83,30 +117,43 @@ FWPLAT01    FULLP      ALL      /* Revised Forgotten Wars Item Pack - rfwip */
 FWPLAT02    FULLP      ALL      /* Revised Forgotten Wars Item Pack - rfwip */
 FWPLAT03    PLATE      ALL      /* Revised Forgotten Wars Item Pack - rfwip */
 FWPLAT04    FIELDP     ALL      /* Revised Forgotten Wars Item Pack - rfwip */
-GLORY       PLATE      ALL      /* IWD, unused, restored in IWD UB */
+GLORY       PLATE      ALL      /* IWD, unused, restored in IWD UB, The Darkest Day, among others */
 GMD02       CHAIN      ALL      /* Revised Forgotten Wars Item Pack - rfwip */
 ICHAN01     CHAIN      ALL      //BG1
+_ICHAN01    CHAIN      ALL      /* Tutu */
 ICHAN04     SPLINT     ALL      //BG1
-ICEPLAT     PLATE      ALL      /* RPG Dungeon Kitpack - Ice Knight */
+_ICHAN04    SPLINT     ALL      /* Tutu */
+ICEPLAT     PLATE      ALL      /* RPG Dungeon Kitpack - Ice Knight OR The Darkest Day */
 ILEAT04     STUDDED    ALL      //BG1
+_ILEAT04    STUDDED    ALL      /* Tutu */
 ILLAS04     ELVENC     ALL      /* Ascension */
 IPLAT01     PLATE      ALL      //BG1
+_IPLAT01    PLATE      ALL      /* Tutu */
 IPLAT05     FULLP      ALL      //IWD
 ISWARM      PLATE      ALL      //TOTLM
 J#SPLI06    SPLINT     ALL      /* Ashes of Embers */
 KAYCHAI     ELVENC     ALL      //IWD
-KING        PLATE      ALL      //HOW
+KING        PLATE      ALL      //HOW OR The Darkest Day
 KINPLAT     FULLP      ALL      /* Kindrek NPC */
 LEAT01      LEATHER    ALL      //BG1
+_LEAT01     LEATHER    ALL      /* Tutu */
 LEAT02      LEATHER    ALL      //BG1
+_LEAT02     LEATHER    ALL      /* Tutu */
 LEAT03      LEATHER    ALL      //BG1
+_LEAT03     LEATHER    ALL      /* Tutu */
 LEAT04      STUDDED    ALL      //BG1
+_LEAT04     STUDDED    ALL      /* Tutu */
 LEAT05      STUDDED    ALL      //BG1
+_LEAT05     STUDDED    ALL      /* Tutu */
 LEAT06      STUDDED    ALL      //BG1
 LEAT07      STUDDED    ALL      //BG1
+_LEAT07     STUDDED    ALL      /* Tutu */
 LEAT08      STUDDED    ALL      //BG1(?)
+_LEAT08     STUDDED    ALL      /* Tutu */
 LEAT09      LEATHER    ALL      //BG2:SOA
+_LEAT09     LEATHER    ALL      /* Tutu */
 LEAT10      HIDE       ALL      //BG2:SOA
+_LEAT10     HIDE       ALL      /* Tutu */
 LEAT11      LEATHER    ALL      //BG2:SOA
 LEAT12      LEATHER    ALL      //BG2:SOA
 LEAT13      LEATHER    ALL      //BG2:SOA
@@ -129,23 +176,41 @@ LEATGR02    PADDED     ALL      /* Auril's Bane */
 LEATGR03    STUDDED    ALL      /* Auril's Bane */
 LEATGR04    HIDE       ALL      /* Auril's Bane */
 LEATGR05    STUDDED    ALL      /* Auril's Bane */
-MAILLIF     CHAIN      ALL      //IWD
+LEATRAT     LEATHER    ALL      /* The Darkest Day */
+MAILLIF     CHAIN      ALL      //IWD OR NeJ2 OR Tortured Souls
 M#ASLEAT    STUDDED    ALL      /* Amber NPC */
 MGILEAT1    LEATHER    ALL      /* Selune's Armoury */
 MGIPLAT1    FULLP      ALL      /* Selune's Armoury */
-MOURNER     LEATHER    ALL      //HOW
+MOURNER     LEATHER    ALL      //HOW OR Tortured Souls
 MWARARM     HIDE       ALL      /* Ariena NPC */
 NPCHAN      CHAIN      ALL      //BG2:SOA
 NPPLAT      FULLP      ALL      //BG2:SOA
+O!BOM001    FULLP      ALL      /* Boards o'Magic Item Pack */
+O!BOM002    CHAIN      ALL      /* Boards o'Magic Item Pack */
+O!BOM003    CHAIN      ALL      /* Boards o'Magic Item Pack */
+O!BOM004    CHAIN      ALL      /* Boards o'Magic Item Pack */
+O!BOM005    CHAIN      ALL      /* Boards o'Magic Item Pack */
+O!BOM006    CHAIN      ALL      /* Boards o'Magic Item Pack */
+O!BOM007    PLATE      ALL      /* Boards o'Magic Item Pack */
+O!BOM008    PLATE      ALL      /* Boards o'Magic Item Pack */
+O!BOM009    PLATE      ALL      /* Boards o'Magic Item Pack */
+O!BOM011    HIDE       ALL      /* Boards o'Magic Item Pack */
 OGIEN       SCALE      ALL      //HOW
 PALPLAT     FULLP      ALL      //BG2:TOB
 PLAT01      PLATE      ALL      //BG1
+_PLAT01     PLATE      ALL      /* Tutu */
 PLAT02      PLATE      ALL      //BG1
+_PLAT02     PLATE      ALL      /* Tutu */
 PLAT04      FULLP      ALL      //BG1
+_PLAT04     FULLP      ALL      /* Tutu */
 PLAT05      FULLP      ALL      //BG1
+_PLAT05     FULLP      ALL      /* Tutu */
 PLAT06      PLATE      ALL      //BG1
+_PLAT06     PLATE      ALL      /* Tutu */
 PLAT07      PLATE      ALL      //BG1
+_PLAT07     PLATE      ALL      /* Tutu */
 PLAT08      PLATE      ALL      //BG2:SOA
+_PLAT08     PLATE      ALL      /* Tutu */
 PLAT09      MFIELDP    ALL      //BG2:SOA
 PLAT10      PLATE      ALL      //BG2:SOA
 PLAT11      PLATE      ALL      //BG2:SOA
@@ -164,8 +229,10 @@ PLAT22      FULLP      ALL      //BG2:TOB
 PLAT22      PLATE      item_rev /* Item Revisions */
 PLAT23      FULLP      ALL      //BG2:TOB
 PLAT98      PLATE      ALL      //BG2:SOA
+_PLAT98     PLATE      ALL      /* Tutu */
 PLAT99      PLATE      ALL      //BG2:SOA
 PLATBLK     PLATE      ALL      //IWD
+PLATBLUE    STUDDED    ALL      /* The Darkest Day */
 PLATCM01    FULLP      ALL      /* Auril's Bane */
 PLATCM02    PLATE      ALL      /* Auril's Bane */
 PLATCM03    FULLP      ALL      /* Auril's Bane */
@@ -175,8 +242,16 @@ PLATGR02    PLATE      ALL      /* Auril's Bane */
 PLATND      PLATE      ALL      //HOW
 PLATRED     PLATE      ALL      //IWD
 POTN18      NOTARMOR   ALL      //BG1
+_POTN18     NOTARMOR   ALL      /* Tutu */
 POTN24      NOTARMOR   ALL      //BG1
+_POTN24     NOTARMOR   ALL      /* Tutu */
 POTN46      FULLP      ALL      //BG1
+_POTN46     FULLP      ALL      /* Tutu */
+PSMADE27    PLATE      ALL      /* Planar Sphere Mod */
+PSMADE28    PLATE      ALL      /* Planar Sphere Mod */
+PSMADE29    FULLP      ALL      /* Planar Sphere Mod */
+PSMADE30    STUDDED    ALL      /* Planar Sphere Mod */
+PSMADE31    LEATHER    ALL      /* Planar Sphere Mod */
 R!KITPLT    PLATE      ALL      /* Kitanya NPC */
 RR#ABIH     STUDDED    ALL      /* Rogue Rebalancing */
 RR#CHN01    ELVENC     ALL      /* Rogue Rebalancing */
@@ -193,23 +268,50 @@ S!PLAT03    PLATE      ALL      /* Improved Anvil */
 S!PLAT04    FULLP      ALL      /* Improved Anvil */
 S!PLAT05    FULLP      ALL      /* Improved Anvil */
 S!PLAT06    FULLP      ALL      /* Improved Anvil */
+SAMARMX1    BANDED     ALL      /* The Darkest Day */
 SCAL01      SCALE      ALL      /* Ashes of Embers */
 SCAL02      SCALE      ALL      /* Ashes of Embers */
 SCAL03      SCALE      ALL      /* Ashes of Embers */
 SCAL04      SCALE      ALL      /* Ashes of Embers */
+SHAR20      LEATHER    ALL      /* The Darkest Day */
 SHARARM     CHAIN      ALL      //BG2:TOB
 SHARK       LEATHER    ALL      //HOW
 SHARK2      STUDDED    ALL      //HOW
 SHARK3      SPLINT     ALL      //HOW
 SHPLATE     PLATE      ALL      //IWD
+SILEAT      STUDDED    ALL      /* Tortured Souls */
 SLAYER3     ELVENC     ALL      /* Auril's Bane */
-SWANARM     PLATE      ALL      //IWD
+SWANARM     PLATE      ALL      //IWD OR The Darkest Day
 TAMCHAIN    CHAIN      ALL      //BG2:TOB
+TCALEIGA    STUDDED    ALL      /* Classic Adventures */
+TCARMOR1    PLATE      ALL      /* Classic Adventures */
+TCARMOR2    CHAIN      ALL      /* Classic Adventures */
+TCARMOR3    SPLINT     ALL      /* Classic Adventures */
+TCARMOR4    LEATHER    ALL      /* Classic Adventures */
+TCARMOR5    ELVENC     ALL      /* Classic Adventures */
+TCCHAN01    CHAIN      ALL      /* Classic Adventures */
+TCILHAR1    PLATE      ALL      /* Classic Adventures */
+TCILHAR2    PLATE      ALL      /* Classic Adventures */
+TCLEAT05    STUDDED    ALL      /* Classic Adventures */
+TCPLAT01    PLATE      ALL      /* Classic Adventures */
+TCRIHARM    ELVENC     ALL      /* Classic Adventures */
+TCRIVARM    ELVENC     ALL      /* Classic Adventures */
+TCVILDPL    FIELDP     ALL      /* Classic Adventures */
 TG#BSP2     STUDDED    ALL      /* Refinements */
 TG#SPI2     CHAIN      ALL      /* Refinements */
+TROLLARM    FULLP      ALL      /* The Darkest Day */
 TTLEAT      LEATHER    ALL      //BG2:SOA
+U#CHAN01    ADAMC      ALL      /* Ruad OR Classic Adventures */
 U#CHAN07    ELVENC     ALL      /* Underrepresented Items */
 U#HFHEAH    HIDE       ALL      /* Underrepresented Items */
+U#LEAT01    STUDDED    ALL      /* Ruad OR Classic Adventures */
+U#LEAT02    STUDDED    ALL      /* Ruad OR Classic Adventures */
+U#PLAT01    FULLP      ALL      /* Ruad OR Classic Adventures */
+U#PLAT02    PLATE      ALL      /* Ruad OR Classic Adventures */
+UCMGCH01    ADAMC      ALL      /* CoM Encounters */
+UCMGCH02    ADAMC      ALL      /* CoM Encounters */
+UCMGLE01    STUDDED    ALL      /* CoM Encounters */
+UCMGPL01    PLATE      ALL      /* CoM Encounters */
 UMHULK      PLATE      ALL      //IWD
 USLTR01     STUDDED    ALL      //IWD
 USLTR2A     STUDDED    ALL      //IWD
@@ -229,12 +331,16 @@ ZILFGT      STUDDED    ALL      /* Ascension (Tougher Illasera) */
 ZOMBSKIN    LEATHER    ALL      /* NeJ2 */
 SPPR111     NOTARMOR   SOA      //BG2:SOA
 SPPR111     NOTARMOR   TOB      //BG2:SOA
+DLPR111     NOTARMOR   ALL      /* DLTC: Glory of Istar demo */
 DGFAITH     NOTARMOR   ALL      //BG2:SOA
 SPPR202     SCALE      ALL      //BG1
 SPPR202     nonono     spell_rev_d  /* Spell Revisions */
+DLPR202     SCALE      ALL      /* DLTC: Glory of Istar demo */
 SPWI102     SCALE      ALL      //BG1
+DLWI102     SCALE      ALL      /* DLTC: Glory of Istar demo */
 SPWI317     FIELDP     SOA
 SPWI317     FIELDP     TOB
+DLWI317     FIELDP     ALL      /* DLTC: Glory of Istar demo */
 SPWI317     PLATE      gsp_ga   /* Galactygon's Spell Pack beta 5 */
 SPWI317     PLATE      IWD
 SPWI317     PLATE      HOW

@@ -111,6 +111,12 @@ Design notes
 
 Changes
 
+beta 5
+ * more mod items and tuning of descriptions
+ * DLTC: Glory of Istar support
+ * Easytutu support
+ * Classic Adventures support
+
 beta 4 (closed beta, november 2008)
  * bugfix: armor no longer overrides natural resistances
  * install-time analysis of resistances added by items and effects, creatures
