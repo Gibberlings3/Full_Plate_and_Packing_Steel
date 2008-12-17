@@ -1059,7 +1059,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_LONG 0x54 0xffffffff // non-magical, doesn't need identified_desc
     END
 
-    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~SWANARM.ITM~) BEGIN
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~SWANARM.ITM~ || "%SOURCE_FILE%" STRING_EQUAL ~ISWARM.ITM~) BEGIN
       WRITE_LONG NAME1 platemail_name
       SAY NAME2 ~Black Swan Armor +2~
       WRITE_BYTE 0x60 2
