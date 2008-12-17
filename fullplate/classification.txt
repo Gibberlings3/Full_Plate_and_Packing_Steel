@@ -9,9 +9,9 @@ BELT02      NOTARMOR   ALL      //BG1
 BELT03      NOTARMOR   ALL      //BG1
 BELT04      NOTARMOR   ALL      //BG1
 BLCKPLA     PLATE      ALL      //IWD
-BLEAT01     HIDE       ALL
-BLEAT02     HIDE       ALL
-BLEAT03     HIDE       ALL
+BLEAT01     HIDE       ALL      /* Improved Horns of Valhalla */
+BLEAT02     HIDE       ALL      /* Improved Horns of Valhalla */
+BLEAT03     HIDE       ALL      /* Improved Horns of Valhalla */
 BLOOD       PLATE      ALL      //IWD
 BRUENPLA    MFIELDP    ALL      //BG2:SOA
 C2BELT01    NOTARMOR   ALL      /* Item Upgrade */
@@ -22,7 +22,7 @@ C2LEAT01    LEATHER    ALL      /* Item Upgrade */
 C2PLAT01    PLATE      ALL      /* Item Upgrade */
 C2VALY01    CHAIN      ALL      /* Item Upgrade */
 CHAINBM     CHAIN      ALL      //IWD
-CHALARM     FULLP      ALL
+CHALARM     FULLP      ALL      //BG2:TOB
 CHAN01      CHAIN      ALL      //BG1
 CHAN02      CHAIN      ALL      //BG1
 CHAN03      CHAIN      ALL      //BG1
@@ -44,15 +44,15 @@ CHAN18      SPLINT     ALL      //BG2:SOA
 CHAN19      ELVENC     ALL      //BG2:TOB
 CHAN20      SPLINT     ALL      //BG2:TOB
 CHAN21      CHAIN      ALL      //BG2:TOB
+CHANCM01    SPLINT     ALL      /* Auril's Bane */
+CHANCM02    ELVENC     ALL      /* Auril's Bane */
+CHANGR01    ELVENC     ALL      /* Auril's Bane */
+CHANGR02    SPLINT     ALL      /* Auril's Bane */
+CHANGR03    CHAIN      ALL      /* Auril's Bane */
+CISPGRD     PLATE      ALL      //TOTLM
+CISPGRD3    PLATE      ALL      //TOTLM
 CLOLTH      ELVENC     ALL      //BG2:SOA
-CYLEAT      STUDDED    ALL
-D0T#LEAT    STUDDED    ALL
-DEITM053    CHAIN      ALL
-DEITM086    FULLP      ALL
-DEITM087    CHAIN      ALL
-DEITM088    PLATE      ALL
-DEITM090    FULLP      ALL
-DEITM096    FULLP      ALL
+D0T#LEAT    STUDDED    ALL      /* Ascension: Turnabout */
 DLEAT10     HIDE       ALL      //BG2:SOA
 DRAGARM     SCALE      ALL      //IWD
 DW#ABYDA    STUDDED    ALL      /* SCSII */
@@ -66,19 +66,21 @@ FLAT01      FIELDP     ALL      /* Ashes of Embers */
 FLAT02      FIELDP     ALL      /* Ashes of Embers */
 FLAT03      FIELDP     ALL      /* Ashes of Embers */
 FLAT04      FIELDP     ALL      /* Ashes of Embers */
-FWCHAN01    CHAIN      ALL
-FWLEAT03    HIDE       ALL
+FWCHAN01    CHAIN      ALL      /* Revised Forgotten Wars Item Pack - rfwip */
+FWLEAT03    HIDE       ALL      /* Revised Forgotten Wars Item Pack - rfwip */
 GLORY       PLATE      ALL      /* IWD, unused, restored in IWD UB */
 ICHAN01     CHAIN      ALL      //BG1
 ICHAN04     SPLINT     ALL      //BG1
-ICEPLAT     PLATE      ALL
+ICEPLAT     PLATE      ALL      /* RPG Dungeon Kitpack - Ice Knight */
 ILEAT04     STUDDED    ALL      //BG1
-ILLAS04     ELVENC     ALL
+ILLAS04     ELVENC     ALL      /* Ascension */
 IPLAT01     PLATE      ALL      //BG1
 IPLAT05     FULLP      ALL      //IWD
-J#SPLI06    SPLINT     ALL
+ISWARM      PLATE      ALL      //TOTLM
+J#SPLI06    SPLINT     ALL      /* Ashes of Embers */
 KAYCHAI     ELVENC     ALL      //IWD
-KINPLAT     FULLP      ALL
+KING        PLATE      ALL      //HOW
+KINPLAT     FULLP      ALL      /* Kindrek NPC */
 LEAT01      LEATHER    ALL      //BG1
 LEAT02      LEATHER    ALL      //BG1
 LEAT03      LEATHER    ALL      //BG1
@@ -103,14 +105,23 @@ LEAT21      LEATHER    ALL      //BG2:SOA
 LEAT22      LEATHER    ALL      //BG2:SOA
 LEAT23      STUDDED    ALL      //BG2:TOB
 LEAT24      STUDDED    ALL      //BG2:TOB
+LEATCM01    STUDDED    ALL      /* Auril's Bane */
+LEATCM02    STUDDED    ALL      /* Auril's Bane */
+LEATGR01    LEATHER    ALL      /* Auril's Bane */
+LEATGR02    PADDED     ALL      /* Auril's Bane */
+LEATGR03    STUDDED    ALL      /* Auril's Bane */
+LEATGR04    HIDE       ALL      /* Auril's Bane */
+LEATGR05    STUDDED    ALL      /* Auril's Bane */
 MAILLIF     CHAIN      ALL      //IWD
 M#ASLEAT    STUDDED    ALL      /* Amber NPC */
 MGILEAT1    LEATHER    ALL      /* Selune's Armoury */
 MGIPLAT1    FULLP      ALL      /* Selune's Armoury */
+MOURNER     LEATHER    ALL      //HOW
 MWARARM     HIDE       ALL      /* Ariena NPC */
 NPCHAN      CHAIN      ALL      //BG2:SOA
 NPPLAT      FULLP      ALL      //BG2:SOA
-PALPLAT     FULLP      ALL
+OGIEN       SCALE      ALL      //HOW
+PALPLAT     FULLP      ALL      //BG2:TOB
 PLAT01      PLATE      ALL      //BG1
 PLAT02      PLATE      ALL      //BG1
 PLAT04      FULLP      ALL      //BG1
@@ -136,10 +147,17 @@ PLAT23      FULLP      ALL      //BG2:TOB
 PLAT98      PLATE      ALL      //BG2:SOA
 PLAT99      PLATE      ALL      //BG2:SOA
 PLATBLK     PLATE      ALL      //IWD
+PLATCM01    FULLP      ALL      /* Auril's Bane */
+PLATCM02    PLATE      ALL      /* Auril's Bane */
+PLATCM03    FULLP      ALL      /* Auril's Bane */
+PLATCM04    FULLP      ALL      /* Auril's Bane */
+PLATGR01    PLATE      ALL      /* Auril's Bane */
+PLATGR02    PLATE      ALL      /* Auril's Bane */
+PLATND      PLATE      ALL      //HOW
 PLATRED     PLATE      ALL      //IWD
-POTN18      NOTARMOR   ALL
-POTN24      NOTARMOR   ALL
-POTN46      FULLP      ALL
+POTN18      NOTARMOR   ALL      //BG1
+POTN24      NOTARMOR   ALL      //BG1
+POTN46      FULLP      ALL      //BG1
 R!KITPLT    PLATE      ALL      /* Kitanya NPC */
 RR#ABIH     STUDDED    ALL      /* Rogue Rebalancing */
 RR#CHN01    ELVENC     ALL      /* Rogue Rebalancing */
@@ -160,12 +178,16 @@ SCAL01      SCALE      ALL      /* Ashes of Embers */
 SCAL02      SCALE      ALL      /* Ashes of Embers */
 SCAL03      SCALE      ALL      /* Ashes of Embers */
 SCAL04      SCALE      ALL      /* Ashes of Embers */
-SHARARM     CHAIN      ALL
+SHARARM     CHAIN      ALL      //BG2:TOB
+SHARK       LEATHER    ALL      //HOW
+SHARK2      STUDDED    ALL      //HOW
+SHARK3      SPLINT     ALL      //HOW
 SHPLATE     PLATE      ALL      //IWD
+SLAYER3     ELVENC     ALL      /* Auril's Bane */
 SWANARM     PLATE      ALL      //IWD
-TAMCHAIN    CHAIN      ALL
-TG#BSP2     STUDDED    ALL
-TG#SPI2     CHAIN      ALL
+TAMCHAIN    CHAIN      ALL      //BG2:TOB
+TG#BSP2     STUDDED    ALL      /* Refinements */
+TG#SPI2     CHAIN      ALL      /* Refinements */
 TTLEAT      LEATHER    ALL      //BG2:SOA
 U#CHAN07    ELVENC     ALL      /* Underrepresented Items */
 U#HFHEAH    HIDE       ALL      /* Underrepresented Items */
@@ -175,8 +197,15 @@ USLTR2A     STUDDED    ALL      //IWD
 USLTR3A     STUDDED    ALL      //IWD
 USLTR4A     STUDDED    ALL      //IWD
 USLTR5A     STUDDED    ALL      //IWD
+VEXBAD      PLATE      ALL      //HOW
+VEXDL       PLATE      ALL      //HOW
+VEXED       PLATE      ALL      //HOW
+VEXED2      PLATE      ALL      //HOW
+VEXED3      PLATE      ALL      //HOW
 WA2PLAT     FULLP      ALL      //BG2:SOA
-ZILFGT      STUDDED    ALL
+XCHAN03     CHAIN      ALL      //TOTLM
+XLEAT03     LEATHER    ALL      //TOTLM
+ZILFGT      STUDDED    ALL      /* Ascension (Tougher Illasera) */
 SPPR111     NOTARMOR   SOA
 SPPR111     NOTARMOR   TOB
 DGFAITH     NOTARMOR   ALL

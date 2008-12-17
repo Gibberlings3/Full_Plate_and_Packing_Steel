@@ -1,15 +1,11 @@
 BACKUP ~fullplate/backup~
 AUTHOR ~erik, gibberlings3~
-MODDER setup_tra none
-VERSION ~beta ca 3~
+//MODDER setup_tra none
+VERSION ~beta 3~
 README ~fullplate/readme-fullplate.txt~
 NO_IF_EVAL_BUG
 
 ALLOW_MISSING ~baldur25.bcs~
-
-// IWD todo: check potions
-// IWD todo: add the game-specific armors
-// IWD long-term todo: add a resistance limiter creature
 
 BEGIN ~Full Plate And Packing Steel: Between You And Harm (alternate armour system)~
  DESIGNATED 1
@@ -177,6 +173,34 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 3
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CHANCM01.ITM~) BEGIN
+      WRITE_BYTE 0x60 2
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CHANGR01.ITM~) BEGIN
+      READ_LONG NAME2 temp // move id strings to unid strings
+      WRITE_LONG NAME1 %temp%
+      READ_LONG 0x54 temp
+      WRITE_LONG 0x50 %temp%
+      WRITE_LONG 0x54 0xffffffff // non-magical, doesn't need identified_desc
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CHANGR02.ITM~) BEGIN
+      SAY NAME2 ~Zeddek's Skin +6~
+      WRITE_BYTE 0x18 ("%flags%" BOR 0b01000000)
+      WRITE_BYTE 0x60 6
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CHANGR03.ITM~) BEGIN
+      SAY NAME2 ~Mithril Chain Mail +4~
+      WRITE_BYTE 0x60 4
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CISPGRD3.ITM~) BEGIN
+      SAY NAME2 ~Shadowed Plate +3~
+      WRITE_BYTE 0x60 3
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CLCK15.ITM~) BEGIN
       WRITE_BYTE 0x60 5
     END
@@ -187,6 +211,10 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CLCK17.ITM~) BEGIN
       WRITE_BYTE 0x60 5
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CLOLTH.ITM~) BEGIN
+      SAY NAME2 ~Dark Elven Chain +1~
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~D0T#GORI.ITM~) BEGIN
@@ -305,6 +333,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~LEAT09.ITM~) BEGIN
+      SAY NAME2 ~Karajah's Life and Death +3~
       WRITE_BYTE 0x60 3
     END
 
@@ -318,6 +347,50 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~LEAT19.ITM~) BEGIN
       SAY NAME2 ~Shadow Dragon Scale +6~
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~LEATCM01.ITM~) BEGIN
+      WRITE_BYTE 0x60 4
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~LEATCM02.ITM~) BEGIN
+      WRITE_BYTE 0x60 1
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~LEATGR01.ITM~) BEGIN
+      READ_LONG NAME2 temp // move id strings to unid strings
+      WRITE_LONG NAME1 %temp%
+      READ_LONG 0x54 temp
+      WRITE_LONG 0x50 %temp%
+      WRITE_LONG 0x54 0xffffffff // non-magical, doesn't need identified_desc
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~LEATGR02.ITM~) BEGIN
+      READ_LONG NAME2 temp // move id strings to unid strings
+      WRITE_LONG NAME1 %temp%
+      READ_LONG 0x54 temp
+      WRITE_LONG 0x50 %temp%
+      WRITE_BYTE 0x18 ("%flags%" BAND 0b10111111) // switch off magical flag
+      WRITE_LONG 0x54 0xffffffff // non-magical, doesn't need identified_desc
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~LEATGR03.ITM~) BEGIN
+      WRITE_BYTE 0x18 ("%flags%" BAND 0b10111111) // switch off magical flag
+      WRITE_BYTE 0x60 0
+      WRITE_LONG 0x54 0xffffffff // non-magical, doesn't need identified_desc
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~LEATGR04.ITM~) BEGIN
+      SAY NAME2 ~Exotic Hide Armor +1~
+      WRITE_BYTE 0x60 1
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~LEATGR05.ITM~) BEGIN
+      READ_LONG NAME2 temp // move id strings to unid strings
+      WRITE_LONG NAME1 %temp%
+      WRITE_BYTE 0x60 0
+      WRITE_BYTE 0x18 ("%flags%" BAND 0b10111111) // switch off magical flag
+      WRITE_LONG 0x54 0xffffffff // non-magical, doesn't need identified_desc
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~M#ASLEAT.ITM~) BEGIN
@@ -339,6 +412,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 1
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~MOURNER.ITM~) BEGIN
+      SAY NAME2 ~Mourner's Armor +4~
+      WRITE_BYTE 0x60 4
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~MWARARM.ITM~) BEGIN
       SAY NAME2 ~Ariena's Armor: Hide +3~
     END
@@ -355,6 +433,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~NPPLAT.ITM~) BEGIN
       SAY NAME1 ~Firecam Full-Plate Mail~
       SAY NAME2 ~Firecam Full-Plate Mail +1~
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~OGIEN.ITM~) BEGIN
+      SAY NAME2 ~Ogien's Scale +4~
+      WRITE_BYTE 0x60 4
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLAT02.ITM~) BEGIN
@@ -398,7 +481,41 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLAT18.ITM~) BEGIN
+      SAY NAME2 ~Red Dragon Scale +2~
       WRITE_BYTE 0x60 2
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLAT19.ITM~) BEGIN
+      SAY NAME2 ~Full Plate Mail +2~
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLATCM01.ITM~) BEGIN
+      WRITE_BYTE 0x60 1
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLATCM02.ITM~) BEGIN
+      SAY NAME2 ~Demon Plate +4~
+      WRITE_BYTE 0x60 4
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLATCM03.ITM~) BEGIN
+      WRITE_BYTE 0x60 1
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLATCM04.ITM~) BEGIN
+      WRITE_BYTE 0x60 1
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLATGR01.ITM~) BEGIN
+      SAY NAME1 ~Chitinous Plate Mail~
+      SAY NAME2 ~Chitinous Plate Mail +1~
+      WRITE_BYTE 0x18 ("%flags%" BOR 0b01000000)
+      WRITE_BYTE 0x60 1
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLATGR02.ITM~) BEGIN
+      SAY NAME2 ~Plate Mail of Fear +1~
+      WRITE_BYTE 0x60 1
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~POTN18.ITM~) BEGIN
@@ -415,7 +532,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~R!KITPLT.ITM~) BEGIN
       SAY NAME1 ~Plate Mail~
-      SAY NAME2 ~Bringer of Vengeance: Kitanya's Plate Mail +4~
+      SAY NAME2 ~Bringer of Vengeance +4~
       WRITE_BYTE 0x60 4
     END
 
@@ -481,6 +598,15 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 3
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~SLAYER3.ITM~) BEGIN
+      READ_LONG NAME2 temp // move id strings to unid strings
+      WRITE_LONG NAME1 %temp%
+      READ_LONG 0x54 temp
+      WRITE_LONG 0x50 %temp%
+      WRITE_BYTE 0x18 ("%flags%" BAND 0b10111111) // switch off magical flag
+      WRITE_LONG 0x54 0xffffffff // non-magical, doesn't need identified_desc
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~SWANARM.ITM~) BEGIN
       SAY NAME2 ~Black Swan Armor +2~
       WRITE_BYTE 0x60 2
@@ -537,9 +663,39 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 4
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~VEXBAD.ITM~) BEGIN
+      SAY NAME2 ~Vexed Armor +2~
+      WRITE_BYTE 0x60 2
+    END
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~VEXDL.ITM~) BEGIN
+      SAY NAME2 ~Vexed Armor +2~
+      WRITE_BYTE 0x60 2
+    END
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~VEXED.ITM~) BEGIN
+      SAY NAME2 ~Vexed Armor +2~
+      WRITE_BYTE 0x60 2
+    END
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~VEXED2.ITM~) BEGIN
+      SAY NAME2 ~Vexed Armor +2~
+      WRITE_BYTE 0x60 2
+    END
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~VEXED3.ITM~) BEGIN
+      SAY NAME2 ~Vexed Armor +2~
+      WRITE_BYTE 0x60 2
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~WA2ROBE.ITM~) BEGIN
       WRITE_BYTE 0x60 5
     END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~XCHAN03.ITM~) BEGIN
+      WRITE_BYTE 0x60 2
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~XLEAT03.ITM~) BEGIN
+      WRITE_BYTE 0x60 2
+    END
+
   END
   BUT_ONLY_IF_IT_CHANGES
 
@@ -648,60 +804,6 @@ PATCH_IF ( %returnval% > 100 ) BEGIN
 END
 >>>>>>>>
 
-// evil pseudomacro
-//  if searchstring exists in description, replace replacestring with insertstring
-//  else if insertafter exists in description, splice in insertstring after it
-//  else do nothing
-<<<<<<<< descupd_magic.tpp
-PATCH_IF (enchantment > 0) BEGIN
-   PATCH_IF ( ~%iddesc%~ STRING_CONTAINS_REGEXP ~%searchstring%~ == 0) BEGIN
-     INNER_PATCH_SAVE newdescstr "%iddesc%" BEGIN
-       REPLACE_EVALUATE ~%replacestring%~
-         BEGIN
-           SPRINT result ~%insertstring%~
-         END
-         ~%result%~
-     END
-   END ELSE BEGIN
-     INNER_PATCH_SAVE newdescstr "%iddesc%" BEGIN
-       REPLACE_EVALUATE ~%insertafter%~
-         BEGIN
-           SPRINT result  ~%MATCH1%%insertstring%~
-           PATCH_IF (~%insertstring%~ STRING_EQUAL ~~ == 0) BEGIN
-             SPRINT result  ~%result%%wnl%~
-           END
-         END
-         ~%result%~
-     END
-   END
-   SAY_EVALUATED IDENTIFIED_DESC ~%newdescstr%~
-   READ_STRREF 0x54 iddesc ELSE ~nope~
-END ELSE BEGIN // if enchanted
-   PATCH_IF ( ~%uniddesc%~ STRING_CONTAINS_REGEXP ~%searchstring%~ == 0) BEGIN
-     INNER_PATCH_SAVE newdescstr "%uniddesc%" BEGIN
-       REPLACE_EVALUATE ~%replacestring%~
-         BEGIN
-           SPRINT result ~%insertstring%~
-         END
-         ~%result%~
-     END
-   END ELSE BEGIN
-     INNER_PATCH_SAVE newdescstr "%uniddesc%" BEGIN
-       REPLACE_EVALUATE ~%insertafter%~
-         BEGIN
-           SPRINT result  ~%MATCH1%%insertstring%~
-           PATCH_IF (~%insertstring%~ STRING_EQUAL ~~ == 0) BEGIN
-             SPRINT result  ~%result%%wnl%~
-           END
-         END
-         ~%result%~
-     END
-   END
-   SAY_EVALUATED UNIDENTIFIED_DESC ~%newdescstr%~
-   READ_STRREF 0x50 uniddesc ELSE ~nope~
-END // if not enchanted
->>>>>>>>
-
 PRINT ~Detecting game engine...~
 ACTION_IF ENGINE_IS ~soa~ BEGIN
   OUTER_SPRINT gameiam ~soa~
@@ -719,6 +821,7 @@ ACTION_IF ENGINE_IS ~how~ BEGIN
   OUTER_SPRINT gameiam ~how~
   PRINT ~ IWD: HoW...~
 END
+// needs weidu > 208 release
 ACTION_IF ENGINE_IS ~totlm~ BEGIN
   OUTER_SPRINT gameiam ~totlm~
   PRINT ~ IWD: ToTLM...~
@@ -727,8 +830,8 @@ ACTION_IF ENGINE_IS ~iwd2~ BEGIN
   OUTER_SPRINT gameiam ~iwd2~
   PRINT ~ IWD2...~
 END
-// weidu < 209 bug ... iwd is detected as pst
-ACTION_IF ENGINE_IS ~pst~ AND NOT ENGINE_IS ~iwd~ BEGIN
+// needs weidu 208.34 or later ... or iwd/how/totlm is detected as pst as well
+ACTION_IF ENGINE_IS ~pst~ BEGIN
   OUTER_SPRINT gameiam ~pst~
   PRINT ~ PST...~
 END
@@ -922,7 +1025,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                                     ~spellfailmod~
             BEGIN
                 SET x = EVALUATE_BUFFER ~%%param%_%usename%%~
-                PATCH_IF NOT (x = 0 || (x = 10 && ~%param%~ STRING_EQUAL ~baseac~)) BEGIN 
+                PATCH_IF NOT ((x = 0 && NOT ~%param%~ STRING_EQUAL ~baseac~) || (x = 10 && ~%param%~ STRING_EQUAL ~baseac~)) BEGIN 
                     PATCH_IF ~%param%~ STRING_EQUAL dexmod BEGIN
                         SET opcode = 15
                         SET param1 = 0 - x
@@ -1142,15 +1245,36 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
             SPRINT insertafter    ~gnurf~
             SPRINT replacestring  ~STATISTICS.*%wnl%~
             SPRINT insertstring   ~STATISTICS:%wnl%%wnl%~
-            PATCH_INCLUDE ~descupd_magic.tpp~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
 
-            // custom fixup for missing STATISTICS line - IWD, Umber Hulk Plate
-            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~umhulk~) BEGIN
+            // custom fixups for missing STATISTICS header
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~umhulk~) BEGIN // IWD, Umber Hulk Plate
               SPRINT searchstring   ~THISWILLNEVERMATCH~
               SPRINT insertafter    ~\(umber hulk exoskeletons, cured and reinforced the armor.\)~
               SPRINT replacestring  ~NOTHINGDAMNIT~
               SPRINT insertstring   ~%wnl%%wnl%STATISTICS:%wnl%~
-              PATCH_INCLUDE ~descupd_magic.tpp~
+              PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~leatgr02~) BEGIN // Auril's Bane, Padded Armour
+              SPRINT searchstring   ~THISWILLNEVERMATCH~
+              SPRINT insertafter    ~\(disrupt their spellcasting ability.\)~
+              SPRINT replacestring  ~NOTHINGDAMNIT~
+              SPRINT insertstring   ~%wnl%%wnl%STATISTICS:%wnl%~
+              PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~changr02~) BEGIN // Auril's Bane, Zeddek's Skin
+              SPRINT searchstring   ~THISWILLNEVERMATCH~
+              SPRINT insertafter    ~\(Silanna as a reward for her loyalty and bravery.\)~
+              SPRINT replacestring  ~NOTHINGDAMNIT~
+              SPRINT insertstring   ~%wnl%%wnl%STATISTICS:%wnl%%wnl%~
+              PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~platgr01~) BEGIN // Auril's Bane, Chitinous Plate Mail
+              SPRINT searchstring   ~THISWILLNEVERMATCH~
+              SPRINT insertafter    ~\(but fatigue is a constant enemy.\)~
+              SPRINT replacestring  ~NOTHINGDAMNIT~
+              SPRINT insertstring   ~%wnl%%wnl%STATISTICS:%wnl%~
+              PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
 
             // kill whitespace at beginning of line, repeatedly
@@ -1158,10 +1282,10 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
             SPRINT insertafter    ~gnurf~
             SPRINT replacestring  ~^[ %tab%]+~
             SPRINT insertstring   ~~
-            PATCH_INCLUDE ~descupd_magic.tpp~
-            PATCH_INCLUDE ~descupd_magic.tpp~
-            PATCH_INCLUDE ~descupd_magic.tpp~
-            PATCH_INCLUDE ~descupd_magic.tpp~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
 
             PATCH_FOR_EACH param IN ~weight~ ~dexmod~ ~movemod~ ~wpnspeedmod~ ~baseac~ ~slashac~ ~crushac~ ~pierceac~ ~missileac~
                                     ~slashres~ ~crushres~ ~pierceres~ ~missileres~ ~fireres~ ~coldres~
@@ -1169,27 +1293,27 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
             BEGIN
 
                  SET x = EVALUATE_BUFFER ~%%param%_%usename%%~
-                 PATCH_IF NOT (x = 0 || (x = 10 && ~%param%~ STRING_EQUAL ~baseac~)) BEGIN 
+                 PATCH_IF NOT ((x = 0 && NOT ~%param%~ STRING_EQUAL ~baseac~) || (x = 10 && ~%param%~ STRING_EQUAL ~baseac~)) BEGIN 
                      PATCH_IF ~%param%~ STRING_EQUAL weight BEGIN
                          SPRINT searchstring   ~Weight:~
                          SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
                          SPRINT replacestring  ~Weight:[%tab% ]*[0-9]+[%tab% a-zA-Z.]*~
                          SPRINT insertstring   ~Weight: %x%~
-                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+                         PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
 
                      PATCH_IF ~%param%~ STRING_EQUAL baseac BEGIN // kill "AC:" lines
                          SPRINT searchstring   ~^AC~
                          SPRINT insertafter    ~\(STATISTICS\)~
                          SPRINT replacestring  ~^AC[%tab% :]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+~
                          SPRINT insertstring   ~~
-                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+                         PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
 
                      PATCH_IF ~%param%~ STRING_EQUAL baseac BEGIN
                          SPRINT searchstring   ~Armor Class:~
                          SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
                          SPRINT replacestring  ~Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*~
                          SPRINT insertstring   ~Armor Class: %x%~
-                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+                         PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
 
                      PATCH_IF ((~%param%~ STRING_EQUAL slashres || ~%param%~ STRING_EQUAL crushres ||
                                 ~%param%~ STRING_EQUAL pierceres || ~%param%~ STRING_EQUAL missileres)
@@ -1203,7 +1327,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                          SET crushrestotal = 0
                          SET piercerestotal = 0
                          SET missilerestotal = 0
-                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+                         PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
 
                      PATCH_IF ~%param%~ STRING_EQUAL slashres BEGIN
                          SET intopcode = 86
@@ -1244,24 +1368,24 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                          SET dexmodtotal = 0
                          SET movemodtotal = 0
                          SET wpnspeedtotal = 0
-                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+                         PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
 
                      PATCH_IF ~%param%~ STRING_EQUAL dexmod BEGIN // kill various DEX lines
                          SPRINT searchstring   ~DEX bonus~
                          SPRINT insertafter    ~\(STATISTICS\)~
                          SPRINT replacestring  ~+[1-9] DEX bonus, ~
                          SPRINT insertstring   ~~
-                         PATCH_INCLUDE ~descupd_magic.tpp~
+                         PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
                          SPRINT searchstring   ~Bonus.*Dexterity~
                          SPRINT insertafter    ~\(STATISTICS\)~
                          SPRINT replacestring  ~Bonus.*Dexterity[%wnl%%lnl%%mnl%]~
                          SPRINT insertstring   ~~
-                         PATCH_INCLUDE ~descupd_magic.tpp~
+                         PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
                          SPRINT searchstring   ~.*Dexterity~
                          SPRINT insertafter    ~\(STATISTICS\)~
                          SPRINT replacestring  ~.*Dexterity[%wnl%%lnl%%mnl%]~
                          SPRINT insertstring   ~~
-                         PATCH_INCLUDE ~descupd_magic.tpp~
+                         PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
                          SET intopcode = 15
                          SET intparam = 1
                          PATCH_INCLUDE ~sumfx.tpp~
@@ -1297,7 +1421,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                          SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
                          SPRINT replacestring  ~Hide.*Shadows:.*[1-9]*%perc%*~
                          SPRINT insertstring   ~Hide in Shadows: %x%~
-                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+                         PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
 
                      PATCH_IF (~%param%~ STRING_EQUAL movesilmod || ((~%SOURCE_RES%~ STRING_EQUAL ~c2leat01~ ||  // hack to force
                                                                       ~%SOURCE_RES%~ STRING_EQUAL ~leat21~) &&   // description update
@@ -1313,7 +1437,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                          SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
                          SPRINT replacestring  ~\(Stealth|Move Silently\):.*[1-9]*%perc%*.*~
                          SPRINT insertstring   ~Move Silently: %x%~
-                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+                         PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
 
                      PATCH_IF ~%param%~ STRING_EQUAL openlockmod BEGIN
                          SET intopcode = 90
@@ -1327,7 +1451,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                          SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
                          SPRINT replacestring  ~\(Open.*ocks|Lock Picking\):.*[1-9]*%perc%*~
                          SPRINT insertstring   ~Open Locks: %x%~
-                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+                         PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
 
                      PATCH_IF ~%param%~ STRING_EQUAL disarmtrapmod BEGIN
                          SET intopcode = 91
@@ -1341,7 +1465,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                          SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
                          SPRINT replacestring  ~Find/Remove.*raps:.*[1-9]*%perc%*~
                          SPRINT insertstring   ~Find/Remove Traps: %x%~
-                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+                         PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
 
                      PATCH_IF ~%param%~ STRING_EQUAL pickpocketmod BEGIN
                          SET intopcode = 92
@@ -1355,7 +1479,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                          SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
                          SPRINT replacestring  ~Pick Pockets:.*[1-9]*%perc%*~
                          SPRINT insertstring   ~Pick Pockets: %x%~
-                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+                         PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
 
                      PATCH_IF ~%param%~ STRING_EQUAL spellfailmod BEGIN
                          SET intopcode = 60
@@ -1369,19 +1493,24 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                          SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
                          SPRINT replacestring  ~Spell Failure:.*[1-9]*%perc%*~
                          SPRINT insertstring   ~Mage Spell Failure: %x%%perc%~
-                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+                         PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
 
                 END // if the param has changed
             END // foreach
 
-            // collapse empty lines in the middle of the statistics block - or at least imm. above Armor Class
-            // this one works, but by blind luck. It will fail at some point.
+            // collapse empty lines in the middle of the statistics block - or at least imm. above Armor Class / Weight
             SPRINT searchstring   ~%wnl%%wnl%Armor Class~
             SPRINT insertafter    ~gnurf~
             SPRINT replacestring  ~%wnl%%wnl%Armor Class~
             SPRINT insertstring   ~%wnl%Armor Class~
-            PATCH_INCLUDE ~descupd_magic.tpp~
-            PATCH_INCLUDE ~descupd_magic.tpp~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            SPRINT searchstring   ~%wnl%%wnl%Weight~
+            SPRINT insertafter    ~gnurf~
+            SPRINT replacestring  ~%wnl%%wnl%Weight~
+            SPRINT insertstring   ~%wnl%Weight~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
 
             // batched updates ... where we have multiple values on one line.
             // elaborate tricks with QUOTE, REPLACE_EVALUATE and EVALUATE_BUFFER failed.
@@ -1390,14 +1519,14 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                 SPRINT insertafter    ~THISWILLNEVERMATCH~
                 SPRINT replacestring  ~Slash/Crush/Pierce/Missile:%wnl%  0 / 0 / 0 / 0~
                 SPRINT insertstring   ~Slash/Crush/Pierce/Missile:%wnl%  %slashrestotal%%perc% / %crushrestotal%%perc% / %piercerestotal%%perc% / %missilerestotal%%perc%~
-                PATCH_INCLUDE ~descupd_magic.tpp~
+                PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
             PATCH_IF (slowheaderprinted = 1) BEGIN
                 SPRINT searchstring   ~ Dex/Move Speed/Weapon Speed Factor:~
                 SPRINT insertafter    ~THISWILLNEVERMATCH~
                 SPRINT replacestring  ~ Dex/Move Speed/Weapon Speed Factor:%wnl%  0 / 0 / 0 ~
                 SPRINT insertstring   ~ Dex/Move Speed/Weapon Speed Factor:%wnl%  %dexmodtotal% / %movemodtotal%%perc% / %wpnspeedtotal% ~
-                PATCH_INCLUDE ~descupd_magic.tpp~
+                PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
 
             // some custom updates for less-than-accurate statements after mod install
@@ -1406,21 +1535,21 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
                  SPRINT replacestring  ~ Despite being incredibly strong, the armor is almost weightless.~
                  SPRINT insertstring   ~~
-                 PATCH_INCLUDE ~descupd_magic.tpp~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
             PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~leat16~ || ~%SOURCE_RES%~ STRING_EQUAL ~dw#abyda~) BEGIN // orc leather, yellow dragon armor
                  SPRINT searchstring   ~Bonuses:~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
                  SPRINT replacestring  ~Bonuses: .*esistance to .*[mM]issile [aA]ttacks[%wnl%%lnl%%mnl%]+~
                  SPRINT insertstring   ~~
-                 PATCH_INCLUDE ~descupd_magic.tpp~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
             PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~usltr2a~ ) BEGIN // IWD: reinforced leather
                  SPRINT searchstring   ~Resistance Bonus:~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
                  SPRINT replacestring  ~Resistance Bonus: .*[%wnl%%lnl%%mnl%]+~
                  SPRINT insertstring   ~~
-                 PATCH_INCLUDE ~descupd_magic.tpp~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
             PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~usltr3a~ || ~%SOURCE_RES%~ STRING_EQUAL ~usltr4a~ ||
                       ~%SOURCE_RES%~ STRING_EQUAL ~usltr5a~ ) BEGIN // IWD: various studded leathers
@@ -1428,21 +1557,21 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
                  SPRINT replacestring  ~Resistance Bonus.*[%wnl%%lnl%%mnl%]+.*Resistance[%wnl%%lnl%%mnl%]+.*Resistance[%wnl%%lnl%%mnl%]+~
                  SPRINT insertstring   ~~
-                 PATCH_INCLUDE ~descupd_magic.tpp~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
             PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~s!plat04~) BEGIN // improved firecam full plate
                  SPRINT searchstring   ~Missile Damage~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
                  SPRINT replacestring  ~.*esistance to .*[mM]issile [dD]amage[%wnl%%lnl%%mnl%]+~
                  SPRINT insertstring   ~~
-                 PATCH_INCLUDE ~descupd_magic.tpp~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
             PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~plat22~) BEGIN // shuruppak's plate
                  SPRINT searchstring   ~[%wnl%%lnl%%mnl%][%wnl%%lnl%%mnl%]+.*fire resistance~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
                  SPRINT replacestring  ~[%wnl%%lnl%%mnl%][%wnl%%lnl%%mnl%]+.*fire resistance~
                  SPRINT insertstring   ~%wnl%+20%perc% fire resistance~
-                 PATCH_INCLUDE ~descupd_magic.tpp~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
             PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~chan02~ || ~%SOURCE_RES%~ STRING_EQUAL ~chan05~ ||
                       ~%SOURCE_RES%~ STRING_EQUAL ~j#spli06~) BEGIN // chain mail +1, splint mail +1, splint mail +2
@@ -1450,69 +1579,80 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
                  SPRINT replacestring  ~This suit of armor is enchanted, granting the wearer a.* bonus.* to their armor class.~
                  SPRINT insertstring   ~This suit of armor is enchanted, so it is lighter, easier to move in and more protective.~
-                 PATCH_INCLUDE ~descupd_magic.tpp~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
             PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~s!leat03~) BEGIN // corthala family armor +6
                  SPRINT searchstring   ~so that it grants a.* bonus to Valygar's armor class~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
                  SPRINT replacestring  ~so that it grants a.* bonus to Valygar's armor class~
                  SPRINT insertstring   ~so that it is lighter, easier to move in and more protective than before~
-                 PATCH_INCLUDE ~descupd_magic.tpp~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
             PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~rr#abih~) BEGIN // abishai hide
                  SPRINT searchstring   ~resistance~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
                  SPRINT replacestring  ~.*resistance to slashing, piercing, crushing and missile damage[%wnl%%lnl%%mnl%]+~
                  SPRINT insertstring   ~~
-                 PATCH_INCLUDE ~descupd_magic.tpp~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
             PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~mwararm~ || ~%SOURCE_RES%~ STRING_EQUAL ~armpen~) BEGIN // kill unneeded Special: clauses
                  SPRINT searchstring   ~Special~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
                  SPRINT replacestring  ~.*Special:.*[%wnl%%lnl%%mnl%]+~
                  SPRINT insertstring   ~~
-                 PATCH_INCLUDE ~descupd_magic.tpp~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
             PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~armpen~) BEGIN // armor of penance
                  SPRINT searchstring   ~Dexterity:~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
                  SPRINT replacestring  ~Dexterity.*[%wnl%%lnl%%mnl%]+~
                  SPRINT insertstring   ~~
-                 PATCH_INCLUDE ~descupd_magic.tpp~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
             PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~s!leat04~ || ~%SOURCE_RES%~ STRING_EQUAL ~s!leat05~) BEGIN // green leaves/red coral armor
                  SPRINT searchstring   ~resistance~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
                  SPRINT replacestring  ~.*resistance to physical damage.*[%wnl%%lnl%%mnl%]+~
                  SPRINT insertstring   ~~
-                 PATCH_INCLUDE ~descupd_magic.tpp~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
             PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~c2chan01~) BEGIN // incarnadine elven chain - no thieving penalties
                  SPRINT searchstring   ~Incarnadine~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
                  SPRINT replacestring  ~Stealth:.*[%wnl%%lnl%%mnl%]+~
                  SPRINT insertstring   ~~
-                 PATCH_INCLUDE ~descupd_magic.tpp~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
                  SPRINT replacestring  ~Lockpicking:.*[%wnl%%lnl%%mnl%]+~
-                 PATCH_INCLUDE ~descupd_magic.tpp~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
                  SPRINT replacestring  ~Find/Remove.*[%wnl%%lnl%%mnl%]+~
-                 PATCH_INCLUDE ~descupd_magic.tpp~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
                  SPRINT replacestring  ~Pick.*[%wnl%%lnl%%mnl%]+~
-                 PATCH_INCLUDE ~descupd_magic.tpp~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
             PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~shplate~) BEGIN // IWD: fix shadowed plate typo if noone else has
                  SPRINT searchstring   ~ corporeal ~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
                  SPRINT replacestring  ~ corporeal ~
                  SPRINT insertstring   ~ incorporeal ~
-                 PATCH_INCLUDE ~descupd_magic.tpp~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
             PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~glory~) BEGIN // glory of suffering
                  SPRINT searchstring   ~bonus to resist all Slashing, Piercing, Bludgeoning~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
                  SPRINT replacestring  ~  .*Missile attacks.~
                  SPRINT insertstring   ~~
-                 PATCH_INCLUDE ~descupd_magic.tpp~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~leatcm02~) BEGIN // green peace resistance
+                 SPRINT searchstring   ~Special~
+                 SPRINT insertafter    ~THISWILLNEVERMATCH~
+                 SPRINT replacestring  ~.*Piercing Resistance.*[%wnl%%lnl%%mnl%]+~
+                 SPRINT insertstring   ~~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+                 SPRINT replacestring  ~.*Slashing Resistance.*[%wnl%%lnl%%mnl%]+~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+                 SPRINT replacestring  ~.*Stealth.*[%wnl%%lnl%%mnl%]+~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
 
         END // if not empty usename
@@ -1576,7 +1716,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                                     ~spellfailmod~ ~pickpocketmod~ ~disarmtrapmod~ ~openlockmod~ ~movesilmod~ ~hidemod~ 
             BEGIN
                 SET x = EVALUATE_BUFFER ~%%param%_%usename%%~
-                PATCH_IF NOT (x = 0 || (x = 10 && ~%param%~ STRING_EQUAL ~baseac~)) BEGIN 
+                PATCH_IF NOT ((x = 0 && NOT ~%param%~ STRING_EQUAL ~baseac~) || (x = 10 && ~%param%~ STRING_EQUAL ~baseac~)) BEGIN 
                     PATCH_IF ~%param%~ STRING_EQUAL dexmod BEGIN
                         SET opcode = 15
                         SET param1 = 0 - x
@@ -1657,7 +1797,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                         SET param1 = 0
                         SET param2 = 89
                         PATCH_INCLUDE ~addpotfx.tpp~ END
-                    PATCH_IF ~%param%~ STRING_EQUAL hidemod BEGIN
+                    PATCH_IF (~%param%~ STRING_EQUAL hidemod  && (ENGINE_IS ~ToB~ || ENGINE_IS ~SoA~)) BEGIN
                         SET opcode = 275
                         SET param1 = 0 - x
                         SET param2 = 0
@@ -1709,13 +1849,13 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
             BEGIN
 
                  SET x = EVALUATE_BUFFER ~%%param%_%usename%%~
-                 PATCH_IF NOT (x = 0 || (x = 10 && ~%param%~ STRING_EQUAL ~baseac~)) BEGIN 
+                 PATCH_IF NOT ((x = 0 && NOT ~%param%~ STRING_EQUAL ~baseac~) || (x = 10 && ~%param%~ STRING_EQUAL ~baseac~)) BEGIN 
                      PATCH_IF ~%param%~ STRING_EQUAL baseac BEGIN
                          SPRINT searchstring   ~Armor Class:~
                          SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
                          SPRINT replacestring  ~Armor Class:[%tab% ]*.*-*[0-9]+[%tab% a-zA-Z0-9+.()]*~
                          SPRINT insertstring   ~Armor Class: %x%~
-                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+                         PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
 
                      PATCH_IF ((~%param%~ STRING_EQUAL slashres || ~%param%~ STRING_EQUAL crushres ||
                                 ~%param%~ STRING_EQUAL pierceres || ~%param%~ STRING_EQUAL missileres)
@@ -1729,7 +1869,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                          SET crushrestotal = 0
                          SET piercerestotal = 0
                          SET missilerestotal = 0
-                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+                         PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
 
                      PATCH_IF ~%param%~ STRING_EQUAL slashres BEGIN
                          SET slashrestotal = x
@@ -1770,14 +1910,14 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                          SET dexmodtotal = 0
                          SET movemodtotal = 0
                          SET wpnspeedtotal = 0
-                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+                         PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
 
                      PATCH_IF ~%param%~ STRING_EQUAL dexmod BEGIN // kill various DEX lines
                          SPRINT searchstring   ~Dexterity~
                          SPRINT insertafter    ~\(STATISTICS\)~
                          SPRINT replacestring  ~Dexterity:.*%wnl%~
                          SPRINT insertstring   ~~
-                         PATCH_INCLUDE ~descupd_magic.tpp~
+                         PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
                          SET dexmodtotal = 0 - x
                          END
 
@@ -1792,7 +1932,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                          END
                          END
 
-                     PATCH_IF ~%param%~ STRING_EQUAL hidemod BEGIN
+                     PATCH_IF (~%param%~ STRING_EQUAL hidemod  && (ENGINE_IS ~ToB~ || ENGINE_IS ~SoA~)) BEGIN
                          PATCH_IF (x > 0) BEGIN
                            SPRINT x ~-%x%~
                          END
@@ -1800,7 +1940,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                          SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
                          SPRINT replacestring  ~Hide.*Shadows:.*[1-9]*%perc%*~
                          SPRINT insertstring   ~Hide in Shadows: %x%~
-                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+                         PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
 
                      PATCH_IF (~%param%~ STRING_EQUAL movesilmod) BEGIN
                          PATCH_IF (x > 0) BEGIN
@@ -1810,7 +1950,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                          SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
                          SPRINT replacestring  ~\(Stealth|Move Silently\):.*[1-9]*%perc%*.*~
                          SPRINT insertstring   ~Move Silently: %x%~
-                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+                         PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
 
                      PATCH_IF ~%param%~ STRING_EQUAL openlockmod BEGIN
                          PATCH_IF (x > 0) BEGIN
@@ -1820,7 +1960,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                          SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
                          SPRINT replacestring  ~\(Open.*ocks|Lock Picking\):.*[1-9]*%perc%*~
                          SPRINT insertstring   ~Open Locks: %x%~
-                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+                         PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
 
                      PATCH_IF ~%param%~ STRING_EQUAL disarmtrapmod BEGIN
                          PATCH_IF (x > 0) BEGIN
@@ -1830,7 +1970,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                          SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
                          SPRINT replacestring  ~Find/Remove.*raps:.*[1-9]*%perc%*~
                          SPRINT insertstring   ~Find/Remove Traps: %x%~
-                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+                         PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
 
                      PATCH_IF ~%param%~ STRING_EQUAL pickpocketmod BEGIN
                          PATCH_IF (x > 0) BEGIN
@@ -1840,7 +1980,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                          SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
                          SPRINT replacestring  ~Pick Pockets:.*[1-9]*%perc%*~
                          SPRINT insertstring   ~Pick Pockets: %x%~
-                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+                         PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
 
                      PATCH_IF ~%param%~ STRING_EQUAL spellfailmod BEGIN
                          PATCH_IF (x > 0) BEGIN
@@ -1850,7 +1990,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                          SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
                          SPRINT replacestring  ~Spell Failure:.*[1-9]*%perc%*~
                          SPRINT insertstring   ~Mage Spell Failure: %x%%perc%~
-                         PATCH_INCLUDE ~descupd_magic.tpp~ END
+                         PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
 
                 END // if the param has changed
             END // foreach
@@ -1862,14 +2002,14 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                 SPRINT insertafter    ~THISWILLNEVERMATCH~
                 SPRINT replacestring  ~Slash/Crush/Pierce/Missile:%wnl%  0 / 0 / 0 / 0~
                 SPRINT insertstring   ~Slash/Crush/Pierce/Missile:%wnl%  %slashrestotal%%perc% / %crushrestotal%%perc% / %piercerestotal%%perc% / %missilerestotal%%perc%~
-                PATCH_INCLUDE ~descupd_magic.tpp~
+                PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
             PATCH_IF (slowheaderprinted = 1) BEGIN
                 SPRINT searchstring   ~ Dex/Move Speed/Weapon Speed Factor:~
                 SPRINT insertafter    ~THISWILLNEVERMATCH~
                 SPRINT replacestring  ~ Dex/Move Speed/Weapon Speed Factor:%wnl%  0 / 0 / 0 ~
                 SPRINT insertstring   ~ Dex/Move Speed/Weapon Speed Factor:%wnl%  %dexmodtotal% / %movemodtotal%%perc% / %wpnspeedtotal% ~
-                PATCH_INCLUDE ~descupd_magic.tpp~
+                PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
             // some custom updates for less-than-accurate statements after mod install
             PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~potn24~) BEGIN // potion of defense
@@ -1877,19 +2017,19 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
                  SPRINT replacestring  ~Armor Class: set to 0~
                  SPRINT insertstring   ~Armor Class: +%crushac_potn24% bonus vs. all~
-                 PATCH_INCLUDE ~descupd_magic.tpp~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
                  SPRINT searchstring   ~improves the armor class of the imbiber.~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
                  SPRINT replacestring  ~improves the armor class of the imbiber.~
                  SPRINT insertstring   ~improves your understanding of combat and helps you dodge, weave and avoid attacks.~
-                 PATCH_INCLUDE ~descupd_magic.tpp~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
             PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~potn46~) BEGIN // potion of stone form
                  SPRINT searchstring   ~THISWILLNEVERMATCH~
                  SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
                  SPRINT replacestring  ~~
                  SPRINT insertstring   ~WARNING: dropping below 1 Dexterity will turn you to stone and kill you.%wnl%~
-                 PATCH_INCLUDE ~descupd_magic.tpp~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
 
         END // if usename
@@ -1902,8 +2042,16 @@ PRINT ~Reworking spells and updating descriptions...~
 //////////////////////////////
 // spell updates start here //
 //////////////////////////////
+//
+// perhaps todo: Auril's Bane:
+//  SPPR425 Earthen Skin (described as Better Barkskin, actual effect Stoneskin)
+//  SPPR724 Aura of Protection (base ac 1, whole party, two hours)
 
 COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
+
+  PATCH_IF (SOURCE_SIZE < 0x72) BEGIN
+    // PATCH_PRINT "%SOURCE_FILE%: Invalid, below minimum size"
+  END ELSE BEGIN
 
     SPRINT usename ~~
     SET enchantment = 0
@@ -2015,7 +2163,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
                 SET x = %y%
             END
 
-            PATCH_IF NOT (x = 0 || (x = 10 && ~%param%~ STRING_EQUAL ~baseac~)) BEGIN 
+            PATCH_IF NOT ((x = 0 && NOT ~%param%~ STRING_EQUAL ~baseac~) || (x = 10 && ~%param%~ STRING_EQUAL ~baseac~)) BEGIN 
                 PATCH_IF ~%param%~ STRING_EQUAL baseac BEGIN
                     SET opcode = 0
                     SET param1 = x
@@ -2078,58 +2226,73 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
              SPRINT insertafter    ~THISWILLNEVERMATCH~
              SPRINT replacestring  ~(AC 6)~
              SPRINT insertstring   ~(AC %baseac_scale0%, Protection vs. S/C/P/M: %slashres_scale0%%perc% / %crushres_scale0%%perc% / %pierceres_scale0%%perc% / %missileres_scale0%%perc%)~
-             PATCH_INCLUDE ~descupd_magic.tpp~
+             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
         END
         PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~spwi317~) BEGIN // Ghost Armor spell
              SPRINT searchstring   ~field plate armor (AC 2)~
              SPRINT insertafter    ~THISWILLNEVERMATCH~
              SPRINT replacestring  ~(AC 2)~
              SPRINT insertstring   ~(AC %baseac_fieldp0%, Protection vs. S/C/P/M: %slashres_fieldp0%%perc% / %crushres_fieldp0%%perc% / %pierceres_fieldp0%%perc% / %missileres_fieldp0%%perc%)~
-             PATCH_INCLUDE ~descupd_magic.tpp~
-             // IWD variant
+             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+             // IWD variant - touch range and a bit weaker, bg2 is caster-only
              SPRINT searchstring   ~plate armor (AC 3)~
              SPRINT insertafter    ~THISWILLNEVERMATCH~
              SPRINT replacestring  ~(AC 3)~
              SPRINT insertstring   ~(AC %baseac_plate0%, Protection vs. S/C/P/M: %slashres_plate0%%perc% / %crushres_plate0%%perc% / %pierceres_plate0%%perc% / %missileres_plate0%%perc%)~
-             PATCH_INCLUDE ~descupd_magic.tpp~
+             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
         END
         PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~spwi414~) BEGIN // Spirit Armor spell
              SPRINT searchstring   ~1, as if he was wearing full plate~
              SPRINT insertafter    ~THISWILLNEVERMATCH~
              SPRINT replacestring  ~While in effect the AC (armor class) of the recipient will be 1, as if he was wearing full plate.~
              SPRINT insertstring   ~While in effect the recipient will be protected as if he was wearing full plate armor. (AC %baseac_fullp0%, Protection vs. S/C/P/M: %slashres_fullp0%%perc% / %crushres_fullp0%%perc% / %pierceres_fullp0%%perc% / %missileres_fullp0%%perc%)~
-             PATCH_INCLUDE ~descupd_magic.tpp~
+             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
              // IWD variant
              SPRINT searchstring   ~1, as if he was wearing plate mail~
              SPRINT replacestring  ~While in effect the AC (armor class) of the recipient will be 1, as if he was wearing plate mail.~
-             PATCH_INCLUDE ~descupd_magic.tpp~
+             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
         END
         PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~sppr111~ || ~%SOURCE_RES%~ STRING_EQUAL ~dgfaith~) BEGIN // Armor of Faith spell
              SPRINT searchstring   ~At first level, the protection is 5~
              SPRINT insertafter    ~THISWILLNEVERMATCH~
              SPRINT replacestring  ~At first level, the protection is 5%perc%, and every five levels of the caster improves this by another 5%perc%.~
              SPRINT insertstring   ~At first level, the protection is 5%perc% versus magic and %slashres_sppr111%%perc% versus physical attacks, and every five levels of the caster improves this by another 5%perc% and %slashres_sppr111%%perc%, respectively.~
-             PATCH_INCLUDE ~descupd_magic.tpp~
+             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
              SPRINT searchstring   ~A 20th level priest would have~
              SPRINT insertafter    ~THISWILLNEVERMATCH~
              SPRINT replacestring  ~A 20th level priest would have 25%perc% of her damage 'absorbed'~
              SPRINT insertstring   ~A 20th level priest would have 25%perc% / %slashres_sppr111-20%%perc% of her damage 'absorbed'~
-             PATCH_INCLUDE ~descupd_magic.tpp~
+             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
         END
         PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~sppr202~) BEGIN // Barkskin spell
              SPRINT searchstring   ~increasing its base Armor Class to 6, plus 1 bonus point for every four levels of the priest (AC 5 at 4th level, AC 4 at 8th level, and so forth).~
              SPRINT insertafter    ~THISWILLNEVERMATCH~
              SPRINT replacestring  ~increasing its base Armor Class to 6, plus 1 bonus point for every four levels of the priest (AC 5 at 4th level, AC 4 at 8th level, and so forth).~
              SPRINT insertstring   ~protecting it as a scale mail armor (AC %baseac_sppr202%, Protection vs. S/C/P/M: %slashres_sppr202%%perc% / %crushres_sppr202%%perc% / %pierceres_sppr202%%perc% / %missileres_sppr202%%perc%) of +1 enchantment for every four levels of the priest (+1 at 4th level, +2 at 8th level, and so forth).~
-             PATCH_INCLUDE ~descupd_magic.tpp~
+             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
              // IWD variant
              SPRINT searchstring   ~increasing its base Armor Class to AC 6, plus 1 AC for every four levels of the priest: Armor Class 5 at 4th level, Armor Class 4 at 8th, and so on.~
              SPRINT replacestring  ~increasing its base Armor Class to AC 6, plus 1 AC for every four levels of the priest: Armor Class 5 at 4th level, Armor Class 4 at 8th, and so on.~
-             PATCH_INCLUDE ~descupd_magic.tpp~
+             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
         END
         
+        // update scroll descriptions to match the modified spell
+        READ_STRREF 0x08 spellname
+        READ_LONG 0x50 spelldescref
+        INNER_ACTION BEGIN
+          COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+            PATCH_IF (SOURCE_SIZE < 0x72) BEGIN
+              // PATCH_PRINT "%SOURCE_FILE%: Invalid, below minimum size"
+            END ELSE BEGIN
+              READ_STRREF 0x0c scrollname
+              PATCH_IF (~%spellname%~ STRING_EQUAL ~%scrollname%~) BEGIN
+                WRITE_LONG 0x54 %spelldescref%
+              END
+            END
+          BUT_ONLY_IF_IT_CHANGES
+        END // inner_action
     END // if usename
-            
+  END // 0-byte-file guard
   BUT_ONLY_IF_IT_CHANGES
 
 ///////////////////////////////////////
@@ -2171,9 +2334,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
         END
         PATCH_IF ~%classdefined%~ STRING_EQUAL ~hide~ BEGIN
           INNER_ACTION BEGIN
-            COPY_EXISTING ~leat10.itm~ ~override~
-              READ_LONG 0x50 uniddescref
-            BUT_ONLY_IF_IT_CHANGES
+            ACTION_IF FILE_EXISTS_IN_GAME ~leat10.itm~ BEGIN // if hide-type armor added to, say, IWD, that doesn't have leat10.itm
+              COPY_EXISTING ~leat10.itm~ ~override~
+                READ_LONG 0x50 uniddescref
+              BUT_ONLY_IF_IT_CHANGES
+            END
           END
           WRITE_LONG 0x50 uniddescref
         END
@@ -2329,7 +2494,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 // whee, it works, perfectly!    //
 ///////////////////////////////////
 
-// Need variants for BG1/IWD/PST
+// Need variants for BG1/PST
 ACTION_IF ( ENGINE_IS ~ToB~ || ENGINE_IS ~SoA~ ) BEGIN
 
 PRINT ~Adding damage resistance limiter... (physical 90, magical 100)~
@@ -2871,7 +3036,7 @@ COPY ~fullplate/ekmdam.spl~ ~override~
 
 // ApplySpellRES() isn't defined in a stock SoA install
 APPEND ~action.ids~ ~160 ApplySpellRES(S:RES*,O:Target)~
- UNLESS ~ApplySpellRES(S:RES*,O:Target)~
+ UNLESS ~ApplySpellRES(S:RES\*,O:Target)~
 // MakeGlobal() isn't defined in a stock SoA install
 APPEND ~action.ids~ ~336 MakeGlobal()~
  UNLESS ~MakeGlobal()~
@@ -2885,9 +3050,719 @@ ACTION_IF FILE_EXISTS_IN_GAME ~baldur25.bcs~ BEGIN
 END
 
 END // ACTION_IF BG2 engine
-ELSE BEGIN
-  PRINT ~Non-BG2 engine detected, not adding damage resistance limiter...~
+
+
+// Crude icewind dale variant
+ACTION_IF ( ENGINE_IS ~IWD~ || ENGINE_IS ~HOW~ || ENGINE_IS ~TOTLM~ ) BEGIN
+
+PRINT ~Adding damage resistance limiter... (physical 90, magical 100)~
+
+<<<<<<<< iwresres.baf
+IF
+    CheckStatGT(Player1,90,RESISTSLASHING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKSLASH", Player1)
+        Continue()
 END
+
+IF
+    CheckStatGT(Player2,90,RESISTSLASHING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKSLASH", Player2)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player3,90,RESISTSLASHING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKSLASH", Player3)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player4,90,RESISTSLASHING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKSLASH", Player4)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player5,90,RESISTSLASHING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKSLASH", Player5)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player6,90,RESISTSLASHING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKSLASH", Player6)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player1,90,RESISTCRUSHING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKCRUSH", Player1)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player2,90,RESISTCRUSHING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKCRUSH", Player2)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player3,90,RESISTCRUSHING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKCRUSH", Player3)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player4,90,RESISTCRUSHING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKCRUSH", Player4)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player5,90,RESISTCRUSHING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKCRUSH", Player5)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player6,90,RESISTCRUSHING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKCRUSH", Player6)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player1,90,RESISTPIERCING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKPIERC", Player1)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player2,90,RESISTPIERCING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKPIERC", Player2)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player3,90,RESISTPIERCING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKPIERC", Player3)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player4,90,RESISTPIERCING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKPIERC", Player4)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player5,90,RESISTPIERCING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKPIERC", Player5)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player6,90,RESISTPIERCING)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKPIERC", Player6)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player1,90,RESISTMISSILE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKMISS", Player1)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player2,90,RESISTMISSILE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKMISS", Player2)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player3,90,RESISTMISSILE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKMISS", Player3)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player4,90,RESISTMISSILE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKMISS", Player4)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player5,90,RESISTMISSILE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKMISS", Player5)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player6,90,RESISTMISSILE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKMISS", Player6)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player1,100,RESISTFIRE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKFIRE", Player1)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player2,100,RESISTFIRE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKFIRE", Player2)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player3,100,RESISTFIRE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKFIRE", Player3)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player4,100,RESISTFIRE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKFIRE", Player4)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player5,100,RESISTFIRE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKFIRE", Player5)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player6,100,RESISTFIRE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKFIRE", Player6)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player1,100,RESISTCOLD)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKCOLD", Player1)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player2,100,RESISTCOLD)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKCOLD", Player2)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player3,100,RESISTCOLD)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKCOLD", Player3)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player4,100,RESISTCOLD)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKCOLD", Player4)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player5,100,RESISTCOLD)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKCOLD", Player5)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player6,100,RESISTCOLD)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKCOLD", Player6)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player1,100,RESISTELECTRICITY)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKELEC", Player1)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player2,100,RESISTELECTRICITY)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKELEC", Player2)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player3,100,RESISTELECTRICITY)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKELEC", Player3)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player4,100,RESISTELECTRICITY)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKELEC", Player4)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player5,100,RESISTELECTRICITY)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKELEC", Player5)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player6,100,RESISTELECTRICITY)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKELEC", Player6)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player1,100,RESISTACID)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKACID", Player1)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player2,100,RESISTACID)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKACID", Player2)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player3,100,RESISTACID)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKACID", Player3)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player4,100,RESISTACID)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKACID", Player4)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player5,100,RESISTACID)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKACID", Player5)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player6,100,RESISTACID)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKACID", Player6)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player1,100,MAGICDAMAGERESISTANCE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKMDAM", Player1)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player2,100,MAGICDAMAGERESISTANCE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKMDAM", Player2)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player3,100,MAGICDAMAGERESISTANCE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKMDAM", Player3)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player4,100,MAGICDAMAGERESISTANCE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKMDAM", Player4)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player5,100,MAGICDAMAGERESISTANCE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKMDAM", Player5)
+        Continue()
+END
+
+IF
+    CheckStatGT(Player6,100,MAGICDAMAGERESISTANCE)
+THEN
+    RESPONSE #100
+        ApplySpellRES("EKMDAM", Player6)
+        Continue()
+END
+>>>>>>>>
+
+COPY ~fullplate/ekresspy.cre~ ~override~
+COPY ~fullplate/ekslash.spl~ ~override~
+COPY ~fullplate/ekcrush.spl~ ~override~
+COPY ~fullplate/ekpierc.spl~ ~override~
+COPY ~fullplate/ekmiss.spl~ ~override~
+COPY ~fullplate/ekfire.spl~ ~override~
+COPY ~fullplate/ekcold.spl~ ~override~
+COPY ~fullplate/ekacid.spl~ ~override~
+COPY ~fullplate/ekelec.spl~ ~override~
+COPY ~fullplate/ekmdam.spl~ ~override~
+
+// ApplySpellRES() isn't defined in a stock IWD install
+APPEND ~action.ids~ ~160 ApplySpellRES(S:RES*,O:Target)~
+ UNLESS ~ApplySpellRES(S:RES\*,O:Target)~
+
+// IWD Tweaks code for assigning area scripts
+COPY_EXISTING ~ar1101.are~ ~override~
+              ~ar1102.are~ ~override~
+              ~ar1104.are~ ~override~
+              ~ar1106.are~ ~override~
+              ~ar1109.are~ ~override~
+              ~ar1200.are~ ~override~
+              ~ar1201.are~ ~override~
+              ~ar2001.are~ ~override~
+              ~ar2002.are~ ~override~
+              ~ar2003.are~ ~override~
+              ~ar2005.are~ ~override~
+              ~ar2006.are~ ~override~
+              ~ar3001.are~ ~override~
+              ~ar3101.are~ ~override~
+              ~ar3201.are~ ~override~
+              ~ar3301.are~ ~override~
+              ~ar3401.are~ ~override~
+              ~ar3501.are~ ~override~
+              ~ar3502.are~ ~override~
+              ~ar3503.are~ ~override~
+              ~ar3600.are~ ~override~
+              ~ar3601.are~ ~override~
+              ~ar3602.are~ ~override~
+              ~ar3603.are~ ~override~
+              ~ar4002.are~ ~override~
+              ~ar4004.are~ ~override~
+              ~ar5001.are~ ~override~
+              ~ar5002.are~ ~override~
+              ~ar5003.are~ ~override~
+              ~ar5102.are~ ~override~
+              ~ar5201.are~ ~override~
+              ~ar5202.are~ ~override~
+              ~ar5203.are~ ~override~
+              ~ar5204.are~ ~override~
+              ~ar5301.are~ ~override~
+              ~ar5302.are~ ~override~
+              ~ar5303.are~ ~override~
+              ~ar5401.are~ ~override~
+              ~ar5402.are~ ~override~
+              ~ar5403.are~ ~override~
+              ~ar5404.are~ ~override~
+              ~ar5502.are~ ~override~
+              ~ar6001.are~ ~override~
+              ~ar6007.are~ ~override~
+              ~ar6009.are~ ~override~
+              ~ar6011.are~ ~override~
+              ~ar6014.are~ ~override~
+              ~ar7000.are~ ~override~
+              ~ar7002.are~ ~override~
+              ~ar8002.are~ ~override~
+              ~ar8014.are~ ~override~
+              ~ar8015.are~ ~override~
+              ~ar8016.are~ ~override~
+  WRITE_ASCIIE 0x94 ~%SOURCE_RES%~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// IWD Tweaks code for assigning area scripts, HoW
+ACTION_IF FILE_EXISTS_IN_GAME ~ar9100.are~ THEN BEGIN
+  COPY_EXISTING ~ar9103.are~ ~override~
+                  ~ar9301.are~ ~override~
+                  ~ar9501.are~ ~override~
+                  ~ar9601.are~ ~override~
+    WRITE_ASCIIE 0x94 ~%SOURCE_RES%~ #8
+  BUT_ONLY_IF_IT_CHANGES
+END
+
+// IWD Tweaks code for assigning area scripts, TotL
+ACTION_IF FILE_EXISTS_IN_GAME ~ar9700.are~ THEN BEGIN
+  COPY_EXISTING ~ar9800.are~ ~override~
+                ~ar9801.are~ ~override~
+    WRITE_ASCIIE 0x94 ~%SOURCE_RES%~ #8
+  BUT_ONLY_IF_IT_CHANGES
+END
+
+// Ugly, ugly, ugly. If any mod adds areas we're fucked.
+// todo: do this via a *.are regexp instead
+EXTEND_BOTTOM ~AR1000.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR1001.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR1002.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR1003.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR1004.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR1005.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR1006.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR1007.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR1008.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR1009.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR1010.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR1011.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR1012.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR1013.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR1014.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR1015.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR1016.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR1100.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR1101.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR1102.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR1103.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR1104.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR1105.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR1106.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR1109.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR1200.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR1201.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR2000.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR2001.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR2002.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR2003.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR2004.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR2005.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR2006.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR2100.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR2101.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR2102.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR2103.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR2104.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR2105.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR2106.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR2107.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR2108.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR2110.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR2111.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR2112.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR2113.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR2114.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR2115.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR2116.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR3000.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR3001.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR3101.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR3201.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR3301.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR3401.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR3501.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR3502.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR3503.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR3600.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR3601.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR3602.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR3603.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR4000.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR4001.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR4002.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR4003.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR4004.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR4005.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR5000.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR5001.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR5002.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR5003.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR5004.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR5101.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR5102.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR5103.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR5104.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR5201.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR5202.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR5203.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR5204.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR5301.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR5302.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR5303.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR5304.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR5401.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR5402.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR5403.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR5404.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR5502.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR6000.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR6001.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR6002.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR6003.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR6004.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR6005.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR6006.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR6007.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR6008.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR6009.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR6010.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR6011.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR6013.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR6014.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR7000.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR7001.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR7002.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR7003.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR7004.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR7005.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR8001.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR8002.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR8003.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR8004.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR8005.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR8006.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR8007.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR8008.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR8009.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR8010.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR8011.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR8012.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR8013.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR8014.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR8015.bcs~ ~iwresres.baf~
+EXTEND_BOTTOM ~AR8016.bcs~ ~iwresres.baf~
+
+ACTION_IF FILE_EXISTS_IN_GAME ~ar9100.are~ THEN BEGIN
+  EXTEND_BOTTOM ~AR9100.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9101.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9102.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9103.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9104.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9105.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9106.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9107.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9108.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9109.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9110.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9200.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9201.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9300.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9301.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9400.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9500.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9501.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9502.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9600.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9601.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9602.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9603.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9604.bcs~ ~iwresres.baf~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~ar9700.are~ THEN BEGIN
+  EXTEND_BOTTOM ~AR9700.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9701.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9702.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9703.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9704.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9705.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9706.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9707.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9708.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9709.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9710.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9711.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9712.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9713.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9714.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9715.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9716.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9717.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9718.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9800.bcs~ ~iwresres.baf~
+  EXTEND_BOTTOM ~AR9801.bcs~ ~iwresres.baf~
+END
+
+END // ACTION_IF Icewind Dale engine
 
 
 //////////////////////////
@@ -2913,8 +3788,104 @@ COPY_EXISTING ~backstab.2da~ ~override/backstab.2da~
   END
   BUT_ONLY_IF_IT_CHANGES
 
-// todo: add new description for assassins/stalkers/swashbucklers (x8/x6, x4, x2)
+// allows us to regexp match tabs and newlines
+INCLUDE ~fullplate/extra_regexp_vars.tph~
+
+<<<<<<<< dummy.blarg
+           
+>>>>>>>>
+
 ACTION_IF ( ENGINE_IS ~ToB~ || ENGINE_IS ~SoA~ ) BEGIN
-// READ_STRREF / SAY / SET_2DA_ENTRY ?
+  COPY_EXISTING ~kitlist.2da~ ~override~
+    COUNT_2DA_ROWS 4 ~entrycount~
+    FOR (i=0;i<~%entrycount%~;i=i+1) BEGIN
+        READ_2DA_ENTRY ~%i%~ 1 4 ~name~
+        READ_2DA_ENTRY ~%i%~ 4 4 ~helpref~
+        PATCH_IF ( ~%name%~ STRING_EQUAL ~ASSASIN~ && ENGINE_IS ~SoA~ ) BEGIN
+          GET_STRREF %helpref% helptext
+
+          INNER_PATCH_SAVE newhelptext "%helptext%" BEGIN
+            REPLACE_EVALUATE ~Bonus \+1 to hit and \+1 damage~
+            BEGIN
+              SPRINT result  ~Bonus +1 to hit and +1 damage%wnl%%wnl%-  Improves further to x7 backstabbing at level 18 and x8 at level 21.~
+            END
+            ~%result%~
+          END
+          INNER_ACTION BEGIN
+            COPY ~dummy.blarg~ ~override~
+              SAY 0 ~%newhelptext%~
+
+            COPY_EXISTING ~dummy.blarg~ ~override~
+              READ_LONG 0 newhelpref
+          END
+
+          SET_2DA_ENTRY ~%i%~ 4 4 ~%newhelpref%~
+        END
+
+        PATCH_IF ( ~%name%~ STRING_EQUAL ~ASSASIN~ && ENGINE_IS ~ToB~ ) BEGIN
+          GET_STRREF %helpref% helptext
+
+          INNER_PATCH_SAVE newhelptext "%helptext%" BEGIN
+            REPLACE_EVALUATE ~Backstab reaches x7 instead of x5~
+            BEGIN
+              SPRINT result  ~Backstab reaches x8 instead of x6~
+            END
+            ~%result%~
+          END
+          INNER_ACTION BEGIN
+            COPY ~dummy.blarg~ ~override~
+              SAY 0 ~%newhelptext%~
+
+            COPY_EXISTING ~dummy.blarg~ ~override~
+              READ_LONG 0 newhelpref
+          END
+
+          SET_2DA_ENTRY ~%i%~ 4 4 ~%newhelpref%~
+        END
+
+        PATCH_IF ( ~%name%~ STRING_EQUAL ~STALKER~ ) BEGIN
+          GET_STRREF %helpref% helptext
+
+          INNER_PATCH_SAVE newhelptext "%helptext%" BEGIN
+            REPLACE_EVALUATE ~May backstab for a lesser amount than the thief class (level 1-8: x1, level 9-16: x2, level 17\+: x3)~
+            BEGIN
+              SPRINT result  ~May backstab for a lesser amount than the thief class (level 1-8: x2, level 9-16: x3, level 17+: x4)~
+            END
+            ~%result%~
+          END
+          INNER_ACTION BEGIN
+            COPY ~dummy.blarg~ ~override~
+              SAY 0 ~%newhelptext%~
+
+            COPY_EXISTING ~dummy.blarg~ ~override~
+              READ_LONG 0 newhelpref
+          END
+
+          SET_2DA_ENTRY ~%i%~ 4 4 ~%newhelpref%~
+        END
+
+        PATCH_IF ( ~%name%~ STRING_EQUAL ~SWASHBUCKLER~ ) BEGIN
+          GET_STRREF %helpref% helptext
+
+          INNER_PATCH_SAVE newhelptext "%helptext%" BEGIN
+            REPLACE_EVALUATE ~No backstab multiplier~
+            BEGIN
+              SPRINT result  ~Backstab multiplier x2, does not increase.~
+            END
+            ~%result%~
+          END
+          INNER_ACTION BEGIN
+            COPY ~dummy.blarg~ ~override~
+              SAY 0 ~%newhelptext%~
+
+            COPY_EXISTING ~dummy.blarg~ ~override~
+              READ_LONG 0 newhelpref
+          END
+
+          SET_2DA_ENTRY ~%i%~ 4 4 ~%newhelpref%~
+        END
+    END
+    BUT_ONLY_IF_IT_CHANGES
+
 END
 

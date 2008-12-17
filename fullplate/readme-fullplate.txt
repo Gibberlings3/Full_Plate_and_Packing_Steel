@@ -1,13 +1,13 @@
 Full Plate and Packing Steel
 
-Beta 3, Xxx 200X
+Beta 3, Nov 2008
 
 Between You And Harm: Armour System Rework for BG2 and IWD
 
 AD&D's armour system never made sense to me. Characters as
 agile and sprightly in full plate as in light leather armour.
 Heavy armour not helping one bit if a goblin happens to roll
-a 20 when hitting you in the chest with a butterknife. You
+a 20 hitting you in the chest with a bent butterknife. You
 get hurt just as bad as the random unarmoured commoner.
 
 And in BG2, AC simply isn't effective after a while. Opponents
@@ -39,6 +39,7 @@ Thanks to:
  Avenger, for DLTCEP
  the Bigg and the Refinements team, for inspiration
  Gibberlings3, for the friendly atmosphere
+ Kulyok, for IWD scripting inspiration
  various Pen & Paper roleplaying games, for inspiration
 
 Incompatible with:
@@ -58,9 +59,9 @@ Touched:
  armour spells
  items with armour effects (girdle of bluntness, etc.)
  armour potions (stone form, defense, absorption)
+ shields (removes spellcasting/thieving restrictions, if any)
 
 Untouched:
- shields
  shield spell
  bracers of defense
  rings of protection
@@ -69,6 +70,7 @@ Untouched:
  helmets
  potion of invuln.
  weapons with protective effects
+ hardiness hla (fine as it is)
 
 Question marks, untouched at the moment:
  mage robes
@@ -77,8 +79,6 @@ Question marks, untouched at the moment:
 Design notes
 
 - if you have a klutz character with 6 or less DEX ... don't let him try to put on heavy armour. He'll break his neck dressing for battle.
-- conflicts with "thieving in heavy armour" and "casting in heavy armour" from BG2 Tweaks, don't install.
-- conflicts with "armor refinements" from Refinements, don't install.
 - movement penalty purely based on weight.
 - light armour:
   * leather, studded, hide, elven chain, light dragonscale armours
@@ -100,9 +100,12 @@ Design notes
 
 Changes
 
-beta 3
+beta 3 (closed beta, november 2008)
+ * caveat: WeiDU pre-209 beta, for proper game engine detection
+ * bugfix: update scroll descriptions to match spell changes
+ * bugfix: fix ac for armors with updated base ac 0
  * game-specific tweaks (same filename, different spell)
- * Icewind Dale compatibility (experimental, no resistance limiter yet)
+ * Icewind Dale, Heart of Winter, Trials of the Luremaster compatibility
  * improved SoA compatibility
  * added backstabbing-for-everyone component
 
