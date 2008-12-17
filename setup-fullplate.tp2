@@ -1,7 +1,7 @@
 BACKUP ~fullplate/backup~
 AUTHOR ~erik, gibberlings3~
 //MODDER setup_tra none
-VERSION ~beta 3~
+VERSION ~beta 4~
 README ~fullplate/readme-fullplate.txt~
 NO_IF_EVAL_BUG
 
@@ -132,6 +132,15 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       SAY NAME2 ~Corthala Family Armor +5~
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CDECHAIN.ITM~) BEGIN
+      WRITE_BYTE 0x18 ("%flags%" BAND 0b10111111)
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CDSCALE.ITM~) BEGIN
+      SAY NAME2 ~White Dragon Scale +6~
+      WRITE_BYTE 0x60 6
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CHAINBM.ITM~) BEGIN
       SAY NAME2 ~Baleful Mail +2~
       WRITE_BYTE 0x60 2
@@ -163,9 +172,12 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CHAN12.ITM~) BEGIN
       WRITE_BYTE 0x18 ("%flags%" BAND 0b10111111) // switch off magical flag
+      READ_LONG NAME2 temp // move id strings to unid strings
+      WRITE_LONG NAME1 %temp%
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CHAN20.ITM~) BEGIN
+      SAY NAME2 ~White Dragon Scale +6~
       WRITE_BYTE 0x60 6
     END
 
@@ -226,8 +238,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~DLEAT10.ITM~) BEGIN
+      SAY NAME2 ~Hide Armor +2~
       WRITE_BYTE 0x18 ("%flags%" BOR 0b01000000) // switch on magical flag
       WRITE_BYTE 0x60 2
+      READ_LONG 0x50 temp
+      WRITE_LONG 0x54 %temp% // missing identified desc
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~DRAGARM.ITM~) BEGIN
@@ -460,12 +475,17 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLAT08.ITM~) BEGIN
+      SAY NAME2 ~Plate Mail +3~
       WRITE_BYTE 0x60 3
+      READ_LONG 0x50 temp
+      WRITE_LONG 0x54 %temp% // missing identified desc
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLAT09.ITM~) BEGIN
       SAY NAME1 ~Field Plate Mail~
       WRITE_BYTE 0x60 2
+      READ_LONG 0x50 temp
+      WRITE_LONG 0x54 %temp% // missing identified desc
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLAT10.ITM~) BEGIN
@@ -487,6 +507,14 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLAT19.ITM~) BEGIN
       SAY NAME2 ~Full Plate Mail +2~
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLAT20.ITM~) BEGIN
+      SAY NAME2 ~Blue Dragon Plate +2~
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLAT22.ITM~) BEGIN
+      SAY NAME2 ~Shuruppak's Plate +3~
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLATCM01.ITM~) BEGIN
@@ -682,6 +710,10 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~VEXED3.ITM~) BEGIN
       SAY NAME2 ~Vexed Armor +2~
       WRITE_BYTE 0x60 2
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~WA2PLAT.ITM~) BEGIN
+      SAY NAME2 ~Plate of Balduran +2~
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~WA2ROBE.ITM~) BEGIN
@@ -1241,9 +1273,9 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
             SET slowheaderprinted = 0
 
             // add empty line below the STATISTICS header, if there is none
-            SPRINT searchstring   ~STATISTICS.*%wnl%[ %tab%]*[a-zA-Z0-9+]~
+            SPRINT searchstring   ~STATISTICS.*[%wnl%%lnl%%mnl%][ %tab%]*[a-zA-Z0-9+]~
             SPRINT insertafter    ~gnurf~
-            SPRINT replacestring  ~STATISTICS.*%wnl%~
+            SPRINT replacestring  ~STATISTICS.*[%wnl%%lnl%%mnl%]~
             SPRINT insertstring   ~STATISTICS:%wnl%%wnl%~
             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
 
@@ -1505,10 +1537,34 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
             SPRINT insertstring   ~%wnl%Armor Class~
             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            SPRINT searchstring   ~%mnl%%mnl%Armor Class~
+            SPRINT insertafter    ~gnurf~
+            SPRINT replacestring  ~%mnl%%mnl%Armor Class~
+            SPRINT insertstring   ~%mnl%Armor Class~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            SPRINT searchstring   ~%lnl%%lnl%Armor Class~
+            SPRINT insertafter    ~gnurf~
+            SPRINT replacestring  ~%lnl%%lnl%Armor Class~
+            SPRINT insertstring   ~%lnl%Armor Class~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             SPRINT searchstring   ~%wnl%%wnl%Weight~
             SPRINT insertafter    ~gnurf~
             SPRINT replacestring  ~%wnl%%wnl%Weight~
             SPRINT insertstring   ~%wnl%Weight~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            SPRINT searchstring   ~%mnl%%mnl%Weight~
+            SPRINT insertafter    ~gnurf~
+            SPRINT replacestring  ~%mnl%%mnl%Weight~
+            SPRINT insertstring   ~%mnl%Weight~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            SPRINT searchstring   ~%lnl%%lnl%Weight~
+            SPRINT insertafter    ~gnurf~
+            SPRINT replacestring  ~%lnl%%lnl%Weight~
+            SPRINT insertstring   ~%lnl%Weight~
             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
 
@@ -2037,8 +2093,6 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   END
   BUT_ONLY_IF_IT_CHANGES
 
-PRINT ~Reworking spells and updating descriptions...~
-
 //////////////////////////////
 // spell updates start here //
 //////////////////////////////
@@ -2046,6 +2100,8 @@ PRINT ~Reworking spells and updating descriptions...~
 // perhaps todo: Auril's Bane:
 //  SPPR425 Earthen Skin (described as Better Barkskin, actual effect Stoneskin)
 //  SPPR724 Aura of Protection (base ac 1, whole party, two hours)
+
+PRINT ~Reworking spells and updating descriptions...~
 
 COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
 
@@ -2279,7 +2335,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
         // update scroll descriptions to match the modified spell
         READ_STRREF 0x08 spellname
         READ_LONG 0x50 spelldescref
-        INNER_ACTION BEGIN
+        INNER_ACTION BEGIN SILENT
           COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
             PATCH_IF (SOURCE_SIZE < 0x72) BEGIN
               // PATCH_PRINT "%SOURCE_FILE%: Invalid, below minimum size"
@@ -2300,6 +2356,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
 ///////////////////////////////////////
 
 PRINT ~Fixing up unidentified armour descriptions...~
+SILENT
 COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 
   PATCH_IF (SOURCE_SIZE < 0x72) BEGIN
@@ -2334,8 +2391,12 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
         END
         PATCH_IF ~%classdefined%~ STRING_EQUAL ~hide~ BEGIN
           INNER_ACTION BEGIN
-            ACTION_IF FILE_EXISTS_IN_GAME ~leat10.itm~ BEGIN // if hide-type armor added to, say, IWD, that doesn't have leat10.itm
+            ACTION_IF FILE_EXISTS_IN_GAME ~leat10.itm~ BEGIN 
               COPY_EXISTING ~leat10.itm~ ~override~
+                READ_LONG 0x50 uniddescref
+              BUT_ONLY_IF_IT_CHANGES
+            END ELSE BEGIN
+              COPY_EXISTING ~leat01.itm~ ~override~ // if hide-type armor added to, say, IWD, that doesn't have leat10.itm
                 READ_LONG 0x50 uniddescref
               BUT_ONLY_IF_IT_CHANGES
             END
@@ -2488,6 +2549,428 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   BUT_ONLY_IF_IT_CHANGES
 
 
+//////////////////////////////////////////////////
+// wonderful resistance static analysis thingie //
+//////////////////////////////////////////////////
+
+ACTION_IF ( ENGINE_IS ~ToB~ || ENGINE_IS ~SoA~ || ENGINE_IS ~IWD~ || ENGINE_IS ~HOW~ || ENGINE_IS ~TOTLM~ ) BEGIN
+
+PRINT ~Stripping godhood from newly invulnerable creatures...~
+
+// takes eff_offset, eff_count, intopcode, intparam, returns returnval, clobbers fxnum fxoff opcode param1 param2 i.
+// eff v1 = 0x30 bytes
+<<<<<<<< sumcrefx1.tpp
+SET returnval = 0
+
+FOR (i=0; (i < %eff_count%); i+=1) BEGIN
+    READ_SHORT  %eff_offset% + 0x30 * %i% + 0     opcode
+    READ_SLONG  %eff_offset% + 0x30 * %i% + 0x04  param1
+    READ_SLONG  %eff_offset% + 0x30 * %i% + 0x08  param2
+
+    PATCH_IF ( %opcode% = %intopcode% ) BEGIN
+      PATCH_IF ( %intparam% = 1 ) BEGIN
+        SET returnval = %returnval% + %param1%
+      END
+      PATCH_IF ( %intparam% = 2 ) BEGIN
+        SET returnval = %returnval% + %param2%
+      END
+    END
+END
+>>>>>>>>
+
+// takes eff_offset, eff_count, intopcode, intparam, returns returnval, clobbers opcode param1 param2 i.
+// eff v2 w/o header = 0x108 bytes
+<<<<<<<< sumcrefx2.tpp
+SET returnval = 0
+
+FOR (i=0; (i < %eff_count%); i+=1) BEGIN
+    READ_LONG   %eff_offset% + 0x108 * %i% + 0x08  opcode
+    READ_SLONG  %eff_offset% + 0x108 * %i% + 0x14  param1
+    READ_SLONG  %eff_offset% + 0x108 * %i% + 0x18  param2
+
+    PATCH_IF ( %opcode% = %intopcode% ) BEGIN
+      PATCH_IF ( %intparam% = 1 ) BEGIN
+        SET returnval = %returnval% + %param1%
+      END
+      PATCH_IF ( %intparam% = 2 ) BEGIN
+        SET returnval = %returnval% + %param2%
+      END
+    END
+END
+>>>>>>>>
+
+<<<<<<<< addcreeff1.tpp
+INSERT_BYTES    %eff_offset%         0x30
+WRITE_SHORT     %eff_offset% + 0x00  %opcode%
+WRITE_BYTE      %eff_offset% + 0x02  1           // target self
+WRITE_BYTE      %eff_offset% + 0x03  0           // power
+WRITE_LONG      %eff_offset% + 0x04  %param1%
+WRITE_LONG      %eff_offset% + 0x08  %param2%
+WRITE_BYTE      %eff_offset% + 0x0c  9           // timing permanent after death
+WRITE_BYTE      %eff_offset% + 0x12  100         // probability upper
+// rest irrelevant, kept 0
+SET accum_adj = %accum_adj% + 1
+>>>>>>>>
+
+<<<<<<<< addcreeff2.tpp
+INSERT_BYTES    %eff_offset%           0x108
+WRITE_LONG      %eff_offset% + 0x08    %opcode%
+WRITE_LONG      %eff_offset% + 0x0c    1           // target self
+WRITE_LONG      %eff_offset% + 0x10    0           // power 0
+WRITE_LONG      %eff_offset% + 0x14    %param1%
+WRITE_LONG      %eff_offset% + 0x18    %param2%
+WRITE_BYTE      %eff_offset% + 0x1c    9           // timing permanent after death
+WRITE_SHORT     %eff_offset% + 0x24    100         // probability upper
+// rest irrelevant, kept 0
+SET accum_adj = %accum_adj% + 1
+>>>>>>>>
+
+COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
+  PATCH_IF (SOURCE_SIZE < 0x5) BEGIN
+    PATCH_PRINT "%SOURCE_FILE%: Invalid, zero-byte file?"
+  END ELSE BEGIN
+    READ_ASCII 0x4 creversion (4)
+
+    SET effver2 = 0
+    SET nat_resfire = 0
+    SET nat_rescold = 0
+    SET nat_resslash = 0
+    SET nat_rescrush = 0
+    SET nat_respierce = 0
+    SET nat_resmissile = 0
+
+    SET resfire_eff = 0
+    SET rescold_eff = 0
+    SET resslash_eff = 0
+    SET rescrush_eff = 0
+    SET respierce_eff = 0
+    SET resmissile_eff = 0
+
+    SET resfire_itm = 0
+    SET rescold_itm = 0
+    SET resslash_itm = 0
+    SET rescrush_itm = 0
+    SET respierce_itm = 0
+    SET resmissile_itm = 0
+
+    SET resfire_arm = 0
+    SET rescold_arm = 0
+    SET resslash_arm = 0
+    SET rescrush_arm = 0
+    SET respierce_arm = 0
+    SET resmissile_arm = 0
+
+    PATCH_IF (~%creversion%~ STRING_EQUAL ~V1.0~) BEGIN
+      // PATCH_PRINT "%SOURCE_FILE% : BG1/BG2 CRE V1.0"
+      PATCH_IF (SOURCE_SIZE < 0x2d4) BEGIN
+        PATCH_PRINT "%SOURCE_FILE%: Invalid, below minimum size for V1.0"
+      END ELSE BEGIN
+        READ_BYTE 0x33 effver2
+        READ_SBYTE 0x59 nat_resfire
+        READ_SBYTE 0x5a nat_rescold
+        READ_SBYTE 0x60 nat_resslash
+        READ_SBYTE 0x61 nat_rescrush
+        READ_SBYTE 0x62 nat_respierce
+        READ_SBYTE 0x63 nat_resmissile
+        READ_LONG 0x2a0 knownspells_offset
+        READ_LONG 0x2a8 spellslots_offset
+        READ_LONG 0x2b0 memspells_offset
+        READ_LONG 0x2b8 islots_offset
+        READ_LONG 0x2bc itm_offset
+        READ_LONG 0x2c0 itm_count
+        READ_LONG 0x2c4 eff_offset
+        READ_LONG 0x2c8 eff_count
+      END
+    END
+    PATCH_IF (~%creversion%~ STRING_EQUAL ~V9.0~) BEGIN
+      // PATCH_PRINT "%SOURCE_FILE% : IWD/HOW/TOTLM CRE V9.0"
+      PATCH_IF (SOURCE_SIZE < 0x33c) BEGIN
+        PATCH_PRINT "%SOURCE_FILE%: Invalid, below minimum size for V9.0"
+      END ELSE BEGIN
+        READ_BYTE 0x33 effver2
+        READ_SBYTE 0x59 nat_resfire
+        READ_SBYTE 0x5a nat_rescold
+        READ_SBYTE 0x60 nat_resslash
+        READ_SBYTE 0x61 nat_rescrush
+        READ_SBYTE 0x62 nat_respierce
+        READ_SBYTE 0x63 nat_resmissile
+        READ_LONG 0x308 knownspells_offset
+        READ_LONG 0x310 spellslots_offset
+        READ_LONG 0x318 memspells_offset
+        READ_LONG 0x320 islots_offset
+        READ_LONG 0x324 itm_offset
+        READ_LONG 0x328 itm_count
+        READ_LONG 0x32c eff_offset
+        READ_LONG 0x330 eff_count
+      END
+    END
+
+    // resistances added by permanent eff v2s, if any
+    PATCH_IF (eff_count > 0 && effver2 = 1) BEGIN
+        SET intparam = 1
+
+        SET intopcode = 30
+        PATCH_INCLUDE ~sumcrefx2.tpp~
+        PATCH_IF (returnval != 0) BEGIN resfire_eff += returnval END
+
+        SET intopcode = 28
+        PATCH_INCLUDE ~sumcrefx2.tpp~
+        PATCH_IF (returnval != 0) BEGIN rescold_eff += returnval END
+
+        SET intopcode = 86
+        PATCH_INCLUDE ~sumcrefx2.tpp~
+        PATCH_IF (returnval != 0) BEGIN resslash_eff += returnval END
+
+        SET intopcode = 87
+        PATCH_INCLUDE ~sumcrefx2.tpp~
+        PATCH_IF (returnval != 0) BEGIN rescrush_eff += returnval END
+
+        SET intopcode = 88
+        PATCH_INCLUDE ~sumcrefx2.tpp~
+        PATCH_IF (returnval != 0) BEGIN respierce_eff += returnval END
+
+        SET intopcode = 89
+        PATCH_INCLUDE ~sumcrefx2.tpp~
+        PATCH_IF (returnval != 0) BEGIN resmissile_eff += returnval END
+    END
+
+    // resistances added by permanent eff v1s, if any
+    PATCH_IF (eff_count > 0 && effver2 = 0) BEGIN
+        SET intparam = 1
+
+        SET intopcode = 30
+        PATCH_INCLUDE ~sumcrefx1.tpp~
+        PATCH_IF (returnval != 0) BEGIN resfire_eff += returnval END
+
+        SET intopcode = 28
+        PATCH_INCLUDE ~sumcrefx1.tpp~
+        PATCH_IF (returnval != 0) BEGIN rescold_eff += returnval END
+
+        SET intopcode = 86
+        PATCH_INCLUDE ~sumcrefx1.tpp~
+        PATCH_IF (returnval != 0) BEGIN resslash_eff += returnval END
+
+        SET intopcode = 87
+        PATCH_INCLUDE ~sumcrefx1.tpp~
+        PATCH_IF (returnval != 0) BEGIN rescrush_eff += returnval END
+
+        SET intopcode = 88
+        PATCH_INCLUDE ~sumcrefx1.tpp~
+        PATCH_IF (returnval != 0) BEGIN respierce_eff += returnval END
+
+        SET intopcode = 89
+        PATCH_INCLUDE ~sumcrefx1.tpp~
+        PATCH_IF (returnval != 0) BEGIN resmissile_eff += returnval END
+    END
+
+    // resistances added by items (what we're really interested in)
+    PATCH_IF (itm_count > 0) BEGIN
+
+        FOR (x=0; (x < %itm_count%); x+=1) BEGIN
+          READ_ASCII %itm_offset% + 0x14 * %x%     resref (8) NULL
+
+          // is it equipped and thus relevant?
+          SET valid = 0
+          FOR (y=0; y < 18 ; y+=1) BEGIN
+            READ_SHORT islots_offset + (2 * %y%)       itmnum
+            PATCH_IF itmnum = x BEGIN
+              SET valid = 1
+            END
+          END
+
+          // yes.
+          PATCH_IF (valid = 1) BEGIN
+
+            INNER_ACTION BEGIN
+              SILENT
+              ACTION_IF FILE_EXISTS_IN_GAME ~%resref%.itm~ BEGIN
+                COPY_EXISTING ~%resref%.itm~ ~override~
+
+                    READ_BYTE 0x1c itemtype
+
+                    // start scanning
+                    SET intparam = 1
+
+                    // itemtype = 0x02 catches everything we adjust but the girdles ... good enough
+
+                    SET intopcode = 30
+                    PATCH_INCLUDE ~sumfx.tpp~
+                    PATCH_IF (returnval != 0 && returnval != 100 && itemtype != 0x02) BEGIN resfire_itm += returnval END
+                    PATCH_IF (returnval != 0 && returnval != 100 && itemtype = 0x02) BEGIN resfire_arm += returnval END
+
+                    SET intopcode = 28
+                    PATCH_INCLUDE ~sumfx.tpp~
+                    PATCH_IF (returnval != 0 && returnval != 100 && itemtype != 0x02) BEGIN rescold_itm += returnval END
+                    PATCH_IF (returnval != 0 && returnval != 100 && itemtype = 0x02) BEGIN rescold_arm += returnval END
+
+                    SET intopcode = 86
+                    PATCH_INCLUDE ~sumfx.tpp~
+                    PATCH_IF (returnval != 0 && returnval != 100 && itemtype != 0x02) BEGIN resslash_itm += returnval END
+                    PATCH_IF (returnval != 0 && returnval != 100 && itemtype = 0x02) BEGIN resslash_arm += returnval END
+
+                    SET intopcode = 87
+                    PATCH_INCLUDE ~sumfx.tpp~
+                    PATCH_IF (returnval != 0 && returnval != 100 && itemtype != 0x02) BEGIN rescrush_itm += returnval END
+                    PATCH_IF (returnval != 0 && returnval != 100 && itemtype = 0x02) BEGIN rescrush_arm += returnval END
+
+                    SET intopcode = 88
+                    PATCH_INCLUDE ~sumfx.tpp~
+                    PATCH_IF (returnval != 0 && returnval != 100 && itemtype != 0x02) BEGIN respierce_itm += returnval END
+                    PATCH_IF (returnval != 0 && returnval != 100 && itemtype = 0x02) BEGIN respierce_arm += returnval END
+
+                    SET intopcode = 89
+                    PATCH_INCLUDE ~sumfx.tpp~
+                    PATCH_IF (returnval != 0 && returnval != 100 && itemtype != 0x02) BEGIN resmissile_itm += returnval END
+                    PATCH_IF (returnval != 0 && returnval != 100 && itemtype = 0x02) BEGIN resmissile_arm += returnval END
+                  BUT_ONLY_IF_IT_CHANGES
+              END // action_if
+            END // inner_action
+          END // patch_if valid=1
+        END // for itm_count
+    END // patch_if itm_count
+
+    // sum things up
+    SET resfire_tot = %nat_resfire% + %resfire_eff% + %resfire_itm% + %resfire_arm%
+    SET rescold_tot = %nat_rescold% + %rescold_eff% + %rescold_itm% + %rescold_arm%
+    SET resslash_tot = %nat_resslash% + %resslash_eff% + %resslash_itm% + %resslash_arm%
+    SET rescrush_tot = %nat_rescrush% + %rescrush_eff% + %rescrush_itm% + %rescrush_arm%
+    SET respierce_tot = %nat_respierce% + %respierce_eff% + %respierce_itm% + %respierce_arm%
+    SET resmissile_tot = %nat_resmissile% + %resmissile_eff% + %resmissile_itm% + %resmissile_arm%
+
+    // the object of the exercise: adjust resistances if necessary
+    PATCH_IF (resfire_tot > 100 && (resfire_tot - resfire_arm < 101)) BEGIN WRITE_BYTE 0x59 (nat_resfire - (resfire_tot - 100)) END
+    PATCH_IF (resfire_tot > 99 && (resfire_tot - resfire_arm < 100)) BEGIN WRITE_BYTE 0x59 (nat_resfire - (resfire_tot - 99)) END
+    PATCH_IF (resfire_tot > 90 && (resfire_tot - resfire_arm < 91)) BEGIN WRITE_BYTE 0x59 (nat_resfire - (resfire_tot - 90)) END
+
+    PATCH_IF (rescold_tot > 100 && (rescold_tot - rescold_arm < 101)) BEGIN WRITE_BYTE 0x5a (nat_rescold - (rescold_tot - 100)) END
+    PATCH_IF (rescold_tot > 99 && (rescold_tot - rescold_arm < 100)) BEGIN WRITE_BYTE 0x5a (nat_rescold - (rescold_tot - 99)) END
+    PATCH_IF (rescold_tot > 90 && (rescold_tot - rescold_arm < 91)) BEGIN WRITE_BYTE 0x5a (nat_rescold - (rescold_tot - 90)) END
+
+    PATCH_IF (resslash_tot > 100 && (resslash_tot - resslash_arm < 101)) BEGIN WRITE_BYTE 0x60 (nat_resslash - (resslash_tot - 100)) END
+    PATCH_IF (resslash_tot > 99 && (resslash_tot - resslash_arm < 100)) BEGIN WRITE_BYTE 0x60 (nat_resslash - (resslash_tot - 99)) END
+    PATCH_IF (resslash_tot > 90 && (resslash_tot - resslash_arm < 91)) BEGIN WRITE_BYTE 0x60 (nat_resslash - (resslash_tot - 90)) END
+
+    PATCH_IF (rescrush_tot > 100 && (rescrush_tot - rescrush_arm < 101)) BEGIN WRITE_BYTE 0x61 (nat_rescrush - (rescrush_tot - 100)) END
+    PATCH_IF (rescrush_tot > 99 && (rescrush_tot - rescrush_arm < 100)) BEGIN WRITE_BYTE 0x61 (nat_rescrush - (rescrush_tot - 99)) END
+    PATCH_IF (rescrush_tot > 90 && (rescrush_tot - rescrush_arm < 91)) BEGIN WRITE_BYTE 0x61 (nat_rescrush - (rescrush_tot - 90)) END
+
+    PATCH_IF (respierce_tot > 100 && (respierce_tot - respierce_arm < 101)) BEGIN WRITE_BYTE 0x62 (nat_respierce - (respierce_tot - 100)) END
+    PATCH_IF (respierce_tot > 99 && (respierce_tot - respierce_arm < 100)) BEGIN WRITE_BYTE 0x62 (nat_respierce - (respierce_tot - 99)) END
+    PATCH_IF (respierce_tot > 90 && (respierce_tot - respierce_arm < 91)) BEGIN WRITE_BYTE 0x62 (nat_respierce - (respierce_tot - 90)) END
+
+    PATCH_IF (resmissile_tot > 100 && (resmissile_tot - resmissile_arm < 101)) BEGIN WRITE_BYTE 0x63 (nat_resmissile - (resmissile_tot - 100)) END
+    PATCH_IF (resmissile_tot > 99 && (resmissile_tot - resmissile_arm < 100)) BEGIN WRITE_BYTE 0x63 (nat_resmissile - (resmissile_tot - 100)) END
+    PATCH_IF (resmissile_tot > 90 && (resmissile_tot - resmissile_arm < 91)) BEGIN WRITE_BYTE 0x63 (nat_resmissile - (resmissile_tot - 100)) END
+
+    // if creature has armour equipped, we must add a permanent cumulative effect to the CRE,
+    // equal to natural resistance, to counteract the armor flat "set natural resistance to" effect.
+    // pain in the ass, but only way this can work perfectly with armor spells and potions in the mix.
+    // are there creatures that have their equipment created by script? That would defeat this...
+
+    // reread - we want the adjusted natural resistances from now on, not the originals
+    READ_SBYTE 0x59 nat_resfire
+    READ_SBYTE 0x5a nat_rescold
+    READ_SBYTE 0x60 nat_resslash
+    READ_SBYTE 0x61 nat_rescrush
+    READ_SBYTE 0x62 nat_respierce
+    READ_SBYTE 0x63 nat_resmissile
+
+    PATCH_IF (    (resfire_arm != 0 && nat_resfire != 0)
+               || (rescold_arm != 0 && nat_rescold != 0)
+               || (resslash_arm != 0 && nat_resslash != 0)
+               || (rescrush_arm != 0 && nat_rescrush != 0)
+               || (respierce_arm != 0 && nat_respierce != 0)
+               || (resmissile_arm != 0 && nat_resmissile != 0) ) BEGIN
+      PATCH_IF (eff_offset = 0) BEGIN SET eff_offset = %SOURCE_SIZE% END
+      SET accum_adj = 0
+      PATCH_IF (resfire_arm != 0 && nat_resfire != 0) BEGIN
+         SET opcode = 30
+         SET param1 = %nat_resfire%
+         SET param2 = 0
+         PATCH_IF (effver2 = 1) BEGIN PATCH_INCLUDE ~addcreeff2.tpp~ END
+         ELSE BEGIN PATCH_INCLUDE ~addcreeff1.tpp~ END
+      END
+      PATCH_IF (rescold_arm != 0 && nat_rescold != 0) BEGIN
+         SET opcode = 28
+         SET param1 = %nat_rescold%
+         SET param2 = 0
+         PATCH_IF (effver2 = 1) BEGIN PATCH_INCLUDE ~addcreeff2.tpp~ END
+         ELSE BEGIN PATCH_INCLUDE ~addcreeff1.tpp~ END
+      END
+      PATCH_IF (resslash_arm != 0 && nat_resslash != 0) BEGIN
+         SET opcode = 86
+         SET param1 = %nat_resslash%
+         SET param2 = 0
+         PATCH_IF (effver2 = 1) BEGIN PATCH_INCLUDE ~addcreeff2.tpp~ END
+         ELSE BEGIN PATCH_INCLUDE ~addcreeff1.tpp~ END
+      END
+      PATCH_IF (rescrush_arm != 0 && nat_rescrush != 0) BEGIN
+         SET opcode = 87
+         SET param1 = %nat_rescrush%
+         SET param2 = 0
+         PATCH_IF (effver2 = 1) BEGIN PATCH_INCLUDE ~addcreeff2.tpp~ END
+         ELSE BEGIN PATCH_INCLUDE ~addcreeff1.tpp~ END
+      END
+      PATCH_IF (respierce_arm != 0 && nat_respierce != 0) BEGIN
+         SET opcode = 88
+         SET param1 = %nat_respierce%
+         SET param2 = 0
+         PATCH_IF (effver2 = 1) BEGIN PATCH_INCLUDE ~addcreeff2.tpp~ END
+         ELSE BEGIN PATCH_INCLUDE ~addcreeff1.tpp~ END
+      END
+      PATCH_IF (resmissile_arm != 0 && nat_resmissile != 0) BEGIN
+         SET opcode = 89
+         SET param1 = %nat_resmissile%
+         SET param2 = 0
+         PATCH_IF (effver2 = 1) BEGIN PATCH_INCLUDE ~addcreeff2.tpp~ END
+         ELSE BEGIN PATCH_INCLUDE ~addcreeff1.tpp~ END
+      END
+      // all effects added
+      SET efflength = 0x30
+      PATCH_IF (effver2 = 1) BEGIN SET efflength = 0x108 END
+
+      PATCH_IF (~%creversion%~ STRING_EQUAL ~V1.0~) BEGIN
+        WRITE_LONG 0x2c4 eff_offset
+        WRITE_LONG 0x2c8 (eff_count + accum_adj)
+        PATCH_IF (knownspells_offset >= eff_offset) BEGIN
+          WRITE_LONG 0x2a0 knownspells_offset + (accum_adj * efflength)
+        END
+        PATCH_IF (spellslots_offset >= eff_offset) BEGIN
+          WRITE_LONG 0x2a8 spellslots_offset + (accum_adj * efflength)
+        END
+        PATCH_IF (memspells_offset >= eff_offset) BEGIN
+          WRITE_LONG 0x2b0 memspells_offset + (accum_adj * efflength)
+        END
+        PATCH_IF (islots_offset >= eff_offset) BEGIN
+          WRITE_LONG 0x2b8 islots_offset + (accum_adj * efflength)
+        END
+        PATCH_IF (itm_offset >= eff_offset) BEGIN
+          WRITE_LONG 0x2bc itm_offset + (accum_adj * efflength)
+        END
+      END // bg2 cre
+      PATCH_IF (~%creversion%~ STRING_EQUAL ~V9.0~) BEGIN
+        WRITE_LONG 0x32c eff_offset
+        WRITE_LONG 0x330 (eff_count + accum_adj)
+        PATCH_IF (knownspells_offset >= eff_offset) BEGIN
+          WRITE_LONG 0x308 knownspells_offset + (accum_adj * efflength)
+        END
+        PATCH_IF (spellslots_offset >= eff_offset) BEGIN
+          WRITE_LONG 0x310 spellslots_offset + (accum_adj * efflength)
+        END
+        PATCH_IF (memspells_offset >= eff_offset) BEGIN
+          WRITE_LONG 0x318 memspells_offset + (accum_adj * efflength)
+        END
+        PATCH_IF (islots_offset >= eff_offset) BEGIN
+          WRITE_LONG 0x320 islots_offset + (accum_adj * efflength)
+        END
+        PATCH_IF (itm_offset >= eff_offset) BEGIN
+          WRITE_LONG 0x324 itm_offset + (accum_adj * efflength)
+        END
+      END // iwd cre
+    END // if armor && natural resistance
+  END
+  BUT_ONLY_IF_IT_CHANGES
+END
 
 ///////////////////////////////////
 // add resistance limiter cutspy //
@@ -2498,6 +2981,8 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 ACTION_IF ( ENGINE_IS ~ToB~ || ENGINE_IS ~SoA~ ) BEGIN
 
 PRINT ~Adding damage resistance limiter... (physical 90, magical 100)~
+
+SILENT
 
 <<<<<<<< baldur_res.baf
 IF
@@ -3056,6 +3541,8 @@ END // ACTION_IF BG2 engine
 ACTION_IF ( ENGINE_IS ~IWD~ || ENGINE_IS ~HOW~ || ENGINE_IS ~TOTLM~ ) BEGIN
 
 PRINT ~Adding damage resistance limiter... (physical 90, magical 100)~
+
+SILENT
 
 <<<<<<<< iwresres.baf
 IF

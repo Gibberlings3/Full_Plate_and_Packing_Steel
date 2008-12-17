@@ -21,6 +21,9 @@ C2KELD01    FULLP      ALL      /* Item Upgrade */
 C2LEAT01    LEATHER    ALL      /* Item Upgrade */
 C2PLAT01    PLATE      ALL      /* Item Upgrade */
 C2VALY01    CHAIN      ALL      /* Item Upgrade */
+CDECHAIN    ELVENC     ALL      /* Item Upgrade for IWD */
+CDHARMOR    HIDE       ALL      /* Item Upgrade for IWD */
+CDSCALE     SPLINT     ALL      /* Item Upgrade for IWD */
 CHAINBM     CHAIN      ALL      //IWD
 CHALARM     FULLP      ALL      //BG2:TOB
 CHAN01      CHAIN      ALL      //BG1

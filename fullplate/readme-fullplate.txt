@@ -1,6 +1,6 @@
 Full Plate and Packing Steel
 
-Beta 3, Nov 2008
+Beta 4, Nov 2008
 
 Between You And Harm: Armour System Rework for BG2 and IWD
 
@@ -26,6 +26,10 @@ Heavy armour has quite another feel now. Enjoy.
 
 Do read the updated descriptions. They are informative.
 
+HOW/TOTLM note: The (x amount resisted) feedback text does not
+ seem to be accurate all the time. Strangeness abounds. But it
+ all seems to work correctly.
+
 
 Little He Knows Where a Foe May Lurk:
 
@@ -42,6 +46,7 @@ Thanks to:
  Kulyok, for IWD scripting inspiration
  various Pen & Paper roleplaying games, for inspiration
 
+
 Incompatible with:
  Refinements' Revised Armors & Shields
  BG2 Tweaks' Allow Thieving and Stealth in Heavy Armor
@@ -52,6 +57,10 @@ Incompatible with:
 Install order:
  As close to last as you can manage. After anything adding
  armours to the game.
+
+License:
+ Creative Commons Attribution 3.0 Unported (http://creativecommons.org/licenses/by/3.0/)
+  ... essentially, mention me in the readme if you grab anything. Feel free.
 
 
 Touched:
@@ -70,6 +79,7 @@ Untouched:
  helmets
  potion of invuln.
  weapons with protective effects
+ barbarian resistances
  hardiness hla (fine as it is)
 
 Question marks, untouched at the moment:
@@ -81,7 +91,7 @@ Design notes
 - if you have a klutz character with 6 or less DEX ... don't let him try to put on heavy armour. He'll break his neck dressing for battle.
 - movement penalty purely based on weight.
 - light armour:
-  * leather, studded, hide, elven chain, light dragonscale armours
+  * padded, leather, studded, hide, elven chain, light dragonscale armours
   * enchantment improves ac quickly
   * enchantment removes weapon speed penalties quickly
   * enchantment lowers thieving penalties quickly
@@ -99,6 +109,16 @@ Design notes
 
 
 Changes
+
+beta 4
+ * bugfix: armor no longer overrides natural resistances
+ * install-time analysis of resistances added by items and effects, creatures
+   adjusted to avoid resistant-to-everything enemies
+ * added back some ac-bonuses vs weapon types (equal amount for all armor types,
+   just distributed in various ways), to help icewind dale adventurers a bit
+ * beefed up missile protection of heavy armours a bit
+ * minor descriptionwhacking updates
+ * tested with still more mods than before
 
 beta 3 (closed beta, november 2008)
  * caveat: WeiDU pre-209 beta, for proper game engine detection
