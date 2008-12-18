@@ -332,6 +332,9 @@ VICARM      STUDDED    ALL      /* Item Revisions */
 WA2PLAT     FULLP      ALL      //BG2:SOA
 XCHAN03     CHAIN      ALL      //TOTLM
 XLEAT03     LEATHER    ALL      //TOTLM
+X#FAI4      NOTARMOR   ALL      /* BG1 NPC */
+X#GARCH     CHAIN      ALL      /* BG1 NPC */
+X#GARCH2    CHAIN      ALL      /* BG1 NPC */
 ZILFGT      STUDDED    ALL      /* Ascension (Tougher Illasera) */
 ZOMBSKIN    LEATHER    ALL      /* NeJ2 */
 SPPR111     NOTARMOR   SOA      //BG2:SOA

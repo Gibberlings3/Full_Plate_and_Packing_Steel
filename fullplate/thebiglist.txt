@@ -149,6 +149,8 @@ BSINGCHN     0  0   0   0   0   4  -2   0   0   8  -4   0   0  0   0    0   0   
 O!BOM002   -15 -1 -10   0   0   0   0   0   0   0   0   0   0  0   0  -25 -30   0   0   0   0   // ranger mail +5
 CHAN17       0 -1   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // wyvernscale splint mail
 SHARK3      -5  0 -10   0   0   0   0   0   0   2   2   2   2  0   0    0   0   0   0   0   0   // coral plate - sahuagin splint mail
+X#GARCH    -10  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0 -29   // bardic chain +1
+X#GARCH2   -10  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0 -28   // bardic chain +2
 FWCHAN01     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0 -26   // improved jester's chain
 FWCHAN03     0  0   0   0   0  10   0  10   0  99   0  99   0  0   0    0   0   0   0   0   0   // suldanessellar chain
 FWCHAN04     0  0   0   0  -3   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // sunus graywar's chainmail +6
@@ -193,6 +195,7 @@ PLAT20     -30 -2 -10  -2   0   0   0   0   0   0   0   0   0  0   0  -35 -35 -3
 U#PLAT02   -20 -1 -10  -2   0   0   0   0   0   0   0   0   0  0   0  -35 -35 -35 -35 -35   0   // plate of many dragons
 S!PLAT05   -35 -2 -20  -2   0   0   0   0   0   0   0   0   4  0   0  -35 -35 -35 -35 -35   0   // green wyrmscale plate
 S!PLAT06   -30 -1 -10  -1   0   0   0   0   0   0   0   0   4  0   0  -35 -35 -35 -35 -35   0   // red wyrmscale plate
+X#FAI4     150  9  70  10  -1   0   0   0   0  20  20  20  20  0   0  120 120 120 120 120  90   // battered armor
 DGFAITH      0  0   0   0   0   0   0   0   0  15  15  15  15  0   0    0   0   0   0   0   0   // armor of faith, innate version
 SPPR111      0  0   0   0   0   0   0   0   0   3   3   3   3  0   0    0   0   0   0   0   0   // armor of faith, priest, level 1
 SPPR111-5    0  0   0   0   0   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   // armor of faith, priest, level 5

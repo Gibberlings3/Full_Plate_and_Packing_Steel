@@ -1,7 +1,7 @@
 BACKUP ~fullplate/backup~
 AUTHOR ~erik, gibberlings3~
 //MODDER setup_tra none
-VERSION ~beta 5+~
+VERSION ~v1~
 README ~fullplate/readme-fullplate.html~
 
 ALLOW_MISSING ~baldur25.bcs~
@@ -1262,6 +1262,21 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 2
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~X#FAI4.ITM~) BEGIN
+      READ_LONG 0x54 temp
+      WRITE_LONG 0x50 %temp%
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~X#GARCH.ITM~) BEGIN
+      SAY NAME2 ~Bardic Chain +1~
+      WRITE_BYTE 0x60 1
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~X#GARCH2.ITM~) BEGIN
+      SAY NAME2 ~Bardic Chain +2~
+      WRITE_BYTE 0x60 2
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~ZOMBSKIN.ITM~) BEGIN
       WRITE_BYTE 0x60 2
       SAY NAME1 ~Skin of the Zombie +2~
@@ -1846,6 +1861,13 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
             PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~kinplat~) BEGIN // Kindrek's Full Plate
               SPRINT searchstring   ~THISWILLNEVERMATCH~
               SPRINT insertafter    ~\(This is Kindrek's beloved armor. He will wear no other.\)~
+              SPRINT replacestring  ~NOTHINGDAMNIT~
+              SPRINT insertstring   ~%wnl%%wnl%STATISTICS:%wnl%%wnl%~
+              PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~x#fai4~) BEGIN // BG1NPC - Battered Armour
+              SPRINT searchstring   ~THISWILLNEVERMATCH~
+              SPRINT insertafter    ~\( not for practical use anyway.\)~
               SPRINT replacestring  ~NOTHINGDAMNIT~
               SPRINT insertstring   ~%wnl%%wnl%STATISTICS:%wnl%%wnl%~
               PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
