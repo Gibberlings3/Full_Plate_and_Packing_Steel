@@ -615,6 +615,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 1
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~I1PL001.ITM~) BEGIN
+      WRITE_BYTE 0x18 ("%flags%" BOR 0b01000000) // switch on magical flag
+      WRITE_BYTE 0x60 1
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~IPLAT05.ITM~) BEGIN
       WRITE_BYTE 0x60 1
     END
