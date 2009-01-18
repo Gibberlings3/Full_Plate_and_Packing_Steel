@@ -1,7 +1,7 @@
 BACKUP ~fullplate/backup~
 AUTHOR ~erik, gibberlings3~
 //MODDER setup_tra none
-VERSION ~v1~
+VERSION ~v2~
 README ~fullplate/readme-fullplate.html~
 
 ALLOW_MISSING ~baldur25.bcs~
@@ -872,7 +872,9 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLAT10.ITM~) BEGIN
-      WRITE_BYTE 0x60 1
+      PATCH_IF (enchantment = 0) BEGIN // unless item rev. has given it a makeover
+        WRITE_BYTE 0x60 1
+      END
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~PLAT11.ITM~) BEGIN
@@ -1450,6 +1452,14 @@ COPY_EXISTING - ~fullplate/thebiglist.txt~ ~fullplate~
 
         TO_LOWER name
 
+        // with item revisions installed, all shadow armours do not hinder spellcasting.
+        PATCH_IF (~%modsiam%~ STRING_CONTAINS_REGEXP ~item_rev~ == 0) && (~%name%~ STRING_EQUAL ~leat08~)   BEGIN SPRINT _spellfailmod ~-12~ END
+        PATCH_IF (~%modsiam%~ STRING_CONTAINS_REGEXP ~item_rev~ == 0) && (~%name%~ STRING_EQUAL ~cmtule01~) BEGIN SPRINT _spellfailmod ~-11~ END
+        PATCH_IF (~%modsiam%~ STRING_CONTAINS_REGEXP ~item_rev~ == 0) && (~%name%~ STRING_EQUAL ~m#asleat~) BEGIN SPRINT _spellfailmod ~-14~ END
+        PATCH_IF (~%modsiam%~ STRING_CONTAINS_REGEXP ~item_rev~ == 0) && (~%name%~ STRING_EQUAL ~leat09~)   BEGIN SPRINT _spellfailmod ~-10~ END
+        PATCH_IF (~%modsiam%~ STRING_CONTAINS_REGEXP ~item_rev~ == 0) && (~%name%~ STRING_EQUAL ~u#leat01~) BEGIN SPRINT _spellfailmod ~-10~ END
+        PATCH_IF (~%modsiam%~ STRING_CONTAINS_REGEXP ~item_rev~ == 0) && (~%name%~ STRING_EQUAL ~u#leat02~) BEGIN SPRINT _spellfailmod ~-11~ END
+
         SPRINT $weight(~%name%~)        ~%_weight%~
         SPRINT $dexmod(~%name%~)        ~%_dexmod%~
         SPRINT $movemod(~%name%~)       ~%_movemod%~
@@ -1471,6 +1481,7 @@ COPY_EXISTING - ~fullplate/thebiglist.txt~ ~fullplate~
         SPRINT $disarmtrapmod(~%name%~) ~%_disarmtrapmod%~
         SPRINT $pickpocketmod(~%name%~) ~%_pickpocketmod%~
         SPRINT $spellfailmod(~%name%~)  ~%_spellfailmod%~
+
     END
     BUT_ONLY_IF_IT_CHANGES
 
@@ -2269,6 +2280,21 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                  SPRINT searchstring   ~Physical Resistance:~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
                  SPRINT replacestring  ~Physical Resistance: .*[%wnl%%lnl%%mnl%]+~
+                 SPRINT insertstring   ~~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~dwchan01~ || ~%SOURCE_RES%~ STRING_EQUAL ~dwchan02~
+                   || ~%SOURCE_RES%~ STRING_EQUAL ~dwplat01~ ) BEGIN // IR v2 version of drow items
+                 SPRINT searchstring   ~Drowcraft:~
+                 SPRINT insertafter    ~THISWILLNEVERMATCH~
+                 SPRINT replacestring  ~Drowcraft: .*[%wnl%%lnl%%mnl%]+~
+                 SPRINT insertstring   ~~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~dwchan02~ || ~%SOURCE_RES%~ STRING_EQUAL ~dwplat01~ ) BEGIN // IR v2 version of drow items
+                 SPRINT searchstring   ~Equipped Abilities:~
+                 SPRINT insertafter    ~THISWILLNEVERMATCH~
+                 SPRINT replacestring  ~Equipped Abilities:.*[%wnl%%lnl%%mnl%]+~
                  SPRINT insertstring   ~~
                  PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
