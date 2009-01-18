@@ -601,6 +601,10 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 1
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~I1CH002.ITM~) BEGIN
+      WRITE_BYTE 0x60 1
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~I1LT001.ITM~) BEGIN
       WRITE_BYTE 0x18 ("%flags%" BOR 0b01000000) // switch on magical flag
       WRITE_BYTE 0x60 1
@@ -2030,7 +2034,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                          PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
                          SPRINT searchstring   ~.*[dD]exterity~
                          SPRINT insertafter    ~\(STATISTICS\)~
-                         SPRINT replacestring  ~.*[dD]exterity[%wnl%%lnl%%mnl%]~
+                         SPRINT replacestring  ~.*[dD]exterity\( penalty\)?[%wnl%%lnl%%mnl%]\([%wnl%%lnl%%mnl%]\)?~
                          SPRINT insertstring   ~~
                          PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
                          SET intopcode = 15
