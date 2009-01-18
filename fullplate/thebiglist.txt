@@ -112,7 +112,9 @@ _BELT03      0  0   0   0   0   0   4   0   0   0  15   0   0  0   0    0   0   
 BELT04       0  0   0   0   0   0   0   3   3   0   0  10  10  0   0    0   0   0   0   0   0   // girdle of piercing
 _BELT04      0  0   0   0   0   0   0   3   3   0   0  10  10  0   0    0   0   0   0   0   0   // girdle of piercing
 C2BELT01     0  0   0   0   0   3   3   3   3  10  10  10  10  0   0    0   0   0   0   0   0   //  combo girdle (IU)
+I1CH001      7  0   0   0  -5   1   1   1   1  20  20  20  20  0   0    0   0   0   0   0   0   // smoke armor
 I1LT001     15  1   0   0  -2   3   1   0   0  18   7   0   0  0   0    0   0   0   0   0  10   // skeleton ribcage
+I1LT002      2  0   0   2   2   0   0   0   0   0  -2   0   0  0   0    5   5   5   5   5   1   // anti-imprisonment armor
 LEATCM02     3  0   0   2   2   0   0   0   0   0  -2   0   0  0   0    5   5   5   5   5   1   // green peace resistance
 LEAT09       0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // karajah's life and death
 CMTULE01     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0 -10   0   // shadow armor +4

@@ -119,7 +119,9 @@ FWPLAT03    PLATE      ALL      /* Revised Forgotten Wars Item Pack - rfwip */
 FWPLAT04    FIELDP     ALL      /* Revised Forgotten Wars Item Pack - rfwip */
 GLORY       PLATE      ALL      /* IWD, unused, restored in IWD UB, The Darkest Day, among others */
 GMD02       CHAIN      ALL      /* Revised Forgotten Wars Item Pack - rfwip */
-I1LT001     NOTARMOR   ALL      /* iiItems */
+I1CH001     NOTARMOR   ALL      /* iiItem */
+I1LT001     NOTARMOR   ALL      /* iiItem */
+I1LT002     HIDE       ALL      /* iiItem */
 ICHAN01     CHAIN      ALL      //BG1
 _ICHAN01    CHAIN      ALL      /* Tutu */
 ICHAN04     SPLINT     ALL      //BG1

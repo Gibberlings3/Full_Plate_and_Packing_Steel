@@ -597,7 +597,16 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 2
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~I1CH001.ITM~) BEGIN
+      WRITE_BYTE 0x60 1
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~I1LT001.ITM~) BEGIN
+      WRITE_BYTE 0x18 ("%flags%" BOR 0b01000000) // switch on magical flag
+      WRITE_BYTE 0x60 1
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~I1LT002.ITM~) BEGIN
       WRITE_BYTE 0x18 ("%flags%" BOR 0b01000000) // switch on magical flag
       WRITE_BYTE 0x60 1
     END
@@ -2450,6 +2459,18 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                 READ_STRREF 0x50 uniddesc
                 INNER_PATCH_SAVE newdescstr "%uniddesc%" BEGIN
                   REPLACE_EVALUATE ~STATISTICS:.*[%wnl%%lnl%%mnl%]+.*[%wnl%%lnl%%mnl%]+.*[%wnl%%lnl%%mnl%]+.*[%wnl%%lnl%%mnl%]+.*[%wnl%%lnl%%mnl%]+.*[%wnl%%lnl%%mnl%]+.*[%wnl%%lnl%%mnl%]+.*[%wnl%%lnl%%mnl%]+.*Mage~
+                  BEGIN
+                    SPRINT result ~~
+                  END
+                  ~~
+                END
+                SAY_EVALUATED UNIDENTIFIED_DESC ~%newdescstr%~
+                READ_STRREF 0x50 uniddesc
+            END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~i1ch001~) BEGIN // smoke armor
+                READ_STRREF 0x50 uniddesc
+                INNER_PATCH_SAVE newdescstr "%uniddesc%" BEGIN
+                  REPLACE_EVALUATE ~STATISTICS:.*[%wnl%%lnl%%mnl%]+.*[%wnl%%lnl%%mnl%]+.*[%wnl%%lnl%%mnl%]+.*[%wnl%%lnl%%mnl%]+.*Strength~
                   BEGIN
                     SPRINT result ~~
                   END
