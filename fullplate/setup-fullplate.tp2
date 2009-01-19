@@ -620,6 +620,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 1
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~I1PO010.ITM~) BEGIN
+      WRITE_BYTE 0x18 ("%flags%" BOR 0b01000000) // switch on magical flag
+      WRITE_BYTE 0x60 1
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~IPLAT05.ITM~) BEGIN
       WRITE_BYTE 0x60 1
     END
@@ -2532,6 +2537,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 
                 PATCH_IF (
                     (%opcode% = 0)  ||  // any AC effects
+                    (%opcode% = 10) ||  // con modifiers - fix iiitem rocksalt potion bug: reduced con instead of dex
                     (%opcode% = 15) ||  // dex modifiers
                     (%opcode% = 86) ||  // slashres
                     (%opcode% = 87) ||  // crushres
@@ -2863,6 +2869,16 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                  SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
                  SPRINT replacestring  ~~
                  SPRINT insertstring   ~WARNING: dropping below 1 Dexterity will turn you to stone and kill you.%wnl%~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~i1po010~) BEGIN // rocksalt potion
+                 SPRINT searchstring   ~Special: 5pt AC bonus for 3 rounds~
+                 SPRINT insertafter    ~THISWILLNEVERMATCH~
+                 SPRINT replacestring  ~Special: 5pt AC bonus for 3 rounds.*[%wnl%%lnl%%mnl%][%wnl%%lnl%%mnl%]*~
+                 SPRINT insertstring   ~~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+                 SPRINT searchstring   ~Special: -1 Dexterity for 3 rounds~
+                 SPRINT replacestring  ~Special: -1 Dexterity for 3 rounds.*[%wnl%%lnl%%mnl%]*[%wnl%%lnl%%mnl%]*~
                  PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
 

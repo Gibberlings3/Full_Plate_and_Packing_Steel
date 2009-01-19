@@ -123,6 +123,7 @@ I1CH001     NOTARMOR   ALL      /* iiItem */
 I1CH002     CHAIN      ALL      /* iiItem */
 I1LT001     NOTARMOR   ALL      /* iiItem */
 I1LT002     HIDE       ALL      /* iiItem */
+I1PO010     NOTARMOR   ALL      /* iiItem */
 I1PL001     PLATE      ALL      /* iiItem */
 ICHAN01     CHAIN      ALL      //BG1
 _ICHAN01    CHAIN      ALL      /* Tutu */

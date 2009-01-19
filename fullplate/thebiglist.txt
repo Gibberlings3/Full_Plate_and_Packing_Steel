@@ -294,3 +294,4 @@ POTN18       0  0   0   0   0   0  10   0   0   0  40   0   0  0   0    0   0   
 _POTN18      0  0   0   0   0   0  10   0   0   0  40   0   0  0   0    0   0   0   0   0   0   // potion of absorption
 POTN24       0  0   0   0   0   5   5   5   5   0   0   0   0  0   0    0   0   0   0   0   0   // potion of defense
 _POTN24      0  0   0   0   0   5   5   5   5   0   0   0   0  0   0    0   0   0   0   0   0   // potion of defense
+I1PO010      0  1   0   0   0   0   0   0   0  20  20  20  20  0   0    0   0   0   0   0   0   // rocksalt potion
