@@ -46,71 +46,87 @@ PRINT ~Detecting game engine...~
 OUTER_SPRINT gameiam ~~
 OUTER_SPRINT modsiam ~~
 
+SILENT
 ACTION_IF ENGINE_IS ~soa~ BEGIN
   OUTER_SPRINT gameiam ~soa~
   PRINT ~ BG2: SOA...~
 END
+SILENT
 ACTION_IF ENGINE_IS ~tob~ BEGIN
   OUTER_SPRINT gameiam ~tob~
   PRINT ~ BG2: TOB...~
 END
+SILENT
 ACTION_IF MOD_IS_INSTALLED ~ITEM_REV/ITEM_REV.TP2~ 0 BEGIN
   OUTER_SPRINT modsiam ~%modsiam% item_rev~
   PRINT ~ + Item Revisions...~
 END
+SILENT
 ACTION_IF MOD_IS_INSTALLED ~SETUP-RITEMPACK.TP2~ 1 BEGIN
   OUTER_SPRINT modsiam ~%modsiam% r_patrick~
   PRINT ~ + RPGDungeon Item Pack: Patrick was an elven-king...~
 END
+SILENT
 ACTION_IF MOD_IS_INSTALLED ~SETUP-RITEMPACK.TP2~ 4 BEGIN
   OUTER_SPRINT modsiam ~%modsiam% r_dragon~
   PRINT ~ + RPGDungeon Item Pack: Dragonscale...~
 END
+SILENT
 ACTION_IF MOD_IS_INSTALLED ~SPELL_REV/SETUP-SPELL_REV.TP2~ 1 BEGIN
   OUTER_SPRINT modsiam ~%modsiam% spell_rev_d~
   PRINT ~ + Spell Revisions: Divine...~
 END
+SILENT
 ACTION_IF MOD_IS_INSTALLED ~SPELL_REV/SETUP-SPELL_REV.TP2~ 2 BEGIN
   OUTER_SPRINT modsiam ~%modsiam% spell_rev_a~
   PRINT ~ + Spell Revisions: Arcane...~
 END
+SILENT
 ACTION_IF MOD_IS_INSTALLED ~SETUP-SPELLPACKB5.TP2~ 32 BEGIN
   OUTER_SPRINT modsiam ~%modsiam% gsp_ga~
   PRINT ~ + Galactygon's SpellPack Beta 5: Ghost Armour...~
 END
+SILENT
 ACTION_IF MOD_IS_INSTALLED ~SETUP-NEJ2V694.TP2~ 0 BEGIN
   OUTER_SPRINT modsiam ~%modsiam% nej2_694~
   PRINT ~ + Never Ending Journey Second Edition v6.94 ...~
 END
+SILENT
 ACTION_IF ENGINE_IS ~iwd~ BEGIN
   OUTER_SPRINT gameiam ~iwd~
   PRINT ~ IWD...~
 END
+SILENT
 ACTION_IF ENGINE_IS ~how~ BEGIN
   OUTER_SPRINT gameiam ~how~
   PRINT ~ IWD: HoW...~
 END
 // needs weidu > 208 release
+SILENT
 ACTION_IF ENGINE_IS ~totlm~ BEGIN
   OUTER_SPRINT gameiam ~totlm~
   PRINT ~ IWD: ToTLM...~
 END
+SILENT
 ACTION_IF ENGINE_IS ~iwd2~ BEGIN
   OUTER_SPRINT gameiam ~iwd2~
   PRINT ~ IWD2...~
   PRINT ~Warning: Icewind Dale II untested and probably not working.~
 END
 // needs weidu 208.34 or later ... or iwd/how/totlm is detected as pst as well
+SILENT
 ACTION_IF ENGINE_IS ~pst~ BEGIN
   OUTER_SPRINT gameiam ~pst~
   PRINT ~ PST...~
   PRINT ~Warning: Planescape: Torment untested and probably not working.~
 END
+SILENT
 ACTION_IF ENGINE_IS ~bg1~ BEGIN
   OUTER_SPRINT gameiam ~bg1~
   PRINT ~ BG...~
   PRINT ~Warning: original Baldur's Gate untested and probably not working.~
 END
+SILENT
 ACTION_IF ENGINE_IS ~totsc~ BEGIN
   OUTER_SPRINT gameiam ~totsc~
   PRINT ~ BG: TotSC...~
@@ -5216,12 +5232,15 @@ INCLUDE ~fullplate/extra_regexp_vars.tph~
            
 >>>>>>>>
 
+SILENT
 ACTION_IF ( ENGINE_IS ~ToB~ || ENGINE_IS ~SoA~ ) BEGIN
+  VERBOSE
   COPY_EXISTING ~kitlist.2da~ ~override~
     COUNT_2DA_ROWS 4 ~entrycount~
     FOR (i=0;i<~%entrycount%~;i=i+1) BEGIN
         READ_2DA_ENTRY ~%i%~ 1 4 ~name~
         READ_2DA_ENTRY ~%i%~ 4 4 ~helpref~
+        PATCH_SILENT
         PATCH_IF ( ~%name%~ STRING_EQUAL ~ASSASIN~ && ENGINE_IS ~SoA~ ) BEGIN
           GET_STRREF %helpref% helptext
 
@@ -5243,6 +5262,7 @@ ACTION_IF ( ENGINE_IS ~ToB~ || ENGINE_IS ~SoA~ ) BEGIN
           SET_2DA_ENTRY ~%i%~ 4 4 ~%newhelpref%~
         END
 
+        PATCH_SILENT
         PATCH_IF ( ~%name%~ STRING_EQUAL ~ASSASIN~ && ENGINE_IS ~ToB~ ) BEGIN
           GET_STRREF %helpref% helptext
 
@@ -5263,6 +5283,7 @@ ACTION_IF ( ENGINE_IS ~ToB~ || ENGINE_IS ~SoA~ ) BEGIN
 
           SET_2DA_ENTRY ~%i%~ 4 4 ~%newhelpref%~
         END
+        PATCH_VERBOSE
 
         PATCH_IF ( ~%name%~ STRING_EQUAL ~STALKER~ ) BEGIN
           GET_STRREF %helpref% helptext
