@@ -22,6 +22,7 @@ BSINGCHN    ELVENC     ALL      /* The Darkest Day */
 BW05CM1     CHAIN      ALL      /* The Grey Clan Episode One: In Candlelight */
 BW05JUAR    CHAIN      ALL      /* The Grey Clan Episode One: In Candlelight */
 BW05PL1     PLATE      ALL      /* The Grey Clan Episode One: In Candlelight */
+C!GPLATE    FULLP      ALL      /* Sorcerer's Place Collection */
 C2BELT01    NOTARMOR   ALL      /* Item Upgrade */
 C2CHAN01    ELVENC     ALL      /* Item Upgrade */
 C2HIDE01    HIDE       ALL      /* Item Upgrade */
@@ -140,6 +141,7 @@ IPLAT01     PLATE      ALL      //BG1
 _IPLAT01    PLATE      ALL      /* Tutu */
 IPLAT05     FULLP      ALL      //IWD
 ISWARM      PLATE      ALL      //TOTLM
+J#INDI01    CHAIN      ALL      /* Indira NPC */
 J#SPLI06    SPLINT     ALL      /* Ashes of Embers */
 KAYCHAI     ELVENC     ALL      //IWD
 KING        PLATE      ALL      //HOW OR The Darkest Day

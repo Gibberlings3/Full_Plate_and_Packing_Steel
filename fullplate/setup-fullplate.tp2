@@ -238,6 +238,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 4
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~C!GPLATE.ITM~) BEGIN
+      SAY NAME1 ~Full Plate Mail~
+      SAY NAME2 ~Geirthan's Plate +5~
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~C2BELT01.ITM~) BEGIN
       WRITE_BYTE 0x60 1
     END
@@ -665,6 +670,12 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_LONG NAME1 platemail_name
       SAY NAME2 ~Ice Plate +3~
       WRITE_BYTE 0x60 3
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~J#INDI01.ITM~) BEGIN
+      READ_LONG 0x54 temp
+      WRITE_LONG 0x50 %temp%
+      WRITE_LONG 0x54 0xffffffff // non-magical, doesn't need identified_desc
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~J#SPLI06.ITM~) BEGIN
