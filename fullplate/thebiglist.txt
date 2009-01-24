@@ -194,7 +194,7 @@ DEITM090     0  0   0   0   0   0   0   0   0   2   0   4   4  0   0    0   0   
 PSMADE29     0  0  20   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // ethereal plate +2
 TCVILDPL     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0   55   0   0   0   0   0   // dawn's embrace
 DW#ABYDA     2  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // yellow dragonscale armor
-CHAN20     -10 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0 -10 -10 -10   0   // white dragonscale splint mail
+CHAN20     -10  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0 -10 -10 -10   0   // white dragonscale splint mail
 CHANGR02   -10 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0 -10 -10 -10   0   // zeddek's skin dragonscale splint mail
 PLAT18      -5  0 -10  -1   0   0   0   0   0   0   0   0   0  0   0  -20 -20 -10 -10 -20   0   // red dragonscale plate
 PLAT20     -30 -1 -10  -2   0   0   0   0   0   0   0   0   0  0   0  -35 -35 -35 -35 -35   0   // blue dragonscale plate
