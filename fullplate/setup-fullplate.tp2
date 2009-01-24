@@ -791,6 +791,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_LONG 0x54 0xffffffff // non-magical, doesn't need identified_desc
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~LK#XARM.ITM~) BEGIN
+      WRITE_LONG NAME1 chainmail_name
+      WRITE_BYTE 0x60 4
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~M#ASLEAT.ITM~) BEGIN
       SAY NAME2 ~Apprentice Shadow Armor +1~
       WRITE_BYTE 0x60 1

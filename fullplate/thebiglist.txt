@@ -152,6 +152,7 @@ CHAN07     -15  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   
 _CHAN07    -15  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // mithril chain
 CHANGR03   -15  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // mithril chain
 DEITM053   -15  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // mithril chain
+LK#XARM    -15  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // mithril chain +4
 BSINGCHN     0  0   0   0   0   4  -2   0   0   8  -4   0   0  0   0    0   0   0   0   0   0   // mirathar
 O!BOM002   -15  0 -10   0   0   0   0   0   0   0   0   0   0  0   0  -25 -30   0   0   0   0   // ranger mail +5
 CHAN17       0 -1   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // wyvernscale splint mail

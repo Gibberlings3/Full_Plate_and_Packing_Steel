@@ -189,6 +189,7 @@ LEATGR03    STUDDED    ALL      /* Auril's Bane */
 LEATGR04    HIDE       ALL      /* Auril's Bane */
 LEATGR05    STUDDED    ALL      /* Auril's Bane */
 LEATRAT     LEATHER    ALL      /* The Darkest Day */
+LK#XARM     CHAIN      ALL      /* Xulaye NPC */
 MAILLIF     CHAIN      ALL      //IWD OR NeJ2 OR Tortured Souls
 M#ASLEAT    STUDDED    ALL      /* Amber NPC */
 MGILEAT1    STUDDED    ALL      /* Selune's Armoury */
