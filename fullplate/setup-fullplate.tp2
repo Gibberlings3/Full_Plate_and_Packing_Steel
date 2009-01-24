@@ -2076,7 +2076,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                          SPRINT searchstring   ~THISWILLNEVERMATCH~
                          SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
                          SPRINT replacestring  ~~
-                         SPRINT insertstring   ~Slowdown:%wnl% Dex/Move Speed/Weapon Speed Factor:%wnl%  0 / 0 / 0 ~
+                         SPRINT insertstring   ~Slowdown:%wnl% Dex/Move Speed/Initiative:%wnl%  0 / 0 / 0 ~
                          SET slowheaderprinted = 1
                          SET dexmodtotal = 0
                          SET movemodtotal = 0
@@ -2332,10 +2332,10 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                 PATCH_IF (x > 0) BEGIN
                   SPRINT x ~+%x%~
                 END
-                SPRINT searchstring   ~ Dex/Move Speed/Weapon Speed Factor:~
+                SPRINT searchstring   ~ Dex/Move Speed/Initiative:~
                 SPRINT insertafter    ~THISWILLNEVERMATCH~
-                SPRINT replacestring  ~ Dex/Move Speed/Weapon Speed Factor:%wnl%  0 / 0 / 0 ~
-                SPRINT insertstring   ~ Dex/Move Speed/Weapon Speed Factor:%wnl%  %x% / %movemodtotal%%perc% / %wpnspeedtotal% ~
+                SPRINT replacestring  ~ Dex/Move Speed/Initiative:%wnl%  0 / 0 / 0 ~
+                SPRINT insertstring   ~ Dex/Move Speed/Initiative:%wnl%  %x% / %movemodtotal%%perc% / %wpnspeedtotal% ~
                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
 
@@ -2802,7 +2802,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                          SPRINT searchstring   ~THISWILLNEVERMATCH~
                          SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
                          SPRINT replacestring  ~~
-                         SPRINT insertstring   ~Slowdown:%wnl% Dex/Move Speed/Weapon Speed Factor:%wnl%  0 / 0 / 0 ~
+                         SPRINT insertstring   ~Slowdown:%wnl% Dex/Move Speed/Initiative:%wnl%  0 / 0 / 0 ~
                          SET slowheaderprinted = 1
                          SET dexmodtotal = 0
                          SET movemodtotal = 0
@@ -2902,10 +2902,10 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
             PATCH_IF (slowheaderprinted = 1) BEGIN
-                SPRINT searchstring   ~ Dex/Move Speed/Weapon Speed Factor:~
+                SPRINT searchstring   ~ Dex/Move Speed/Initiative:~
                 SPRINT insertafter    ~THISWILLNEVERMATCH~
-                SPRINT replacestring  ~ Dex/Move Speed/Weapon Speed Factor:%wnl%  0 / 0 / 0 ~
-                SPRINT insertstring   ~ Dex/Move Speed/Weapon Speed Factor:%wnl%  %dexmodtotal% / %movemodtotal%%perc% / %wpnspeedtotal% ~
+                SPRINT replacestring  ~ Dex/Move Speed/Initiative:%wnl%  0 / 0 / 0 ~
+                SPRINT insertstring   ~ Dex/Move Speed/Initiative:%wnl%  %dexmodtotal% / %movemodtotal%%perc% / %wpnspeedtotal% ~
                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
             // some custom updates for less-than-accurate statements after mod install
