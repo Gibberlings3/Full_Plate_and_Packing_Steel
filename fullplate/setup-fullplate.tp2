@@ -1456,6 +1456,7 @@ COPY_EXISTING - ~fullplate/thebiglist.txt~ ~fullplate~
     FOR (i=0;i<~%entrycount%~;i=i+1) BEGIN
         READ_2DA_ENTRY ~%i%~ 0 0 ~name~
         READ_2DA_ENTRY ~%i%~ 1 0 ~_weight~
+        SET                       _fatmod = %_weight% / 15
         READ_2DA_ENTRY ~%i%~ 2 0 ~_dexmod~
         READ_2DA_ENTRY ~%i%~ 3 0 ~_movemod~
         READ_2DA_ENTRY ~%i%~ 4 0 ~_wpnspeedmod~
@@ -1489,6 +1490,7 @@ COPY_EXISTING - ~fullplate/thebiglist.txt~ ~fullplate~
         PATCH_IF (~%modsiam%~ STRING_CONTAINS_REGEXP ~item_rev~ == 0) && (~%name%~ STRING_EQUAL ~u#leat02~) BEGIN SPRINT _spellfailmod ~-11~ END
 
         SPRINT $weight(~%name%~)        ~%_weight%~
+        SPRINT $fatmod(~%name%~)        ~%_fatmod%~
         SPRINT $dexmod(~%name%~)        ~%_dexmod%~
         SPRINT $movemod(~%name%~)       ~%_movemod%~
         SPRINT $wpnspeedmod(~%name%~)   ~%_wpnspeedmod%~
@@ -1554,6 +1556,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
         SPRINT specialcase $weight(~%SOURCE_RES%~)
         PATCH_IF NOT (~%specialcase%~ STRING_CONTAINS_REGEXP ~weight~ == 0) BEGIN
             SET $weight(~%SOURCE_RES%~)         = $weight(~%SOURCE_RES%~) + $weight(~%usename%~)
+            SET $fatmod(~%SOURCE_RES%~)         = $weight(~%SOURCE_RES%~) / 15
             SET $dexmod(~%SOURCE_RES%~)         = $dexmod(~%SOURCE_RES%~) + $dexmod(~%usename%~)
             SET $movemod(~%SOURCE_RES%~)        = $movemod(~%SOURCE_RES%~) + $movemod(~%usename%~)
             SET $wpnspeedmod(~%SOURCE_RES%~)    = $wpnspeedmod(~%SOURCE_RES%~) + $wpnspeedmod(~%usename%~)
@@ -1619,13 +1622,18 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 
             WRITE_SHORT 0x70 %fxnum%
 
-            PATCH_FOR_EACH param IN ~dexmod~ ~movemod~ ~wpnspeedmod~ ~baseac~ ~slashac~ ~crushac~ ~pierceac~ ~missileac~
+            PATCH_FOR_EACH param IN ~fatmod~ ~dexmod~ ~movemod~ ~wpnspeedmod~ ~baseac~ ~slashac~ ~crushac~ ~pierceac~ ~missileac~
                                     ~slashres~ ~crushres~ ~pierceres~ ~missileres~ ~fireres~ ~coldres~
                                     ~hidemod~ ~movesilmod~ ~openlockmod~ ~disarmtrapmod~ ~pickpocketmod~
                                     ~spellfailmod~
             BEGIN
                 SET x = EVALUATE_BUFFER ~%%param%_%usename%%~
                 PATCH_IF NOT ((x = 0 && NOT ~%param%~ STRING_EQUAL ~baseac~) || (x = 10 && ~%param%~ STRING_EQUAL ~baseac~)) BEGIN 
+                    PATCH_IF ~%param%~ STRING_EQUAL fatmod BEGIN
+                        SET opcode = 93
+                        SET param1 = x
+                        SET param2 = 0
+                        PATCH_INCLUDE ~additmfx.tpp~ END
                     PATCH_IF ~%param%~ STRING_EQUAL dexmod BEGIN
                         SET opcode = 15
                         SET param1 = 0 - x
@@ -1936,7 +1944,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
 
-            PATCH_FOR_EACH param IN ~weight~ ~dexmod~ ~movemod~ ~wpnspeedmod~ ~baseac~ ~slashac~ ~crushac~ ~pierceac~ ~missileac~
+            PATCH_FOR_EACH param IN ~weight~ ~fatmod~ ~dexmod~ ~movemod~ ~wpnspeedmod~ ~baseac~ ~slashac~ ~crushac~ ~pierceac~ ~missileac~
                                     ~slashres~ ~crushres~ ~pierceres~ ~missileres~ ~fireres~ ~coldres~
                                     ~spellfailmod~ ~pickpocketmod~ ~disarmtrapmod~ ~openlockmod~ ~movesilmod~ ~hidemod~ 
             BEGIN
@@ -1948,6 +1956,17 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                          SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
                          SPRINT replacestring  ~Weight:[%tab% ]*[0-9]+[%tab% a-zA-Z.]*~
                          SPRINT insertstring   ~Weight: %x%~
+                         PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
+
+                     PATCH_IF ~%param%~ STRING_EQUAL fatmod BEGIN
+                         SET fatmod = %x%
+                         PATCH_IF (fatmod > 0) BEGIN
+                           SPRINT fatmod ~+%fatmod%~
+                         END
+                         SPRINT searchstring   ~Weight:~
+                         SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
+                         SPRINT replacestring  ~Weight:\([%tab% ]*[0-9]+[%tab% a-zA-Z.]*\)~
+                         SPRINT insertstring   ~Weight:\1 (fatigue: %fatmod%)~
                          PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
 
                      PATCH_IF ~%param%~ STRING_EQUAL baseac BEGIN // kill "AC:" lines
