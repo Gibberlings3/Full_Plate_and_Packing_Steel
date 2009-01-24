@@ -5342,6 +5342,27 @@ ACTION_IF ( ENGINE_IS ~ToB~ || ENGINE_IS ~SoA~ ) BEGIN
 
           SET_2DA_ENTRY ~%i%~ 4 4 ~%newhelpref%~
         END
+
+        PATCH_IF ( ~%name%~ STRING_EQUAL ~Forest~ ) BEGIN // TDD: Elven Forest Warrior kit
+          GET_STRREF %helpref% helptext
+
+          INNER_PATCH_SAVE newhelptext "%helptext%" BEGIN
+            REPLACE_EVALUATE ~Has a x2 backstab multiplier~
+            BEGIN
+              SPRINT result  ~Has a x3 backstab multiplier~
+            END
+            ~%result%~
+          END
+          INNER_ACTION BEGIN
+            COPY ~dummy.blarg~ ~override~
+              SAY 0 ~%newhelptext%~
+
+            COPY_EXISTING ~dummy.blarg~ ~override~
+              READ_LONG 0 newhelpref
+          END
+
+          SET_2DA_ENTRY ~%i%~ 4 4 ~%newhelpref%~
+        END
     END
     BUT_ONLY_IF_IT_CHANGES
 
