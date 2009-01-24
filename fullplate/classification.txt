@@ -19,6 +19,9 @@ BLEAT03     HIDE       ALL      /* Improved Horns of Valhalla OR Item Revisions 
 BLOOD       PLATE      ALL      //IWD OR NeJ2 OR The Darkest Day
 BRUENPLA    MFIELDP    ALL      //BG2:SOA
 BSINGCHN    ELVENC     ALL      /* The Darkest Day */
+BW05CM1     CHAIN      ALL      /* The Grey Clan Episode One: In Candlelight */
+BW05JUAR    CHAIN      ALL      /* The Grey Clan Episode One: In Candlelight */
+BW05PL1     PLATE      ALL      /* The Grey Clan Episode One: In Candlelight */
 C2BELT01    NOTARMOR   ALL      /* Item Upgrade */
 C2CHAN01    ELVENC     ALL      /* Item Upgrade */
 C2HIDE01    HIDE       ALL      /* Item Upgrade */
