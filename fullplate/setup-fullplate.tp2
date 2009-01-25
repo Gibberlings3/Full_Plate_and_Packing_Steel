@@ -1412,6 +1412,35 @@ COPY_EXISTING ~hpconbon.2da~ ~override~
   END
   BUT_ONLY_IF_IT_CHANGES
 
+// thieves & DEX < 9
+ACTION_IF (~%gameiam%~ STRING_EQUAL ~tob~ || ~%gameiam%~ STRING_EQUAL ~soa~) BEGIN
+  COPY_EXISTING ~skilldex.2da~ ~override~
+    COUNT_2DA_ROWS 8 ~entrycount~
+    PATCH_IF (entrycount = 17) BEGIN
+      PATCH_PRINT ~Extending thief skill Dex modifier table for Dex < 9...~
+      READ_2DA_ENTRY 0 0 8 ~tempdex~
+      READ_2DA_ENTRY 0 1 8 ~temppickpocket~
+      READ_2DA_ENTRY 0 2 8 ~tempopenlocks~
+      READ_2DA_ENTRY 0 3 8 ~tempfindtraps~
+      READ_2DA_ENTRY 0 4 8 ~tempmovesil~
+      READ_2DA_ENTRY 0 5 8 ~temphide~
+      READ_2DA_ENTRY 0 7 8 ~tempsettraps~
+      WHILE (tempdex > 1) BEGIN
+        SET tempdex        = tempdex        - 1
+        SET temppickpocket = temppickpocket - 5
+        SET tempopenlocks  = tempopenlocks  - 5
+        SET tempmovesil    = tempmovesil    - 5
+        SET temphide       = temphide       - 5
+        PATCH_IF ((tempdex / 2) = ((tempdex+1) / 2)) BEGIN // decrease half as fast
+          SET tempfindtraps  = tempfindtraps  - 5
+          SET tempsettraps   = tempsettraps   - 5
+        END
+        INSERT_2DA_ROW 0 8 ~%tempdex%           %temppickpocket%             %tempopenlocks%             %tempfindtraps%             %tempmovesil%                  %temphide%                0              %tempsettraps%~
+      END
+    END
+  BUT_ONLY_IF_IT_CHANGES
+END
+
 PRINT ~Defining local macros...~
 
 // define local pseudomacros
