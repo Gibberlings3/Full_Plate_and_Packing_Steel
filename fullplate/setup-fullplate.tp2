@@ -705,7 +705,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 1
     END
 
-    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~LEAT06.ITM~) BEGIN
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~LEAT06.ITM~ || "%SOURCE_FILE%" STRING_EQUAL ~_LEAT06.ITM~) BEGIN
       PATCH_IF (~%idname%~ STRING_EQUAL ~Armor of Missile Attraction +3~) BEGIN // if item rev. version
         WRITE_BYTE 0x60 3
       END ELSE BEGIN

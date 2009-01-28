@@ -105,6 +105,7 @@ NOTARMOR4    0  0   0   0  10   0   0   0   0   0   0   0   0  0   0    0   0   
 NOTARMOR5    0  0   0   0  10   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0
 PLAT17       0  1  10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // cursed plate
 LEAT06       0  0   0   0   0   0   0   0 -10   0   0   0 -35  0   0    0   0   0   0   0   0   // cursed studded, missile attractor
+_LEAT06      0  0   0   0   0   0   0   0 -10   0   0   0 -35  0   0    0   0   0   0   0   0   // cursed studded, missile attractor
 BELT02       0  0   0   0   0   3   0   0   0  10   0   0   0  0   0    0   0   0   0   0   0   // golden girdle
 _BELT02      0  0   0   0   0   3   0   0   0  10   0   0   0  0   0    0   0   0   0   0   0   // golden girdle
 BELT03       0  0   0   0   0   0   4   0   0   0  15   0   0  0   0    0   0   0   0   0   0   // girdle of bluntness
