@@ -1139,6 +1139,17 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 3
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~SOAITM01.ITM~) BEGIN
+      SAY NAME2 ~Mecorima's Chain +2~
+      WRITE_BYTE 0x60 2
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~SOAITM02.ITM~) BEGIN
+      WRITE_LONG NAME1 platemail_name
+      SAY NAME2 ~Kalindra's Armor +1~
+      WRITE_BYTE 0x60 1
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~SLAYER3.ITM~) BEGIN
       READ_LONG NAME2 temp // move id strings to unid strings
       WRITE_LONG NAME1 %temp%

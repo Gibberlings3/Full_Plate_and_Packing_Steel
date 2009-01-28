@@ -298,6 +298,8 @@ SHARK3      SPLINT     ALL      //HOW
 SHPLATE     PLATE      ALL      //IWD
 SILEAT      STUDDED    ALL      /* Tortured Souls */
 SLAYER3     ELVENC     ALL      /* Auril's Bane */
+SOAITM01    ELVENC     ALL      /* The Stone of Askavar */
+SOAITM02    PLATE      ALL      /* The Stone of Askavar */
 SWANARM     PLATE      ALL      //IWD OR The Darkest Day
 TAMCHAIN    CHAIN      ALL      //BG2:TOB
 TCALEIGA    STUDDED    ALL      /* Classic Adventures */

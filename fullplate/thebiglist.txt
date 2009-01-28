@@ -182,6 +182,7 @@ PLAT22     -10 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0   -5  -5   
 GLORY       45  3  30   4   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // the glory of suffering
 SHPLATE      0  0   0   0   0   0   0   0   3   0   0   0   6  0   0    0   0   0   0   0   0   // shadowed plate +3
 PSMADE28   -42 -3 -20  -3   0   0   0   0   0   0   0   0   0  0   0  -50 -55 -40 -40 -55   0   // ethereal plate +2
+SOAITM02   -10  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // kalindra's armor
 SWANARM    -15 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0  -20 -20 -10 -10 -20   0   // black swan armor +2
 ISWARM     -15 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0  -20 -20 -10 -10 -20   0   // black swan armor +2
 UMHULK       0  0   0   0   0   1   0   0   0   2   0   0   0  0   0    0   0   0   0   0   0   // umber hulk plate +1
