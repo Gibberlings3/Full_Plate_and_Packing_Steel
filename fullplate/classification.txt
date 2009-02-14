@@ -82,6 +82,7 @@ CMTULE03    STUDDED    ALL      /* The Undying */
 CMTUPL01    PLATE      ALL      /* The Undying */
 CMTUPL02    FULLP      ALL      /* The Undying */
 COMA11      PLATE      ALL      /* CoM Encounters OR The Undying */
+D0LEAT08    STUDDED    ALL      /* Quest Pack */
 D0T#LEAT    STUDDED    ALL      /* Ascension: Turnabout */
 DARCHAIN    PLATE      ALL      /* NeJ2 */
 DEITM053    CHAIN      ALL      /* Freedom's Reign / Reign of Virtue */

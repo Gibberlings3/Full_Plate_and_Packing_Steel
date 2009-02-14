@@ -121,6 +121,7 @@ LEAT09       0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   
 CMTULE01     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0 -10   0   ALL   // shadow armor +4
 LEAT08       0  0   0   0   0   0   0   0   0   0   0   0   0  0   0   -5  -5   0   0 -15   0   ALL   // shadow armor
 _LEAT08      0  0   0   0   0   0   0   0   0   0   0   0   0  0   0   -5  -5   0   0 -15   0   ALL   // shadow armor
+D0LEAT08     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0   -5  -5   0   0 -15   0   ALL   // shadow armor
 M#ASLEAT     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0  -15 -15  -5  -5 -25   0   ALL   // apprentice shadow armor
 TCLEAT05     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0  -10 -10   0   0 -20   0   ALL   // aleigha's studded leather
 USLTR01      0  0   0   0   0   0   0   0   0   0   0   0   0  0   0  -15 -15  -5  -5 -25   0   ALL   // studded leather +1: shadowed
