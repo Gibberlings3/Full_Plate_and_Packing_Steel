@@ -92,6 +92,11 @@ ACTION_IF MOD_IS_INSTALLED ~SETUP-NEJ2V694.TP2~ 0 BEGIN
   PRINT ~ + Never Ending Journey Second Edition v6.94 ...~
 END
 SILENT
+ACTION_IF MOD_IS_INSTALLED ~SETUP-BTL.TP2~ 2 BEGIN
+  OUTER_SPRINT modsiam ~%modsiam% btl_balance~
+  PRINT ~ + Beyond the Law: Better Balanced BTL Items ...~
+END
+SILENT
 ACTION_IF ENGINE_IS ~iwd~ BEGIN
   OUTER_SPRINT gameiam ~iwd~
   PRINT ~ IWD...~
@@ -688,9 +693,32 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 3
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~KIYOARM1.ITM~) BEGIN
+      WRITE_BYTE 0x60 0
+      WRITE_BYTE 0x18 ("%flags%" BAND 0b10111111) // switch off magical flag
+      READ_LONG 0x54 temp
+      WRITE_LONG 0x50 %temp%
+      WRITE_LONG 0x54 0xffffffff // non-magical, doesn't need identified_desc
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~KIYOARM2.ITM~) BEGIN
+      WRITE_BYTE 0x60 2
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~KKCHAIN.ITM~) BEGIN
       WRITE_LONG NAME1 chainmail_name
       WRITE_BYTE 0x60 3
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~KOVAARM1.ITM~) BEGIN
+      WRITE_BYTE 0x18 ("%flags%" BAND 0b10111111) // switch off magical flag
+      READ_LONG 0x54 temp
+      WRITE_LONG 0x50 %temp%
+      WRITE_LONG 0x54 0xffffffff // non-magical, doesn't need identified_desc
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~KOVAARM5.ITM~) BEGIN
+      WRITE_BYTE 0x60 4
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~LEAT02.ITM~ || "%SOURCE_FILE%" STRING_EQUAL ~_LEAT02.ITM~) BEGIN
@@ -2091,9 +2119,9 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                  SET x = EVALUATE_BUFFER ~%%param%_%usename%%~
                  PATCH_IF NOT ((x = 0 && NOT ~%param%~ STRING_EQUAL ~baseac~) || (x = 10 && ~%param%~ STRING_EQUAL ~baseac~)) BEGIN 
                      PATCH_IF ~%param%~ STRING_EQUAL weight BEGIN
-                         SPRINT searchstring   ~Weight:~
+                         SPRINT searchstring   ~Weight[%tab% ]*:~
                          SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
-                         SPRINT replacestring  ~Weight:[%tab% ]*[0-9]+[%tab% a-zA-Z.]*~
+                         SPRINT replacestring  ~Weight[%tab% ]*:[%tab% ]*[0-9]+[%tab% a-zA-Z.]*~
                          SPRINT insertstring   ~Weight: %x%~
                          PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
 
@@ -2123,9 +2151,9 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                          PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
 
                      PATCH_IF ~%param%~ STRING_EQUAL baseac BEGIN
-                         SPRINT searchstring   ~Armou?r Class:~
+                         SPRINT searchstring   ~Armou?r Class[%tab% ]*:~
                          SPRINT insertafter    ~\(STATISTICS.*[%wnl%%lnl%%mnl%].*[%wnl%%lnl%%mnl%]\)~
-                         SPRINT replacestring  ~Armou?r Class:[%tab% ]*\(sets base to \)?-*[0-9]+[%tab% a-zA-Z0-9+.()]*~
+                         SPRINT replacestring  ~Armou?r Class[%tab% ]*:[%tab% ]*\(sets base to \)?-*[0-9]+[%tab% a-zA-Z0-9+.()]*~
                          SPRINT insertstring   ~Armor Class: %x%~
                          PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
 

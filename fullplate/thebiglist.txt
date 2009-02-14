@@ -156,6 +156,12 @@ DEITM053   -15  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   
 LK#XARM    -15  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // mithril chain +4
 BSINGCHN     0  0   0   0   0   4  -2   0   0   8  -4   0   0  0   0    0   0   0   0   0   0   // mirathar
 O!BOM002   -15  0 -10   0   0   0   0   0   0   0   0   0   0  0   0  -25 -30   0   0   0   0   // ranger mail +5
+KOVAARM1    -5  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // haeloven
+KOVAARM2    -1  0   0   0   0   0   0   0   2   0   0   0   4  0   0    0   0   0   0   0   0   // haeloven +2
+KOVAARM5     3  0   0   0   0   0   0   0   2   0   0   0   4  0   0    0   0   0   0   0   0   // haeloven +4
+KIYOARM1   -15 -1 -10  -1   0   0   0   0   1   2   2   2   4  0   0  -20 -20  -5 -15 -20   0   // verdant vigil
+KIYOARM2   -10 -1   0  -1   0   0   0   0   2   2   2   2   6  0   0  -15 -15  -5 -15 -20   0   // verdant vigilant +2
+KIYOARM3    -5 -1   0  -1   0   0   0   0   4   2   2   2  10  0   0  -15 -10  -5 -15 -15   0   // verdant vigilante +4
 CHAN17       0 -1   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // wyvernscale splint mail
 SHARK3      -5  0 -10   0   0   0   0   0   0   2   2   2   2  0   0    0   0   0   0   0   0   // coral plate - sahuagin splint mail
 X#GARCH    -10  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0 -29   // bardic chain +1
