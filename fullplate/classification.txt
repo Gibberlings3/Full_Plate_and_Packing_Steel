@@ -146,13 +146,13 @@ J#SPLI06    SPLINT     ALL      /* Ashes of Embers */
 KAYCHAI     ELVENC     ALL      //IWD
 KING        PLATE      ALL      //HOW OR The Darkest Day
 KINPLAT     FULLP      ALL      /* Kindrek NPC */
-KIYOARM1    SPLINT     ALL      /* Beyond the Law */
-KIYOARM2    SPLINT     ALL      /* Beyond the Law */
-KIYOARM3    SPLINT     ALL      /* Beyond the Law */
+KIYOARM1    ELVENC     ALL      /* Beyond the Law */
+KIYOARM2    ELVENC     ALL      /* Beyond the Law */
+KIYOARM3    ELVENC     ALL      /* Beyond the Law */
 KKCHAIN     CHAIN      ALL      /* Kindrek NPC */
-KOVAARM1    ELVENC     ALL      /* Beyond the Law */
-KOVAARM2    ELVENC     ALL      /* Beyond the Law */
-KOVAARM5    ELVENC     ALL      /* Beyond the Law */
+KOVAARM1    STUDDED    ALL      /* Beyond the Law */
+KOVAARM2    STUDDED    ALL      /* Beyond the Law */
+KOVAARM5    STUDDED    ALL      /* Beyond the Law */
 LEAT01      LEATHER    ALL      //BG1
 _LEAT01     LEATHER    ALL      /* Tutu */
 LEAT02      LEATHER    ALL      //BG1

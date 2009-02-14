@@ -693,7 +693,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 3
     END
 
-    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~KIYOARM1.ITM~) BEGIN
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~KIYOARM1.ITM~) && (~%modsiam%~ STRING_CONTAINS_REGEXP ~btl_balance~ == 0) BEGIN
       WRITE_BYTE 0x60 0
       WRITE_BYTE 0x18 ("%flags%" BAND 0b10111111) // switch off magical flag
       READ_LONG 0x54 temp
@@ -701,8 +701,24 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_LONG 0x54 0xffffffff // non-magical, doesn't need identified_desc
     END
 
-    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~KIYOARM2.ITM~) BEGIN
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~KIYOARM1.ITM~) && NOT (~%modsiam%~ STRING_CONTAINS_REGEXP ~btl_balance~ == 0) BEGIN
       WRITE_BYTE 0x60 2
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~KIYOARM2.ITM~) && (~%modsiam%~ STRING_CONTAINS_REGEXP ~btl_balance~ == 0) BEGIN
+      WRITE_BYTE 0x60 2
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~KIYOARM2.ITM~) && NOT (~%modsiam%~ STRING_CONTAINS_REGEXP ~btl_balance~ == 0) BEGIN
+      WRITE_BYTE 0x60 4
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~KIYOARM3.ITM~) && (~%modsiam%~ STRING_CONTAINS_REGEXP ~btl_balance~ == 0) BEGIN
+      WRITE_BYTE 0x60 4
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~KIYOARM3.ITM~) && NOT (~%modsiam%~ STRING_CONTAINS_REGEXP ~btl_balance~ == 0) BEGIN
+      WRITE_BYTE 0x60 6
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~KKCHAIN.ITM~) BEGIN
@@ -710,15 +726,28 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 3
     END
 
-    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~KOVAARM1.ITM~) BEGIN
-      WRITE_BYTE 0x18 ("%flags%" BAND 0b10111111) // switch off magical flag
-      READ_LONG 0x54 temp
-      WRITE_LONG 0x50 %temp%
-      WRITE_LONG 0x54 0xffffffff // non-magical, doesn't need identified_desc
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~KOVAARM1.ITM~) && NOT (~%modsiam%~ STRING_CONTAINS_REGEXP ~btl_balance~ == 0) BEGIN
+      WRITE_BYTE 0x60 2
     END
 
-    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~KOVAARM5.ITM~) BEGIN
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~KOVAARM1.ITM~) && (~%modsiam%~ STRING_CONTAINS_REGEXP ~btl_balance~ == 0) BEGIN
+      WRITE_BYTE 0x60 1
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~KOVAARM2.ITM~) && NOT (~%modsiam%~ STRING_CONTAINS_REGEXP ~btl_balance~ == 0) BEGIN
       WRITE_BYTE 0x60 4
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~KOVAARM2.ITM~) && (~%modsiam%~ STRING_CONTAINS_REGEXP ~btl_balance~ == 0) BEGIN
+      WRITE_BYTE 0x60 2
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~KOVAARM5.ITM~) && NOT (~%modsiam%~ STRING_CONTAINS_REGEXP ~btl_balance~ == 0) BEGIN
+      WRITE_BYTE 0x60 6
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~KOVAARM5.ITM~) && (~%modsiam%~ STRING_CONTAINS_REGEXP ~btl_balance~ == 0) BEGIN
+      WRITE_BYTE 0x60 3
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~LEAT02.ITM~ || "%SOURCE_FILE%" STRING_EQUAL ~_LEAT02.ITM~) BEGIN
@@ -1647,9 +1676,11 @@ COPY_EXISTING - ~fullplate/thebiglist.txt~ ~fullplate~
         READ_2DA_ENTRY ~%i%~ 19 0 ~_disarmtrapmod~
         READ_2DA_ENTRY ~%i%~ 20 0 ~_pickpocketmod~
         READ_2DA_ENTRY ~%i%~ 21 0 ~_spellfailmod~
+        READ_2DA_ENTRY ~%i%~ 22 0 ~game~
         PATCH_IF (arcanewhacking = 0) BEGIN SPRINT _spellfailmod ~0~ END
 
         TO_LOWER name
+        TO_LOWER game
 
         // with item revisions installed, all shadow armours do not hinder spellcasting.
         PATCH_IF (~%modsiam%~ STRING_CONTAINS_REGEXP ~item_rev~ == 0) && (~%name%~ STRING_EQUAL ~leat08~)   BEGIN SPRINT _spellfailmod ~-12~ END
@@ -1659,28 +1690,31 @@ COPY_EXISTING - ~fullplate/thebiglist.txt~ ~fullplate~
         PATCH_IF (~%modsiam%~ STRING_CONTAINS_REGEXP ~item_rev~ == 0) && (~%name%~ STRING_EQUAL ~u#leat01~) BEGIN SPRINT _spellfailmod ~-10~ END
         PATCH_IF (~%modsiam%~ STRING_CONTAINS_REGEXP ~item_rev~ == 0) && (~%name%~ STRING_EQUAL ~u#leat02~) BEGIN SPRINT _spellfailmod ~-11~ END
 
-        SPRINT $weight(~%name%~)        ~%_weight%~
-        SPRINT $fatmod(~%name%~)        ~%_fatmod%~
-        SPRINT $dexmod(~%name%~)        ~%_dexmod%~
-        SPRINT $movemod(~%name%~)       ~%_movemod%~
-        SPRINT $wpnspeedmod(~%name%~)   ~%_wpnspeedmod%~
-        SPRINT $baseac(~%name%~)        ~%_baseac%~
-        SPRINT $slashac(~%name%~)       ~%_slashac%~
-        SPRINT $crushac(~%name%~)       ~%_crushac%~
-        SPRINT $pierceac(~%name%~)      ~%_pierceac%~
-        SPRINT $missileac(~%name%~)     ~%_missileac%~
-        SPRINT $slashres(~%name%~)      ~%_slashres%~
-        SPRINT $crushres(~%name%~)      ~%_crushres%~
-        SPRINT $pierceres(~%name%~)     ~%_pierceres%~
-        SPRINT $missileres(~%name%~)    ~%_missileres%~
-        SPRINT $fireres(~%name%~)       ~%_fireres%~
-        SPRINT $coldres(~%name%~)       ~%_coldres%~
-        SPRINT $hidemod(~%name%~)       ~%_hidemod%~
-        SPRINT $movesilmod(~%name%~)    ~%_movesilmod%~
-        SPRINT $openlockmod(~%name%~)   ~%_openlockmod%~
-        SPRINT $disarmtrapmod(~%name%~) ~%_disarmtrapmod%~
-        SPRINT $pickpocketmod(~%name%~) ~%_pickpocketmod%~
-        SPRINT $spellfailmod(~%name%~)  ~%_spellfailmod%~
+        // if multiple matches, latest wins
+        PATCH_IF ( ~%game%~ STRING_EQUAL ~all~ || ~%game%~ STRING_EQUAL ~%gameiam%~ || (~%modsiam%~ STRING_CONTAINS_REGEXP ~%game%~ == 0) ) BEGIN
+          SPRINT $weight(~%name%~)        ~%_weight%~
+          SPRINT $fatmod(~%name%~)        ~%_fatmod%~
+          SPRINT $dexmod(~%name%~)        ~%_dexmod%~
+          SPRINT $movemod(~%name%~)       ~%_movemod%~
+          SPRINT $wpnspeedmod(~%name%~)   ~%_wpnspeedmod%~
+          SPRINT $baseac(~%name%~)        ~%_baseac%~
+          SPRINT $slashac(~%name%~)       ~%_slashac%~
+          SPRINT $crushac(~%name%~)       ~%_crushac%~
+          SPRINT $pierceac(~%name%~)      ~%_pierceac%~
+          SPRINT $missileac(~%name%~)     ~%_missileac%~
+          SPRINT $slashres(~%name%~)      ~%_slashres%~
+          SPRINT $crushres(~%name%~)      ~%_crushres%~
+          SPRINT $pierceres(~%name%~)     ~%_pierceres%~
+          SPRINT $missileres(~%name%~)    ~%_missileres%~
+          SPRINT $fireres(~%name%~)       ~%_fireres%~
+          SPRINT $coldres(~%name%~)       ~%_coldres%~
+          SPRINT $hidemod(~%name%~)       ~%_hidemod%~
+          SPRINT $movesilmod(~%name%~)    ~%_movesilmod%~
+          SPRINT $openlockmod(~%name%~)   ~%_openlockmod%~
+          SPRINT $disarmtrapmod(~%name%~) ~%_disarmtrapmod%~
+          SPRINT $pickpocketmod(~%name%~) ~%_pickpocketmod%~
+          SPRINT $spellfailmod(~%name%~)  ~%_spellfailmod%~
+        END
 
     END
     BUT_ONLY_IF_IT_CHANGES

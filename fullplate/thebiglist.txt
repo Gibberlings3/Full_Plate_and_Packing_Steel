@@ -1,308 +1,302 @@
-PADDED0     10  0   0   1   8   2   2   0   0  15  15   5   5  0   0   20  20  10  10  30  10
-PADDED1     10  0   0   0   6   2   2   0   0  15  17   5   5  0   0   15  15   5   5  25  10
-PADDED2     10  0   0   0   4   2   2   0   0  15  17   7   5  0   0   10  10   0   0  20  10
-LEATHER0    10  0   0   0   8   2   1   1   0  15  10  10   5  0   0    0   0   0   0   0  10
-LEATHER1     9  0   0   0   6   2   1   1   0  15  10  10   7  0   0    0   0   0   0   0  10
-LEATHER2     8  0   0   0   4   2   1   1   0  15  10  12   7  0   0    0   0   0   0   0  10
-LEATHER3     7  0   0   0   2   2   1   1   0  17  10  12   7  0   0    0   0   0   0   0  10
-LEATHER4     6  0   0   0   0   2   1   1   0  17  12  12   7  0   0    0   0   0   0   0  10
-LEATHER5     5  0   0   0  -2   2   1   1   0  17  12  12   9  0   0    0   0   0   0   0  10
-LEATHER6     4  0   0   0  -4   2   1   1   0  17  12  14   9  0   0    0   0   0   0   0  10
-LEATHER7     3  0   0   0  -6   2   1   1   0  19  12  14   9  0   0    0   0   0   0   0  10
-LEATHER8     2  0   0   0  -8   2   1   1   0  19  14  14   9  0   0    0   0   0   0   0  10
-STUDDED0    25  1  10   1   8   2   0   1   1  15   5  10  10  0   0   20  20  10  10  30  15
-STUDDED1    22  1  10   0   6   2   0   1   1  15   7  10  10  0   0   15  15   5   5  25  14
-STUDDED2    20  1  10   0   4   2   0   1   1  17   7  10  10  0   0   10  10   0   0  20  13
-STUDDED3    18  0   0   0   2   2   0   1   1  17   7  12  10  0   0    5   5   0   0  15  12
-STUDDED4    15  0   0   0   0   2   0   1   1  17   7  12  12  0   0    0   0   0   0  10  11
-STUDDED5    12  0   0   0  -2   2   0   1   1  17   9  12  12  0   0    0   0   0   0   5  10
-STUDDED6    10  0   0   0  -4   2   0   1   1  19   9  12  12  0   0    0   0   0   0   0  10
-STUDDED7     9  0   0   0  -6   2   0   1   1  19   9  14  12  0   0    0   0   0   0   0  10
-STUDDED8     8  0   0   0  -8   2   0   1   1  19   9  14  14  0   0    0   0   0   0   0  10
-HIDE0       30  2  10   3   7   1   0   1   2  15  10  15  15  5   5   20  30  50  50  60  20
-HIDE1       28  1  10   1   5   1   0   1   2  15  12  15  15  5   5   15  25  45  45  55  19
-HIDE2       26  1  10   0   3   1   0   1   2  15  12  17  15  6   6   10  20  40  40  50  18
-HIDE3       24  1  10   0   1   1   0   1   2  17  12  17  15  6   6    5  15  35  35  45  17
-HIDE4       22  0  10   0  -1   1   0   1   2  17  12  17  17  7   7    0  10  30  30  40  16
-HIDE5       20  0  10   0  -3   1   0   1   2  17  14  17  17  7   7    0   5  25  25  35  15
-HIDE6       18  0   0   0  -5   1   0   1   2  17  14  19  17  8   8    0   0  20  20  30  14
-HIDE7       16  0   0   0  -7   1   0   1   2  19  14  19  17  8   8    0   0  15  15  25  13
-HIDE8       14  0   0   0  -9   1   0   1   2  19  14  19  19  9   9    0   0  10  10  20  12
-HIDE9       12  0   0   0  -11  1   0   1   2  19  16  19  19  9   9    0   0   5   5  15  11
-SCALE0      40  1  20   2   7   2   0   1   1  20   5  15  10  0   0   50  60  20  20  50  25
-SCALE1      35  1  10   1   7   2   0   1   1  22   7  17  12  0   0   50  55  20  20  50  24
-SCALE2      35  1  10   0   6   2   0   1   1  24   9  19  14  0   0   50  50  20  20  50  23
-SCALE3      30  0  10   0   6   2   0   1   1  26  11  21  16  0   0   45  50  20  20  50  22
-SCALE4      30  0  10   0   5   2   0   1   1  28  13  23  18  0   0   45  50  20  20  45  21
-SCALE5      25  0  10   0   5   2   0   1   1  30  15  25  20  0   0   45  45  20  20  45  20
-CHAIN0      40  2  20   3   7   2   0   1   1  35   0  15  15  0   0   30  40  15  15  40  30
-CHAIN1      35  2  10   2   7   2   0   1   1  37   2  17  17  0   0   30  35  15  15  40  29
-CHAIN2      35  1  10   1   6   2   0   1   1  39   4  19  19  0   0   30  35  15  15  35  28
-CHAIN3      30  1  10   0   6   2   0   1   1  41   6  21  21  0   0   30  30  15  15  35  27
-CHAIN4      30  0  10   0   5   2   0   1   1  43   8  23  23  0   0   30  30  15  15  30  26
-CHAIN5      25  0  10   0   5   2   0   1   1  45  10  25  25  0   0   25  30  15  15  30  25
-CHAIN6      25  0  10   0   4   2   0   1   1  47  12  27  27  0   0   25  25  15  15  30  24
-CHAIN7      20  0  10   0   4   2   0   1   1  49  14  29  29  0   0   25  25  15  15  25  23
-CHAIN8      20  0  10   0   3   2   0   1   1  51  16  31  31  0   0   20  25  15  15  25  22
-CHAIN9      15  0   0   0   3   2   0   1   1  53  18  33  33  0   0   20  20  15  15  25  21
-ELVENC0     20  1  10   1   7   2   0   1   1  35  10  15  15  0   0   10  10   5   5  20   0
-ELVENC1     18  0   0   0   5   2   0   1   1  35  12  15  15  0   0    5   5   0   0  15   0
-ELVENC2     16  0   0   0   3   2   0   1   1  37  12  15  15  0   0    0   0   0   0  10   0
-ELVENC3     14  0   0   0   1   2   0   1   1  37  12  17  15  0   0    0   0   0   0   5   0
-ELVENC4     12  0   0   0  -1   2   0   1   1  37  12  17  17  0   0    0   0   0   0   0   0
-ELVENC5     10  0   0   0  -3   2   0   1   1  37  14  17  17  0   0    0   0   0   0   0   0
-ELVENC6      8  0   0   0  -5   2   0   1   1  39  14  17  17  0   0    0   0   0   0   0   0
-ADAMC0      40  2  20   3   7   2   0   1   1  37  12  17  17  0   0   25  35  15  15  35   0
-ADAMC1      35  2  10   2   7   2   0   1   1  39  14  19  19  0   0   25  30  15  15  35   0
-ADAMC2      35  1  10   1   6   2   0   1   1  41  16  21  21  0   0   25  30  15  15  30   0
-ADAMC3      30  1  10   0   6   2   0   1   1  43  18  23  23  0   0   25  25  15  15  30   0
-ADAMC4      30  0  10   0   5   2   0   1   1  45  20  25  25  0   0   25  25  15  15  25   0
-ADAMC5      25  0  10   0   5   2   0   1   1  47  22  27  27  0   0   20  25  15  15  25   0
-BANDED0     35  2  10   4   7   3   0   1   0  40  15  20  20  0   0   40  60  20  20  50  35
-BANDED1     30  2  10   3   7   3   0   1   0  42  17  22  22  0   0   40  55  20  20  50  34
-BANDED2     30  2  10   2   6   3   0   1   0  44  19  24  24  0   0   40  50  20  20  50  33
-BANDED3     25  1  10   1   6   3   0   1   0  46  21  26  26  0   0   40  50  20  20  45  32
-BANDED4     25  1  10   0   5   3   0   1   0  48  23  28  28  0   0   40  45  20  20  45  31
-BANDED5     20  1  10   0   5   3   0   1   0  50  25  30  30  0   0   40  45  20  20  40  30
-SPLINT0     40  3  20   5   7   2   1   1   0  35  20  25  25  0   0   40  40  15  25  40  40
-SPLINT1     35  3  10   4   7   2   1   1   0  37  22  27  27  0   0   40  35  15  25  40  39
-SPLINT2     35  3  10   3   6   2   1   1   0  39  24  29  29  0   0   35  35  15  25  40  38
-SPLINT3     30  2  10   2   6   2   1   1   0  41  26  31  31  0   0   35  35  15  25  35  37
-SPLINT4     30  2  10   1   5   2   1   1   0  43  28  33  33  0   0   35  30  15  25  35  36
-SPLINT5     25  2  10   0   5   2   1   1   0  45  30  35  35  0   0   30  30  15  25  35  35
-SPLINT6     25  1  10   0   4   2   1   1   0  47  32  37  37  0   0   30  30  15  25  30  34
-PLATE0      50  4  20   5   7   2   0   2   0  50  25  40  40  0   0   75  80  40  40  75  40
-PLATE1      45  3  20   4   7   2   0   2   0  52  27  42  42  0   0   75  75  40  40  75  39
-PLATE2      45  3  20   3   6   2   0   2   0  54  29  44  44  0   0   70  75  40  40  75  38
-PLATE3      40  3  20   2   6   2   0   2   0  56  31  46  46  0   0   70  75  40  40  70  37
-PLATE4      40  3  20   1   5   2   0   2   0  58  33  48  48  0   0   70  70  40  40  70  36
-PLATE5      35  2  10   0   5   2   0   2   0  60  35  50  50  0   0   65  70  40  40  70  35
-PLATE6      35  2  10   0   4   2   0   2   0  62  37  52  52  0   0   65  70  40  40  65  34
-PLATE7      30  2  10   0   4   2   0   2   0  64  39  54  54  0   0   65  65  40  40  65  33
-FIELDP0     60  4  30   6   6   2   0   1   1  50  30  45  50  0   0   95  95  80  80  95  40
-FIELDP1     55  4  20   5   6   2   0   1   1  52  32  47  52  0   0   95  90  80  80  95  39
-FIELDP2     55  4  20   4   5   2   0   1   1  54  34  49  54  0   0   90  90  80  80  95  38
-FIELDP3     50  3  20   3   5   2   0   1   1  56  36  51  56  0   0   90  90  80  80  90  37
-FIELDP4     50  3  20   2   4   2   0   1   1  58  38  53  58  0   0   90  85  80  80  90  36
-FIELDP5     45  3  20   1   4   2   0   1   1  60  40  55  60  0   0   85  85  80  80  90  35
-MFIELDP0    30  3  10   3   6   2   0   1   1  50  30  45  50  0   0   95  95  80  80  95  40
-MFIELDP1    25  3  10   2   6   2   0   1   1  52  32  47  52  0   0   95  90  80  80  95  39
-MFIELDP2    25  3  10   1   5   2   0   1   1  54  34  49  54  0   0   90  90  80  80  95  38
-MFIELDP3    20  2  10   0   5   2   0   1   1  56  36  51  56  0   0   90  90  80  80  90  37
-FULLP0      70  4  30   6   6   2   0   1   1  55  35  50  55  0   0   95  95  80  80  95  35
-FULLP1      65  4  30   5   6   2   0   1   1  57  37  52  57  0   0   95  90  80  80  95  34
-FULLP2      65  4  30   4   5   2   0   1   1  59  39  54  59  0   0   90  90  80  80  95  33
-FULLP3      60  4  30   3   5   2   0   1   1  61  41  56  61  0   0   90  90  80  80  90  32
-FULLP4      60  3  30   2   4   2   0   1   1  63  43  58  63  0   0   90  85  80  80  90  31
-FULLP5      55  3  20   1   4   2   0   1   1  65  45  60  65  0   0   85  85  80  80  90  30
-FULLP6      55  3  20   0   3   2   0   1   1  67  47  62  67  0   0   85  85  80  80  85  29
-FULLP7      50  3  20   0   3   2   0   1   1  69  49  64  69  0   0   85  80  80  80  85  28
-NOTARMOR0    0  0   0   0  10   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0
-NOTARMOR1    0  0   0   0  10   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0
-NOTARMOR2    0  0   0   0  10   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0
-NOTARMOR3    0  0   0   0  10   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0
-NOTARMOR4    0  0   0   0  10   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0
-NOTARMOR5    0  0   0   0  10   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0
-PLAT17       0  1  10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // cursed plate
-LEAT06       0  0   0   0   0   0   0   0 -10   0   0   0 -35  0   0    0   0   0   0   0   0   // cursed studded, missile attractor
-_LEAT06      0  0   0   0   0   0   0   0 -10   0   0   0 -35  0   0    0   0   0   0   0   0   // cursed studded, missile attractor
-BELT02       0  0   0   0   0   3   0   0   0  10   0   0   0  0   0    0   0   0   0   0   0   // golden girdle
-_BELT02      0  0   0   0   0   3   0   0   0  10   0   0   0  0   0    0   0   0   0   0   0   // golden girdle
-BELT03       0  0   0   0   0   0   4   0   0   0  15   0   0  0   0    0   0   0   0   0   0   // girdle of bluntness
-_BELT03      0  0   0   0   0   0   4   0   0   0  15   0   0  0   0    0   0   0   0   0   0   // girdle of bluntness
-BELT04       0  0   0   0   0   0   0   3   3   0   0  10  10  0   0    0   0   0   0   0   0   // girdle of piercing
-_BELT04      0  0   0   0   0   0   0   3   3   0   0  10  10  0   0    0   0   0   0   0   0   // girdle of piercing
-C2BELT01     0  0   0   0   0   3   3   3   3  10  10  10  10  0   0    0   0   0   0   0   0   //  combo girdle (IU)
-I1CH001      7  0   0   0  -5   1   1   1   1  20  20  20  20  0   0    0   0   0   0   0   0   // smoke armor
-I1LT001     15  1   0   0  -2   3   1   0   0  18   7   0   0  0   0    0   0   0   0   0  10   // skeleton ribcage
-I1LT002      2  0   0   2   2   0   0   0   0   0  -2   0   0  0   0    5   5   5   5   5   1   // anti-imprisonment armor
-LEATCM02     3  0   0   2   2   0   0   0   0   0  -2   0   0  0   0    5   5   5   5   5   1   // green peace resistance
-LEAT09       0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // karajah's life and death
-CMTULE01     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0 -10   0   // shadow armor +4
-LEAT08       0  0   0   0   0   0   0   0   0   0   0   0   0  0   0   -5  -5   0   0 -15   0   // shadow armor
-_LEAT08      0  0   0   0   0   0   0   0   0   0   0   0   0  0   0   -5  -5   0   0 -15   0   // shadow armor
-M#ASLEAT     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0  -15 -15  -5  -5 -25   0   // apprentice shadow armor
-TCLEAT05     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0  -10 -10   0   0 -20   0   // aleigha's studded leather
-USLTR01      0  0   0   0   0   0   0   0   0   0   0   0   0  0   0  -15 -15  -5  -5 -25   0   // studded leather +1: shadowed
-USLTR3A      0  0   0   0   0   0   0   0   0   0   0   0   0  0   0  -10 -10   0   0 -20   0   // studded leather +2: shadowed
-USLTR5A      0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0 -10   0   // studded leather +4: shadowed
-U#LEAT01     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0  -5   0   // pikim's armor
-U#LEAT02     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0 -10   0   // hide of shades
-S!LEAT01     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0 -20   0   0   0   0   // improved human flesh - restore lost move silently bonus
-MOURNER     14  1  10   0   0   0   0   0   0   0   0   0   0  0   0   25  25  25  25  25   0   // mourner's armour +4
-LEATGR01     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0 -10   // bardic leather
-ADLEATH     -5 -1 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0 -13   // angelo's (studded) leathers
-ARMPEN      23  1  10   0   0   0   0   0   0   0   0   0   0  0   0   25  25  25  25  20   0   // studded leather armor of repentance +5
-FWLEAT02     0  0   0   0   0   0   0   0   0   2   2   2   2  0   0    0   0   0   0   0   0   // beastmen's leather +5
-FWLEAT03    38  2  20   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // desert troll hide
-FWLEAT05     0  0   0   0   0   0   0  -2  -2   0   0  -4  -4  0   0    0   0   0   0   0   0   // deathbane
-FWLEAT06     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0 -14   // caster's leather
-DRAGARM    -20  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // black dragon scale +2
-SCAL04     -20 -1 -10   0   0   0   0   0   0   0   0   0   0  0   0  -50 -50 -20 -20 -50 -23   // sea-elven scale
-I1CH002      5  0   0   1   0   0   0   0   0  -2  -2  -2  -2  0   0    0   5   0   0   0   1   // voice of doom
-DLARMOR1    -4  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // rosemail
-DLCHAN01    -5  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // fine chainmail
-BW05JUAR     0  0   0   0   0   0   0   0   0   0  10   0   0  0   0    0   0   0   0   0   0   // jusam's chainmail +4
-J#INDI01   -20 -1 -10  -1   0   0   0   0   0 -15   0  -5  -5  0   0   -5  -5  -5  -5  -5 -30   // indi's chain vest
-O!BOM004   -15 -1   0   0   1   0   0   0   0  -6  -2  -6  -6  0   0    0   0   0   0   0  -9   // mage chain
-O!BOM005   -20 -1 -10   0   1   0   0   0   0  -4  -2  -4  -4  0   0    0   0   0   0   0   1   // mage chain +1
-O!BOM006   -20 -1 -10   0   1   0   0   0   0  -4  -4  -4  -4  0   0    0   0   0   0   0  12   // mage chain +2
-CHAN06     -15  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // mithril chain
-_CHAN06    -15  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // mithril chain
-CHAN07     -15  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // mithril chain
-_CHAN07    -15  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // mithril chain
-CHANGR03   -15  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // mithril chain
-DEITM053   -15  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // mithril chain
-LK#XARM    -15  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // mithril chain +4
-BSINGCHN     0  0   0   0   0   4  -2   0   0   8  -4   0   0  0   0    0   0   0   0   0   0   // mirathar
-O!BOM002   -15  0 -10   0   0   0   0   0   0   0   0   0   0  0   0  -25 -30   0   0   0   0   // ranger mail +5
-KOVAARM1    -5  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // haeloven
-KOVAARM2    -1  0   0   0   0   0   0   0   2   0   0   0   4  0   0    0   0   0   0   0   0   // haeloven +2
-KOVAARM5     3  0   0   0   0   0   0   0   2   0   0   0   4  0   0    0   0   0   0   0   0   // haeloven +4
-KIYOARM1   -15 -1 -10  -1   0   0   0   0   1   2   2   2   4  0   0  -20 -20  -5 -15 -20   0   // verdant vigil
-KIYOARM2   -10 -1   0  -1   0   0   0   0   2   2   2   2   6  0   0  -15 -15  -5 -15 -20   0   // verdant vigilant +2
-KIYOARM3    -5 -1   0  -1   0   0   0   0   4   2   2   2  10  0   0  -15 -10  -5 -15 -15   0   // verdant vigilante +4
-CHAN17       0 -1   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // wyvernscale splint mail
-SHARK3      -5  0 -10   0   0   0   0   0   0   2   2   2   2  0   0    0   0   0   0   0   0   // coral plate - sahuagin splint mail
-X#GARCH    -10  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0 -29   // bardic chain +1
-X#GARCH2   -10  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0 -28   // bardic chain +2
-FWCHAN01     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0 -26   // improved jester's chain
-FWCHAN03     0  0   0   0   0  10   0  10   0  99   0  99   0  0   0    0   0   0   0   0   0   // suldanessellar chain
-FWCHAN04     0  0   0   0  -3   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // sunus graywar's chainmail +6
-CISPGRD    -25 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // winter king's plate
-KING       -25 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // winter king's plate
-UCMGPL01   -25 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // winter king's plate
-PLATGR01   -20 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // chitinous plate +1
-PLAT06     -23  0 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // ankheg plate +2
-_PLAT06    -23  0 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // ankheg plate +2
-C2PLAT01   -18  0 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // ankheg plate +4
-S!PLAT03   -13  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // ankheg plate +5
-ADRED      -23 -1 -10  -1   0   0   0   0   0   6  -3   0   0  0   0  -15 -15  -5  -5 -15   0   // lacquer-plate armour
-SAMARMX1   -15 -2 -10  -1   0   0   0   0   0   6  -3   0   0  0   0  -15 -15  -5  -5 -15   0   // samurai armour
-O!BOM007   -10 -1 -10   0   1   0   0   0   0  -6  -6  -6  -6  0   0    0   0   0   0   0  -9   // mage plate
-O!BOM008   -15 -1 -10   0   1   0   0   0   0  -4  -4  -4  -4  0   0    0   0   0   0   0   1   // mage plate +1
-O!BOM009   -15 -1 -10   0   1   0   0   0   0  -4  -4  -4  -4  0   0    0   0   0   0   0  12   // mage plate +2
-I1PL001      5  1   0   1   0   0   0   0   0  -2  -2  -2  -2  0   0    0   5   0   0   0   1   // gubbie armor
-TCPLAT01   -30 -2 -10  -4   1   0   0   0   0 -10 -20 -20 -20  0   0  -20 -20 -20 -20 -20 -10   // rusted plate mail
-PLAT13       0  0   0   0   0   0   0   0   0   6   0   0   0  0   0    0   0   0   0   0   0   // gorgon-quenched steel plate
-PLAT22     -10 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0   -5  -5   0   0   0   0   // shuruppak's plate
-GLORY       45  3  30   4   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // the glory of suffering
-SHPLATE      0  0   0   0   0   0   0   0   3   0   0   0   6  0   0    0   0   0   0   0   0   // shadowed plate +3
-PSMADE28   -42 -3 -20  -3   0   0   0   0   0   0   0   0   0  0   0  -50 -55 -40 -40 -55   0   // ethereal plate +2
-SOAITM02   -10  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // kalindra's armor
-SWANARM    -15 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0  -20 -20 -10 -10 -20   0   // black swan armor +2
-ISWARM     -15 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0  -20 -20 -10 -10 -20   0   // black swan armor +2
-UMHULK       0  0   0   0   0   1   0   0   0   2   0   0   0  0   0    0   0   0   0   0   0   // umber hulk plate +1
-DLPLAT01    -5  0   0  -1   0   0   0   0   0   2   2   2   2  0   0    0  -5   0   0   0  -1   // solamnic armor
-R!KITPLT     0 -1   0   0   0   0   0   0   0   0   0   0   0  0   0   -5  -5   0   0   0   0   // well-made elven plate
-FWPLAT02     5  0   0   1   0   0   0   0   0  -2  -2  -2  -2  0   0    0   5   0   0   0   1   // full plate of blades
-FWPLAT04   -35 -2 -10  -2   0   0   0   0   0   4   0   4   4  0   0  -80 -80 -75 -75 -75   0   // death knight's armor
-DWPLAT01    15  1  10   1   0   0   0   0   0  -2   0   0   0  0   0    0   0   0   0   0   0   // drow adamantine full plate
-U#PLAT01    65  1  40   2   0   0   0   0   0  -2   0   0   0  0   0    0   0   0   0   0   0   // adamantine full plate +5
-S!PLAT02    35  1  20   2   0   0   0   0   6   0   0   0   0  0   0    0   0   0   0   0   0   // huskar lord's armor
-DEITM088    37  1  20   2   0   0   0   0   0   0   0   0   0  0   0   10  10  10  10  10   0   // falgar's plate
-DEITM090     0  0   0   0   0   0   0   0   0   2   0   4   4  0   0    0   0   0   0   0   0   // baelden's armour
-PSMADE29     0  0  20   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // ethereal plate +2
-TCVILDPL     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0   55   0   0   0   0   0   // dawn's embrace
-DW#ABYDA     2  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   // yellow dragonscale armor
-CHAN20     -10  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0 -10 -10 -10   0   // white dragonscale splint mail
-CHANGR02   -10 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0 -10 -10 -10   0   // zeddek's skin dragonscale splint mail
-PLAT18      -5  0 -10  -1   0   0   0   0   0   0   0   0   0  0   0  -20 -20 -10 -10 -20   0   // red dragonscale plate
-PLAT20     -30 -1 -10  -2   0   0   0   0   0   0   0   0   0  0   0  -35 -35 -35 -35 -35   0   // blue dragonscale plate
-U#PLAT02   -20 -1 -10  -2   0   0   0   0   0   0   0   0   0  0   0  -35 -35 -35 -35 -35   0   // plate of many dragons
-S!PLAT05   -35 -1 -20  -2   0   0   0   0   0   0   0   0   4  0   0  -35 -35 -35 -35 -35   0   // green wyrmscale plate
-S!PLAT06   -30 -1 -10  -1   0   0   0   0   0   0   0   0   4  0   0  -35 -35 -35 -35 -35   0   // red wyrmscale plate
-X#FAI4     150  6  70   8  -1   0   0   0   0  20  20  20  20  0   0  120 120 120 120 120  90   // battered armor
-DGFAITH      0  0   0   0   0   0   0   0   0  15  15  15  15  0   0    0   0   0   0   0   0   // armor of faith, innate version
-SPPR111      0  0   0   0   0   0   0   0   0   3   3   3   3  0   0    0   0   0   0   0   0   // armor of faith, priest, level 1
-SPPR111-5    0  0   0   0   0   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   // armor of faith, priest, level 5
-SPPR111-6    0  0   0   0   0   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   // armor of faith, priest, level 5
-SPPR111-7    0  0   0   0   0   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   // armor of faith, priest, level 5
-SPPR111-8    0  0   0   0   0   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   // armor of faith, priest, level 5
-SPPR111-9    0  0   0   0   0   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   // armor of faith, priest, level 5
-SPPR111-10   0  0   0   0   0   0   0   0   0   9   9   9   9  0   0    0   0   0   0   0   0   // armor of faith, priest, level 10
-SPPR111-11   0  0   0   0   0   0   0   0   0   9   9   9   9  0   0    0   0   0   0   0   0   // armor of faith, priest, level 10
-SPPR111-12   0  0   0   0   0   0   0   0   0   9   9   9   9  0   0    0   0   0   0   0   0   // armor of faith, priest, level 10
-SPPR111-13   0  0   0   0   0   0   0   0   0   9   9   9   9  0   0    0   0   0   0   0   0   // armor of faith, priest, level 10
-SPPR111-14   0  0   0   0   0   0   0   0   0   9   9   9   9  0   0    0   0   0   0   0   0   // armor of faith, priest, level 10
-SPPR111-15   0  0   0   0   0   0   0   0   0  12  12  12  12  0   0    0   0   0   0   0   0   // armor of faith, priest, level 15
-SPPR111-16   0  0   0   0   0   0   0   0   0  12  12  12  12  0   0    0   0   0   0   0   0   // armor of faith, priest, level 15
-SPPR111-17   0  0   0   0   0   0   0   0   0  12  12  12  12  0   0    0   0   0   0   0   0   // armor of faith, priest, level 15
-SPPR111-18   0  0   0   0   0   0   0   0   0  12  12  12  12  0   0    0   0   0   0   0   0   // armor of faith, priest, level 15
-SPPR111-19   0  0   0   0   0   0   0   0   0  12  12  12  12  0   0    0   0   0   0   0   0   // armor of faith, priest, level 15
-SPPR111-20   0  0   0   0   0   0   0   0   0  15  15  15  15  0   0    0   0   0   0   0   0   // armor of faith, priest, level 20
-DLPR111      0  0   0   0   0   0   0   0   0   3   3   3   3  0   0    0   0   0   0   0   0   // armor of faith, priest, level 1
-DLPR111-5    0  0   0   0   0   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   // armor of faith, priest, level 5
-DLPR111-6    0  0   0   0   0   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   // armor of faith, priest, level 5
-DLPR111-7    0  0   0   0   0   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   // armor of faith, priest, level 5
-DLPR111-8    0  0   0   0   0   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   // armor of faith, priest, level 5
-DLPR111-9    0  0   0   0   0   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   // armor of faith, priest, level 5
-DLPR111-10   0  0   0   0   0   0   0   0   0   9   9   9   9  0   0    0   0   0   0   0   0   // armor of faith, priest, level 10
-DLPR111-11   0  0   0   0   0   0   0   0   0   9   9   9   9  0   0    0   0   0   0   0   0   // armor of faith, priest, level 10
-DLPR111-12   0  0   0   0   0   0   0   0   0   9   9   9   9  0   0    0   0   0   0   0   0   // armor of faith, priest, level 10
-DLPR111-13   0  0   0   0   0   0   0   0   0   9   9   9   9  0   0    0   0   0   0   0   0   // armor of faith, priest, level 10
-DLPR111-14   0  0   0   0   0   0   0   0   0   9   9   9   9  0   0    0   0   0   0   0   0   // armor of faith, priest, level 10
-DLPR111-15   0  0   0   0   0   0   0   0   0  12  12  12  12  0   0    0   0   0   0   0   0   // armor of faith, priest, level 15
-DLPR111-16   0  0   0   0   0   0   0   0   0  12  12  12  12  0   0    0   0   0   0   0   0   // armor of faith, priest, level 15
-DLPR111-17   0  0   0   0   0   0   0   0   0  12  12  12  12  0   0    0   0   0   0   0   0   // armor of faith, priest, level 15
-DLPR111-18   0  0   0   0   0   0   0   0   0  12  12  12  12  0   0    0   0   0   0   0   0   // armor of faith, priest, level 15
-DLPR111-19   0  0   0   0   0   0   0   0   0  12  12  12  12  0   0    0   0   0   0   0   0   // armor of faith, priest, level 15
-DLPR111-20   0  0   0   0   0   0   0   0   0  15  15  15  15  0   0    0   0   0   0   0   0   // armor of faith, priest, level 20
-SPPR202      0  0   0   0   0   0   0   0   0   0   5   0   0  0   0    0   0   0   0   0   0   // barkskin, priest, level 1 - scale +0 with +5% vs crushing
-SPPR202-4    0  0   0   0   0   0   0   0   0   2   7   2   2  0   0    0   0   0   0   0   0   // barkskin, priest, level 4 - scale +1 with +5% vs crushing
-SPPR202-5    0  0   0   0   0   0   0   0   0   2   7   2   2  0   0    0   0   0   0   0   0   // barkskin, priest, level 4 - scale +1 with +5% vs crushing
-SPPR202-6    0  0   0   0   0   0   0   0   0   2   7   2   2  0   0    0   0   0   0   0   0   // barkskin, priest, level 4 - scale +1 with +5% vs crushing
-SPPR202-7    0  0   0   0   0   0   0   0   0   2   7   2   2  0   0    0   0   0   0   0   0   // barkskin, priest, level 4 - scale +1 with +5% vs crushing
-SPPR202-8    0  0   0   0  -1   0   0   0   0   4   9   4   4  0   0    0   0   0   0   0   0   // barkskin, priest, level 8 - scale +2 with +5% vs crushing
-SPPR202-9    0  0   0   0  -1   0   0   0   0   4   9   4   4  0   0    0   0   0   0   0   0   // barkskin, priest, level 8 - scale +2 with +5% vs crushing
-SPPR202-10   0  0   0   0  -1   0   0   0   0   4   9   4   4  0   0    0   0   0   0   0   0   // barkskin, priest, level 8 - scale +2 with +5% vs crushing
-SPPR202-11   0  0   0   0  -1   0   0   0   0   4   9   4   4  0   0    0   0   0   0   0   0   // barkskin, priest, level 8 - scale +2 with +5% vs crushing
-SPPR202-12   0  0   0   0  -1   0   0   0   0   6  11   6   6  0   0    0   0   0   0   0   0   // barkskin, priest, level 12 - scale +3 with +5% vs crushing
-SPPR202-13   0  0   0   0  -1   0   0   0   0   6  11   6   6  0   0    0   0   0   0   0   0   // barkskin, priest, level 12 - scale +3 with +5% vs crushing
-SPPR202-14   0  0   0   0  -1   0   0   0   0   6  11   6   6  0   0    0   0   0   0   0   0   // barkskin, priest, level 12 - scale +3 with +5% vs crushing
-SPPR202-15   0  0   0   0  -1   0   0   0   0   6  11   6   6  0   0    0   0   0   0   0   0   // barkskin, priest, level 12 - scale +3 with +5% vs crushing
-SPPR202-16   0  0   0   0  -2   0   0   0   0   8  13   8   8  0   0    0   0   0   0   0   0   // barkskin, priest, level 16 - scale +4 with +5% vs crushing
-SPPR202-17   0  0   0   0  -2   0   0   0   0   8  13   8   8  0   0    0   0   0   0   0   0   // barkskin, priest, level 16 - scale +4 with +5% vs crushing
-SPPR202-18   0  0   0   0  -2   0   0   0   0   8  13   8   8  0   0    0   0   0   0   0   0   // barkskin, priest, level 16 - scale +4 with +5% vs crushing
-SPPR202-19   0  0   0   0  -2   0   0   0   0   8  13   8   8  0   0    0   0   0   0   0   0   // barkskin, priest, level 16 - scale +4 with +5% vs crushing
-SPPR202-20   0  0   0   0  -2   0   0   0   0  10  15  10  10  0   0    0   0   0   0   0   0   // barkskin, priest, level 20 - scale +5 with +5% vs crushing
-DLPR202      0  0   0   0   0   0   0   0   0   0   5   0   0  0   0    0   0   0   0   0   0   // barkskin, priest, level 1 - scale +0 with +5% vs crushing
-DLPR202-4    0  0   0   0   0   0   0   0   0   2   7   2   2  0   0    0   0   0   0   0   0   // barkskin, priest, level 4 - scale +1 with +5% vs crushing
-DLPR202-5    0  0   0   0   0   0   0   0   0   2   7   2   2  0   0    0   0   0   0   0   0   // barkskin, priest, level 4 - scale +1 with +5% vs crushing
-DLPR202-6    0  0   0   0   0   0   0   0   0   2   7   2   2  0   0    0   0   0   0   0   0   // barkskin, priest, level 4 - scale +1 with +5% vs crushing
-DLPR202-7    0  0   0   0   0   0   0   0   0   2   7   2   2  0   0    0   0   0   0   0   0   // barkskin, priest, level 4 - scale +1 with +5% vs crushing
-DLPR202-8    0  0   0   0  -1   0   0   0   0   4   9   4   4  0   0    0   0   0   0   0   0   // barkskin, priest, level 8 - scale +2 with +5% vs crushing
-DLPR202-9    0  0   0   0  -1   0   0   0   0   4   9   4   4  0   0    0   0   0   0   0   0   // barkskin, priest, level 8 - scale +2 with +5% vs crushing
-DLPR202-10   0  0   0   0  -1   0   0   0   0   4   9   4   4  0   0    0   0   0   0   0   0   // barkskin, priest, level 8 - scale +2 with +5% vs crushing
-DLPR202-11   0  0   0   0  -1   0   0   0   0   4   9   4   4  0   0    0   0   0   0   0   0   // barkskin, priest, level 8 - scale +2 with +5% vs crushing
-DLPR202-12   0  0   0   0  -1   0   0   0   0   6  11   6   6  0   0    0   0   0   0   0   0   // barkskin, priest, level 12 - scale +3 with +5% vs crushing
-DLPR202-13   0  0   0   0  -1   0   0   0   0   6  11   6   6  0   0    0   0   0   0   0   0   // barkskin, priest, level 12 - scale +3 with +5% vs crushing
-DLPR202-14   0  0   0   0  -1   0   0   0   0   6  11   6   6  0   0    0   0   0   0   0   0   // barkskin, priest, level 12 - scale +3 with +5% vs crushing
-DLPR202-15   0  0   0   0  -1   0   0   0   0   6  11   6   6  0   0    0   0   0   0   0   0   // barkskin, priest, level 12 - scale +3 with +5% vs crushing
-DLPR202-16   0  0   0   0  -2   0   0   0   0   8  13   8   8  0   0    0   0   0   0   0   0   // barkskin, priest, level 16 - scale +4 with +5% vs crushing
-DLPR202-17   0  0   0   0  -2   0   0   0   0   8  13   8   8  0   0    0   0   0   0   0   0   // barkskin, priest, level 16 - scale +4 with +5% vs crushing
-DLPR202-18   0  0   0   0  -2   0   0   0   0   8  13   8   8  0   0    0   0   0   0   0   0   // barkskin, priest, level 16 - scale +4 with +5% vs crushing
-DLPR202-19   0  0   0   0  -2   0   0   0   0   8  13   8   8  0   0    0   0   0   0   0   0   // barkskin, priest, level 16 - scale +4 with +5% vs crushing
-DLPR202-20   0  0   0   0  -2   0   0   0   0  10  15  10  10  0   0    0   0   0   0   0   0   // barkskin, priest, level 20 - scale +5 with +5% vs crushing
-SPWI102-4    0  0   0   0   0   0   0   0   0   2   2   2   2  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 4 - scale +1
-SPWI102-5    0  0   0   0   0   0   0   0   0   2   2   2   2  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 5 - scale +1
-SPWI102-6    0  0   0   0   0   0   0   0   0   2   2   2   2  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 6 - scale +1
-SPWI102-7    0  0   0   0   0   0   0   0   0   2   2   2   2  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 7 - scale +1
-SPWI102-8    0  0   0   0  -1   0   0   0   0   4   4   4   4  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 8 - scale +2
-SPWI102-9    0  0   0   0  -1   0   0   0   0   4   4   4   4  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 9 - scale +2
-SPWI102-10   0  0   0   0  -1   0   0   0   0   4   4   4   4  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 10 - scale +2
-SPWI102-11   0  0   0   0  -1   0   0   0   0   4   4   4   4  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 11 - scale +2
-SPWI102-12   0  0   0   0  -1   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 12 - scale +3
-SPWI102-13   0  0   0   0  -1   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 13 - scale +3
-SPWI102-14   0  0   0   0  -1   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 14 - scale +3
-SPWI102-15   0  0   0   0  -1   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 15 - scale +3
-SPWI102-16   0  0   0   0  -2   0   0   0   0   8   8   8   8  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 16 - scale +4
-SPWI102-17   0  0   0   0  -2   0   0   0   0   8   8   8   8  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 17 - scale +4
-SPWI102-18   0  0   0   0  -2   0   0   0   0   8   8   8   8  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 18 - scale +4
-SPWI102-19   0  0   0   0  -2   0   0   0   0   8   8   8   8  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 19 - scale +4
-SPWI102-20   0  0   0   0  -2   0   0   0   0  10  10  10  10  0   0    0   0   0   0   0   0   // armor (spell rev.), wizard, level 20 - scale +5
-POTN18       0  0   0   0   0   0  10   0   0   0  40   0   0  0   0    0   0   0   0   0   0   // potion of absorption
-_POTN18      0  0   0   0   0   0  10   0   0   0  40   0   0  0   0    0   0   0   0   0   0   // potion of absorption
-POTN24       0  0   0   0   0   5   5   5   5   0   0   0   0  0   0    0   0   0   0   0   0   // potion of defense
-_POTN24      0  0   0   0   0   5   5   5   5   0   0   0   0  0   0    0   0   0   0   0   0   // potion of defense
-I1PO010      0  1   0   0   0   0   0   0   0  20  20  20  20  0   0    0   0   0   0   0   0   // rocksalt potion
+PADDED0     10  0   0   1   8   2   2   0   0  15  15   5   5  0   0   20  20  10  10  30  10   ALL
+PADDED1     10  0   0   0   6   2   2   0   0  15  17   5   5  0   0   15  15   5   5  25  10   ALL
+PADDED2     10  0   0   0   4   2   2   0   0  15  17   7   5  0   0   10  10   0   0  20  10   ALL
+LEATHER0    10  0   0   0   8   2   1   1   0  15  10  10   5  0   0    0   0   0   0   0  10   ALL
+LEATHER1     9  0   0   0   6   2   1   1   0  15  10  10   7  0   0    0   0   0   0   0  10   ALL
+LEATHER2     8  0   0   0   4   2   1   1   0  15  10  12   7  0   0    0   0   0   0   0  10   ALL
+LEATHER3     7  0   0   0   2   2   1   1   0  17  10  12   7  0   0    0   0   0   0   0  10   ALL
+LEATHER4     6  0   0   0   0   2   1   1   0  17  12  12   7  0   0    0   0   0   0   0  10   ALL
+LEATHER5     5  0   0   0  -2   2   1   1   0  17  12  12   9  0   0    0   0   0   0   0  10   ALL
+LEATHER6     4  0   0   0  -4   2   1   1   0  17  12  14   9  0   0    0   0   0   0   0  10   ALL
+LEATHER7     3  0   0   0  -6   2   1   1   0  19  12  14   9  0   0    0   0   0   0   0  10   ALL
+LEATHER8     2  0   0   0  -8   2   1   1   0  19  14  14   9  0   0    0   0   0   0   0  10   ALL
+STUDDED0    25  1  10   1   8   2   0   1   1  15   5  10  10  0   0   20  20  10  10  30  15   ALL
+STUDDED1    22  1  10   0   6   2   0   1   1  15   7  10  10  0   0   15  15   5   5  25  14   ALL
+STUDDED2    20  1  10   0   4   2   0   1   1  17   7  10  10  0   0   10  10   0   0  20  13   ALL
+STUDDED3    18  0   0   0   2   2   0   1   1  17   7  12  10  0   0    5   5   0   0  15  12   ALL
+STUDDED4    15  0   0   0   0   2   0   1   1  17   7  12  12  0   0    0   0   0   0  10  11   ALL
+STUDDED5    12  0   0   0  -2   2   0   1   1  17   9  12  12  0   0    0   0   0   0   5  10   ALL
+STUDDED6    10  0   0   0  -4   2   0   1   1  19   9  12  12  0   0    0   0   0   0   0  10   ALL
+STUDDED7     9  0   0   0  -6   2   0   1   1  19   9  14  12  0   0    0   0   0   0   0  10   ALL
+STUDDED8     8  0   0   0  -8   2   0   1   1  19   9  14  14  0   0    0   0   0   0   0  10   ALL
+HIDE0       30  2  10   3   7   1   0   1   2  15  10  15  15  5   5   20  30  50  50  60  20   ALL
+HIDE1       28  1  10   1   5   1   0   1   2  15  12  15  15  5   5   15  25  45  45  55  19   ALL
+HIDE2       26  1  10   0   3   1   0   1   2  15  12  17  15  6   6   10  20  40  40  50  18   ALL
+HIDE3       24  1  10   0   1   1   0   1   2  17  12  17  15  6   6    5  15  35  35  45  17   ALL
+HIDE4       22  0  10   0  -1   1   0   1   2  17  12  17  17  7   7    0  10  30  30  40  16   ALL
+HIDE5       20  0  10   0  -3   1   0   1   2  17  14  17  17  7   7    0   5  25  25  35  15   ALL
+HIDE6       18  0   0   0  -5   1   0   1   2  17  14  19  17  8   8    0   0  20  20  30  14   ALL
+HIDE7       16  0   0   0  -7   1   0   1   2  19  14  19  17  8   8    0   0  15  15  25  13   ALL
+HIDE8       14  0   0   0  -9   1   0   1   2  19  14  19  19  9   9    0   0  10  10  20  12   ALL
+HIDE9       12  0   0   0  -11  1   0   1   2  19  16  19  19  9   9    0   0   5   5  15  11   ALL
+SCALE0      40  1  20   2   7   2   0   1   1  20   5  15  10  0   0   50  60  20  20  50  25   ALL
+SCALE1      35  1  10   1   7   2   0   1   1  22   7  17  12  0   0   50  55  20  20  50  24   ALL
+SCALE2      35  1  10   0   6   2   0   1   1  24   9  19  14  0   0   50  50  20  20  50  23   ALL
+SCALE3      30  0  10   0   6   2   0   1   1  26  11  21  16  0   0   45  50  20  20  50  22   ALL
+SCALE4      30  0  10   0   5   2   0   1   1  28  13  23  18  0   0   45  50  20  20  45  21   ALL
+SCALE5      25  0  10   0   5   2   0   1   1  30  15  25  20  0   0   45  45  20  20  45  20   ALL
+CHAIN0      40  2  20   3   7   2   0   1   1  35   0  15  15  0   0   30  40  15  15  40  30   ALL
+CHAIN1      35  2  10   2   7   2   0   1   1  37   2  17  17  0   0   30  35  15  15  40  29   ALL
+CHAIN2      35  1  10   1   6   2   0   1   1  39   4  19  19  0   0   30  35  15  15  35  28   ALL
+CHAIN3      30  1  10   0   6   2   0   1   1  41   6  21  21  0   0   30  30  15  15  35  27   ALL
+CHAIN4      30  0  10   0   5   2   0   1   1  43   8  23  23  0   0   30  30  15  15  30  26   ALL
+CHAIN5      25  0  10   0   5   2   0   1   1  45  10  25  25  0   0   25  30  15  15  30  25   ALL
+CHAIN6      25  0  10   0   4   2   0   1   1  47  12  27  27  0   0   25  25  15  15  30  24   ALL
+CHAIN7      20  0  10   0   4   2   0   1   1  49  14  29  29  0   0   25  25  15  15  25  23   ALL
+CHAIN8      20  0  10   0   3   2   0   1   1  51  16  31  31  0   0   20  25  15  15  25  22   ALL
+CHAIN9      15  0   0   0   3   2   0   1   1  53  18  33  33  0   0   20  20  15  15  25  21   ALL
+ELVENC0     20  1  10   1   7   2   0   1   1  35  10  15  15  0   0   10  10   5   5  20   0   ALL
+ELVENC1     18  0   0   0   5   2   0   1   1  35  12  15  15  0   0    5   5   0   0  15   0   ALL
+ELVENC2     16  0   0   0   3   2   0   1   1  37  12  15  15  0   0    0   0   0   0  10   0   ALL
+ELVENC3     14  0   0   0   1   2   0   1   1  37  12  17  15  0   0    0   0   0   0   5   0   ALL
+ELVENC4     12  0   0   0  -1   2   0   1   1  37  12  17  17  0   0    0   0   0   0   0   0   ALL
+ELVENC5     10  0   0   0  -3   2   0   1   1  37  14  17  17  0   0    0   0   0   0   0   0   ALL
+ELVENC6      8  0   0   0  -5   2   0   1   1  39  14  17  17  0   0    0   0   0   0   0   0   ALL
+ADAMC0      40  2  20   3   7   2   0   1   1  37  12  17  17  0   0   25  35  15  15  35   0   ALL
+ADAMC1      35  2  10   2   7   2   0   1   1  39  14  19  19  0   0   25  30  15  15  35   0   ALL
+ADAMC2      35  1  10   1   6   2   0   1   1  41  16  21  21  0   0   25  30  15  15  30   0   ALL
+ADAMC3      30  1  10   0   6   2   0   1   1  43  18  23  23  0   0   25  25  15  15  30   0   ALL
+ADAMC4      30  0  10   0   5   2   0   1   1  45  20  25  25  0   0   25  25  15  15  25   0   ALL
+ADAMC5      25  0  10   0   5   2   0   1   1  47  22  27  27  0   0   20  25  15  15  25   0   ALL
+BANDED0     35  2  10   4   7   3   0   1   0  40  15  20  20  0   0   40  60  20  20  50  35   ALL
+BANDED1     30  2  10   3   7   3   0   1   0  42  17  22  22  0   0   40  55  20  20  50  34   ALL
+BANDED2     30  2  10   2   6   3   0   1   0  44  19  24  24  0   0   40  50  20  20  50  33   ALL
+BANDED3     25  1  10   1   6   3   0   1   0  46  21  26  26  0   0   40  50  20  20  45  32   ALL
+BANDED4     25  1  10   0   5   3   0   1   0  48  23  28  28  0   0   40  45  20  20  45  31   ALL
+BANDED5     20  1  10   0   5   3   0   1   0  50  25  30  30  0   0   40  45  20  20  40  30   ALL
+SPLINT0     40  3  20   5   7   2   1   1   0  35  20  25  25  0   0   40  40  15  25  40  40   ALL
+SPLINT1     35  3  10   4   7   2   1   1   0  37  22  27  27  0   0   40  35  15  25  40  39   ALL
+SPLINT2     35  3  10   3   6   2   1   1   0  39  24  29  29  0   0   35  35  15  25  40  38   ALL
+SPLINT3     30  2  10   2   6   2   1   1   0  41  26  31  31  0   0   35  35  15  25  35  37   ALL
+SPLINT4     30  2  10   1   5   2   1   1   0  43  28  33  33  0   0   35  30  15  25  35  36   ALL
+SPLINT5     25  2  10   0   5   2   1   1   0  45  30  35  35  0   0   30  30  15  25  35  35   ALL
+SPLINT6     25  1  10   0   4   2   1   1   0  47  32  37  37  0   0   30  30  15  25  30  34   ALL
+PLATE0      50  4  20   5   7   2   0   2   0  50  25  40  40  0   0   75  80  40  40  75  40   ALL
+PLATE1      45  3  20   4   7   2   0   2   0  52  27  42  42  0   0   75  75  40  40  75  39   ALL
+PLATE2      45  3  20   3   6   2   0   2   0  54  29  44  44  0   0   70  75  40  40  75  38   ALL
+PLATE3      40  3  20   2   6   2   0   2   0  56  31  46  46  0   0   70  75  40  40  70  37   ALL
+PLATE4      40  3  20   1   5   2   0   2   0  58  33  48  48  0   0   70  70  40  40  70  36   ALL
+PLATE5      35  2  10   0   5   2   0   2   0  60  35  50  50  0   0   65  70  40  40  70  35   ALL
+PLATE6      35  2  10   0   4   2   0   2   0  62  37  52  52  0   0   65  70  40  40  65  34   ALL
+PLATE7      30  2  10   0   4   2   0   2   0  64  39  54  54  0   0   65  65  40  40  65  33   ALL
+FIELDP0     60  4  30   6   6   2   0   1   1  50  30  45  50  0   0   95  95  80  80  95  40   ALL
+FIELDP1     55  4  20   5   6   2   0   1   1  52  32  47  52  0   0   95  90  80  80  95  39   ALL
+FIELDP2     55  4  20   4   5   2   0   1   1  54  34  49  54  0   0   90  90  80  80  95  38   ALL
+FIELDP3     50  3  20   3   5   2   0   1   1  56  36  51  56  0   0   90  90  80  80  90  37   ALL
+FIELDP4     50  3  20   2   4   2   0   1   1  58  38  53  58  0   0   90  85  80  80  90  36   ALL
+FIELDP5     45  3  20   1   4   2   0   1   1  60  40  55  60  0   0   85  85  80  80  90  35   ALL
+MFIELDP0    30  3  10   3   6   2   0   1   1  50  30  45  50  0   0   95  95  80  80  95  40   ALL
+MFIELDP1    25  3  10   2   6   2   0   1   1  52  32  47  52  0   0   95  90  80  80  95  39   ALL
+MFIELDP2    25  3  10   1   5   2   0   1   1  54  34  49  54  0   0   90  90  80  80  95  38   ALL
+MFIELDP3    20  2  10   0   5   2   0   1   1  56  36  51  56  0   0   90  90  80  80  90  37   ALL
+FULLP0      70  4  30   6   6   2   0   1   1  55  35  50  55  0   0   95  95  80  80  95  35   ALL
+FULLP1      65  4  30   5   6   2   0   1   1  57  37  52  57  0   0   95  90  80  80  95  34   ALL
+FULLP2      65  4  30   4   5   2   0   1   1  59  39  54  59  0   0   90  90  80  80  95  33   ALL
+FULLP3      60  4  30   3   5   2   0   1   1  61  41  56  61  0   0   90  90  80  80  90  32   ALL
+FULLP4      60  3  30   2   4   2   0   1   1  63  43  58  63  0   0   90  85  80  80  90  31   ALL
+FULLP5      55  3  20   1   4   2   0   1   1  65  45  60  65  0   0   85  85  80  80  90  30   ALL
+FULLP6      55  3  20   0   3   2   0   1   1  67  47  62  67  0   0   85  85  80  80  85  29   ALL
+FULLP7      50  3  20   0   3   2   0   1   1  69  49  64  69  0   0   85  80  80  80  85  28   ALL
+NOTARMOR0    0  0   0   0  10   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL
+NOTARMOR1    0  0   0   0  10   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL
+NOTARMOR2    0  0   0   0  10   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL
+NOTARMOR3    0  0   0   0  10   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL
+NOTARMOR4    0  0   0   0  10   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL
+NOTARMOR5    0  0   0   0  10   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL
+PLAT17       0  1  10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // cursed plate
+LEAT06       0  0   0   0   0   0   0   0 -10   0   0   0 -35  0   0    0   0   0   0   0   0   ALL   // cursed studded, missile attractor
+_LEAT06      0  0   0   0   0   0   0   0 -10   0   0   0 -35  0   0    0   0   0   0   0   0   ALL   // cursed studded, missile attractor
+BELT02       0  0   0   0   0   3   0   0   0  10   0   0   0  0   0    0   0   0   0   0   0   ALL   // golden girdle
+_BELT02      0  0   0   0   0   3   0   0   0  10   0   0   0  0   0    0   0   0   0   0   0   ALL   // golden girdle
+BELT03       0  0   0   0   0   0   4   0   0   0  15   0   0  0   0    0   0   0   0   0   0   ALL   // girdle of bluntness
+_BELT03      0  0   0   0   0   0   4   0   0   0  15   0   0  0   0    0   0   0   0   0   0   ALL   // girdle of bluntness
+BELT04       0  0   0   0   0   0   0   3   3   0   0  10  10  0   0    0   0   0   0   0   0   ALL   // girdle of piercing
+_BELT04      0  0   0   0   0   0   0   3   3   0   0  10  10  0   0    0   0   0   0   0   0   ALL   // girdle of piercing
+C2BELT01     0  0   0   0   0   3   3   3   3  10  10  10  10  0   0    0   0   0   0   0   0   ALL   //  combo girdle (IU)
+I1CH001      7  0   0   0  -5   1   1   1   1  20  20  20  20  0   0    0   0   0   0   0   0   ALL   // smoke armor
+I1LT001     15  1   0   0  -2   3   1   0   0  18   7   0   0  0   0    0   0   0   0   0  10   ALL   // skeleton ribcage
+I1LT002      2  0   0   2   2   0   0   0   0   0  -2   0   0  0   0    5   5   5   5   5   1   ALL   // anti-imprisonment armor
+LEATCM02     3  0   0   2   2   0   0   0   0   0  -2   0   0  0   0    5   5   5   5   5   1   ALL   // green peace resistance
+LEAT09       0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // karajah's life and death
+CMTULE01     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0 -10   0   ALL   // shadow armor +4
+LEAT08       0  0   0   0   0   0   0   0   0   0   0   0   0  0   0   -5  -5   0   0 -15   0   ALL   // shadow armor
+_LEAT08      0  0   0   0   0   0   0   0   0   0   0   0   0  0   0   -5  -5   0   0 -15   0   ALL   // shadow armor
+M#ASLEAT     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0  -15 -15  -5  -5 -25   0   ALL   // apprentice shadow armor
+TCLEAT05     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0  -10 -10   0   0 -20   0   ALL   // aleigha's studded leather
+USLTR01      0  0   0   0   0   0   0   0   0   0   0   0   0  0   0  -15 -15  -5  -5 -25   0   ALL   // studded leather +1: shadowed
+USLTR3A      0  0   0   0   0   0   0   0   0   0   0   0   0  0   0  -10 -10   0   0 -20   0   ALL   // studded leather +2: shadowed
+USLTR5A      0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0 -10   0   ALL   // studded leather +4: shadowed
+U#LEAT01     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0  -5   0   ALL   // pikim's armor
+U#LEAT02     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0 -10   0   ALL   // hide of shades
+S!LEAT01     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0 -20   0   0   0   0   ALL   // improved human flesh - restore lost move silently bonus
+MOURNER     14  1  10   0   0   0   0   0   0   0   0   0   0  0   0   25  25  25  25  25   0   ALL   // mourner's armour +4
+LEATGR01     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0 -10   ALL   // bardic leather
+ADLEATH     -5 -1 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0 -13   ALL   // angelo's (studded) leathers
+ARMPEN      23  1  10   0   0   0   0   0   0   0   0   0   0  0   0   25  25  25  25  20   0   ALL   // studded leather armor of repentance +5
+FWLEAT02     0  0   0   0   0   0   0   0   0   2   2   2   2  0   0    0   0   0   0   0   0   ALL   // beastmen's leather +5
+FWLEAT03    38  2  20   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // desert troll hide
+FWLEAT05     0  0   0   0   0   0   0  -2  -2   0   0  -4  -4  0   0    0   0   0   0   0   0   ALL   // deathbane
+FWLEAT06     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0 -14   ALL   // caster's leather
+DRAGARM    -20  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // black dragon scale +2
+SCAL04     -20 -1 -10   0   0   0   0   0   0   0   0   0   0  0   0  -50 -50 -20 -20 -50 -23   ALL   // sea-elven scale
+I1CH002      5  0   0   1   0   0   0   0   0  -2  -2  -2  -2  0   0    0   5   0   0   0   1   ALL   // voice of doom
+DLARMOR1    -4  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // rosemail
+DLCHAN01    -5  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // fine chainmail
+BW05JUAR     0  0   0   0   0   0   0   0   0   0  10   0   0  0   0    0   0   0   0   0   0   ALL   // jusam's chainmail +4
+J#INDI01   -20 -1 -10  -1   0   0   0   0   0 -15   0  -5  -5  0   0   -5  -5  -5  -5  -5 -30   ALL   // indi's chain vest
+O!BOM004   -15 -1   0   0   1   0   0   0   0  -6  -2  -6  -6  0   0    0   0   0   0   0  -9   ALL   // mage chain
+O!BOM005   -20 -1 -10   0   1   0   0   0   0  -4  -2  -4  -4  0   0    0   0   0   0   0   1   ALL   // mage chain +1
+O!BOM006   -20 -1 -10   0   1   0   0   0   0  -4  -4  -4  -4  0   0    0   0   0   0   0  12   ALL   // mage chain +2
+CHAN06     -15  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // mithril chain
+_CHAN06    -15  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // mithril chain
+CHAN07     -15  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // mithril chain
+_CHAN07    -15  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // mithril chain
+CHANGR03   -15  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // mithril chain
+DEITM053   -15  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // mithril chain
+LK#XARM    -15  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // mithril chain +4
+BSINGCHN     0  0   0   0   0   4  -2   0   0   8  -4   0   0  0   0    0   0   0   0   0   0   ALL   // mirathar
+O!BOM002   -15  0 -10   0   0   0   0   0   0   0   0   0   0  0   0  -25 -30   0   0   0   0   ALL   // ranger mail +5
+CHAN17       0 -1   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // wyvernscale splint mail
+SHARK3      -5  0 -10   0   0   0   0   0   0   2   2   2   2  0   0    0   0   0   0   0   0   ALL   // coral plate - sahuagin splint mail
+X#GARCH    -10  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0 -29   ALL   // bardic chain +1
+X#GARCH2   -10  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0 -28   ALL   // bardic chain +2
+FWCHAN01     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0 -26   ALL   // improved jester's chain
+FWCHAN03     0  0   0   0   0  10   0  10   0  99   0  99   0  0   0    0   0   0   0   0   0   ALL   // suldanessellar chain
+FWCHAN04     0  0   0   0  -3   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // sunus graywar's chainmail +6
+CISPGRD    -25 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // winter king's plate
+KING       -25 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // winter king's plate
+UCMGPL01   -25 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // winter king's plate
+PLATGR01   -20 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // chitinous plate +1
+PLAT06     -23  0 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // ankheg plate +2
+_PLAT06    -23  0 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // ankheg plate +2
+C2PLAT01   -18  0 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // ankheg plate +4
+S!PLAT03   -13  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // ankheg plate +5
+ADRED      -23 -1 -10  -1   0   0   0   0   0   6  -3   0   0  0   0  -15 -15  -5  -5 -15   0   ALL   // lacquer-plate armour
+SAMARMX1   -15 -2 -10  -1   0   0   0   0   0   6  -3   0   0  0   0  -15 -15  -5  -5 -15   0   ALL   // samurai armour
+O!BOM007   -10 -1 -10   0   1   0   0   0   0  -6  -6  -6  -6  0   0    0   0   0   0   0  -9   ALL   // mage plate
+O!BOM008   -15 -1 -10   0   1   0   0   0   0  -4  -4  -4  -4  0   0    0   0   0   0   0   1   ALL   // mage plate +1
+O!BOM009   -15 -1 -10   0   1   0   0   0   0  -4  -4  -4  -4  0   0    0   0   0   0   0  12   ALL   // mage plate +2
+I1PL001      5  1   0   1   0   0   0   0   0  -2  -2  -2  -2  0   0    0   5   0   0   0   1   ALL   // gubbie armor
+TCPLAT01   -30 -2 -10  -4   1   0   0   0   0 -10 -20 -20 -20  0   0  -20 -20 -20 -20 -20 -10   ALL   // rusted plate mail
+PLAT13       0  0   0   0   0   0   0   0   0   6   0   0   0  0   0    0   0   0   0   0   0   ALL   // gorgon-quenched steel plate
+PLAT22     -10 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0   -5  -5   0   0   0   0   ALL   // shuruppak's plate
+GLORY       45  3  30   4   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // the glory of suffering
+SHPLATE      0  0   0   0   0   0   0   0   3   0   0   0   6  0   0    0   0   0   0   0   0   ALL   // shadowed plate +3
+PSMADE28   -42 -3 -20  -3   0   0   0   0   0   0   0   0   0  0   0  -50 -55 -40 -40 -55   0   ALL   // ethereal plate +2
+SOAITM02   -10  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // kalindra's armor
+SWANARM    -15 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0  -20 -20 -10 -10 -20   0   ALL   // black swan armor +2
+ISWARM     -15 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0  -20 -20 -10 -10 -20   0   ALL   // black swan armor +2
+UMHULK       0  0   0   0   0   1   0   0   0   2   0   0   0  0   0    0   0   0   0   0   0   ALL   // umber hulk plate +1
+DLPLAT01    -5  0   0  -1   0   0   0   0   0   2   2   2   2  0   0    0  -5   0   0   0  -1   ALL   // solamnic armor
+R!KITPLT     0 -1   0   0   0   0   0   0   0   0   0   0   0  0   0   -5  -5   0   0   0   0   ALL   // well-made elven plate
+FWPLAT02     5  0   0   1   0   0   0   0   0  -2  -2  -2  -2  0   0    0   5   0   0   0   1   ALL   // full plate of blades
+FWPLAT04   -35 -2 -10  -2   0   0   0   0   0   4   0   4   4  0   0  -80 -80 -75 -75 -75   0   ALL   // death knight's armor
+DWPLAT01    15  1  10   1   0   0   0   0   0  -2   0   0   0  0   0    0   0   0   0   0   0   ALL   // drow adamantine full plate
+U#PLAT01    65  1  40   2   0   0   0   0   0  -2   0   0   0  0   0    0   0   0   0   0   0   ALL   // adamantine full plate +5
+S!PLAT02    35  1  20   2   0   0   0   0   6   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // huskar lord's armor
+DEITM088    37  1  20   2   0   0   0   0   0   0   0   0   0  0   0   10  10  10  10  10   0   ALL   // falgar's plate
+DEITM090     0  0   0   0   0   0   0   0   0   2   0   4   4  0   0    0   0   0   0   0   0   ALL   // baelden's armour
+PSMADE29     0  0  20   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // ethereal plate +2
+TCVILDPL     0  0   0   0   0   0   0   0   0   0   0   0   0  0   0   55   0   0   0   0   0   ALL   // dawn's embrace
+DW#ABYDA     2  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // yellow dragonscale armor
+CHAN20     -10  0 -10   0   0   0   0   0   0   0   0   0   0  0   0    0   0 -10 -10 -10   0   ALL   // white dragonscale splint mail
+CHANGR02   -10 -1 -10  -1   0   0   0   0   0   0   0   0   0  0   0    0   0 -10 -10 -10   0   ALL   // zeddek's skin dragonscale splint mail
+PLAT18      -5  0 -10  -1   0   0   0   0   0   0   0   0   0  0   0  -20 -20 -10 -10 -20   0   ALL   // red dragonscale plate
+PLAT20     -30 -1 -10  -2   0   0   0   0   0   0   0   0   0  0   0  -35 -35 -35 -35 -35   0   ALL   // blue dragonscale plate
+U#PLAT02   -20 -1 -10  -2   0   0   0   0   0   0   0   0   0  0   0  -35 -35 -35 -35 -35   0   ALL   // plate of many dragons
+S!PLAT05   -35 -1 -20  -2   0   0   0   0   0   0   0   0   4  0   0  -35 -35 -35 -35 -35   0   ALL   // green wyrmscale plate
+S!PLAT06   -30 -1 -10  -1   0   0   0   0   0   0   0   0   4  0   0  -35 -35 -35 -35 -35   0   ALL   // red wyrmscale plate
+X#FAI4     150  6  70   8  -1   0   0   0   0  20  20  20  20  0   0  120 120 120 120 120  90   ALL   // battered armor
+DGFAITH      0  0   0   0   0   0   0   0   0  15  15  15  15  0   0    0   0   0   0   0   0   ALL   // armor of faith, innate version
+SPPR111      0  0   0   0   0   0   0   0   0   3   3   3   3  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 1
+SPPR111-5    0  0   0   0   0   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 5
+SPPR111-6    0  0   0   0   0   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 5
+SPPR111-7    0  0   0   0   0   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 5
+SPPR111-8    0  0   0   0   0   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 5
+SPPR111-9    0  0   0   0   0   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 5
+SPPR111-10   0  0   0   0   0   0   0   0   0   9   9   9   9  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 10
+SPPR111-11   0  0   0   0   0   0   0   0   0   9   9   9   9  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 10
+SPPR111-12   0  0   0   0   0   0   0   0   0   9   9   9   9  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 10
+SPPR111-13   0  0   0   0   0   0   0   0   0   9   9   9   9  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 10
+SPPR111-14   0  0   0   0   0   0   0   0   0   9   9   9   9  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 10
+SPPR111-15   0  0   0   0   0   0   0   0   0  12  12  12  12  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 15
+SPPR111-16   0  0   0   0   0   0   0   0   0  12  12  12  12  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 15
+SPPR111-17   0  0   0   0   0   0   0   0   0  12  12  12  12  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 15
+SPPR111-18   0  0   0   0   0   0   0   0   0  12  12  12  12  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 15
+SPPR111-19   0  0   0   0   0   0   0   0   0  12  12  12  12  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 15
+SPPR111-20   0  0   0   0   0   0   0   0   0  15  15  15  15  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 20
+DLPR111      0  0   0   0   0   0   0   0   0   3   3   3   3  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 1
+DLPR111-5    0  0   0   0   0   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 5
+DLPR111-6    0  0   0   0   0   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 5
+DLPR111-7    0  0   0   0   0   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 5
+DLPR111-8    0  0   0   0   0   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 5
+DLPR111-9    0  0   0   0   0   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 5
+DLPR111-10   0  0   0   0   0   0   0   0   0   9   9   9   9  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 10
+DLPR111-11   0  0   0   0   0   0   0   0   0   9   9   9   9  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 10
+DLPR111-12   0  0   0   0   0   0   0   0   0   9   9   9   9  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 10
+DLPR111-13   0  0   0   0   0   0   0   0   0   9   9   9   9  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 10
+DLPR111-14   0  0   0   0   0   0   0   0   0   9   9   9   9  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 10
+DLPR111-15   0  0   0   0   0   0   0   0   0  12  12  12  12  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 15
+DLPR111-16   0  0   0   0   0   0   0   0   0  12  12  12  12  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 15
+DLPR111-17   0  0   0   0   0   0   0   0   0  12  12  12  12  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 15
+DLPR111-18   0  0   0   0   0   0   0   0   0  12  12  12  12  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 15
+DLPR111-19   0  0   0   0   0   0   0   0   0  12  12  12  12  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 15
+DLPR111-20   0  0   0   0   0   0   0   0   0  15  15  15  15  0   0    0   0   0   0   0   0   ALL   // armor of faith, priest, level 20
+SPPR202      0  0   0   0   0   0   0   0   0   0   5   0   0  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 1 - scale +0 with +5% vs crushing
+SPPR202-4    0  0   0   0   0   0   0   0   0   2   7   2   2  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 4 - scale +1 with +5% vs crushing
+SPPR202-5    0  0   0   0   0   0   0   0   0   2   7   2   2  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 4 - scale +1 with +5% vs crushing
+SPPR202-6    0  0   0   0   0   0   0   0   0   2   7   2   2  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 4 - scale +1 with +5% vs crushing
+SPPR202-7    0  0   0   0   0   0   0   0   0   2   7   2   2  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 4 - scale +1 with +5% vs crushing
+SPPR202-8    0  0   0   0  -1   0   0   0   0   4   9   4   4  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 8 - scale +2 with +5% vs crushing
+SPPR202-9    0  0   0   0  -1   0   0   0   0   4   9   4   4  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 8 - scale +2 with +5% vs crushing
+SPPR202-10   0  0   0   0  -1   0   0   0   0   4   9   4   4  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 8 - scale +2 with +5% vs crushing
+SPPR202-11   0  0   0   0  -1   0   0   0   0   4   9   4   4  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 8 - scale +2 with +5% vs crushing
+SPPR202-12   0  0   0   0  -1   0   0   0   0   6  11   6   6  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 12 - scale +3 with +5% vs crushing
+SPPR202-13   0  0   0   0  -1   0   0   0   0   6  11   6   6  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 12 - scale +3 with +5% vs crushing
+SPPR202-14   0  0   0   0  -1   0   0   0   0   6  11   6   6  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 12 - scale +3 with +5% vs crushing
+SPPR202-15   0  0   0   0  -1   0   0   0   0   6  11   6   6  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 12 - scale +3 with +5% vs crushing
+SPPR202-16   0  0   0   0  -2   0   0   0   0   8  13   8   8  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 16 - scale +4 with +5% vs crushing
+SPPR202-17   0  0   0   0  -2   0   0   0   0   8  13   8   8  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 16 - scale +4 with +5% vs crushing
+SPPR202-18   0  0   0   0  -2   0   0   0   0   8  13   8   8  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 16 - scale +4 with +5% vs crushing
+SPPR202-19   0  0   0   0  -2   0   0   0   0   8  13   8   8  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 16 - scale +4 with +5% vs crushing
+SPPR202-20   0  0   0   0  -2   0   0   0   0  10  15  10  10  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 20 - scale +5 with +5% vs crushing
+DLPR202      0  0   0   0   0   0   0   0   0   0   5   0   0  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 1 - scale +0 with +5% vs crushing
+DLPR202-4    0  0   0   0   0   0   0   0   0   2   7   2   2  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 4 - scale +1 with +5% vs crushing
+DLPR202-5    0  0   0   0   0   0   0   0   0   2   7   2   2  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 4 - scale +1 with +5% vs crushing
+DLPR202-6    0  0   0   0   0   0   0   0   0   2   7   2   2  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 4 - scale +1 with +5% vs crushing
+DLPR202-7    0  0   0   0   0   0   0   0   0   2   7   2   2  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 4 - scale +1 with +5% vs crushing
+DLPR202-8    0  0   0   0  -1   0   0   0   0   4   9   4   4  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 8 - scale +2 with +5% vs crushing
+DLPR202-9    0  0   0   0  -1   0   0   0   0   4   9   4   4  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 8 - scale +2 with +5% vs crushing
+DLPR202-10   0  0   0   0  -1   0   0   0   0   4   9   4   4  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 8 - scale +2 with +5% vs crushing
+DLPR202-11   0  0   0   0  -1   0   0   0   0   4   9   4   4  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 8 - scale +2 with +5% vs crushing
+DLPR202-12   0  0   0   0  -1   0   0   0   0   6  11   6   6  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 12 - scale +3 with +5% vs crushing
+DLPR202-13   0  0   0   0  -1   0   0   0   0   6  11   6   6  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 12 - scale +3 with +5% vs crushing
+DLPR202-14   0  0   0   0  -1   0   0   0   0   6  11   6   6  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 12 - scale +3 with +5% vs crushing
+DLPR202-15   0  0   0   0  -1   0   0   0   0   6  11   6   6  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 12 - scale +3 with +5% vs crushing
+DLPR202-16   0  0   0   0  -2   0   0   0   0   8  13   8   8  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 16 - scale +4 with +5% vs crushing
+DLPR202-17   0  0   0   0  -2   0   0   0   0   8  13   8   8  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 16 - scale +4 with +5% vs crushing
+DLPR202-18   0  0   0   0  -2   0   0   0   0   8  13   8   8  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 16 - scale +4 with +5% vs crushing
+DLPR202-19   0  0   0   0  -2   0   0   0   0   8  13   8   8  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 16 - scale +4 with +5% vs crushing
+DLPR202-20   0  0   0   0  -2   0   0   0   0  10  15  10  10  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 20 - scale +5 with +5% vs crushing
+SPWI102-4    0  0   0   0   0   0   0   0   0   2   2   2   2  0   0    0   0   0   0   0   0   ALL   // armor (spell rev.), wizard, level 4 - scale +1
+SPWI102-5    0  0   0   0   0   0   0   0   0   2   2   2   2  0   0    0   0   0   0   0   0   ALL   // armor (spell rev.), wizard, level 5 - scale +1
+SPWI102-6    0  0   0   0   0   0   0   0   0   2   2   2   2  0   0    0   0   0   0   0   0   ALL   // armor (spell rev.), wizard, level 6 - scale +1
+SPWI102-7    0  0   0   0   0   0   0   0   0   2   2   2   2  0   0    0   0   0   0   0   0   ALL   // armor (spell rev.), wizard, level 7 - scale +1
+SPWI102-8    0  0   0   0  -1   0   0   0   0   4   4   4   4  0   0    0   0   0   0   0   0   ALL   // armor (spell rev.), wizard, level 8 - scale +2
+SPWI102-9    0  0   0   0  -1   0   0   0   0   4   4   4   4  0   0    0   0   0   0   0   0   ALL   // armor (spell rev.), wizard, level 9 - scale +2
+SPWI102-10   0  0   0   0  -1   0   0   0   0   4   4   4   4  0   0    0   0   0   0   0   0   ALL   // armor (spell rev.), wizard, level 10 - scale +2
+SPWI102-11   0  0   0   0  -1   0   0   0   0   4   4   4   4  0   0    0   0   0   0   0   0   ALL   // armor (spell rev.), wizard, level 11 - scale +2
+SPWI102-12   0  0   0   0  -1   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   ALL   // armor (spell rev.), wizard, level 12 - scale +3
+SPWI102-13   0  0   0   0  -1   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   ALL   // armor (spell rev.), wizard, level 13 - scale +3
+SPWI102-14   0  0   0   0  -1   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   ALL   // armor (spell rev.), wizard, level 14 - scale +3
+SPWI102-15   0  0   0   0  -1   0   0   0   0   6   6   6   6  0   0    0   0   0   0   0   0   ALL   // armor (spell rev.), wizard, level 15 - scale +3
+SPWI102-16   0  0   0   0  -2   0   0   0   0   8   8   8   8  0   0    0   0   0   0   0   0   ALL   // armor (spell rev.), wizard, level 16 - scale +4
+SPWI102-17   0  0   0   0  -2   0   0   0   0   8   8   8   8  0   0    0   0   0   0   0   0   ALL   // armor (spell rev.), wizard, level 17 - scale +4
+SPWI102-18   0  0   0   0  -2   0   0   0   0   8   8   8   8  0   0    0   0   0   0   0   0   ALL   // armor (spell rev.), wizard, level 18 - scale +4
+SPWI102-19   0  0   0   0  -2   0   0   0   0   8   8   8   8  0   0    0   0   0   0   0   0   ALL   // armor (spell rev.), wizard, level 19 - scale +4
+SPWI102-20   0  0   0   0  -2   0   0   0   0  10  10  10  10  0   0    0   0   0   0   0   0   ALL   // armor (spell rev.), wizard, level 20 - scale +5
+POTN18       0  0   0   0   0   0  10   0   0   0  40   0   0  0   0    0   0   0   0   0   0   ALL   // potion of absorption
+_POTN18      0  0   0   0   0   0  10   0   0   0  40   0   0  0   0    0   0   0   0   0   0   ALL   // potion of absorption
+POTN24       0  0   0   0   0   5   5   5   5   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // potion of defense
+_POTN24      0  0   0   0   0   5   5   5   5   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // potion of defense
+I1PO010      0  1   0   0   0   0   0   0   0  20  20  20  20  0   0    0   0   0   0   0   0   ALL   // rocksalt potion
