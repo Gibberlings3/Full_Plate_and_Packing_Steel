@@ -2275,9 +2275,9 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                          SPRINT insertstring   ~Hide in Shadows: %x%~
                          PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
 
-                     PATCH_IF (~%param%~ STRING_EQUAL movesilmod || ((~%SOURCE_RES%~ STRING_EQUAL ~c2leat01~ ||  // hack to force
-                                                                      (~%SOURCE_RES%~ STRING_EQUAL ~leat21~ && NOT ~%modiam%~ STRING_EQUAL ~item_rev~)) &&   // description update
-                                                                      ~%param%~ STRING_EQUAL weight)) BEGIN      // of Human Flesh
+                     PATCH_IF (~%param%~ STRING_EQUAL movesilmod || ((~%SOURCE_RES%~ STRING_EQUAL ~c2leat01~ ||
+                                                                      (~%SOURCE_RES%~ STRING_EQUAL ~leat21~ && NOT (~%modsiam%~ STRING_CONTAINS_REGEXP ~item_rev~ == 0))) &&
+                                                                      ~%param%~ STRING_EQUAL weight)) BEGIN // hack to force desc. update of some Human Flesh variants
                          SET intopcode = 59
                          SET intparam = 1
                          PATCH_INCLUDE ~sumfx.tpp~
