@@ -290,6 +290,12 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       WRITE_BYTE 0x60 3
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CBMTCHAN.ITM~) BEGIN
+      SAY NAME2 ~Chain of Drakkas' Fury +3~
+      WRITE_BYTE 0x60 3
+      WRITE_ASCII 0x22 ~3A~ #2       // chain mail paperdoll, not plate
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CBPLAT13.ITM~) BEGIN
       WRITE_BYTE 0x60 5
     END
@@ -2409,7 +2415,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                          END
                          SPRINT searchstring   ~\(Spell Failure\|Miscast Arcane Magic\|Miscast Magic\)~
                          SPRINT insertafter    ~\(Armor Class:[%tab% ]*-*[0-9]+[%tab% a-zA-Z0-9+.()]*[%wnl%%lnl%%mnl%]+\)~
-                         SPRINT replacestring  ~^.*Miscast\( Arcane\)? Magic.*$~
+                         SPRINT replacestring  ~^\(.*Miscast\( Arcane\)? Magic.*\|Spell Failure Bonus.*\)$~
                          SPRINT insertstring   ~Mage Spell Failure: %x%%perc%~
                          PATCH_INCLUDE ~fullplate/descupd_magic.tpp~ END
 
@@ -2731,6 +2737,19 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                  SPRINT replacestring  ~.*Slashing Resistance.*[%wnl%%lnl%%mnl%]+~
                  PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
                  SPRINT replacestring  ~.*Stealth.*[%wnl%%lnl%%mnl%]+~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~cbmtchan~) BEGIN // chain of drakkas' fury
+                 SPRINT searchstring   ~Special~
+                 SPRINT insertafter    ~THISWILLNEVERMATCH~
+                 SPRINT replacestring  ~.*Armor Class Bonus.*[%wnl%%lnl%%mnl%]+~
+                 SPRINT insertstring   ~~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+                 SPRINT replacestring  ~.*Max Dexterity Bonus.*[%wnl%%lnl%%mnl%]+~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+                 SPRINT replacestring  ~.*Spellcasting and Thieving skills can be performed without penalties while wearing Drakkas' chain armor.*[%wnl%%lnl%%mnl%]+~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+                 SPRINT replacestring  ~.*Special:.*[%wnl%%lnl%%mnl%]+~
                  PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
             PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~i1lt001~) BEGIN // skeleton ribcage

@@ -33,6 +33,7 @@ C2VALY01    CHAIN      ALL      /* Item Upgrade */
 CALLAR      CHAIN      ALL      /* The Undying */
 CBBDARMR    FULLP      ALL      /* Check the Bodies */
 CBCHANP4    CHAIN      ALL      /* Check the Bodies */
+CBMTCHAN    CHAIN      ALL      /* Check the Bodies */
 CBPLAT13    PLATE      ALL      /* Check the Bodies */
 CBTSCH01    CHAIN      ALL      /* Check the Bodies */
 CBTSPT01    FULLP      ALL      /* Check the Bodies */
