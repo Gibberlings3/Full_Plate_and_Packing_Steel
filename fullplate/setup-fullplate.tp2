@@ -1,7 +1,7 @@
 BACKUP ~fullplate/backup~
 AUTHOR ~erik, gibberlings3~
 //MODDER setup_tra none
-VERSION ~v2~
+VERSION ~v2+~
 README ~fullplate/readme-fullplate.html~
 
 ALLOW_MISSING ~baldur25.bcs~
@@ -282,6 +282,36 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CALLAR.ITM~) BEGIN
       WRITE_LONG NAME1 chainmail_name
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CBBDARMR.ITM~) BEGIN
+      SAY NAME1 ~Full Plate Mail~
+      SAY NAME2 ~Blue Dragon Plate +3~
+      WRITE_BYTE 0x60 3
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CBPLAT13.ITM~) BEGIN
+      WRITE_BYTE 0x60 5
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CBTSCH01.ITM~) BEGIN
+      WRITE_BYTE 0x60 5
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CBTSPT01.ITM~) BEGIN
+      WRITE_BYTE 0x60 5
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CBTSST01.ITM~) BEGIN
+      WRITE_BYTE 0x60 4
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CBXTGCDD.ITM~) BEGIN
+      WRITE_BYTE 0x60 1
+    END
+
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CBXTSHDD.ITM~) BEGIN
+      WRITE_BYTE 0x60 4
     END
 
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~CDECHAIN.ITM~) BEGIN
@@ -2599,6 +2629,13 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                  SPRINT insertafter    ~THISWILLNEVERMATCH~
                  SPRINT replacestring  ~This suit of armor is enchanted, granting the wearer a.* bonus.* to their armor class.~
                  SPRINT insertstring   ~This suit of armor is enchanted, so it is lighter, easier to move in and more protective.~
+                 PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+            END
+            PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~cbtsst01~ ) BEGIN // splint mail +4, CtB
+                 SPRINT searchstring   ~bonus.* to their armor class~
+                 SPRINT insertafter    ~THISWILLNEVERMATCH~
+                 SPRINT replacestring  ~, and grants the wearer a.* bonus.* to their armor class.~
+                 SPRINT insertstring   ~. It is lighter, easier to move in and more protective than most.~
                  PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
             END
             PATCH_IF (   ~%SOURCE_RES%~ STRING_EQUAL ~npchan~ || ~%SOURCE_RES%~ STRING_EQUAL ~s!leat03~

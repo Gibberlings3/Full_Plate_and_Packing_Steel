@@ -31,6 +31,14 @@ C2LEAT01    LEATHER    ALL      /* Item Upgrade */
 C2PLAT01    PLATE      ALL      /* Item Upgrade */
 C2VALY01    CHAIN      ALL      /* Item Upgrade */
 CALLAR      CHAIN      ALL      /* The Undying */
+CBBDARMR    FULLP      ALL      /* Check the Bodies */
+CBCHANP4    CHAIN      ALL      /* Check the Bodies */
+CBPLAT13    PLATE      ALL      /* Check the Bodies */
+CBTSCH01    CHAIN      ALL      /* Check the Bodies */
+CBTSPT01    FULLP      ALL      /* Check the Bodies */
+CBTSST01    SPLINT     ALL      /* Check the Bodies */
+CBXTGCDD    CHAIN      ALL      /* Check the Bodies */
+CBXTSHDD    STUDDED    ALL      /* Check the Bodies */
 CDECHAIN    ELVENC     ALL      /* Item Upgrade for IWD */
 CDHARMOR    HIDE       ALL      /* Item Upgrade for IWD */
 CDSCALE     SPLINT     ALL      /* Item Upgrade for IWD */
