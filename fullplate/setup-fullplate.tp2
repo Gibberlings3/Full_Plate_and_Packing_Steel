@@ -840,6 +840,10 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
       END
     END
 
+    PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~LEAT23.ITM~) BEGIN
+      WRITE_BYTE 0x60 1  // Human Flesh counts as +1 leather, until completed, not +5
+    END
+
     PATCH_IF ("%SOURCE_FILE%" STRING_EQUAL ~LEATCM01.ITM~) BEGIN
       WRITE_BYTE 0x60 4
     END
