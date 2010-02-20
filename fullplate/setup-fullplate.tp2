@@ -4203,30 +4203,21 @@ IF
         CheckStatGT(Player6,100,MAGICDAMAGERESISTANCE)
 THEN
     RESPONSE #100
-        CreateCreatureObject("ekresspy",Player1,1,0,0)
         SetGlobal("ekresspybeenhere","GLOBAL",1)
-        Continue()
 END
 
 IF
     GlobalGT("ekresspybeenhere","GLOBAL",0)
-    !InActiveArea("ekresspy")
+    GlobalLT("ekresspyspawned","MYAREA",1)
 THEN
     RESPONSE #100
-        MoveGlobalObjectOffscreen("ekresspy",Player1)
+        CreateCreatureImpassable("ekresspy",[0.0],0)
+        SetGlobal("ekresspyspawned","MYAREA",1)
 END
 
 >>>>>>>>
 
 <<<<<<<< ekresres.baf
-IF
-    Global("ekresspybeenhere","GLOBAL",1)
-THEN
-    RESPONSE #100
-        MakeGlobal()
-        SetGlobal("ekresspybeenhere","GLOBAL",2)
-END
-
 IF
     CheckStatGT(Player1,90,RESISTSLASHING)
 THEN
@@ -4668,6 +4659,14 @@ END
 >>>>>>>>
 
 COPY ~fullplate/ekresspy.cre~ ~override~
+  WRITE_BYTE 0x59 100
+  WRITE_BYTE 0x5a 100
+  WRITE_BYTE 0x60 100
+  WRITE_BYTE 0x61 100
+  WRITE_BYTE 0x62 100
+  WRITE_BYTE 0x63 100
+  WRITE_ASCII 0x280 ~~ #32 // blank the death variable
+
 COPY ~fullplate/ekslash.spl~ ~override~
 COPY ~fullplate/ekcrush.spl~ ~override~
 COPY ~fullplate/ekpierc.spl~ ~override~
@@ -4681,9 +4680,6 @@ COPY ~fullplate/ekmdam.spl~ ~override~
 // ApplySpellRES() isn't defined in a stock SoA install
 APPEND ~action.ids~ ~160 ApplySpellRES(S:RES*,O:Target)~
  UNLESS ~ApplySpellRES(S:RES\*,O:Target)~
-// MakeGlobal() isn't defined in a stock SoA install
-APPEND ~action.ids~ ~336 MakeGlobal()~
- UNLESS ~MakeGlobal()~
 
 COMPILE ~ekresres.baf~
 
@@ -5137,7 +5133,6 @@ THEN
 END
 >>>>>>>>
 
-COPY ~fullplate/ekresspy.cre~ ~override~
 COPY ~fullplate/ekslash.spl~ ~override~
 COPY ~fullplate/ekcrush.spl~ ~override~
 COPY ~fullplate/ekpierc.spl~ ~override~
