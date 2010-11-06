@@ -370,10 +370,12 @@ ZILFGT      STUDDED    ALL      /* Ascension (Tougher Illasera) */
 ZOMBSKIN    LEATHER    ALL      /* NeJ2 */
 SPPR111     NOTARMOR   SOA      //BG2:SOA
 SPPR111     NOTARMOR   TOB      //BG2:SOA
+SPPR111     nonono     spell_rev_3  /* Spell Revisions v3 */
 DLPR111     NOTARMOR   ALL      /* DLTC: Glory of Istar demo */
 DGFAITH     NOTARMOR   ALL      //BG2:SOA
 SPPR202     SCALE      ALL      //BG1
 SPPR202     nonono     spell_rev_d  /* Spell Revisions */
+SPPR202     nonono     spell_rev_3  /* Spell Revisions v3 */
 DLPR202     SCALE      ALL      /* DLTC: Glory of Istar demo */
 SPWI102     SCALE      ALL      //BG1
 DLWI102     SCALE      ALL      /* DLTC: Glory of Istar demo */

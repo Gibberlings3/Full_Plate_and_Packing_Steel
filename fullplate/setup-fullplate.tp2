@@ -74,12 +74,17 @@ END
 SILENT
 ACTION_IF MOD_IS_INSTALLED ~SPELL_REV/SETUP-SPELL_REV.TP2~ 1 BEGIN
   OUTER_SPRINT modsiam ~%modsiam% spell_rev_d~
-  PRINT ~ + Spell Revisions: Divine...~
+  PRINT ~ + Spell Revisions v2: Divine...~
 END
 SILENT
 ACTION_IF MOD_IS_INSTALLED ~SPELL_REV/SETUP-SPELL_REV.TP2~ 2 BEGIN
   OUTER_SPRINT modsiam ~%modsiam% spell_rev_a~
-  PRINT ~ + Spell Revisions: Arcane...~
+  PRINT ~ + Spell Revisions v2: Arcane...~
+END
+SILENT
+ACTION_IF MOD_IS_INSTALLED ~SPELL_REV/SETUP-SPELL_REV.TP2~ 0 BEGIN
+  OUTER_SPRINT modsiam ~%modsiam% spell_rev_3~
+  PRINT ~ + Spell Revisions v3...~
 END
 SILENT
 ACTION_IF MOD_IS_INSTALLED ~SETUP-SPELLPACKB5.TP2~ 32 BEGIN
@@ -3381,6 +3386,13 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
              SPRINT insertstring   ~protects the caster as a scale mail armor (AC %baseac_scale0%, Protection vs. S/C/P/M: %slashres_scale0%%perc% / %crushres_scale0%%perc% / %pierceres_scale0%%perc% / %missileres_scale0%%perc%), of +1 enchantment for every four levels of the caster (+1 at 4th level, +2 at 8th level, and so forth). ~
              PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
         END
+        PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~spwi102~) && (~%modsiam%~ STRING_CONTAINS_REGEXP ~spell_rev_3~ == 0) BEGIN // Mage Armor spell
+             SPRINT searchstring   ~sets its base armor class to 6. This improves by 1 AC for every four levels of the caster, up to a minimum base armor class of 3 at 12th level.~
+             SPRINT insertafter    ~THISWILLNEVERMATCH~
+             SPRINT replacestring   ~sets its base armor class to 6. This improves by 1 AC for every four levels of the caster, up to a minimum base armor class of 3 at 12th level. ~
+             SPRINT insertstring   ~protects the caster as a scale mail armor (AC %baseac_scale0%, Protection vs. S/C/P/M: %slashres_scale0%%perc% / %crushres_scale0%%perc% / %pierceres_scale0%%perc% / %missileres_scale0%%perc%), of +1 enchantment for every four levels of the caster (+1 at 4th level, +2 at 8th level, to a maximum of +3 at 12th level). ~
+             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+        END
         PATCH_IF (~%SOURCE_RES%~ STRING_EQUAL ~spwi317~ || ~%SOURCE_RES%~ STRING_EQUAL ~dlwi317~) BEGIN // Ghost Armor spell
              SPRINT searchstring   ~field plate armor (AC 2)~
              SPRINT insertafter    ~THISWILLNEVERMATCH~
@@ -3392,6 +3404,13 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
              SPRINT insertafter    ~THISWILLNEVERMATCH~
              SPRINT replacestring  ~that sets its base armor class to 2.~
              SPRINT insertstring   ~that protects as a field plate armor (AC %baseac_fieldp0%, Protection vs. S/C/P/M: %slashres_fieldp0%%perc% / %crushres_fieldp0%%perc% / %pierceres_fieldp0%%perc% / %missileres_fieldp0%%perc%).~
+             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+             // Spell Revisions v3 variant
+             SPRINT searchstring   ~Until dispelled or disbelieved, the armor sets the recipient's base armor class to 2.~
+             SPRINT insertafter    ~THISWILLNEVERMATCH~
+             SPRINT replacestring  ~Until dispelled or disbelieved, the armor sets the recipient's base armor class to 2.~
+             SPRINT insertstring   ~Until dispelled or disbelieved, the armor protects as a field plate armor (AC %baseac_fieldp0%, Protection vs. S/C/P/M: %slashres_fieldp0%%perc% / %crushres_fieldp0%%perc% / %pierceres_fieldp0%%perc% / %missileres_fieldp0%%perc%).~
+             SPRINT insertafter    ~THISWILLNEVERMATCH~
              PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
              // IWD variant - touch range and a bit weaker, bg2 is caster-only
              SPRINT searchstring   ~plate armor (AC 3)~
@@ -3413,6 +3432,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
              SPRINT insertstring   ~While in effect the recipient will be protected as if he was wearing full plate armor. (AC %baseac_fullp0%, Protection vs. S/C/P/M: %slashres_fullp0%%perc% / %crushres_fullp0%%perc% / %pierceres_fullp0%%perc% / %missileres_fullp0%%perc%)~
              PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
              SPRINT replacestring  ~While in effect, the armor class of the recipient will be set to 1, as if he were wearing full plate armor.~
+             PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
+             // spell revisions v3 variant
+             SPRINT searchstring   ~the armor class of the recipient will be set to 1~
+             SPRINT replacestring  ~While in effect, the armor class of the recipient will be set to 1, and all saving throws will be made with a \+2 bonus.~
+             SPRINT insertstring   ~While in effect, the recipient will be protected as if he was wearing full plate armor, and all saving throws will be made with a +2 bonus. (AC %baseac_fullp0%, Protection vs. S/C/P/M: %slashres_fullp0%%perc% / %crushres_fullp0%%perc% / %pierceres_fullp0%%perc% / %missileres_fullp0%%perc%)~
              PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
              // IWD variant
              SPRINT searchstring   ~1, as if he was wearing plate mail~
