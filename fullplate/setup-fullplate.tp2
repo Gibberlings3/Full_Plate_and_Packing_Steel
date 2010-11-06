@@ -1,7 +1,7 @@
 BACKUP ~fullplate/backup~
 AUTHOR ~erik, gibberlings3~
 //MODDER setup_tra none
-VERSION ~v2+~
+VERSION ~v3~
 README ~fullplate/readme-fullplate.html~
 
 ALLOW_MISSING ~baldur25.bcs~
