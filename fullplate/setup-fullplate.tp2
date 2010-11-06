@@ -2843,6 +2843,8 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                 END
               END // for fx_num
 
+              SET index2 = fx_off // rewind to start, so our effects are added at the beginning. Avoids ordering problems with cumulative-spell-avoidance immunity effects.
+
             PATCH_FOR_EACH param IN ~dexmod~ ~movemod~ ~wpnspeedmod~ ~baseac~ ~slashac~ ~crushac~ ~pierceac~ ~missileac~
                                     ~slashres~ ~crushres~ ~pierceres~ ~missileres~
                                     ~spellfailmod~ ~pickpocketmod~ ~disarmtrapmod~ ~openlockmod~ ~movesilmod~ ~hidemod~ 
@@ -3300,6 +3302,8 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
             END
           END // for fx_num
 
+        SET index2 = fx_off // rewind to start, so our effects are added at the beginning. Avoids ordering problems with cumulative-spell-avoidance immunity effects.
+ 
         PATCH_FOR_EACH param IN ~baseac~ ~slashac~ ~crushac~ ~pierceac~ ~missileac~
                                 ~slashres~ ~crushres~ ~pierceres~ ~missileres~
         BEGIN
