@@ -294,6 +294,7 @@ DLPR202-17   0  0   0   0  -2   0   0   0   0   8  13   8   8  0   0    0   0   
 DLPR202-18   0  0   0   0  -2   0   0   0   0   8  13   8   8  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 16 - scale +4 with +5% vs crushing
 DLPR202-19   0  0   0   0  -2   0   0   0   0   8  13   8   8  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 16 - scale +4 with +5% vs crushing
 DLPR202-20   0  0   0   0  -2   0   0   0   0  10  15  10  10  0   0    0   0   0   0   0   0   ALL   // barkskin, priest, level 20 - scale +5 with +5% vs crushing
+SPWI102      0  0   0   0   0   0   0   0   0   0   0   0   0  0   0    0   0   0   0   0   0   ALL   // armor (spell rev.), wizard, level 1 - scale
 SPWI102-4    0  0   0   0   0   0   0   0   0   2   2   2   2  0   0    0   0   0   0   0   0   ALL   // armor (spell rev.), wizard, level 4 - scale +1
 SPWI102-5    0  0   0   0   0   0   0   0   0   2   2   2   2  0   0    0   0   0   0   0   0   ALL   // armor (spell rev.), wizard, level 5 - scale +1
 SPWI102-6    0  0   0   0   0   0   0   0   0   2   2   2   2  0   0    0   0   0   0   0   0   ALL   // armor (spell rev.), wizard, level 6 - scale +1
