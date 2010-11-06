@@ -3042,7 +3042,7 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
                      PATCH_IF ~%param%~ STRING_EQUAL dexmod BEGIN // kill various DEX lines
                          SPRINT searchstring   ~Dexterity~
                          SPRINT insertafter    ~\(STATISTICS\)~
-                         SPRINT replacestring  ~Dexterity:.*%wnl%~
+                         SPRINT replacestring  ~Dexterity:.*[%wnl%%lnl%%mnl%]~
                          SPRINT insertstring   ~~
                          PATCH_INCLUDE ~fullplate/descupd_magic.tpp~
                          SET dexmodtotal = 0 - x
